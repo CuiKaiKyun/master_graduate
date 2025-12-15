@@ -1,0 +1,5 @@
+{
+    "latex-workshop.latex.autoBuild.interval": 0,
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.formatting.latex": "latexindent"
+}

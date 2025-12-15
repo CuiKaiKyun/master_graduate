@@ -1,16 +1,1 @@
-*.aux
-*.log
-*.synctex.gz
-*.fls
-*.fdb_latexmk
-*.out
-*.toc
-*.lof
-*.lot
-*.bbl
-*.blg
-*.nav
-*.snm
-*.vrb
-*.run.xml
-*.bcf
+build/*
