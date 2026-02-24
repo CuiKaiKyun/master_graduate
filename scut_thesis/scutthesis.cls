@@ -58,8 +58,8 @@
 %% 设置页面布局
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage[left=2.5cm,right=2.5cm,bottom=2.5cm,top=2.5cm,%设置页面上下左右各为25mm
- headheight=1.5cm,%页眉所占高度
- footskip=1cm %页脚所占高度
+  headheight=1.5cm,%页眉所占高度
+  footskip=1cm %页脚所占高度
 ]{geometry}
 
 %% 字体设置
@@ -75,7 +75,7 @@
 \setCJKmainfont{SimSun}
 \setCJKfamilyfont{song}{SimSun}
 \setCJKfamilyfont{hei}{SimHei}
-\setCJKfamilyfont{kai}{KaiTi_GB2312}
+\setCJKfamilyfont{kai}{KaiTi}
 \setCJKfamilyfont{fang}{FangSong_GB2312}
 
 \newcommand{\songti}{\CJKfamily{song}}
@@ -106,8 +106,8 @@
 \def\CJK@spaceChar{\hskip \f@size \p@}
 %%\def\CJK@spaceChar{\Unicode{48}{7}} %delete
 \def\CJKindent{%
-    \settowidth\CJK@twochars{\CJK@spaceChar\CJK@spaceChar}%
-    \parindent\CJK@twochars}
+  \settowidth\CJK@twochars{\CJK@spaceChar\CJK@spaceChar}%
+  \parindent\CJK@twochars}
 \newcommand{\cndash}{\rule{0.0em}{0pt}\rule[0.35em]{1.4em}{0.05em}\rule{0.2em}{0pt}} % 中文破折号,added by Quansheng
 
 % 报警处理
@@ -190,7 +190,7 @@
 {
   \subfloat[#2]{
     \label{#3}
-    \addtocounter{subfigure}{-1} 
+    \addtocounter{subfigure}{-1}
     \subfloat[\vspace{-5pt}#1]{#4}
   }%
 }
@@ -270,7 +270,7 @@
   showstringspaces=false,%不显示代码字符串中间的空格标记
   stringstyle=\ttfamily,
   basicstyle={\footnotesize\ttfamily},
-  breaklines=true, 
+  breaklines=true,
   keepspaces=true, %
   flexiblecolumns=true, %
   lineskip=-0.1pt,%行距
@@ -278,7 +278,7 @@
   captionpos=t,
   framextopmargin=1pt,framexbottommargin=1pt,abovecaptionskip=-1pt,belowcaptionskip=1pt,
   %xleftmargin=4em,xrightmargin=4em, % 设定listing左右的空白
- extendedchars=false,columns=flexible,mathescape=false
+  extendedchars=false,columns=flexible,mathescape=false
   breakautoindent=true
 }
 \renewcommand{\lstlistingname}{代码} %% 重命名Listings标题头 added by Guan
@@ -289,20 +289,20 @@
 
 % 设置目录
 %%%%%%%%%%%%%%%%%
-\RequirePackage{titletoc} 
+\RequirePackage{titletoc}
 \renewcommand\contentsname{\centerline{\toctitlefont{目\quad{}录}}}
 \titlecontents{chapter}[0ex]{\tocchapterfont}{%
-    第\CJKnumber{\thecontentslabel}章\quad{}}{}{%
-    \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
+  第\CJKnumber{\thecontentslabel}章\quad{}}{}{%
+  \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
 \titlecontents{section}[1em]{\tocsectionfont}{%
-    \thecontentslabel\quad{}}{}{%
-    \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
+  \thecontentslabel\quad{}}{}{%
+  \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
 \titlecontents{subsection}[2em]{\tocsubsectionfont}{%
-    \thecontentslabel\quad{}}{}{%
-    \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
+  \thecontentslabel\quad{}}{}{%
+  \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
 \titlecontents{subsubsection}[3em]{\tocsubsubsectionfont}{%
-    \thecontentslabel\quad{}}{}{%
-    \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
+  \thecontentslabel\quad{}}{}{%
+  \hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}%
 
 % 设定章节深度和目录深度
 \setcounter{secnumdepth}{4}
@@ -321,51 +321,51 @@
 \setlength{\parskip}{0ex}% 正文段前段后距：无空行
 \titlespacing{\chapter}{0pt}{-20pt}{1pt} % 缩短章标题上间距，revised by Quansheng Guan
 \titlespacing{\section}{0pt}{1pt}{1pt}  % 标题间距
-\titlespacing{\subsection}{0pt}{4pt}{0pt} 
-\titlespacing{\subsubsection}{0pt}{6pt}{6pt} 
+\titlespacing{\subsection}{0pt}{4pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{6pt}{6pt}
 
 \newcommand{\linespacing}[1]{\linespread{#1}\selectfont}% 行距命令
 
 %\sethead[ even-left ][ even-center ][ even-right ]    { odd-left }{ odd-center }{ odd-right }
 \newpagestyle{revtitlestyle}{
- \ifchapterx 
-  \sethead[][{\headfont{}\thesissubject}][] % 页眉偶数页
-  {}{{\headfont{}\@chapterxname}}{} % 页眉奇数页
- \else
-  \sethead[][{\headfont{}\thesissubject}][] % 页眉偶数页，五号字体，居中
-  {}{{\headfont{}\chaptertitlename\quad\chaptertitle}}{} % 页眉奇数页，五号字体，居中
- \fi
+  \ifchapterx
+    \sethead[][{\headfont{}\thesissubject}][] % 页眉偶数页
+    {}{{\headfont{}\@chapterxname}}{} % 页眉奇数页
+  \else
+    \sethead[][{\headfont{}\thesissubject}][] % 页眉偶数页，五号字体，居中
+    {}{{\headfont{}\chaptertitlename\quad\chaptertitle}}{} % 页眉奇数页，五号字体，居中
+  \fi
   \setfoot[][\headfont{}\thepage][] %偶数页码五号宋体居右
-   {}{\headfont{}\thepage}{}%页码五号宋体居右
+  {}{\headfont{}\thepage}{}%页码五号宋体居右
   \headrule%上横线
   \setheadrule{1.5pt}%设置横线粗细
 }
 
 \let\orig@bibliography=\bibliography
 \renewcommand{\bibliography}[1]{
-	\cleardoublepage % 使参考文献使用 seunolabel 页面样式
-	\refbodyfont
-        \chapterxtrue % 改变页眉标题方式
-        \chapterxname{\bibname}
-	\let\ps@plain=\ps@revtitlestyle
-	\pagestyle{revtitlestyle} % here and continue 
-	\orig@bibliography{#1}
-	\normalsize
-} 
+  \cleardoublepage % 使参考文献使用 seunolabel 页面样式
+  \refbodyfont
+  \chapterxtrue % 改变页眉标题方式
+  \chapterxname{\bibname}
+  \let\ps@plain=\ps@revtitlestyle
+  \pagestyle{revtitlestyle} % here and continue 
+  \orig@bibliography{#1}
+  \normalsize
+}
 
 \renewcommand\frontmatter{ %标题之后，开始中英文摘要，目录
-    \pagenumbering{Roman}% Roman style page number
-    \pagestyle{plain}
-    \@mainmatterfalse
+  \pagenumbering{Roman}% Roman style page number
+  \pagestyle{plain}
+  \@mainmatterfalse
 }%
 
 \renewcommand\mainmatter{%
- \@mainmattertrue
+  \@mainmattertrue
   \chapterxfalse % 改变页眉标题方式
   \ifodd \arabic{page} % 目录后如果是奇数页结尾，则插入一个无页码空白页
-   \clearpage
-   \pagestyle{empty}
-   \mbox{} %空白占位符
+    \clearpage
+    \pagestyle{empty}
+    \mbox{} %空白占位符
   \fi
   \clearpage
   \pagenumbering{arabic}
@@ -381,50 +381,50 @@
 }
 %==========
 \AtBeginDocument{\CJKindent{}%
-    \makeindex%
-    \normalsize%正文字体格式
-    \linespacing{1.682}% 主行距～1.5倍
-  }
+  \makeindex%
+  \normalsize%正文字体格式
+  \linespacing{1.682}% 主行距～1.5倍
+}
 \AtEndDocument{}
 
 %------------------
 \renewcommand{\maketitle}{% called outside
   \ifpdfcover
-%%coverpage from pdf file
-        \includepdf[pages=-]{thesis_cover.pdf}%pdf文件路径为主文件tex或lyx的当前目录
-   \else
-%%buildin coverpage
-\begin{titlepage}
-\raggedleft
-\null
-\vskip 4em
+    %%coverpage from pdf file
+    \includepdf[pages=-]{thesis_cover.pdf}%pdf文件路径为主文件tex或lyx的当前目录
+  \else
+    %%buildin coverpage
+    \begin{titlepage}
+      \raggedleft
+      \null
+      \vskip 4em
 
-\bigskip
-\centerline{\songti\erhao  {\thesissubject} }
-\vskip 4em
+      \bigskip
+      \centerline{\songti\erhao  {\thesissubject} }
+      \vskip 4em
 
-\bigskip
-\centerline{\heiti\yihao  {\@title} }
-\vskip 2em
+      \bigskip
+      \centerline{\heiti\yihao  {\@title} }
+      \vskip 2em
 
-\bigskip
-\centerline{\songti\erhao   {\@author} }
-\bigskip
-\centerline{\songti\erhao   {\@supervisor} }
+      \bigskip
+      \centerline{\songti\erhao   {\@author} }
+      \bigskip
+      \centerline{\songti\erhao   {\@supervisor} }
 
-\vfill
-\centerline{\songti\normalsize{\@institute}}
-\centerline{\songti\normalsize{\@date}}
-\end{titlepage}
+      \vfill
+      \centerline{\songti\normalsize{\@institute}}
+      \centerline{\songti\normalsize{\@date}}
+    \end{titlepage}
 
-\fi
+  \fi
 }
 %%摘要分中英文页，而且有两者排版方式：
 %一种是采用\abstractCN和\abstractEN方式以“摘要”和“Abstract”为页标题
 %另一种采用研究报告的标题为摘要页的标题，这时使用\charpter*{报告中文或英文标题}和\chapterx{摘要或Abstract}
 \newenvironment{abstractCN}{
   \chapter*{摘\quad 要}
-  \addcontentsline{toc}{chapter}{摘要} 
+  \addcontentsline{toc}{chapter}{摘要}
 }{}
 
 \newenvironment{abstractEN}
@@ -435,21 +435,21 @@
 
 \newcommand{\keywordsCN}[1]{
   \par
- \vspace{1em}
+  \vspace{1em}
   \newcommand{\@keywords}{#1}
   {\noindent\abskeycn 关键词：} {\abskeyscn \@keywords} % \noindent去掉缩进 
 }
 \newcommand{\keywordsEN}[1]{
   \par
- \vspace{1em}
+  \vspace{1em}
   {\noindent\abskeyen Keywords:} {\abskeysen #1} % \noindent去掉缩进
 }
 %
 \newcommand{\abstractx}[1]
 {
- \begin{center}
-  #1
- \par\end{center}
+  \begin{center}
+    #1
+    \par\end{center}
   \addcontentsline{toc}{chapter}{#1}
 }
 
@@ -466,54 +466,54 @@
 
 \renewcommand{\appendix}[1]{%
   % \chaptertitle is not available for those chapters without label number.
-   \cleardoublepage 
-   \renewcommand{\thesection}{{#1}\arabic{section}} 
-   \chapter*{#1}
-   \chapterxname{\thesection\quad\sectiontitle}
-   \addcontentsline{toc}{chapter}{#1}
-   \setcounter{section}{0}
+  \cleardoublepage
+  \renewcommand{\thesection}{{#1}\arabic{section}}
+  \chapter*{#1}
+  \chapterxname{\thesection\quad\sectiontitle}
+  \addcontentsline{toc}{chapter}{#1}
+  \setcounter{section}{0}
 }
 
 \renewenvironment{verse}
-               {\let\\\@centercr
-                \list{}{\itemsep      \z@
-                        \itemindent   -1.5em%
-                        \listparindent\itemindent
-                        \rightmargin  \leftmargin
-                        \advance\leftmargin 1.5em}%
-                \item\relax}
-               {\endlist}
+{\let\\\@centercr
+  \list{}{\itemsep      \z@
+    \itemindent   -1.5em%
+    \listparindent\itemindent
+    \rightmargin  \leftmargin
+    \advance\leftmargin 1.5em}%
+  \item\relax}
+{\endlist}
 \renewenvironment{quotation}
-               {\list{}{\listparindent 1.5em%
-                        \itemindent    \listparindent
-                        \rightmargin   \leftmargin
-                        \parsep        \z@ \@plus\p@}%
-                \item\relax}
-               {\endlist}
+{\list{}{\listparindent 1.5em%
+    \itemindent    \listparindent
+    \rightmargin   \leftmargin
+    \parsep        \z@ \@plus\p@}%
+  \item\relax}
+{\endlist}
 \renewenvironment{quote}
-               {\list{}{\rightmargin\leftmargin}%\vspace{-15pt}
-                \item\relax}
-               {\endlist}
-            
+{\list{}{\rightmargin\leftmargin}%\vspace{-15pt}
+  \item\relax}
+{\endlist}
+
 %%定理环境
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{bm} % 数学符号粗体
 %\RequirePackage[amsmath,thmmarks]{ntheorem}
-\RequirePackage{amsmath,amsthm,mathrsfs} 
+\RequirePackage{amsmath,amsthm,mathrsfs}
 %允许公式换页显示,否则大型推导公式都在一页内，
 %一页显示不下放到第二页，导致很大的空白空间，很不好看
 \allowdisplaybreaks[4]
 %\setlength\jot{1pt} %公式之间的距离,TODO
 
 \newtheoremstyle{definition}% name
-  {0pt}%      Space above, empty = `usual value'
-  {0pt}%      Space below
-  {}% Body font \itshape
-  {\parindent}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
-  {:}%        Punctuation after thm head
-  {0.5em}% Space after thm head: \newline = linebreak
-  {}%         Thm head spec
+{0pt}%      Space above, empty = `usual value'
+{0pt}%      Space below
+{}% Body font \itshape
+{\parindent}%         Indent amount (empty = no indent, \parindent = para indent)
+{\bfseries}% Thm head font
+{:}%        Punctuation after thm head
+{0.5em}% Space after thm head: \newline = linebreak
+{}%         Thm head spec
 \theoremstyle{definition}
 \newtheorem{definition}{定义~}[chapter]
 \newtheorem{example}{例~}[chapter]
@@ -521,14 +521,14 @@
 
 
 \newtheoremstyle{plain}% name
-  {0pt}%      Space above, empty = `usual value'
-  {0pt}%      Space below
-  {\itshape}% Body font \itshape
-  {\parindent}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
-  {:}%        Punctuation after thm head
-  {0.5em}% Space after thm head: \newline = linebreak
-  {}%         Thm head spec
+{0pt}%      Space above, empty = `usual value'
+{0pt}%      Space below
+{\itshape}% Body font \itshape
+{\parindent}%         Indent amount (empty = no indent, \parindent = para indent)
+{\bfseries}% Thm head font
+{:}%        Punctuation after thm head
+{0.5em}% Space after thm head: \newline = linebreak
+{}%         Thm head spec
 \theoremstyle{plain}
 \newtheorem{proposition}{命题~}[chapter]
 \newtheorem{lemma}{引理~}[chapter]
