@@ -21,7 +21,7 @@
 
 %% import global options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newif\ifmasterdegree\masterdegreefalse %默认为doctor
+\newif\ifmasterdegree\masterdegreetrue %默认为doctor
 \newif\ifpdfcover\pdfcoverfalse
 \newif\ifchapterx\chapterxfalse
 

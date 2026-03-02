@@ -48,6 +48,6 @@ del_target:
 	del $(MAIN).pdf
 
 clean: del_target
-	cd $(BUILDDIR)
-	del /s /q *.xml *.bcf *.log *.aux *.synctex.gz *.pdf *.hd *.idx *.out *.toc *.bbl *.blg
+	cd $(BUILDDIR) && del /s /q *.xml *.bcf *.log *.aux *.synctex.gz *.hd *.idx *.out *.toc *.bbl *.blg *.lof *.lot
+	del /s /q main.pdf
 	cd ..
