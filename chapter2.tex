@@ -4,11 +4,11 @@
 
 \section{涵道式无人机的系统构成}
 \subsection{机体结构}
-涵道式无人机大致结构如图\ref{fig:body}所示。顾名思义，涵道式无人机的核心结构是螺旋桨以及涵道壁。该无人机具有C4旋转对称性，即机体绕垂直轴旋转90°后，其几何结构与质量分布均与原状态重合。无人机选用直径为7寸的螺旋桨作为内部的涵道风扇。螺旋桨和其外包裹的筒状涵道壁共同构成完整的涵道结构。涵道壁内径略大于螺旋桨直径，用于约束气流，使内部气流保持轴向流动。
+涵道式无人机大致结构如图\ref{fig:body}所示。顾名思义，涵道式无人机的核心结构是螺旋桨以及涵道壁。涵道风扇的转轴所在的直线被称为机体轴，该无人机具有C4旋转对称性，即机体绕机体轴旋转90°后，其几何结构与质量分布均与原状态重合。无人机选用直径为7寸的螺旋桨作为内部的涵道风扇。螺旋桨和其外包裹的筒状涵道壁共同构成完整的涵道结构。涵道壁内径略大于螺旋桨直径，用于约束气流，使内部气流保持轴向流动。
 
-为抵抗螺旋桨高速转动产生的反扭距，在螺旋桨的下方装有反扭距襟翼，用于平衡该反扭距，该襟翼为固定襟翼。
+为抵抗螺旋桨高速转动产生的反扭距，在螺旋桨的下方装有反扭距襟翼。该襟翼有四片固定的机翼构成，各机翼平行于机体轴，且围绕机体轴成星型排布，如图\ref{fig:body}涵道风扇下方的灰色结构所示。
 
-反扭距襟翼下方装有四个由舵机控制的可旋转的控制舵面，用于产生控制力矩，对整机进行闭环控制。为了增加控制舵面产生的气动力对无人机质心的力臂，无人机的质心需要往上移，因此，电池、电机和电调被设计在无人机的顶部。
+反扭距襟翼下方装有四个由舵机控制的可旋转的控制舵面，每个控制舵面由两片平行翼面构成，用于产生控制力矩，对整机进行闭环控制。为了增加控制舵面产生的气动力对无人机质心的力臂，无人机的质心需要往上移，因此，电池、电机和电调被设计在无人机的顶部。
 
 机上搭载有两块电路板，分别是飞行控制板和舵机驱动板，各自搭载一块微控制器。舵机控制板位于无人机的底部，而飞行控制板位于电池上方，距离质心较近。飞行控制板上搭载有IMU和气压计等对温度、气压较为敏感的器件，为此专门设计了飞行控制板仓室外壳用于将它们与外界空气隔离。
 \begin{figure}
@@ -26,6 +26,7 @@
     \item 激光测距模块，激光测距模块被安装在飞机的底部，是无人机领域用于感知离地高度的常用传感器。本文使用的激光测距模块是意法半导体公司的VL53l1X激光测距传感器。测量精度为±5\%，采样频率为50Hz。读取测量数据能够感知离地高度进而能够对地面效应带来的扰动做抗扰控制。
     \item 电池，本文使用的电池是容量为1680mAh的4S1P的航模电池，电池的输出电压为16.8V，最大持续输出电流为20A。
     \item 电机电调系统，电机电调系统用于带动主螺旋桨的转动。本文使用的电机是翼飞的2806.5无刷直流电机，其KV值为1300KV，定子直径28mm，高度6.5mm。使用的电调的通信方式为PWM通信，控制频率为200Hz。其额定电压为16V，额定电流为30A。
+    \item 无刷电机测速模块，该测速模块的本质是利用电机绕组在换相过程中产生的反电动势作为转子位置和速度的信息载体。通过检测两相电压，并辅以特定的开关时序，可以提取出反电动势的过零点，最终通过测量这些特征点的时间间隔来实现对电机转速的精确计算，模块通过PWM脉宽将转速信息输出给MCU。
     \item 舵机，舵机用于控制螺旋桨下方的控制舵面的转动，是无人机实现姿态闭环控制的关键。本文使用的舵机是银燕的ES9251舵机，该舵机为塑料齿轮舵机，单个舵机重量仅为2.8g，最大输出力矩为0.02646N·m。舵机的通信方式为PWM通信，最高控制频率为50Hz。
     \begin{figure}[htbp]
         \centering
@@ -82,7 +83,7 @@
 \end{figure}
 
 \subsection{程序设计}
-程序设计指的是基于C++语言设计的部署在微控制器上的嵌入式程序设计。为了对任务进行管理，该程序部署了FreeRTOS实时操作系统。程序主要负责内容如下：遥控器控制指令获取，传感器数据读取，传感器数据预处理，无人机位姿估计，闭环控制器算法处理，输出执行器指令等。具体程序设计如图\ref{fig:software_figure}所示。
+程序设计指的是基于C++语言设计的部署在微控制器上的嵌入式程序设计。为了对多个任务进行调度管理，该程序部署了FreeRTOS实时操作系统。程序主要负责内容如下：遥控器控制指令获取，传感器数据读取，传感器数据预处理，无人机位姿估计，闭环控制器算法处理，输出执行器指令等。具体程序设计如图\ref{fig:software_figure}所示。
 \begin{figure}
     \centering
     \includegraphics[scale=0.25]{figure/chapter2/software.png}
@@ -90,13 +91,13 @@
 \end{figure}
 
 \section{坐标系的定义}
-清晰、准确地定义无人机坐标系是至关重要的基础性工作，是确保论文科学性和严谨性的前提。接下来将逐一介绍本文使用的坐标系以及相关符号的定义。
+坐标系定义是任何飞行器动力学建模与控制系统设计的逻辑起点，其严谨性直接决定了后续数学推导的准确性与结论的可靠性，是后续的模型分析、控制器设计与实验验证理论基础。
 
 \subsection{地面坐标系}
-地面坐标系是右手系，满足右手定则。取无人机的起飞点作为地面坐标系的原点\( O_e \)，定义坐标轴\( O_e - X_e \)过原点\( O_e \)向地理北向（North），坐标轴\( O_e - Y_e \)过原点\( O_e \)向地理东向（East），由右手定则，坐标轴\( O_e - Z_e \) 竖直向下（Down）。根据定义可知，该地面坐标系\( O_e - X_e Y_e Z_e \)和地面相对静止，因此，地面坐标系为惯性系。地面坐标系文中也称为地面系。
+地面坐标系是右手系，满足右手定则。取无人机的起飞点作为地面坐标系的原点\( O_e \)，定义坐标轴\( O_eX_e \)过原点\( O_e \)向地理北向（North），坐标轴\( O_eY_e \)过原点\( O_e \)向地理东向（East），由右手定则，坐标轴\( O_eZ_e \) 竖直向下（Down）。根据定义可知，该地面坐标系\( O_e - X_e Y_e Z_e \)和地面相对静止，因此，地面坐标系为惯性系。地面坐标系文中也称为地面系。
 
 \subsection{机体坐标系}
-机体坐标系也是右手系，同样满足右手定则。取无人机的质心为机体坐标系的原点\( O_b \)，定义坐标轴\( O_b - X_b \)过原点\( O_b \)指向无人机的正前方，定义坐标轴\( O_b - Y_b \)过原点\( O_b \)指向无人机的正右方，由右手定则，坐标轴\( O_e - Z_e \) 过原点\( O_b \)指向无人机的正下方。类似的，机体坐标系和无人机相对静止，机体坐标系为非惯性系。机体坐标系文中也称为机体系。
+机体坐标系也是右手系，同样满足右手定则。取无人机的质心为机体坐标系的原点\( O_b \)，定义坐标轴\( O_bX_b \)过原点\( O_b \)指向无人机的正前方，定义坐标轴\( O_bY_b \)过原点\( O_b \)指向无人机的正右方，由右手定则，坐标轴\( O_bZ_b \) 过原点\( O_b \)指向无人机的正下方。类似的，机体坐标系\( O_b - X_b Y_b Z_b \)和无人机相对静止，机体坐标系为非惯性系。机体坐标系文中也称为机体系。
 
 \begin{figure}
     \centering
@@ -111,14 +112,14 @@
 
 （1）欧拉角
 
-欧拉角是描述刚体在三维空间中旋转关系的一种常用方法，它通过三次绕指定坐标轴的旋转，将地面坐标系变换到机体坐标系。本文使用的欧拉角是“ZYX欧拉角”，即旋转顺序为：首先绕地面坐标系的 $O_e - Z_e$ 轴旋转角度 $\psi$（偏航角，yaw），然后绕新坐标系（第一次旋转后）的 $O_e ' - Y_e '$ 轴旋转角度 $\theta$（俯仰角，pitch），最后绕最新坐标系（第二次旋转后）的 $O_e '' - X_e ''$ 轴旋转角度 $\varphi$（滚转角，roll）。这种旋转方式也称为内旋（intrinsic rotation），即每次旋转绕当前坐标系的轴进行。
+欧拉角是描述刚体在三维空间中旋转关系的一种常用方法，它通过三次绕指定坐标轴的旋转，将地面坐标系变换到机体坐标系。本文使用的欧拉角是“ZYX欧拉角”，即旋转顺序为：首先绕地面坐标系的 $O_eZ_e$ 轴旋转角度 $\psi$（偏航角，yaw），然后绕新坐标系（第一次旋转后）的 $O_e 'Y_e '$ 轴旋转角度 $\theta$（俯仰角，pitch），最后绕最新坐标系（第二次旋转后）的 $O_e ''X_e ''$ 轴旋转角度 $\varphi$（滚转角，roll）。这种旋转方式也称为内旋（intrinsic rotation），即每次旋转绕当前坐标系的轴进行。
 规定$(\psi, \theta, \varphi)$的角度范围为：
 \begin{equation}
 \psi \in (-\pi,\ \pi], \quad \theta \in \left[-\frac{\pi}{2},\ \frac{\pi}{2}\right], \quad \varphi \in (-\pi,\ \pi].
 \end{equation}
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{figure/body1.png}
+    \includegraphics[scale=0.25]{figure/chapter2/eular_angle.png}
     \caption{\label{fig:eular_angle}“ZYX欧拉角”的定义}
 \end{figure}
 
@@ -153,9 +154,12 @@
 \end{equation}
 
 对于ZYX内旋顺序，旋转矩阵 $\bm{R}_{e}^{b}$ 的计算过程为：
-1. 第一次旋转绕地面系 $O_e - Z_e$ 轴旋转 $\psi$，得到坐标系 $\{1\}$，有 $\bm{R}_{e}^{1} = \bm{R}_z(\psi)$。
-2. 第二次旋转绕坐标系 $\{1\}$ 的 $O_e' - Y_e'$ 轴旋转 $\theta$，得到坐标系 $\{2\}$。由于旋转在当前坐标系中进行，且当前坐标系的基仍为标准正交基，该旋转在坐标系 $\{1\}$ 中的表示即为 $\bm{R}_y(\theta)$。因此从世界到坐标系 $\{2\}$ 的旋转矩阵为 $\bm{R}_{e}^{2} = \bm{R}_y(\theta) \bm{R}_z(\psi)$。
-3. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e'' - X_e''$ 轴旋转 $\varphi$，类似地得到从世界到物体坐标系的旋转矩阵：
+
+a. 第一次旋转绕地面系 $O_eZ_e$ 轴旋转 $\psi$，得到坐标系 $\{1\}$，有 $\bm{R}_{e}^{1} = \bm{R}_z(\psi)$。
+
+b. 第二次旋转绕坐标系 $\{1\}$ 的 $O_e'Y_e'$ 轴旋转 $\theta$，得到坐标系 $\{2\}$。由于旋转在当前坐标系中进行，且当前坐标系的基仍为标准正交基，该旋转在坐标系 $\{1\}$ 中的表示即为 $\bm{R}_y(\theta)$。因此从世界到坐标系 $\{2\}$ 的旋转矩阵为 $\bm{R}_{e}^{2} = \bm{R}_y(\theta) \bm{R}_z(\psi)$。
+
+c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，类似地得到从世界到物体坐标系的旋转矩阵：
 \begin{equation}
 \bm{R}_{e}^{b} = \bm{R}_x(\varphi) \bm{R}_y(\theta) \bm{R}_z(\psi).
 \end{equation}
@@ -173,16 +177,17 @@
 运动学建模是指在不考虑引起运动的力（如重力、惯性力、摩擦力等）的情况下，使用数学工具对物体或机构（特别是连杆机构）的运动属性（如位置、速度、加速度）进行描述、分析和计算的过程。本小节将针对涵道式无人机的机身进行运动学分析，用数学语言建立其位置姿态与时间之间的关系。
 
 记无人机在地面系下的位置矢量为$\bm{P}$，无人机在地面系下的速度矢量为$\bm{v}$，记无人机的欧拉角为$\bm{\eta}=[\varphi \quad \theta \quad \psi]^T$，记无人机的角速度矢量为$\bm{\omega}$，那么$\bm{\omega}$在机体系下的投影为$\bm{\omega}^b = [p \quad q \quad r]^T$。
-可得速度和位置之间的关系为：
+
+由速度和位置之间的关系，可得:
 \begin{equation}
-    \dot{\bm{P}}^e = \bm{v}^e
+    \dot{\bm{P}}^e = \bm{v}^e.
     \label{eq:d_pos}
 \end{equation}
 
 而无人机的角速度和与其欧拉角的关系可参考Ducard等人\cite{Ducard2009Flight}的推导结果，此处直接引述其结论:
 
 \begin{equation}
-\bm{\omega}^b = \dot{\psi} \bm{R}_\varphi \bm{R}_\theta \bm{e}_3 + \dot{\theta} \bm{R}_\varphi \bm{e}_2 + \dot{\varphi} \bm{e}_1
+\bm{\omega}^b = \dot{\psi} \bm{R}_\varphi \bm{R}_\theta \bm{e}_3 + \dot{\theta} \bm{R}_\varphi \bm{e}_2 + \dot{\varphi} \bm{e}_1,
 \label{eq:eular_rate}
 \end{equation}
 其中，
@@ -213,7 +218,7 @@
 0 & \cos\varphi & -\sin\varphi \\
 0 & \sin\varphi & \cos\varphi
 \end{bmatrix}
-\bm{\omega}^b
+\bm{\omega}^b,
 \end{equation}
 为了简化表述，令矩阵$\bm{Q}$为：
 \begin{equation}
@@ -222,32 +227,26 @@
 1 & \sin\varphi\tan\theta & \cos\varphi\tan\theta \\
 0 & \cos\varphi & -\sin\varphi \\
 0 & \sin\varphi & \cos\varphi
-\end{bmatrix}
+\end{bmatrix}.
 \end{equation}
 最终，能够得到无人机的角速度和姿态角的变化率之间的关系为：
 \begin{equation}
-    \dot{\bm{\eta}} = \bm{Q}\bm{\omega}^b
+    \dot{\bm{\eta}} = \bm{Q}\bm{\omega}^b.
     \label{eq:d_eular}
 \end{equation}
 
 \section{动力学模型}
 动力学建模是指在考虑引起运动的根本原因——力与力矩的前提下，运用物理学基本定律建立数学模型。在动力学建模领域，牛顿-欧拉方法是一种广泛应用于多体系统动力学建模的递推算法，它基于经典力学中的牛顿第二定律（描述刚体平动）和欧拉方程（描述刚体转动），通过正向和反向递推，系统地建立机器人等机构各连杆之间的运动学关系。和大多数无人机领域的学术研究一样，本文假设涵道式无人机的各个零件认为是质量均匀分布的刚体模型。
 
-由前文对机体结构的介绍可知，涵道式无人机可以看作六个相互独立的刚体，分别是无人机的机身、螺旋桨以及四个控制舵面。由单个控制舵面的质量仅为3.2g，控制舵面的活动范围较小，为避免动力学模型过于复杂，本文作出必要的简化，认为控制舵面是能够产生气动力而质量为零的刚体，而将控制舵面的质量计入机身质量。
+由前文对机体结构的介绍可知，涵道式无人机可以看作六个相互独立的刚体，分别是无人机的机身、螺旋桨以及四个控制舵面。四个控制舵面和机体通过转动副连接，涵道风扇和机体也通过转动副连接。由于单个控制舵面的质量仅为3.2g，控制舵面的活动范围较小，为避免动力学模型过于复杂，本文作出必要的简化，认为控制舵面是能够产生气动力而质量为零的刚体，并将控制舵面的质量计入机身质量。
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.6\textwidth]{figure/body1.png}
-    \caption{涵道式无人机的各个刚体零件}
-\end{figure}
-
-无人机的位置动力学可由牛顿第二定律推导出。记无人机受到的除重力之外的合外力为$\bm{F}$，无人机质量为$m$，当地重力加速度大小为$g$，无人机的加速度为$\bm{a}$，由牛顿第二定律可以得到，在地面坐标系下的加速度$\bm{a}^e$为：
+无人机的位置动力学可由牛顿第二定律推导出。记无人机受到的除重力之外的合外力为$\bm{F}$，无人机质量为$m$，当地重力加速度大小为$g$，无人机的加速度为$\bm{a}$，由牛顿第二定律可以得到，加速度在地面坐标系下的投影$\bm{a}^e$为：
 \begin{equation}
-    \bm{a}^e = \dot{\bm{V}}^e = g\bm{e}_{3} + \bm{F}^e m^{-1}
+    \bm{a}^e = \dot{\bm{v}}^e = g\bm{e}_{3} + \bm{F}^e m^{-1},
 \end{equation}
 整理可得：
 \begin{equation}
-    \dot{\bm{V}}^e = g\bm{e}_{3} + \bm{R}_b^e\bm{F}^b m^{-1}
+    \dot{\bm{v}}^e = g\bm{e}_{3} + \bm{R}_b^e\bm{F}^b m^{-1}.
     \label{eq:d_vel}
 \end{equation}
 
@@ -259,15 +258,15 @@
         J_x & 0 & 0 \\
         0 & J_y & 0 \\
         0 & 0 & J_z
-    \end{bmatrix}
+    \end{bmatrix}.
 \end{equation}
 由欧拉方程，无人机受到的合外力矩在机体坐标系下的投影$\bm{M}^b$可直接给出：
 \begin{equation}
-    \bm{M}^b = \bm{J}\cdot\dot{\bm{\omega}^b}+\bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)
+    \bm{M}^b = \bm{J}\cdot\dot{\bm{\omega}^b}+\bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b),
 \end{equation}
 经整理，可得：
 \begin{equation}
-    \dot{\bm{\omega}^b} = \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b))
+    \dot{\bm{\omega}^b} = \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)).
     \label{eq:d_omega}
 \end{equation}
 
@@ -278,7 +277,7 @@
         \dot{\bm{V}}^e = g\bm{e}_{3} + \bm{R}_b^e\bm{F}^b m^{-1} \\ 
         \dot{\bm{\eta}} = \bm{Q}\bm{\omega}^b \\ 
         \dot{\bm{\omega}^b} = \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)) 
-    \end{cases} 
+    \end{cases} .
     \label{eq:base_dynamic}
 \end{equation}
 
@@ -295,14 +294,14 @@
 \begin{figure}
     \centering
     \includegraphics[scale=0.25]{figure/chapter2/ductedfan_force.png}
-    \caption{\label{fig:ductedfan_force}涵道风扇受力分析}
+    \caption{\label{fig:ductedfan_force}涵道风扇气动力分析}
 \end{figure}
 
 定义$\Omega$为螺旋桨的角速度大小，$R$为螺旋桨的半径。
 
-定义$\bm{v}_a$为空速，即机体相对于周围气流的速度，$V_a$为其大小。
+定义$\bm{v}_a$为空速，即机体相对于周围气流的速度，$V_a$为其大小，$\bm{v}_a^b = [u_r \quad v_r \quad w_r]^T$为其在机体系下的投影。
 
-定义$\bm{v}_a^{||}$为空速$\bm{v}_a$在机体系平面$X_bO_bY_b$上的投影。
+定义$\bm{v}_a^{||}$为空速$\bm{v}_a$在机体系平面$X_bO_bY_b$上的投影，显然，$\bm{v}_a^{||}$在机体系下的投影为$[u_r \quad v_r \quad 0]^T$。
 
 定义$\alpha_{df}$为涵道迎风角，即空速$\bm{v}_a$的方向和机体系坐标轴$O_bZ_b$负方向的夹角。
 
@@ -337,83 +336,137 @@
 
 结合式\ref{eq:J}，式\ref{eq:thrust}和式\ref{eq:thrust_k}可得侧向力$N_{df}$为：
 \begin{equation}
-    N_{df} = \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} V_a sin\alpha_{df}.
-\end{equation}
-注意到，$V_a sin\alpha_{df}$即为$\bm{v}_a^{||}$的模，且$N_{df}$的方向
-与$\bm{v}_a^{||}$方向相反，那么侧向力矢量$\bm{N}_{df}^b$在机体系下的投影可写为：
-\begin{equation}
-    \bm{N}_{df}^b = \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} \bm{v}_a^{||}.
+    N_{df} = \frac{1}{2}\rho \pi^2 R^3 C_{N_J} V_a sin\alpha_{df} \Omega.
 \end{equation}
 
 已知风扇拉力的方向是指向机体系坐标轴$O_bZ_b$的负方向，那么结合式\ref{eq:thrust}和式\ref{eq:thrust_k}，风扇拉力矢量$\bm{T}_{df}^b$在机体系下的投影可写为：
 \begin{equation}
-    \bm{T}_{df}^b = \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})).
+    \bm{T}_{df}^b = -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \bm{e}_3.
+    \label{eq:T_df}
 \end{equation}
 
-至此，涵道风扇受到的气动力合力已呼之欲出，其在机体系下的投影$\bm{F}_{df}^b$为：
+已知$N_{df}$的方向与$\bm{v}_a^{||}$方向相反，注意到，$V_a sin\alpha_{df}$即为$\bm{v}_a^{||}$的模，那么侧向力矢量$\bm{N}_{df}^b$在机体系下的投影可写为：
 \begin{equation}
-    \bm{F}_{df}^b = \bm{N}_{df}^b + \bm{T}_{df}^b.
+    \bm{N}_{df}^b = -\frac{1}{2}\rho \pi^2 R^3 C_{N_J} \Omega \cdot \bm{v}_a^{||} = 
+    \begin{bmatrix}
+        -\frac{1}{2}\rho \pi^2 R^3 C_{N_J} \Omega u_r \\
+        -\frac{1}{2}\rho \pi^2 R^3 C_{N_J} \Omega v_r \\
+        0
+    \end{bmatrix}.
+    \label{eq:N_df}
+\end{equation}
+
+涵道风扇受到的总气动力在机体系下的投影$\bm{F}_{df}^b$即为这两个力的矢量和：
+\begin{equation}
+    \bm{F}_{df}^b = \bm{N}_{df}^b + \bm{T}_{df}^b =
+    \begin{bmatrix}
+        -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r \\
+        -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r \\
+        -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df}))
+    \end{bmatrix}.
 \end{equation}
 
 (2)涵道风扇的气动力矩
 
-气动力矩是指涵道风扇的气动力给机体带来的的力矩，从图\ref{fig:ductedfan_force}不难看出，涵道风扇的拉力和侧向力并非经过质心，这些气动力的等效作用点位置的影响因素更为复杂。Ohanian等人所提出的模型是基于侧向力等效作用点不变的假设\cite{2012Nondimensional}，通过较为简约的解析式描述了涵道风扇气动力矩$M_{df}$：
+气动力矩是指涵道风扇的气动力给机体带来的的力矩，从图\ref{fig:ductedfan_force}不难看出，涵道风扇的拉力和侧向力并非经过质心，这些气动力的等效作用点位置的影响因素更为复杂。Ohanian等人所提出的模型是基于侧向力等效作用点不变的假设\cite{2012Nondimensional}，并通过较为简约的解析式描述了涵道风扇气动力矩$M_{df}$：
 \begin{equation}
     M_{df} = -l_N N_{df} + l_T T_{df}.
 \end{equation}
-式中，气动力矩$M_{df}$以使无人机具有抬头趋势的方向为正，$X_J$和$X_{\alpha}$均为无量纲的常系数，$l_N$和$l_T$分别是侧向力和拉力对机体重心的力臂，其关系如图\ref{fig:ductedfan_force}所示。该理论认为侧向力的力臂$l_N$不变，而拉力力臂$l_T$满足如下关系：
+式中，气动力矩$M_{df}$以使无人机具有抬头趋势的方向为正，$X_J$和$X_{\alpha}$均为无量纲的常系数，$l_N$和$l_T$分别是侧向力和拉力对机体重心的力臂，其关系如图\ref{fig:ductedfan_force}所示。根据该理论，侧向力的作用点固定且高度大致位于涵道入口平面，可认为侧向力力臂$l_N$为已知常量，拉力力臂$l_T$满足如下关系：
 \begin{equation}
     l_T = X_J J R sin(X_\alpha \alpha_{df}).
 \end{equation}
-
-已知力和力臂，即可求出涵道风扇的气动力矩在机体系下的投影$\bm{M}_{df}^b$为：
+将式\ref{eq:J}代入可得：
 \begin{equation}
-    \bm{M}_{df}^b = l_N \bm{e}_3 \times \bm{N}_{df}^b + l_T \frac{\bm{v}_a^{||}}{\lVert \bm{v}_a^{||} \rVert} \times \bm{T}_{df}^b.
+    l_T = X_J \pi V_a \Omega ^{-1} sin(X_\alpha \alpha_{df}).
+    \label{eq:l_T}
+\end{equation}
+
+由图\ref{fig:ductedfan_force}可知，拉力的力臂平行于$\bm{v}_a^{||}$，那么根据几何关系拉力力臂和侧向力力臂在机体系下的投影$\bm{L}_T^b$和$\bm{L}_N^b$可分别写为：
+\begin{equation}
+    \bm{L}_T^b = 
+    \begin{bmatrix}
+        l_T \cdot \dfrac{u_r}{V_a sin\alpha} \\
+        l_T \cdot \dfrac{v_r}{V_a sin\alpha} \\
+        0
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
+        \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) v_r}{\Omega sin\alpha} \\
+        0
+    \end{bmatrix},
+    \bm{L}_N^b = 
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        -l_N
+    \end{bmatrix},
+\end{equation}
+已知力和力臂，即可求出涵道风扇的气动力矩在机体系下的投影$\bm{M}_{df}^b$：
+\begin{equation}
+    \begin{aligned}
+        \bm{M}_{df}^b = &\bm{L}_T^b \times \bm{T}_{df}^b + \bm{L}_N^b \times \bm{N}_{df}^b \\
+        =
+        &\begin{bmatrix}
+            -\dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
+            \dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
+            0
+        \end{bmatrix} \\
+        &+ \begin{bmatrix}
+            - \dfrac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r \cdot l_N \\
+            \dfrac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r \cdot l_N \\
+            0
+        \end{bmatrix}.
+    \end{aligned}
 \end{equation}
 
 此外，涵道风扇在高速旋转过程中，会受到与旋转方向相反的力矩，该力矩会通过电机最终传递到机体上，称为涵道风扇反扭距。定义涵道风扇反扭距为$M_{fan}$，该扭矩大小可以由下式给出：
 \begin{equation}
     M_{fan} = \frac{1}{2}\rho \pi C_Q R^5 \Omega^2.
 \end{equation}
-式中，$C_Q$为风扇扭矩系数。
 
 由于本文设计的涵道式无人机的螺旋桨旋转方向指向机体系坐标轴$O_bZ_b$轴正方向，因此该反扭矩指向$Z_b$轴负方向，有：
 \begin{equation}
-    \bm{M}_{fan}^b = - M_{fan} \cdot \bm{e}_3 = - \frac{1}{2}\rho \pi C_Q R^5 \Omega^2  \cdot \bm{e}_3.
+    \bm{M}_{fan}^b = - M_{fan} \cdot \bm{e}_3 = - \frac{1}{2}\rho \pi C_Q R^5 \Omega^2 \cdot \bm{e}_3.
     \label{eq:M_fan}
 \end{equation}
 
 (3)涵道风扇的陀螺力矩
+
 陀螺力矩是指若对高速旋转的转子施加一个力矩，使其自转轴发生倾斜（进动），则物体会产生一个垂直于施加力矩方向且垂直于自转轴方向的力矩。本文研究的样机内部的涵道风扇转速较大，在实践过程中发现，其陀螺力矩效应尤为明显。根据其陀螺力矩的定义，陀螺力矩在机体系下的投影$\bm{M}_{gyro}^b$满足如下关系：
 \begin{equation}
-    \bm{M}_{gyro}^b = J_{fan} (\bm{\Omega} \times \bm{\omega}^b).
+    \bm{M}_{gyro}^b = J_{fan} (\Omega \cdot \bm{e}_3 \times \bm{\omega}^b) = 
+    \begin{bmatrix}
+        -J_{fan} \Omega q \\
+        J_{fan} \Omega p \\
+        0
+    \end{bmatrix}
     \label{eq:M_gyro}
 \end{equation}
-式中，$J_{fan}$为涵道风扇对转轴的转动惯量，$\bm{\Omega}$为转轴的角速度，满足$\bm{\Omega} = [0 \quad 0 \quad \Omega]^T$。
-
+式中，$J_{fan}$为涵道风扇对转轴的转动惯量。
 
 \subsection{反扭距襟翼动力学}
 对于单螺旋桨的涵道式无人机，在悬停状态下，螺旋桨产生的反扭距较大。而反扭矩襟翼能够利用涵道风扇吹出的高速流动的气流经过各个翼面产生如图\ref{fig:M_flap}所示的力，在这些力的共同作用下，能够产生襟翼扭矩$\bm{M}_{flap}$。经过大量的CFD仿真测试，设计出来的反扭距襟翼能够抵消绝大部分的风扇反扭矩$\bm{M}_{fan}$。
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{figure/body1.png}
+    \includegraphics[scale=0.25]{figure/chapter2/anti_torque.png}
     \caption{\label{fig:M_flap}反扭距襟翼作用示意图}
 \end{figure}
 
 在给出襟翼扭矩$\bm{M}_{flap}$与涵道出口风速$V_e$有直接关系，因此，需要先介绍涵道内部的气动特性，以分析出口风速$V_e$。现阶段涵道风扇的气动特性分析的主流理论是基于动量理论与叶素理论展开的。动量理论从整体的角度出发，通过质量、动量和能量守恒定律，建立其推力，功率和气流速度之间的关系。
 
-动量理论的理论前提是，假设气体是定常的不可压缩流体，且流体在任何位置速度不会突变。该理论将涵道风扇看作一个均匀的，厚度无限小的激励盘。如图\ref{fig:flow_status}所示，设气流在无穷远处的速度大小为$V_0$，由于涵道口的抽吸作用，气流流入涵道口的过程中速度逐渐增加并以速度$V_1$接触到涵道风扇的上表面，由于假设认为流体速度不会突变，因此，气流在经过激励盘后，速度仍为$V_1$，而气流压力骤增，紧接着，气流在排出涵道的过程中，气压逐渐降低为外界气压，气流速度进一步增加，最终以速度$V_e$经过涵道出口截面，并并被排出。
+动量理论的理论前提是，假设气体是定常的不可压缩流体，且流体在任何位置速度不会突变。该理论将涵道风扇看作一个均匀的，厚度无限小的激励盘。如图\ref{fig:flow_status}所示，设气流在无穷远处的速度大小为$V_0$，由于涵道口的抽吸作用，气流流入涵道口的过程中速度逐渐增加并以速度$V_1$接触到涵道风扇的上表面，由于假设认为流体速度不会突变，因此，气流在经过激励盘后，速度仍为$V_1$，而气流压力骤增，紧接着，气流在排出涵道的过程中，气压逐渐降低为外界气压，气流速度进一步增加，最终以速度$V_e$经过涵道出口截面，并被排出。
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{figure/body1.png}
+    \includegraphics[scale=0.25]{figure/chapter2/ductedfan_flow.png}
     \caption{\label{fig:flow_status}轴流状态的气动分析}
 \end{figure}
-注意到无穷远处的速度为$V_0$的气流和涵道出口处速度为$V_e$的气流，它们的气压均为外界气压。设单位时间内，从涵道出风口排出的气体质量为$\dot{m}_{air}$，气体密度为$\rho$，根据动量定理可得，涵道风扇对气体的推力等于气流在单位时间内的动量的增加量，即：
+设单位时间内，从涵道出风口排出的气体质量为$\dot{m}_{air}$，气体密度为$\rho$，根据动量定理可得，涵道风扇对气体的推力等于气流在单位时间内的动量的增加量，即：
 \begin{equation}
     T_{df} = \dot{m}_{air} (V_e - V_0) = \rho S V_1 (V_e - V_0),
     \label{eq:dongliang}
 \end{equation}
-同时注意到，根据能量守恒定律，涵道风扇推力的功率等于单位时间内气体动能的变化量：
+注意到无穷远处的速度为$V_0$的气流和涵道出口处速度为$V_e$的气流，它们的气压一致，均为外界气压，可认为单位时间内，流过出口截面的气体增加的动能即为这部分气体增加的能量。根据能量守恒定律可知，涵道风扇推力的功率等于单位时间内气体动能的变化量：
 \begin{equation}
     \frac{1}{2} \dot{m}_{air} V_e^2 - \frac{1}{2} \dot{m}_{air} V_0^2 = T_{df} V_1.
     \label{eq:nengliang}
@@ -426,45 +479,63 @@
 联立\ref{eq:dongliang}，\ref{eq:nengliang}和\ref{eq:kuozhangbi}，可得
 \begin{equation}
     V_e = \frac{V_0}{2} + \sqrt{(\frac{V_0}{2})^2 + \frac{T_{df}}{{\sigma}_d \rho S}}.
+    \label{eq:V_e}
 \end{equation}
 
-涵道出口风速$V_e$可近似认为是气流掠过反扭距襟翼的速度，由此便可给出襟翼扭矩的解析表达。襟翼扭矩可以认为各个叶片产生的气动力对机体质心的扭矩的总和。假设单个叶片受到的气动力的压心到螺旋桨转轴的距离为$l_{sta}$，单片叶片的面积为$A_{sta}$，叶片的升力系数为$C_{sta}$，叶片数量为$n_{sta}$，襟翼扭矩$M_{sta}$可以表示为：
+涵道出口风速$V_e$可近似认为是气流掠过反扭距襟翼的速度，由此便可给出襟翼扭矩的解析表达。襟翼扭矩可以认为各个叶片产生的气动力对机体质心的扭矩的总和。如图\ref{fig:M_flap}，假设单片叶片的面积为$A_{sta}$，叶片的升力系数为$C_{sta}$，单片襟翼产生的升力$F_{sta}$可以表示为：
 \begin{equation}
-    M_{sta} = \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2.
+    F_{sta} = \frac{1}{2} \rho A_{sta} C_{sta} V_e^2.
+\end{equation}
+记叶片数量为$n_{sta}$，单个叶片受到的气动力的压心到机体轴的距离为$l_{sta}$襟翼扭矩$M_{sta}$可以表示为：
+\begin{equation}
+    M_{sta} = n_{sta} l_{sta} F_{sta} = \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2.
 \end{equation}
 
 襟翼扭矩的方向为机体系坐标轴$O_bZ_b$的正方向，恰与风扇反扭距方向相反，则该扭矩在机体系下的投影$\bm{M}_{sta}^b$为：
 \begin{equation}
-    \bm{M}_{sta}^b = M_{sta} \cdot \bm{e}_3 = \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2 \cdot \bm{e}_3.
+    \bm{M}_{sta}^b = n_{sta} l_{sta} F_{sta} = \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2 \cdot \bm{e}_3.
     \label{eq:M_sta}
 \end{equation}
 
 \subsection{控制舵面动力学}
 涵道无人机的控制力矩主要来源与控制舵面，利用涵道风扇出风口高速喷射的气流，控制舵面通过调整其角度，来产生合适的升力。由于控制舵面距离无人机质心较远，在正常飞行状态下，能够产生效果较为可观的控制力矩。
 
-如图\ref{fig:ctrl_surface}所示，本文所研究的无人机具有四个控制舵面。定义四个舵面旋转的正方向均为沿转轴方向，从靠近机体轴一侧指向远离机体轴一侧。并且，定义旋转正方向与$O_bX_b$轴同向的舵面为1号舵，反向的舵面为3号舵；定义旋转正方向与$O_bY_b$轴同向的为2号舵，反向的为4号舵。，定义控制舵面的偏转角度向量为$\bm{\delta} = [\delta_1 \quad \delta_2 \quad \delta_3 \quad \delta_4]^T$，分别对应1，2，3，4号控制舵面。
+如图\ref{fig:ctrl_surface}所示，本文所研究的无人机具有四个控制舵面，每个控制舵面由一对平行翼面构成。定义四个舵面旋转的正方向均为沿转轴方向，从靠近机体轴一侧指向远离机体轴一侧。并且，定义旋转正方向与$O_bX_b$轴同向的舵面为1号舵，反向的舵面为3号舵；定义旋转正方向与$O_bY_b$轴同向的为2号舵，反向的为4号舵。，定义控制舵面的偏转角度向量为$\bm{\delta} = [\delta_1 \quad \delta_2 \quad \delta_3 \quad \delta_4]^T$，分别对应1，2，3，4号控制舵面。
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{figure/body1.png}
+    \includegraphics[scale = 0.25]{figure/chapter2/control_surface.png}
     \caption{\label{fig:ctrl_surface}控制舵面示意图}
 \end{figure}
 
-如图\ref{fig:ctrl_surface}所示，设1号控制舵面的气动压力的压心为$O_cs$，$O_cs$到机体轴的距离是$l_1$，$O_cs$到机体轴$O_bX_b$的距离是$l_2$，设控制舵面的面积为$A_cv$，控制舵面的升力系数为$C_cv$，且根据对称关系，可给出控制舵面受到的气动力为：
+针对单个控制舵面，可以认为一对平行翼面的气动压力的压心位于两片翼面的轴对称平面上，如图橙色点虚线平面\ref{fig:ctrl_surface}所示。
+
+在给出控制舵面的气动力之前，有必要先定义几个物理量，如图\ref{fig:ctrl_surface}，设1号控制舵面的气动压力的压心为$O_{cs1}$，$O_{cs1}$到机体系坐标轴$O_bX_b$的距离是$l_1$，$O_{cs1}$到机体系坐标轴$O_bZ_b$的距离是$l_2$，设控制舵面的面积为$A_{cv}$，控制舵面的升力系数为$C_{cv}$。那么根据升力方程，1号舵面单个翼面受到的气动力为：
 \begin{equation}
-    F_i = \frac{1}{2}\rho A_cv C_cv V_e^2, \quad i=1,2,3,4.
+    F_{cv_{1}}' = \frac{1}{2}\rho A_{cv} C_{cv} V_e^2 \delta _1
 \end{equation}
+单个控制舵面包含一对平行翼面，且四个控制舵面具有对称性，可得各控制舵面受到的气动力：
+\begin{equation}
+    F_{cv_{i}} = 2 F_{cv_{i}}' = \rho A_{cv} C_{cv} V_e^2 \delta _i, \quad i=1,2,3,4.
+    \label{eq:F_cv}
+\end{equation}
+
 值得注意的是，上述解析式是对控制力的近似，仅当控制舵面偏转角度较小时成立，对此，本文作出限制：
 \begin{equation}
     \delta_i \in [-20^\circ, 20^\circ], \quad i=1,2,3,4.
 \end{equation}
 由于舵面偏转角度较小，可近似认为距离$l_1$，$l_2$均不发生变化。
 
-根据上述推导，可得出控制舵面的作用力在机体系下的投影$\bm{F}_{vane}^b$为：
+根据几何关系，并结合式\ref{eq:F_cv}可得出控制舵面的作用力在机体系下的投影$\bm{F}_{vane}^b$为：
 \begin{equation}
     \bm{F}_{vane}^b = 
     \begin{bmatrix}
-        F_4 - F_2 \\
-        F_1 - F_3 \\
+        F_{cv_{4}} - F_{cv_{2}} \\
+        F_{cv_{1}} - F_{cv_{3}} \\
+        0
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        \rho A_{cv} C_{cv} V_e^2 (\delta _4 - \delta _2) \\
+        \rho A_{cv} C_{cv} V_e^2 (\delta _1 - \delta _3) \\
         0
     \end{bmatrix},
     \label{eq:F_vane}
@@ -473,9 +544,14 @@
 \begin{equation}
     \bm{M}_{vane}^b = 
     \begin{bmatrix}
-        l_1 (F_4 - F_2) \\
-        -l_1 (F_1 - F_3) \\
-        l_2 (F_1 + F_2 + F_3 + F_4)
+        -l_1 (F_{cv_{1}} - F_{cv_{3}}) \\
+        l_1 (F_{cv_{4}} - F_{cv_{2}}) \\
+        l_2 (F_{cv_{1}} + F_{cv_{2}} + F_{cv_{3}} + F_{cv_{4}})
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        -\rho A_{cv} C_{cv} V_e^2 l_1 (\delta _1 - \delta _3) \\
+        \rho A_{cv} C_{cv} V_e^2 l_1 (\delta _4 - \delta _2) \\
+        \rho A_{cv} C_{cv} V_e^2 l_2 (\delta _1 + \delta _2 + \delta _3 + \delta _4)
     \end{bmatrix}.
     \label{eq:M_vane}
 \end{equation}
@@ -513,10 +589,117 @@
     \end{tabular}
 \end{table}
 
+结合涵道式无人机的运动学模型和动力学模型，可以推导出无人机的完整动态方程。设无人机的状态矢量为：
+\begin{equation}
+    \bm{x}_{uav} = 
+    \begin{bmatrix}
+        \bm{P}^{e} \\
+        \bm{v}^{e} \\
+        \bm{\eta} \\
+        \bm{\omega}^{b}
+    \end{bmatrix},
+\end{equation}
+且满足：
+\begin{equation}
+    \bm{P}^e = 
+    \begin{bmatrix}
+        p_x^e \\
+        p_y^e \\
+        p_z^e
+    \end{bmatrix},
+    \quad
+    \bm{v}^e = 
+    \begin{bmatrix}
+        v_x^e \\
+        v_y^e \\
+        v_z^e
+    \end{bmatrix}, 
+    \quad
+    \bm{\eta} = 
+    \begin{bmatrix}
+        \phi \\
+        \theta \\
+        \psi
+    \end{bmatrix},
+    \quad
+    \bm{\omega} = 
+    \begin{bmatrix}
+        p \\
+        q \\
+        r
+    \end{bmatrix}.
+\end{equation}
+那么可以给出如下所示的无人机的各个状态量的动态方程。
+
+(1)位置动态方程：
+\begin{equation}
+    \begin{aligned}
+        \dot{p_x^e} &= v_x^e \\
+        \dot{p_y^e} &= v_y^e \\
+        \dot{p_z^e} &= v_z^e
+    \end{aligned}
+\end{equation}
+
+(2)速度动态方程：
+\begin{equation}
+    \label{eq:v_dynamic}
+    \begin{aligned}
+        \dot{v_x^e} = & \frac{1}{m} \Biggl\{(\cos \theta \cos \psi) \\
+        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2) \Bigr] \\
+        & + (\sin \varphi \sin \theta \cos \psi - \cos \varphi \sin \psi) \\
+        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + \rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3) \Bigr] \\
+        & + (\cos \varphi \sin \theta \cos \psi + \sin \varphi \sin \psi) \\
+        & \cdot \Bigl[ -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df}))\Bigr] \Biggr\}
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        \dot{v_y^e} = & \frac{1}{m} \Biggl\{ (\cos\theta\sin\psi) \\
+        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2) \Bigr] \\
+        & + (\sin\varphi\sin\theta\sin\psi + \cos\varphi\cos\psi) \\
+        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + L\rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3) \Bigr] \\
+        & + (\cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi) \\
+        & \cdot\Bigl[ -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \Bigr] \Biggr\}
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        \dot{v_z^e} = & \frac{1}{m} \Biggl\{ -\sin\theta \cdot \\
+        & \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2) \Bigr] \\
+        & + (\sin\varphi\cos\theta) \\
+        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + \rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3) \Bigr] \\
+        & + (\cos\varphi\cos\theta) \\
+        & \cdot \Bigl[ -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \Bigr] \Biggr\} + g 
+    \end{aligned}
+\end{equation}
+
+(3)姿态动态方程：
+\begin{equation}
+    \begin{aligned}
+        \dot{\varphi} &= p + \sin\varphi \tan\theta \, q + \cos\varphi \tan\theta \, r \\
+        \dot{\theta}  &= \cos\varphi \, q - \sin\varphi \, r \\
+        \dot{\psi}    &= \frac{\sin\varphi}{\cos\theta} \, q + \frac{\cos\varphi}{\cos\theta} \, r
+    \end{aligned}
+\end{equation}
+
+(4)角速度动态方程：
+\begin{equation}
+    \label{eq:w_dynamic}
+    \begin{aligned}
+        \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr + \biggl[ - \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) v_r}{\Omega sin\alpha} \\
+        & - \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r l_N - J_{{fan}} \Omega q - \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_1 - \delta_3) \biggr] \biggr\} \\[4pt]
+        \dot{q} = & \frac{1}{J_y} \biggl\{(J_z - J_x)pr + \biggl[  \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
+        & + \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r l_N + J_{{fan}} \Omega p + \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_4 - \delta_2) \biggr] \biggr\} \\[4pt]
+        \dot{r} = & \frac{1}{J_z} \biggl\{ (J_x - J_y)pq + \biggl[ - \frac{1}{2}\rho \pi C_Q R^5 \Omega^2  + \rho A_{cv} C_{cv} V_e^2 l_2 (\delta_1 + \delta_2 + \delta_3 + \delta_4) \\
+        & + \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2 \biggr] \biggr\}
+    \end{aligned}
+\end{equation}
+
+
 \section{实验样机}
-在本文的研究中涉及到模型参数辨识以及基于模型的抗扰动控制，其本质上是在利用模型构建一个对现实物理系统的“反向映射”或“逆动力学”，模型的精度直接决定了这一映射的保真度与有效性。因此需要要在开展正式研究前，获取非线性系统的相关参数。经过大量测试、仿真和验证，本文研究的涵道式无人机相关系统参数被整理成表\ref{tab:F_and_M}。
+在本文的研究中涉及到模型参数辨识以及基于模型的抗扰动控制，其本质上是在利用模型构建一个对现实物理系统的“反向映射”或“逆动力学”，模型的精度直接决定了这一映射的保真度与有效性。因此需要要在开展正式研究前，获取非线性系统的相关参数。经过大量测试、仿真和验证，本文研究的涵道式无人机相关系统参数被整理成表\ref{tab:params}。
 \begin{table}
-    \caption{\label{tab:F_and_M}实验样机非线性系统模型参数}
+    \caption{\label{tab:params}实验样机非线性系统模型参数}
     \centering{}%
     \begin{tabular}{cccc}
     \toprule
@@ -529,22 +712,28 @@
 
     $l_1(m)$ & $0.09529$ & $l_2(m)$ & $0.05685$\tabularnewline
 
-    $J_fan(kg \cdot m^2)$ & $2.084 \times 10^{-5}$ & $l_N(m)$ & $0.012$\tabularnewline
+    $l_{sta}(m)$ & $0.03252$ & $n_{sta}$ & $4$\tabularnewline
+
+    $J_{fan}(kg \cdot m^2)$ & $2.084 \times 10^{-5}$ & $l_N(m)$ & $0.012$\tabularnewline
+
+    $A_{sta}(m^2)$ & $2.680 \times 10^{-3}$ & $A_{cv}(m^2)$ & $2.443 \times 10 ^{-3}$\tabularnewline
 
     $\rho (kg/m^3)$ & $1.225$ & $\sigma _d$ & $0.7800$\tabularnewline
+
+    $C_{cv} $ & $1.7266$ & $\sigma _d$ & $0.7800$\tabularnewline
     
-    $k_{flap}$ & $6.966 \times 10^{-6}$ & $k_{T0}$ & $7.041 \times 10^{-6}$\tabularnewline
+    $C_{T0}$ & $ 0.0307$ & $C_{sta}$ & $0.7517$\tabularnewline
     
-    $k_{Th}$ & $-3.646 \times 10^{-6}$ & $k_{Ts}$ & $-2.247 \times 10^{-5}$\tabularnewline
+    $C_{T_{J}}$ & $−0.0691$ & $C_{N_{J}}$ & $0.0959$\tabularnewline
     
-    $k_{Ns}$ & $8.593 \times 10^{-4}$ & $k_{cpx}$ & $7.041 \times 10^{-6}$\tabularnewline
+    $X_J$ & $0.4679$ & $X_{\alpha}$ & $0.8$\tabularnewline
     
-    $d_{MS}$ & $1.918 \times 10^{-7}$ & $d_{cs}$ & $0.0048$\tabularnewline
+    $C_{Q}$ & $0.0031$\tabularnewline
     \bottomrule
     \end{tabular}
 \end{table}
 
-尽管前文通过机理分析建立了涵道式无人机的非线性数学模型，并在理想条件下对其动力学特性进行了推导与仿真验证，但必须指出的是，该模型本质上是对真实物理系统的一种理想化抽象与近似描述。在实际工程应用中，由于模型简化、装配误差和机械磨损，理论模型与实物系统之间往往存在一定的偏差。
+尽管前文通过机理分析建立了涵道式无人机的非线性数学模型，并在理想条件下对其动力学特性进行了推导与部分仿真验证。但必须指出的是，由于涵道无人机在飞行过程中表现出较强的非线性特性，并且与系统的多个状态存在复杂耦合关系，该模型本质上是对真实物理系统的一种理想化抽象与近似描述。在实际工程应用中，由于模型简化、装配误差和机械磨损，理论模型与实物系统之间往往存在一定的偏差。
 
 \section{本章小结}
 本章围绕小型涵道式无人机的系统建模展开，旨在建立能够准确描述其运动特性与受力机理的数学模型，为后续的控制器设计和参数辨识提供理论依据。
