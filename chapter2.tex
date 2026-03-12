@@ -125,13 +125,13 @@
 
 （2）旋转矩阵
 
-定义从机体坐标系到地面坐标系的旋转矩阵 $\bm{R}_{b}^{e}$，使得对三维空间中的任意矢量$\bm{v}$ 在机体坐标系中的投影$\bm{v}^b$ 以及其在地面坐标系中的投影 $\bm{v}^e$ 满足：
+定义从机体坐标系到地面坐标系的旋转矩阵 $\bm{R}_{b}^{e}$，使得对三维空间中的任意矢量$\bm{v}$ 在机体坐标系中的投影$\bm{v}^b$ 以及其在地面坐标系中的投影 $\bm{v}^b$ 满足：
 \begin{equation}
-\bm{v}^e = \bm{R}_{b}^{e} \, \bm{v}^b.
+\bm{v}^b = \bm{R}_{b}^{e} \, \bm{v}^b.
 \end{equation}
 根据旋转矩阵的特性，从地面坐标系到机体坐标系的旋转矩阵$\bm{R}_{e}^{b} = \bm{R}_{b}^{eT}$ ，且满足：
 \begin{equation}
-\bm{v}^b = \bm{R}_{e}^{b} \, \bm{v}^e.
+\bm{v}^b = \bm{R}_{e}^{b} \, \bm{v}^b.
 \end{equation}
 按照上述顺序，旋转矩阵可通过依次左乘每次旋转对应的基本旋转矩阵得到。绕X、Y、Z轴旋转的基本旋转矩阵的定义分别如下：
 \begin{equation}
@@ -176,11 +176,11 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \section{运动学模型}
 运动学建模是指在不考虑引起运动的力（如重力、惯性力、摩擦力等）的情况下，使用数学工具对物体或机构（特别是连杆机构）的运动属性（如位置、速度、加速度）进行描述、分析和计算的过程。本小节将针对涵道式无人机的机身进行运动学分析，用数学语言建立其位置姿态与时间之间的关系。
 
-记无人机在地面系下的位置矢量为$\bm{P}$，无人机在地面系下的速度矢量为$\bm{v}$，记无人机的欧拉角为$\bm{\eta}=[\varphi \quad \theta \quad \psi]^T$，记无人机的角速度矢量为$\bm{\omega}$，那么$\bm{\omega}$在机体系下的投影为$\bm{\omega}^b = [p \quad q \quad r]^T$。
+记无人机在地面系下的位置矢量为$\bm{p}$，无人机在地面系下的速度矢量为$\bm{v}$，记无人机的欧拉角为$\bm{\eta}=[\varphi \quad \theta \quad \psi]^T$，记无人机的角速度矢量为$\bm{\omega}$，那么$\bm{\omega}$在机体系下的投影为$\bm{\omega}^b = [p \quad q \quad r]^T$。
 
 由速度和位置之间的关系，可得:
 \begin{equation}
-    \dot{\bm{P}}^e = \bm{v}^e.
+    \dot{\bm{p}}^e = \bm{v}^b = \bm{R}_b^e \bm{v}^b.
     \label{eq:d_pos}
 \end{equation}
 
@@ -242,11 +242,22 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 
 无人机的位置动力学可由牛顿第二定律推导出。记无人机受到的除重力之外的合外力为$\bm{F}$，无人机质量为$m$，当地重力加速度大小为$g$，无人机的加速度为$\bm{a}$，由牛顿第二定律可以得到，加速度在地面坐标系下的投影$\bm{a}^e$为：
 \begin{equation}
-    \bm{a}^e = \dot{\bm{v}}^e = g\bm{e}_{3} + \bm{F}^e m^{-1},
+    \bm{a}^e = \dot{\bm{v}}^e = g\bm{e}_{3} + m^{-1} \bm{F}^e,
+    \label{eq:a_e}
 \end{equation}
-整理可得：
+
+为方便后续对气动力和气动力矩的研究，本文选用$\bm{v}^b$作为系统状态量之一，下面推导其动态 $\dot{\bm{v}}^b$。根据矢量在旋转坐标系中的导数定理，惯性系下的绝对导数与旋转系下的相对导数之间存在如下关系：
 \begin{equation}
-    \dot{\bm{v}}^e = g\bm{e}_{3} + \bm{R}_b^e\bm{F}^b m^{-1}.
+    \dot{\bm{v}}^e = \bm{R}_b^e(\dot{\bm{v}}^b + \bm{\omega}^{b} \times \bm{v}^b).
+    \label{eq:transport}
+\end{equation}
+将式 \eqref{eq:transport} 代入式 \eqref{eq:a_e} 的左端 $\dot{\bm{v}}^e$，得到：
+\begin{equation}
+    \bm{R}_b^e(\dot{\bm{v}}^b + \bm{\omega}^{b} \times \bm{v}^b) = g\bm{e}_{3} + m^{-1} \bm{F}^e,
+\end{equation}
+移项整理得到完全在机体坐标系下表达的平动动力学方程：
+\begin{equation}
+    \dot{\bm{v}}^b = g\bm{R}_e^b\bm{e}_3 + m^{-1} \bm{F}^b - \bm{\omega}^b \times \bm{v}^b
     \label{eq:d_vel}
 \end{equation}
 
@@ -273,10 +284,10 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 至此，无人机的基本运动学和动力学模型可以通过\eqref{eq:d_pos}、\eqref{eq:d_eular}、\eqref{eq:d_vel}、\eqref{eq:d_omega}给出，整理可得：
 \begin{equation}
     \begin{cases} 
-        \dot{\bm{P}}^e = \bm{v}^e \\ 
-        \dot{\bm{V}}^e = g\bm{e}_{3} + \bm{R}_b^e\bm{F}^b m^{-1} \\ 
-        \dot{\bm{\eta}} = \bm{Q}\bm{\omega}^b \\ 
-        \dot{\bm{\omega}^b} = \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)) 
+        \dot{\bm{p}}^e &= \bm{R}_b^n \bm{v}^b \\ 
+        \dot{\bm{v}}^b &= g\bm{R}_e^b\bm{e}_3 + m^{-1} \bm{F}^b - \bm{\omega}^b \times \bm{v}^b  \\ 
+        \dot{\bm{\eta}} &= \bm{Q}\bm{\omega}^b \\ 
+        \dot{\bm{\omega}^b} &= \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)) 
     \end{cases} .
     \label{eq:base_dynamic}
 \end{equation}
@@ -327,8 +338,8 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 其中，$C_T$和$C_N$都是无量纲系数，分别是涵道风扇的拉力系数和侧向力系数，且它们满足下面式子\cite{2012Nondimensional}：
 \begin{equation}
     \begin{cases}
-        C_T = C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df}) \\
-        C_N =  J C_{N_J} sin\alpha_{df}
+        C_T = C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df}) \\
+        C_N =  J C_{N_J} \sin\alpha_{df}
     \end{cases}.
     \label{eq:thrust_k}
 \end{equation}
@@ -336,16 +347,16 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 
 结合式\ref{eq:J}，式\ref{eq:thrust}和式\ref{eq:thrust_k}可得侧向力$N_{df}$为：
 \begin{equation}
-    N_{df} = \frac{1}{2}\rho \pi^2 R^3 C_{N_J} V_a sin\alpha_{df} \Omega.
+    N_{df} = \frac{1}{2}\rho \pi^2 R^3 C_{N_J} V_a \sin\alpha_{df} \Omega.
 \end{equation}
 
 已知风扇拉力的方向是指向机体系坐标轴$O_bZ_b$的负方向，那么结合式\ref{eq:thrust}和式\ref{eq:thrust_k}，风扇拉力矢量$\bm{T}_{df}^b$在机体系下的投影可写为：
 \begin{equation}
-    \bm{T}_{df}^b = -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \bm{e}_3.
+    \bm{T}_{df}^b = -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \bm{e}_3.
     \label{eq:T_df}
 \end{equation}
 
-已知$N_{df}$的方向与$\bm{v}_a^{||}$方向相反，注意到，$V_a sin\alpha_{df}$即为$\bm{v}_a^{||}$的模，那么侧向力矢量$\bm{N}_{df}^b$在机体系下的投影可写为：
+已知$N_{df}$的方向与$\bm{v}_a^{||}$方向相反，注意到，$V_a \sin\alpha_{df}$即为$\bm{v}_a^{||}$的模，那么侧向力矢量$\bm{N}_{df}^b$在机体系下的投影可写为：
 \begin{equation}
     \bm{N}_{df}^b = -\frac{1}{2}\rho \pi^2 R^3 C_{N_J} \Omega \cdot \bm{v}_a^{||} = 
     \begin{bmatrix}
@@ -362,7 +373,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
     \begin{bmatrix}
         -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r \\
         -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r \\
-        -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df}))
+        -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df}))
     \end{bmatrix}.
 \end{equation}
 
@@ -374,11 +385,11 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{equation}
 式中，气动力矩$M_{df}$以使无人机具有抬头趋势的方向为正，$X_J$和$X_{\alpha}$均为无量纲的常系数，$l_N$和$l_T$分别是侧向力和拉力对机体重心的力臂，其关系如图\ref{fig:ductedfan_force}所示。根据该理论，侧向力的作用点固定且高度大致位于涵道入口平面，可认为侧向力力臂$l_N$为已知常量，拉力力臂$l_T$满足如下关系：
 \begin{equation}
-    l_T = X_J J R sin(X_\alpha \alpha_{df}).
+    l_T = X_J J R \sin(X_\alpha \alpha_{df}).
 \end{equation}
 将式\ref{eq:J}代入可得：
 \begin{equation}
-    l_T = X_J \pi V_a \Omega ^{-1} sin(X_\alpha \alpha_{df}).
+    l_T = X_J \pi V_a \Omega ^{-1} \sin(X_\alpha \alpha_{df}).
     \label{eq:l_T}
 \end{equation}
 
@@ -386,13 +397,13 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
     \bm{L}_T^b = 
     \begin{bmatrix}
-        l_T \cdot \dfrac{u_r}{V_a sin\alpha} \\
-        l_T \cdot \dfrac{v_r}{V_a sin\alpha} \\
+        l_T \cdot \dfrac{u_r}{V_a \sin\alpha} \\
+        l_T \cdot \dfrac{v_r}{V_a \sin\alpha} \\
         0
     \end{bmatrix} = 
     \begin{bmatrix}
-        \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
-        \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) v_r}{\Omega sin\alpha} \\
+        \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
+        \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\
         0
     \end{bmatrix},
     \bm{L}_N^b = 
@@ -408,8 +419,8 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         \bm{M}_{df}^b = &\bm{L}_T^b \times \bm{T}_{df}^b + \bm{L}_N^b \times \bm{N}_{df}^b \\
         =
         &\begin{bmatrix}
-            -\dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
-            \dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
+            -\dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
+            \dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
             0
         \end{bmatrix} \\
         &+ \begin{bmatrix}
@@ -593,7 +604,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
     \bm{x}_{uav} = 
     \begin{bmatrix}
-        \bm{P}^{e} \\
+        \bm{p}^{e} \\
         \bm{v}^{e} \\
         \bm{\eta} \\
         \bm{\omega}^{b}
@@ -601,14 +612,14 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{equation}
 且满足：
 \begin{equation}
-    \bm{P}^e = 
+    \bm{p}^e = 
     \begin{bmatrix}
         p_x^e \\
         p_y^e \\
         p_z^e
     \end{bmatrix},
     \quad
-    \bm{v}^e = 
+    \bm{v}^b = 
     \begin{bmatrix}
         v_x^e \\
         v_y^e \\
@@ -634,43 +645,29 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 (1)位置动态方程：
 \begin{equation}
     \begin{aligned}
-        \dot{p_x^e} &= v_x^e \\
-        \dot{p_y^e} &= v_y^e \\
-        \dot{p_z^e} &= v_z^e
+        \dot{p_x^e} =& (\cos\theta\cos\psi) v_x^b + (\sin\varphi\sin\theta\cos\psi - \cos\varphi\sin\psi) v_y^b \\
+        &+ 
+        (\cos\varphi\sin\theta\cos\psi + \sin\varphi\sin\psi) v_z^b \\
+        \dot{p_y^e} =& (\cos\theta\sin\psi) v_x^b + (\sin\varphi\sin\theta\sin\psi + \cos\varphi\cos\psi) v_y^b \\
+        &+ 
+        (\cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi) v_z^b \\
+        \dot{p_z^e} =& (-\sin\theta) v_x^b + (\sin\varphi\cos\theta) v_y^b + 
+        (\cos\varphi\cos\theta) v_z^b
     \end{aligned}
+    \label{eq:p_dynamic}
 \end{equation}
 
 (2)速度动态方程：
 \begin{equation}
+    \begin{aligned}
+        \dot{v_x^b} =& -g\sin\theta + m^{-1}(-\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2)) \\
+        &+ (v_y^e r - v_z^e q)\\
+        \dot{v_y^b} =& g\sin\phi\cos\theta + m^{-1}(-\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + \rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3)) \\
+        &+ (v_z^e p - v_x^e r)\\
+        \dot{v_z^b} =& g\cos\phi\cos\theta + m^{-1}(-\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df}))) \\
+        &+ (v_x^e q - v_y^e p)
+    \end{aligned}
     \label{eq:v_dynamic}
-    \begin{aligned}
-        \dot{v_x^e} = & \frac{1}{m} \Biggl\{(\cos \theta \cos \psi) \\
-        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2) \Bigr] \\
-        & + (\sin \varphi \sin \theta \cos \psi - \cos \varphi \sin \psi) \\
-        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + \rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3) \Bigr] \\
-        & + (\cos \varphi \sin \theta \cos \psi + \sin \varphi \sin \psi) \\
-        & \cdot \Bigl[ -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df}))\Bigr] \Biggr\}
-    \end{aligned}
-\end{equation}
-\begin{equation}
-    \begin{aligned}
-        \dot{v_y^e} = & \frac{1}{m} \Biggl\{ (\cos\theta\sin\psi) \\
-        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2) \Bigr] \\
-        & + (\sin\varphi\sin\theta\sin\psi + \cos\varphi\cos\psi) \\
-        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + L\rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3) \Bigr] \\
-        & + (\cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi) \\
-        & \cdot\Bigl[ -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \Bigr] \Biggr\}
-    \end{aligned}
-\end{equation}
-\begin{equation}
-    \begin{aligned}
-        \dot{v_z^e} = & \frac{1}{m} \Biggl\{ -\sin\theta \cdot \\
-        & \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2) \Bigr] \\
-        & + (\sin\varphi\cos\theta) \\
-        & \cdot \Bigl[ -\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + \rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3) \Bigr] \\
-        & + (\cos\varphi\cos\theta) \\
-        & \cdot \Bigl[ -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \Bigr] \Biggr\} + g 
-    \end{aligned}
 \end{equation}
 
 (3)姿态动态方程：
@@ -680,23 +677,28 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         \dot{\theta}  &= \cos\varphi \, q - \sin\varphi \, r \\
         \dot{\psi}    &= \frac{\sin\varphi}{\cos\theta} \, q + \frac{\cos\varphi}{\cos\theta} \, r
     \end{aligned}
+    \label{eq:eta_dynamic}
 \end{equation}
 
 (4)角速度动态方程：
 \begin{equation}
     \label{eq:w_dynamic}
     \begin{aligned}
-        \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr + \biggl[ - \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) v_r}{\Omega sin\alpha} \\
+        \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr \\[4pt]
+        &+ \biggl[ - \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\[4pt]
         & - \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r l_N - J_{{fan}} \Omega q - \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_1 - \delta_3) \biggr] \biggr\} \\[4pt]
-        \dot{q} = & \frac{1}{J_y} \biggl\{(J_z - J_x)pr + \biggl[  \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} cos\alpha_{df})) \cdot \dfrac{X_J \pi sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
+        \dot{q} = & \frac{1}{J_y} \biggl\{(J_z - J_x)pr \\[4pt]
+        &+ \biggl[  \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\[4pt]
         & + \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r l_N + J_{{fan}} \Omega p + \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_4 - \delta_2) \biggr] \biggr\} \\[4pt]
-        \dot{r} = & \frac{1}{J_z} \biggl\{ (J_x - J_y)pq + \biggl[ - \frac{1}{2}\rho \pi C_Q R^5 \Omega^2  + \rho A_{cv} C_{cv} V_e^2 l_2 (\delta_1 + \delta_2 + \delta_3 + \delta_4) \\
+        \dot{r} = & \frac{1}{J_z} \biggl\{ (J_x - J_y)pq \\[4pt]
+        &+\biggl[ - \frac{1}{2}\rho \pi C_Q R^5 \Omega^2  + \rho A_{cv} C_{cv} V_e^2 l_2 (\delta_1 + \delta_2 + \delta_3 + \delta_4) \\[4pt]
         & + \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2 \biggr] \biggr\}
     \end{aligned}
 \end{equation}
 
 
 \section{实验样机}
+\label{sec:sample_uav}
 在本文的研究中涉及到模型参数辨识以及基于模型的抗扰动控制，其本质上是在利用模型构建一个对现实物理系统的“反向映射”或“逆动力学”，模型的精度直接决定了这一映射的保真度与有效性。因此需要要在开展正式研究前，获取非线性系统的相关参数。经过大量测试、仿真和验证，本文研究的涵道式无人机相关系统参数被整理成表\ref{tab:params}。
 \begin{table}
     \caption{\label{tab:params}实验样机非线性系统模型参数}

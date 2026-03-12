@@ -71,31 +71,7 @@
 \bibliographystyle{scut_thesis/scutthesis}
 \bibliography{refrence}
 
-\appendix{附录}
-\section{Ubuntu Linux系统下中文字体的安装}
-\label{sec:ubuntuzhfont}
-整个过程分为两部分：得到中文字体文件和安装设置。
-
-常用中文字体有三套：
-
-1. winfonts（微软的六种中易字体，包括宋体、黑体、楷书、仿宋、隶书、幼圆），
-
-2. adobefonts（Adobe 的四套字体，包括 Adobe Song Std、Adobe Heiti Std、Adobe
-Fangsong Std、Adobe Kaiti Std）
-
-3. Ubuntu开源的文泉字体
-CTex宏库默认支持winfonts和adboefonts。因此要在linux系统下使用Ctex宏库最好是安装这些字库之一。
-
-\section{Texlive的安装}
-
-\label{sec:texlive_install}
-
-Texlive是TEX的一个集成发行包，相关介绍见http://tug.org/texlive/doc/texlive-zh-cn/。其主要过程包括：预设置、下载安装和测试调用。建议用GUI方式安装：
-
-sudo apt-get install perl-tk
-
-到http://tug.org/texlive/acquire-netinstall.html页面下载 install-tl在线安装前端程序.
-
+\input{appendix.tex}
 
 \chapterx{攻读博士学位期间取得的研究成果}
 

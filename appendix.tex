@@ -1,0 +1,52 @@
+\appendix{附录}
+
+\section{一阶李导数对状态量偏导}
+\label{appendix:lei}
+由式\ref{eq:lei_sim}，该矩阵为$12 \times 18$的分块矩阵：
+\begin{equation}
+    \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^1 \bm{h}(\bm{x}, \bm{u}_k) \big)\Big|_{\bm{x}=\bm{x}_k} = 
+    \begin{bmatrix}
+        \bm{I}_{3 \times 3} & \triangle t \bm{I}_{3 \times 3} & \bm{0}_{3 \times 3} & \bm{0}_{3 \times 3} & \bm{0}_{3 \times 6} \\
+        \bm{0}_{3 \times 3} & \bm{A}_{v v} & \bm{A}_{\bm{v \eta}} & \bm{0}_{3 \times 3} & \bm{A}_{\bm{v \theta}} \\
+        \bm{0}_{3 \times 3} & \bm{0}_{3 \times 3} & \bm{A}_{\bm{\eta \eta}} & \bm{A}_{\bm{\eta \omega}} & \bm{0}_{3 \times 6} \\
+        \bm{0}_{3 \times 3} & \bm{A}_{\bm{\omega v}} & \bm{A}_{\bm{\omega \eta}} & \bm{A}_{\bm{\omega \omega}} & \bm{A}_{\bm{\omega \theta}}
+    \end{bmatrix}.
+\end{equation}
+
+经整理，这些偏导数分别如下：
+\begin{equation}
+    \bm{A}_{\bm{vv}} = 
+    \begin{bmatrix}
+        1 - \frac{(\cos\theta \cos\psi) K_N \Omega \triangle t}{m} & - \frac{(\sin \varphi \sin \theta \cos \psi - \cos \varphi \sin \psi) K_N \Omega \triangle t}{m} & 0 \\
+        - \frac{(\cos\theta \sin\psi) K_N \Omega \triangle t}{m} & 1 - \frac{(\sin \varphi \sin \theta \sin \psi + \cos \varphi \cos \psi) K_N \Omega \triangle t}{m} & 0 \\
+        \frac{(\sin\theta) K_N \Omega \triangle t}{m} & - \frac{(\sin \varphi \cos \theta) K_N \Omega \triangle t}{m}& 1
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \bm{A}_{\bm{v \eta}} = 
+    \begin{bmatrix}
+        A_{\bm{v \eta}}^{11} & A_{\bm{v \eta}}^{12} & A_{\bm{v \eta}}^{13} \\
+        A_{\bm{v \eta}}^{21} & A_{\bm{v \eta}}^{22} & A_{\bm{v \eta}}^{23} \\
+        A_{\bm{v \eta}}^{31} & A_{\bm{v \eta}}^{32} & A_{\bm{v \eta}}^{33}
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \begin{aligned}
+        A_{\bm{v \eta}}^{11} =& \frac{\triangle t}{m} \big((\cos \varphi \sin \theta \cos \psi + \sin \varphi \sin \psi) F_y^e + (-\sin \varphi \sin \theta \cos \psi + \cos \varphi \sin \psi) F_z^e \big)\\
+        A_{\bm{v \eta}}^{12} =& \frac{\triangle t}{m} \big((-\sin \theta \cos \psi) F_x^e + (\sin \varphi \cos \theta \cos \varphi) F_y^e + (\cos \varphi \cos \theta \cos \psi) F_z^e \big)\\
+        A_{\bm{v \eta}}^{13} =& \frac{\triangle t}{m} \big((-\cos \theta \sin \psi) F_x^e + (-\sin \varphi \sin \theta \sin \varphi - \cos \phi \cos \psi) F_y^e \\
+        &+ (-\cos \varphi \sin \theta \sin \psi + \sin \varphi \cos \psi) F_z^e \big)\\
+        A_{\bm{v \eta}}^{21} =& \frac{\triangle t}{m} \big((\cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi) F_y^e + (- \sin\varphi\sin\theta\sin\psi - \cos\varphi\cos\psi) F_z^e \big)\\
+        A_{\bm{v \eta}}^{22} =& \frac{\triangle t}{m} \big((- \sin\theta\sin\psi) F_x^e + (\sin\varphi\cos\theta\sin\psi) F_y^e + (\cos\varphi\cos\theta\sin\psi) F_z^e \big)\\
+        A_{\bm{v \eta}}^{23} =& \frac{\triangle t}{m} \big((\cos\theta\cos\psi) F_x^e + (\sin\varphi\sin\theta\cos\psi - \cos\varphi\sin\psi) F_y^e \\
+        &+ (\cos\varphi\sin\theta\cos\psi + \sin\varphi\sin\psi) F_z^e \big)\\
+        A_{\bm{v \eta}}^{31} =& \frac{\triangle t}{m} \big((\cos\varphi\cos\theta) F_y^e + (-\sin\varphi\cos\theta) F_z^e \big)\\
+        A_{\bm{v \eta}}^{32} =& \frac{\triangle t}{m} \big((-\cos\theta) F_x^e + (-\sin\varphi\sin\theta) F_y^e + (-\cos\varphi\sin\theta) F_z^e \big)\\
+        A_{\bm{v \eta}}^{33} =& 0
+    \end{aligned}
+\end{equation}
+
+
+\section{可观性矩阵行满秩证明}
+\label{appendix:full_rank}

@@ -86,13 +86,14 @@
 \section{基于卡尔曼滤波器的模型参数辨识算法}% 12Pages
 本节将扩展卡尔曼滤波器理论具体应用于涵道式无人机的气动参数在线辨识问题。以无人机的位置、速度、姿态、角速度作为系统状态变量，并将部分核心气动参数增广为待估计状态，构建增广状态空间模型。系统的控制输入取自螺旋桨转速与各个舵机的偏转角度，观测数据则采用室内动作捕捉系统提供的高精度位姿信息。基于动作捕捉系统的噪声特性，合理设定观测噪声协方差矩阵与过程噪声协方差矩阵，以保证滤波器的估计一致性。最后，设计在固定周期下迭代更新的EKF算法，通过预测-更新递推流程实现状态与参数的实时联合估计。
 \subsection{模型简化} %2Page
+\label{sec:model_simplification}
 第二章从机理层面建立了涵道式无人机的完整非线性动力学模型，系统分析了涵道风扇、反扭矩襟翼及控制舵面所产生的气动力与力矩。然而，将该模型直接应用于扩展卡尔曼滤波器的在线参数辨识时，面临两方面挑战：其一，原始模型变量众多且相互耦合，部分次要因素对参数估计精度影响有限，却显著增加计算复杂度；其二，模型中包含多个常系数组合，在可辨识性分析中可合并为集总参数，以降低待估状态维度。
 
 基于上述考虑，有必要在保留核心气动特性的前提下对模型进行合理简化。首先，根据实际飞行工况忽略对参数辨识贡献较小的非核心变量，如控制舵面的质量效应、部分高阶耦合项及弱非线性环节；其次，将原始模型中具有相似物理意义或成组出现的常系数进行整合，减少冗余参数，提升滤波器收敛性能。简化后的模型在保证描述精度的同时，降低状态空间维度和线性化复杂度。
 
-首先，忽略对系统动态影响可忽略的分量。在涵道风扇动力学小节，式\ref{eq:thrust_k}中的$C_T$解析式里包含分量$J(C_{T_{J0}} + C_{T_J} cos\alpha_{df})$。其中，$C_{T_J}$的实际数值相比于$C_{T_{J0}}$较小，且本文研究的涵道无人机在实际飞行中迎风角$\alpha _{df}$的变化范围不超过15°，对应$cos\alpha_{df}$的变化幅度小于5\%，因此，在飞行过程中，$(C_{T_J} cos\alpha_{df})$的绝对变化量占$(C_{T_{J0}} + C_{T_J} cos\alpha_{df})$总量的比例不足2\%，故可将$(C_{T_{J0}} + C_{T_J} cos\alpha_{df})$整体近似为常量$C_{T_J}'$：
+首先，忽略对系统动态影响可忽略的分量。在涵道风扇动力学小节，式\ref{eq:thrust_k}中的$C_T$解析式里包含分量$J(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$。其中，$C_{T_J}$的实际数值相比于$C_{T_{J0}}$较小，且本文研究的涵道无人机在实际飞行中迎风角$\alpha _{df}$的变化范围不超过15°，对应$\cos\alpha_{df}$的变化幅度小于5\%，因此，在飞行过程中，$(C_{T_J} \cos\alpha_{df})$的绝对变化量占$(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$总量的比例不足2\%，故可将$(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$整体近似为常量$C_{T_J}'$：
 \begin{equation}
-    C_{T_J}' \approx (C_{T_{J0}} + C_{T_J} cos\alpha_{df})
+    C_{T_J}' \approx (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})
 \end{equation}
 可得简化后的$C_T$解析式为：
 \begin{equation}
@@ -129,35 +130,26 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 根据上述简化，结合式\ref{eq:C_T}第二章中的速度动态方程(式\ref{eq:v_dynamic})可被简化为：
 \begin{equation}
     \begin{aligned}
-        \dot{v_x^e} = & \frac{1}{m} \Biggl\{(\cos \theta \cos \psi) \cdot \Bigl[ -K_{N} \Omega u_r + K_{cv} (\delta_4 - \delta_2) \Bigr] \\
-        & + (\sin \varphi \sin \theta \cos \psi - \cos \varphi \sin \psi) \cdot \Bigl[ -K_{N} \Omega v_r + K_{cv} (\delta_1 - \delta_3) \Bigr] \\
-        & + (\cos \varphi \sin \theta \cos \psi + \sin \varphi \sin \psi) \cdot \Bigl[ -(K_{T0} + K_{T_J}J) \Omega^2 \Bigr] \Biggr\}
+        \dot{v_x^b} =& -g\sin\theta + m^{-1}(-K_{N} u_r + K_{cv} (\delta_4 - \delta_2)) \\
+        &+ (v_y^e r - v_z^e q)\\
+        \dot{v_y^b} =& g\sin\phi\cos\theta + m^{-1}(-K_{N} v_r + K_{cv} (\delta_1 - \delta_3)) \\
+        &+ (v_z^e p - v_x^e r)\\
+        \dot{v_z^b} =& g\cos\phi\cos\theta + m^{-1}(-(K_{T0} + K_{T_J}J) \Omega^2) \\
+        &+ (v_x^e q - v_y^e p)
     \end{aligned}
-\end{equation}
-\begin{equation}
-    \begin{aligned}
-        \dot{v_y^e} = & \frac{1}{m} \Biggl\{ (\cos\theta\sin\psi)  \cdot \Bigl[ -K_{N} \Omega u_r + K_{cv} (\delta_4 - \delta_2) \Bigr] \\
-        & + (\sin\varphi\sin\theta\sin\psi + \cos\varphi\cos\psi)  \cdot \Bigl[ -K_{N} \Omega v_r + K_{cv} (\delta_1 - \delta_3) \Bigr] \\
-        & + (\cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi) \cdot\Bigl[ -(K_{T0} + K_{T_J}J) \Omega^2 \Bigr] \Biggr\}
-    \end{aligned}
-\end{equation}
-\begin{equation}
-    \begin{aligned}
-        \dot{v_z^e} = & \frac{1}{m} \Biggl\{ -\sin\theta \cdot  \Bigl[ -K_{N} \Omega u_r + K_{cv} (\delta_4 - \delta_2) \Bigr] \\
-        & + (\sin\varphi\cos\theta) \cdot \Bigl[ -K_{N} \Omega v_r + K_{cv} (\delta_1 - \delta_3) \Bigr] \\
-        & + (\cos\varphi\cos\theta) \cdot \Bigl[ -(K_{T0} + K_{T_J}J) \Omega^2 \Bigr] \Biggr\} + g 
-    \end{aligned},
+    \label{eq:v_dynamic_sim}
 \end{equation}
 角速度动态方程(式\ref{eq:w_dynamic})可被简化为：
 \begin{equation}
     \begin{aligned}
-        \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr + \biggl[ - (K_{T0} + K_{T_J}J) \Omega^2 \cdot \dfrac{K_{l_N} sin(X_\alpha \alpha_{df}) v_r}{\Omega sin\alpha} \\
-        & - K_{N} \Omega v_r l_N - J_{{fan}} \Omega q - K_{cv} l_1 (\delta_1 - \delta_3) \biggr] \biggr\} \\[4pt]
-        \dot{q} = & \frac{1}{J_y} \biggl\{(J_z - J_x)pr + \biggl[  (K_{T0} + K_{T_J}J) \Omega^2 \cdot \dfrac{K_{l_N} sin(X_\alpha \alpha_{df}) u_r}{\Omega sin\alpha} \\
-        & + K_{N} \Omega u_r l_N + J_{{fan}} \Omega p + K_{cv} l_1 (\delta_4 - \delta_2) \biggr] \biggr\} \\[4pt]
+        \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr + \biggl[ - (K_{T0} + K_{T_J}J) \Omega^2 \cdot \dfrac{K_{l_N} \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\
+        & - K_{N} \Omega v_r l_N - J_{{fan}} \Omega q - K_{cv} l_1 (\delta_1 - \delta_3) \biggr] \biggr\} \\
+        \dot{q} = & \frac{1}{J_y} \biggl\{(J_z - J_x)pr + \biggl[  (K_{T0} + K_{T_J}J) \Omega^2 \cdot \dfrac{K_{l_N} \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
+        & + K_{N} \Omega u_r l_N + J_{{fan}} \Omega p + K_{cv} l_1 (\delta_4 - \delta_2) \biggr] \biggr\} \\
         \dot{r} = & \frac{1}{J_z} \biggl\{ (J_x - J_y)pq + \biggl[ - K_{fan} \Omega^2  + K_{cv} l_2 (\delta_1 + \delta_2 + \delta_3 + \delta_4) \\
         & + K_{sta} V_e^2 \biggr] \biggr\}
     \end{aligned}
+    \label{eq:omega_dynamic_sim}
 \end{equation}
 
 通过上述简化，原始模型中的冗余参数得以压缩，待辨识参数集规模显著减小，且保留了主导非线性特征，为后续可辨识性分析与滤波器设计奠定了简洁而有效的模型基础。
@@ -200,12 +192,13 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 \begin{equation}
     \bm{x} = 
     \begin{bmatrix}
-        \bm{P}^e \\
-        \bm{v}^e \\
+        \bm{p}^e \\
+        \bm{v}^b \\
         \bm{\eta} \\
         \bm{\omega} \\
         \bm{\theta}
-    \end{bmatrix}.
+    \end{bmatrix},
+    \bm{x} \in \mathbb{R}^{18}.
 \end{equation}
 由于这些参数仅与无人机的结构相关，可认为其变化是足够缓慢的，其动态可建模为随机游走过程：
 \begin{equation}
@@ -219,14 +212,15 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
     \begin{bmatrix}
         \Omega \\
         \bm{\delta}
-    \end{bmatrix}.
+    \end{bmatrix},
+    \bm{u} \in \mathbb{R}^{5}.
 \end{equation}
 
 增广系统的连续时间状态方程可写为：
 \begin{equation}
-    \dot{\bm{x}} = \bm{f}(\bm{x}, \bm{u})+\bm{w}
+    \dot{\bm{x}} = \bm{f}(\bm{x}, \bm{u})+\bm{w}.
 \end{equation}
-其中，$\bm{w} \sim \mathcal{N}(0, \bm{Q})$为过程噪声，其中蕴含了无人机的建模误差与各种难以估计的扰动。为了便于表述，使用$\bm{f^p}$，$\bm{f^v}$，$\bm{f^{\eta}}$，$\bm{f^{\omega}}$和$\bm{f^{\theta}}$分别表示$\bm{f}$中的位置、速度、姿态、角速度和气动参数分量。根据第二章对系统动态的分析，由式\ref{eq:base_dynamic}可知：
+其中，$\bm{f}(\bm{x}, \bm{u}) \in \mathbb{R}^{18}$ 为连续时间状态转移函数，$\bm{w} \sim \mathcal{N}(0, \bm{Q})$为过程噪声，其中蕴含了无人机的建模误差与各种难以估计的扰动。为了便于表述，使用$\bm{f^p}$，$\bm{f^v}$，$\bm{f^{\eta}}$，$\bm{f^{\omega}}$和$\bm{f^{\theta}}$分别表示$\bm{f}$中的位置、速度、姿态、角速度和气动参数分量。根据第二章对系统动态的分析，由式\ref{eq:base_dynamic}可知：
 \begin{equation}
     \bm{f}(\bm{x}, \bm{u}) = 
     \begin{bmatrix}
@@ -237,8 +231,8 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
         \bm{f^{\theta}}(\bm{x}, \bm{u})
     \end{bmatrix} =
     \begin{bmatrix}
-        \bm{v}^e \\
-        g\bm{e}_{3} + \bm{R}_b^e\bm{F}^b m^{-1} \\ 
+        \bm{R}_b^e \bm{v}^b \\
+        g\bm{R}_e^b \bm{e}_{3} +  m^{-1}\bm{F}^b - \bm{\omega}^b \times \bm{v}^b \\ 
         \bm{Q}\bm{\omega}^b \\
         \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)) \\
         \bm{0}
@@ -249,7 +243,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 \begin{equation}
     \bm{x}_k = \bm{f}_d(\bm{x}_{k-1}, \bm{u}_{k-1}) + \bm{w}_{k-1}.
 \end{equation}
-其中，$\bm{f}_d(\cdot)$的具体形式可写为：
+其中，$\bm{f}_d(\bm{x}_{k-1}, \bm{u}_{k-1}) \in \mathbb{R}^{18}$的具体形式可写为：
 \begin{equation}
     \bm{f}_d(\bm{x}_{k-1}, \bm{u}_{k-1}) = 
     \begin{bmatrix}
@@ -260,36 +254,41 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
         \bm{f^{\theta}}_d(\bm{x}, \bm{u})
     \end{bmatrix} =
     \begin{bmatrix}
-        \bm{p}_{k-1}^e + \bm{v}_{k-1}^e \triangle t \\
-        \bm{v}_{k-1}^e + (g\bm{e}_{3} + \bm{R}_b^e\bm{F}^b m^{-1}) \triangle t\\
-        \bm{\eta}_{k-1} + \bm{Q}\bm{\omega}^b \triangle t \\
-        \bm{\omega}_{k-1} + \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)) \triangle t \\
+        \bm{p}_{k-1}^e + \bm{R}_b^e \bm{v}_{k-1}^e \triangle t \\
+        \bm{v}_{k-1}^e + (g\bm{R}_e^b \bm{e}_{3} +  m^{-1}\bm{F}^b - \bm{\omega}^b \times \bm{v}^b) \triangle t\\
+        \bm{\eta}_{k-1} + \bm{Q}\bm{\omega}_{k-1}^b \triangle t \\
+        \bm{\omega}_{k-1}^b + \bm{J}^{-1}(\bm{M}^b - \bm{\omega}_{k-1}^b\times(\bm{J}\cdot\bm{\omega}_{k-1}^b)) \triangle t \\
         \bm{\theta}_{k-1}
     \end{bmatrix}
+    \label{eq:f_d}
 \end{equation}
 
-系统的观测信息来自于室内动作捕捉系统，该系统通过一组高帧率多方位摄像头采集飞机上固连的反光小球的位置，从而推算出飞机飞行期间的位置、速度和姿态。定义观测矢量$\bm{z}$为：
+系统的观测信息来自于室内动作捕捉系统和机载IMU。动作捕捉系统通过一组高帧率多方位摄像头采集飞机上固连的反光小球的位置，从而推算出飞机飞行期间的位置、速度和姿态。IMU则能够直接获取机体系下的角速度数据。定义观测矢量$\bm{z}$为：
 \begin{equation}
     \bm{z} = 
     \begin{bmatrix}
         \bm{p}^e \\
-        \bm{v}^e \\
-        \bm{\eta}
-    \end{bmatrix}
+        \bm{v}^b \\
+        \bm{\eta} \\
+        \bm{\omega}^b
+    \end{bmatrix},
+    \bm{z} \in \mathbb{R}^{12}.
 \end{equation}
 
 已知观测方程为：
 \begin{equation}
     \bm{z}_k = \bm{h}(\bm{x}_k) + \bm{v}_k,
 \end{equation}
-其中$\bm{v}_k \sim \mathcal{N}(0, \bm{R}_k)$，$\bm{R}_k$的选取需依据动作捕捉系统的噪声特性设定。由于观测量即为系统状态量，那么具体观测函数$\bm{h}(\cdot)$为：
+其中$\bm{v}_k \sim \mathcal{N}(0, \bm{R}_k)$，$\bm{R}_k$的选取需依据动作捕捉系统和IMU的噪声特性设定。由于观测量即为系统状态量，那么具体观测函数$\bm{h}(\bm{x}_k) \in \mathbb{R}^{12}$为：
 \begin{equation}
     \bm{h}(\bm{x}_k) = 
     \begin{bmatrix}
         \bm{p}^e \\
-        \bm{v}^e \\
-        \bm{\eta}
+        \bm{v}^b \\
+        \bm{\eta} \\
+        \bm{\omega}^b
     \end{bmatrix}.
+    \label{eq:obs}
 \end{equation}
 
 上述状态空间方程与观测方程完整地描述了增广系统的动态与量测关系，为后续讨论奠定了统一且明确的数学框架。
@@ -297,14 +296,265 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 \subsection{可辨识性分析} %2Page
 参数可辩性的是指在给定的模型结构、输入激励与观测条件下，待估参数是否能够被唯一确定，其分析方法较多，一种常用的可辨性分析方法是基于可观性矩阵的秩判据。该方法将待估参数增广为系统状态后，构造增广系统的可观性矩阵。由于该系统为非线性系统，应采用线性化后的时变可观性矩阵进行分析。若可观性矩阵满秩，则增广状态（含参数）在给定时间区间内可观。
 
+对于非线性系统，为刻画观测向量对初始状态的依赖关系，引入离散李导数（向前移位算子）的概念。定义零阶离散李导数为输出函数本身：
+\begin{equation}
+    \mathcal{L}_f^0 \bm{h}(\bm{x}) \triangleq \bm{h}(\bm{x}).
+\end{equation}
+对于任意整数 $r \ge 1$，$r$ 阶离散李导数通过递归方式定义为：
+\begin{equation}
+    \mathcal{L}_f^r \bm{h}(\bm{x}, \bm{u}_k, \dots, \bm{u}_{k+r-1}) 
+\triangleq \mathcal{L}_f^{r-1} \bm{h}\big( \bm{f}(\bm{x}, \bm{u}_k), \bm{u}_{k+1}, \dots, \bm{u}_{k+r-1} \big),
+\end{equation}
+其显式形式为输出函数与系统映射的复合：
+\begin{equation}
+    \mathcal{L}_f^r \bm{h}(\bm{x}, \bm{u}_{[k,k+r-1]}) = \bm{h}\Big( \bm{f}\big( \bm{f}( \cdots \bm{f}(\bm{x}, \bm{u}_k) \cdots, \bm{u}_{k+r-2}), \bm{u}_{k+r-1} \big) \Big),
+\end{equation}
+其中 $\bm{u}_{[k,k+r-1]} = (\bm{u}_k, \bm{u}_{k+1}, \dots, \bm{u}_{k+r-1})$ 表示从时刻 $k$ 起的输入序列。
 
+基于上述定义，系统在未来 $N$ 步内的输出可表示为关于初始状态 $\bm{x}_k$ 及输入序列的函数：
+\begin{equation}\label{eq:output_sequence}
+    \bm{Y}_N(\bm{x}_k, \bm{U}) = 
+    \begin{bmatrix}
+        \bm{y}_k \\ \bm{y}_{k+1} \\ \vdots \\ \bm{y}_{k+N-1}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \mathcal{L}_f^0 \bm{h}(\bm{x}_k) \\
+        \mathcal{L}_f^1 \bm{h}(\bm{x}_k, \bm{u}_k) \\
+        \vdots \\
+        \mathcal{L}_f^{N-1} \bm{h}(\bm{x}_k, \bm{u}_k, \dots, \bm{u}_{k+N-2})
+    \end{bmatrix},
+\end{equation}
+
+为判断系统的局部弱能观性，需考察映射 $\bm{Y}_N(\cdot, \bm{U})$ 在状态空间中的局部单射性。这可通过分析该映射的微分（即雅可比矩阵）来实现。构造能观性矩阵 $\mathcal{O}_N(\bm{x}_k, \bm{U})$ 如下：
+\begin{equation}\label{eq:observability_matrix}
+\mathcal{O}_N(\bm{x}_k, \bm{U}) \triangleq 
+\frac{\partial \bm{Y}_N}{\partial \bm{x}_k}(\bm{x}_k, \bm{U})
+= 
+\begin{bmatrix}
+\displaystyle \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^0 \bm{h}(\bm{x}) \big)\Big|_{\bm{x}=\bm{x}_k} \\[10pt]
+\displaystyle \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^1 \bm{h}(\bm{x}, \bm{u}_k) \big)\Big|_{\bm{x}=\bm{x}_k} \\[10pt]
+\vdots \\[10pt]
+\displaystyle \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^{N-1} \bm{h}(\bm{x}, \bm{u}_k, \dots, \bm{u}_{k+N-2}) \big)\Big|_{\bm{x}=\bm{x}_k}
+\end{bmatrix}.
+\end{equation}
+对于该非线性系统，若存在某个正整数 $N \le n$ 及输入序列 $\bm{U}$，使得能观性矩阵 $\mathcal{O}_N(\bm{x}_k, \bm{U})$ 在点 $\bm{x}_k$ 处满秩，则系统在 $\bm{x}_k$ 处是局部弱能观的。
+
+根据本节给出的秩判据，接下来对涵道式无人机增广系统的状态可观性进行分析。
+
+当$r=0$时，零阶李导数定义为观测函数本身，即$\mathcal{L}_f^0 \bm{h}(\bm{x}) \triangleq \bm{h}(\bm{x})$，由观测方程的线性结构可知，其关于状态的梯度矩阵为：
+\begin{equation}
+    \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^0 \bm{h}(\bm{x}) \big)\Big|_{\bm{x}=\bm{x}_k} = \frac{\partial \bm{h}(\bm{x})}{\partial \bm{x}}\Big|_{\bm{x}=\bm{x}_k} = 
+    \begin{bmatrix}
+        \bm{I}_{12 \times 12} \quad \bm{0}_{12 \times 6}.
+    \end{bmatrix},
+    \label{eq:L0fh}
+\end{equation}
+其中 $\bm{I}{12}$ 对应可直接观测的核心状态部分，$\bm{0}{12\times 6}$ 表示观测对参数 $\bm{\theta}$ 的偏导为零
+
+当$r=1$时，离散李导数描述了系统在下一离散时刻的观测值，结合离散状态转移函数\ref{eq:f_d}可得，一阶李导数$\mathcal{L}_f^1 \bm{h}(\bm{x})$可展开为：
+\begin{equation}
+    \mathcal{L}_f^1 \bm{h}(\bm{x}, \bm{u}_k) = 
+    \bm{h}\big(\bm{f}_d(\bm{x},\bm{u})\big) =
+    \begin{bmatrix}
+        \bm{p}^e + \bm{R}_b^e \bm{v}^b \triangle t \\
+        \bm{v}^e + (g\bm{R}_e^b \bm{e}_{3} +  m^{-1}\bm{F}^b - \bm{\omega}^b \times \bm{v}^b) \triangle t\\
+        \bm{\eta} + \bm{Q}\bm{\omega}^b \triangle t \\
+        \bm{\omega}^b + \bm{J}^{-1}(\bm{M}^b - \bm{\omega}^b\times(\bm{J}\cdot\bm{\omega}^b)) \triangle t \\
+    \end{bmatrix}.
+    \label{eq:Lf1h}
+\end{equation}
+结合位置动态方程\ref{eq:p_dynamic}, 姿态动态方程\ref{eq:eta_dynamic}，以及简化后的速度动态方程\ref{eq:v_dynamic_sim}，角速度动态方程式\ref{eq:omega_dynamic_sim}，可对式(\ref{eq:Lf1h})求关于状态 $\bm{x}$ 的偏导数，得到一阶李导数的梯度矩阵：
+\begin{equation}
+    \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^1 \bm{h}(\bm{x}, \bm{u}_k) \big)\Big|_{\bm{x}=\bm{x}_k} = 
+    \begin{bmatrix}
+        \bm{I}_{3 \times 3} & \bm{A}_{\bm{p} \bm{v}} & \bm{A}_{\bm{p} \bm{\eta}} & \bm{0}_{3 \times 3} & \bm{0}_{3 \times 6} \\
+        \bm{0}_{3 \times 3} & \bm{A}_{v v} & \bm{A}_{\bm{v \eta}} & \bm{A}_{\bm{v \omega}} & \bm{A}_{\bm{v \theta}} \\
+        \bm{0}_{3 \times 3} & \bm{0}_{3 \times 3} & \bm{A}_{\bm{\eta \eta}} & \bm{A}_{\bm{\eta \omega}} & \bm{0}_{3 \times 6} \\
+        \bm{0}_{3 \times 3} & \bm{A}_{\bm{\omega v}} & \bm{A}_{\bm{\omega \eta}} & \bm{A}_{\bm{\omega \omega}} & \bm{A}_{\bm{\omega \theta}}
+    \end{bmatrix},
+    \label{eq:lei_sim}
+\end{equation}
+其中，$\bm{A}_{\bm{ij}}$表示一阶李导数$\mathcal{L}_f^1 \bm{h}(\bm{x}, \bm{u}_k)$中的分量$\bm{i}$对状态量$\bm{x}$中的分量$\bm{j}$的偏导数，其具体表达式较为复杂，详见\ref{appendix:lei}。
+
+根据非线性系统局部弱可观性秩判据，构建能观性矩阵$\mathcal{O}_2(\bm{x}_k, \bm{U}) \in \mathbb{R}^{24 \times 18}$如下：
+\begin{equation}
+    \mathcal{O}_2(\bm{x}_k, \bm{U}) = 
+    \begin{bmatrix}
+        \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^0 \bm{h}(\bm{x}) \big)\Big|_{\bm{x}=\bm{x}_k} \\[10pt]
+        \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^1 \bm{h}(\bm{x}, \bm{u}_k) \big)\Big|_{\bm{x}=\bm{x}_k} \\[10pt]
+    \end{bmatrix}
+\end{equation}
+若能观性矩阵 $\mathcal{O}_2$ 满秩，即$rank(\mathcal{O}_2) = 18$，则该系统的所有状态量在 $\bm{x}_k$ 处均具备局部弱能观性。
+
+为验证 $\mathcal{O}_2$ 的秩，可通过初等行变换将其化为行阶梯形，并统计非零行数目。\ref{appendix:full_rank} 详细推导了该变换过程，结果表明在典型飞行工况（如悬停或低速前飞）且系统输入满足持续激励条件下，$\mathcal{O}_2$ 行满秩，从而保证了各状态的可观性。这一结论为后续扩展卡尔曼滤波器的设计提供了理论依据。
 
 \subsection{线性化近似} %1Pages
-\subsection{迭代流程} %2Pages
-\subsection{初始状态选取} %1Pages
+扩展卡尔曼滤波器的递推更新依赖于系统在估计点附近的局部线性化。由于状态转移函数 $\bm{f}_d(\bm{x}, \bm{u})$ 与观测函数 $\bm{h}(\bm{x})$ 均为非线性函数，需在当前状态估计值处对其进行一阶泰勒展开，得到线性化的系统矩阵，进而沿用标准卡尔曼滤波的预测-更新框架。
+
+设系统的状态方程和观测方程的雅可比矩阵分别为$\bm{F} \in \mathbb{R}^{18 \times 18}$和$\bm{H} \in \mathbb{R}^{12 \times 18}$，它们的定义如下：
+\begin{equation}
+    \bm{F}_{k-1} = \left. \frac{\partial \bm{f}_d}{\partial \bm{x}} \right|_{\hat{\bm{x}}_{k-1}^+, \bm{u}_{k-1}}, \quad \bm{H}_{k} = \left. \frac{\partial \bm{h}}{\partial \bm{x}} \right|_{\hat{\bm{x}}_{k}^+}.
+\end{equation}
+
+根据离散状态转移函数\ref{eq:f_d}可知，结合第二章的动力学模型及第\ref{sec:model_simplification}节的简化结果，$\bm{F}_{k-1}$ 可展开为以下分块形式：
+\begin{equation}
+    \bm{F}_{k-1} = 
+    \left.\begin{bmatrix}
+        \bm{I}_{3 \times 3} & \bm{F}_{\bm{p} \bm{v}} & \bm{F}_{\bm{p} \bm{\eta}} & \bm{0}_{3 \times 3} & \bm{0}_{3 \times 6} \\
+        \bm{0}_{3 \times 3} & \bm{F}_{v v} & \bm{F}_{\bm{v \eta}} & \bm{F}_{\bm{v \omega}} & \bm{F}_{\bm{v \theta}} \\
+        \bm{0}_{3 \times 3} & \bm{0}_{3 \times 3} & \bm{F}_{\bm{\eta \eta}} & \bm{F}_{\bm{\eta \omega}} & \bm{0}_{3 \times 6} \\
+        \bm{0}_{3 \times 3} & \bm{F}_{\bm{\omega v}} & \bm{F}_{\bm{\omega \eta}} & \bm{F}_{\bm{\omega \omega}} & \bm{F}_{\bm{\omega \theta}} \\
+        \bm{0}_{6 \times 3} & \bm{0}_{6 \times 3} & \bm{0}_{6 \times 3} & \bm{0}_{6 \times 3} & \bm{I}_{6 \times 6}
+    \end{bmatrix}\right|_{\hat{\bm{x}}_{k-1}^+, \bm{u}_{k-1}},
+    \label{eq:F_km1}
+\end{equation}
+其中，各子块$\bm{F}_{\bm{ij}}$表示离散状态转移函数$\bm{f}_d(\bm{x},\bm{u})$中的$\bm{i}$分量对状态量$\bm{x}$中的$j$分量的偏导数。不难发现，式\ref{eq:F_km1}中的偏导数矩阵$\bm{F}_{\bm{ij}}$与式\ref{eq:lei_sim}中的偏导数矩阵$\bm{A}_{\bm{ij}}$一一对应，其具体表达式已在\ref{appendix:lei}中给出。
+
+对于观测函数，由于观测向量 $\bm{z}$ 直接由部分状态分量构成，可直接给出其观测方程的雅可比矩阵$\bm{H}_k$:
+\begin{equation}
+    \bm{H}_k = 
+    \begin{bmatrix}
+        \bm{I}_{12 \times 12} \quad \bm{0}_{12 \times 6}
+    \end{bmatrix}.
+    \label{eq:H_k}
+\end{equation}
+可见，$\bm{H}_k$为常矩阵，即前12列对应可直接观测的核心状态，后6列对应待辨识参数，此外还可以发现，$\bm{H}_k$恰与零阶李导数对应的梯度矩阵（式\ref{eq:L0fh}）完全一致。
+
+上述两个雅可比矩阵在扩展卡尔曼滤波中具有明确的物理含义：
+
+$\bm{F}_{k-1}$ 描述了从 $k-1$ 时刻到 $k$ 时刻的状态误差传播关系。其左上12×12子块刻画了核心状态之间的耦合与动态演化，右上12×6子块反映了气动参数变化对核心状态的影响，而右下6×6子块为参数自身的随机游走动态，其余子块的结构则体现了模型中的因果关系。
+
+$\bm{H}_k$ 描述了当前时刻状态误差向观测残差的映射。由于观测方程线性且直接选取部分状态，该矩阵将状态误差中与观测相关的分量直接投影到观测空间，同时明确排除了参数对观测的直接贡献
+
+通过上述线性化，非线性系统在估计点附近被近似为线性时变系统，为后续EKF的预测与更新步骤提供了必要的系统矩阵。
+
+\subsection{迭代流程}
+\label{sec:diedai}
+基于前述扩展卡尔曼滤波器的理论框架，结合已建立的增广状态空间模型与线性化近似结果，本节给出涵道式无人机气动参数在线辨识的具体递推实现流程。流程开始前，需对各状态数据进行必要的初始化。该流程在每个采样周期内依次执行状态预测与观测更新两个核心步骤，从而实现系统核心状态与待辨识参数的实时最优估计。
+
+\subsubsection{状态初始化}
+    根据无人机起飞前的已知工况，设定初始时刻 $k=0$ 的增广状态估计值 $\hat{\bm{x}}_0^+$。初始状态估计应尽可能接近真实状态，通常根据起飞前的静态测量或离线辨识结果设定。对初始协方差矩阵 $\bm{P}_0^+$ 反映了对初始估计的不确定度，较大的初始协方差表示对初值信任度较低，有利于滤波器在初期快速收敛，但需避免取值过大导致数值不稳定。
+    
+    由于观测量位置、速度、姿态角及角速度即为状态量的一部分，本文直接取故传感器初始读数作为它们的初始值：
+    \begin{equation}
+        \begin{bmatrix}
+            \bm{p}_0^e \\
+            \bm{v}_0^b \\
+            \bm{\eta}_0 \\
+            \bm{\omega}_0
+        \end{bmatrix} = 
+        \bm{z}_0
+    \end{equation}
+    对于待辨识的气动参数 $\bm{\theta}$，本文根据参数特性，按照理论估算或同型号样机的历史统计值设定。
+
+    初始误差协方差矩阵 $\bm{P}_0^+$ 反映了对初始状态估计不确定性的置信程度。由于初始时刻各状态分量之间的相关性未知，且初始阶段耦合微弱，可近似认为独立，为降低初始阶段计算复杂度，本文选取 $\bm{P}_0^+$ 为对角矩阵，其中位置，速度以及姿态角方差由动作捕捉系统的静态精度给出，角速度初始方差由IMU的测量方差给出，气动参数方差则根据置信度在初始值的10\%到40\%之间选取。
+
+\subsubsection{迭代阶段}
+
+\begin{enumerate}
+    \item {利用离散状态转移函数 $\bm{f}_d(\cdot)$ 计算先验状态估计}
+
+    \begin{equation}
+        \hat{\bm{x}}_{k}^{-} = \bm{f}_d(\hat{\bm{x}}_{k-1}^{+}, \bm{u}_{k-1}),
+    \end{equation}
+    其中 $\bm{f}_d$ 的具体形式由式\ref{eq:f_d}给出，其计算中涉及的合外力 $\bm{F}^b$ 与合外力矩 $\bm{M}^b$ 需根据简化后的动力学方程式\ref{eq:v_dynamic_sim}和式\ref{eq:omega_dynamic_sim}，并结合当前状态估计值与控制输入实时求取。
+
+    \item {计算先验误差协方差矩阵}
+    \begin{equation}
+        \bm{P}_{k}^{-} = \bm{F}_{k-1} \bm{P}_{k-1}^{+} \bm{F}_{k-1}^{T} + \bm{Q}_{k-1},
+    \end{equation}
+    其中 $\bm{F}_{k-1}$ 为状态转移函数的雅可比矩阵，按式\ref{eq:F_km1}在点 $(\hat{\bm{x}}_{k-1}^{+}, \bm{u}_{k-1})$ 处实时更新该矩阵；$\bm{Q}_{k-1}$ 为过程噪声协方差矩阵，其取值需综合考虑模型简化引入的不确定性、未建模动态以及外界扰动等因素，通常通过经验试凑或自适应方法进行整定。
+
+    过程噪声协方差矩阵 $\bm{Q}$ 用于描述系统模型误差与未建模动态引起的不确定性。在实际工程应用中，为简化处理并保证滤波器稳定性，通常将其设定为常值对角阵，即 $\bm{Q}_k \equiv \bm{Q}$，其中:
+    \begin{equation}
+        \bm{Q} = \operatorname{diag}(q_1, q_2, \dots, q_{18}).
+    \end{equation}
+     对角线元素 $q_i$ 的选取需平衡滤波器的收敛速度与估计精度：取值过大会导致估计结果易受噪声影响，波动增大；取值过小则可能使滤波器对模型偏差响应迟缓，甚至发散。通常通过仿真调试与实飞实验相结合的方式，依据残差序列的统计特性对 $\bm{Q}$ 进行整定，确保滤波一致性。
+
+    \item {计算卡尔曼增益矩阵}
+    \begin{equation}
+        \bm{K}_k = \bm{P}_{k}^{-} \bm{H}_k^{T} \left( \bm{H}_k \bm{P}_{k}^{-} \bm{H}_k^{T} + \bm{R}_k \right)^{-1},
+    \end{equation}
+    其中 $\bm{H}_k$ 为观测函数的雅可比矩阵，由于观测向量直接选取部分状态分量，由式\ref{eq:H_k}可知 $\bm{H}_k = [\bm{I}_{12\times 12} \; \bm{0}_{12\times 6}]$ 为常矩阵；$\bm{R}_k$ 为观测噪声协方差矩阵，依据动作捕捉系统与机载IMU的实测噪声特性离线标定，并在滤波过程中保持为常值或根据信噪比进行适当调整。
+    
+    在实际的工程应用中，通常认为各个观测量噪声之间不存在相关性。此外，在飞行期间，观测噪声的噪声模型基本保持一致，因此，为降低计算复杂度，可将$\bm{R}_k$设为常对角阵：
+    \begin{equation}
+        \bm{R} = \operatorname{diag}(\sigma^2_{p_x},\sigma^2_{p_y}, \sigma^2_{p_z}, \sigma^2_{v_x},\sigma^2_{v_y}, \sigma^2_{v_z}, \sigma^2_{\varphi},\sigma^2_{\theta}, \sigma^2_{\psi}, \sigma^2_{p},\sigma^2_{q}, \sigma^2_{r}).
+    \end{equation}
+    其中，对角线元素可直接取自传感器的标称噪声方差，如动作捕捉系统的位置测量方差、IMU的角速度测量方差等。
+
+    \item {融合观测信息获得后验状态估计}
+    \begin{equation}
+        \hat{\bm{x}}_{k}^{+} = \hat{\bm{x}}_{k}^{-} + \bm{K}_k \left( \bm{z}_k - \bm{h}(\hat{\bm{x}}_{k}^{-}) \right),
+    \end{equation}
+    式中新息项 $\bm{z}_k - \bm{h}(\hat{\bm{x}}_{k}^{-})$ 反映了模型预测与实际量测之间的偏差；观测函数 $\bm{h}(\cdot)$ 的形式见式\ref{eq:obs}。
+
+    \item {更新后验误差协方差矩阵}
+    \begin{equation}
+        \bm{P}_{k}^{+} = \left( \bm{I}_{18\times 18} - \bm{K}_k \bm{H}_k \right) \bm{P}_{k}^{-}.
+    \end{equation}
+    此步骤保证了估计误差协方差矩阵的递推更新，为下一时刻的滤波提供先验信息。
+\end{enumerate}
+
+通过上述初始化与参数配置，扩展卡尔曼滤波器能够在涵道式无人机飞行过程中实时、稳定地估计核心气动参数，为后续抗扰控制器的设计提供准确的模型依据。
 
 \section{仿真实验}% 3Pages
-\subsection{仿真实验条件}
+为了验证本文所提出的基于扩展卡尔曼滤波器的气动参数在线辨识算法的可行性与估计精度，本节在MATLAB环境中构建涵道式无人机的数值仿真平台，模拟真实飞行工况。通过对比算法估计值$\hat{\bm{\theta}}$与预设真值$\bm{\theta}$的收敛过程及稳态误差，评估滤波器在典型机动下的辨识性能。
+
+\subsection{仿真环境搭建}
+仿真环境的核心是精确模拟涵道式无人机的六自由度非线性动力学。采用式~\eqref{eq:base_dynamic} 所示的连续时间动力学模型作为被控对象，该模型已整合了第~\ref{sec:model_simplification} 节的简化气动力表达式。为获得高精度的数值解，使用四阶龙格-库塔法（Runge-Kutta 4， RK4）进行离散积分，积分步长固定为1ms，与机载控制器的主循环频率1kHz一致。仿真总时长设定为80s，涵盖悬停、低速前飞及小幅机动等多种飞行模态，以保证持续激励条件。
+
+为保证仿真过程中无人机不因开环不稳定而发散，引入串级比例-积分-微分（PID）控制器进行姿态与位置稳定。外环为位置环，内环为姿态环，控制器参数通过试凑法整定，使闭环系统具有足够的带宽和阻尼。由于本文聚焦于气动参数的在线估计，控制器的具体设计细节不予赘述，仅将其视为维持系统可观测性的必要手段。
+
+传感器测量环节通过叠加高斯白噪声模拟真实物理传感器的输出特性。观测向量$\bm{z}_k$包含位置$\bm{p}^e$，机体系速度$\bm{v}^b$，姿态角$\bm{\eta}$以及角速度$\bm{\omega}^b$，其噪声统计特性依据实际器件选型设定：动作捕捉系统的位置测量噪声标准差$\sigma_p$，速度噪声标准差$\sigma_v$，姿态角测量噪声标准差$\sigma_{\eta}$以及角速度噪声标准差$\sigma_{\omega}$的取值如表\ref{tab:matlab_noise}所示。各通道噪声均视为相互独立的零均值高斯白噪声，即观测噪声协方差矩阵$\bm{R}$为常值对角阵。
+
+\begin{table}[htbp]
+    \centering
+    \caption{仿真环境预设的测量噪声标准差}
+    \label{tab:matlab_noise}
+    \begin{tabular}{ccc}
+    \toprule
+    参数符号 & 标准差 & 单位 \\
+    \midrule
+    $\sigma_p$ & $0.02$ & $m$ \\
+    $\sigma_v$ & $0.1$ & $m/s$ \\
+    $\sigma_{\eta}$ & $0.02$ & $rad$ \\
+    $\sigma_{\omega}$ & $0.15$ & $rad/s$ \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+考虑到现实环境中舵机与无刷电机执行延迟时间极短，且本文辨识算法对执行器延迟不敏感，因此将执行器建模为瞬时响应环节。即输入指令$\bm{u}$直接作用于动力学模型。
+
+\subsection{参数真值与初始估计}
+为使仿真结果具有工程参考价值，预设的气动参数真值$\theta$取自
+\ref{sec:sample_uav}节的实验样机设计值，具体数值见表~\ref{tab:true_theta}。为了验证滤波器在参数未知情况下的收敛能力，初始估计值$\hat{\bm{\theta}}$不取真值，而是在真值的60\%到140\%范围内按均匀分布随机生成，以模拟实际飞行中因个体差异或离线标定误差导致的参数不确定性。
+
+其它状态量（位置、速度、姿态、角速度）的初始值如\ref{sec:diedai}所述，取自传感器初始采样值$\bm{z}_0$
+
+仿真实验使用的$\bm{\theta}$与$\bm{\theta}_0$整理后，如下表所示：
+
+\begin{table}[htbp]
+    \centering
+    \caption{仿真预设的气动参数真值与初始估计值示例}
+    \label{tab:true_theta}
+    \begin{tabular}{cccc}
+    \toprule
+    参数符号 & 参数真值 & 参数初始估计 & 初始估计标准差 \\
+    \midrule
+    $K_{T0}$ & $7.0414 \times 10^{-6}$ & $1.0 \times 10^{-5}$ \\
+    $K_{cv}$ & $4.8 \times 10^{-3}$ & $9.0 \times 10^{-4}$ \\
+    $K_{sta}$ & $1.917 \times 10^{-7}$ & $1.0 \times 2.3^{-7}$ \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{滤波器参数配置}
+增广状态向量 $\bm{x}$ 的初始协方差矩阵 $\bm{P}_0^+$ 取为对角阵，对角线元素根据先验不确定性设定：位置与速度通道基于传感器静态精度；姿态角与角速度基于初始对准误差；气动参数通道则取标称值 $20\%$ 的相对不确定度，对应方差为 $(0.2\theta_i)^2$。过程噪声协方差矩阵 $\bm{Q}$ 亦取为常值对角阵，其数值通过试错法调整，以平衡收敛速度与稳态波动。具体而言，速度通道的 $\bm{Q}$ 元素设为 $10^{-6}\,(\mathrm{m/s})^2$，角速度通道设为 $10^{-4}\,(\mathrm{rad/s})^2$，气动参数通道设为 $10^{-8}\sim10^{-10}$ 量级，以体现其慢变特性。观测噪声协方差矩阵 $\bm{R}$ 直接根据前述传感器噪声标准差平方构造。
+
+滤波器以 $100\,\mathrm{Hz}$ 的频率执行递推更新（即每 $10\,\mathrm{ms}$ 处理一次观测），该频率与动作捕捉系统的典型输出速率匹配。所有矩阵计算均在双精度浮点下进行，以保证数值稳定性。
+
 \subsection{仿真实验结果分析}
 
 \section{实飞实验}% 3Pages
