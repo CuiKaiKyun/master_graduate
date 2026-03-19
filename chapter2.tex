@@ -32,14 +32,14 @@
         \centering
         \begin{minipage}[b]{0.45\textwidth}
             \centering
-            \includegraphics[height=0.14\textheight]{figure/Hiller VZ-1.jpeg}
+            \includegraphics[height=0.14\textheight]{figure/chapter1/STM32.png}
             \caption{微控制器}
         \end{minipage}
         \hfill  % 产生弹性水平间距
         \begin{minipage}[b]{0.45\textwidth}
             \centering
-            \includegraphics[height=0.14\textheight]{figure/Piasecki VZ-8.jpg}
-            \caption{电机电调系统}
+            \includegraphics[height=0.14\textheight]{figure/chapter1/servo.png}
+            \caption{舵机}
         \end{minipage}
     
         \vspace{0.5cm}
@@ -47,14 +47,14 @@
         \centering
         \begin{minipage}[b]{0.45\textwidth}
             \centering
-            \includegraphics[height=0.14\textheight]{figure/Hiller VZ-1.jpeg}
+            \includegraphics[height=0.14\textheight]{figure/chapter1/battery.jpg}
             \caption{电池}
         \end{minipage}
         \hfill  % 产生弹性水平间距
         \begin{minipage}[b]{0.45\textwidth}
             \centering
-            \includegraphics[height=0.14\textheight]{figure/Piasecki VZ-8.jpg}
-            \caption{舵机}
+            \includegraphics[height=0.14\textheight]{figure/chapter1/motor.jpg}
+            \caption{电机电调系统}
         \end{minipage}
     \end{figure}
     
@@ -63,13 +63,13 @@
         \centering
         \begin{minipage}[b]{0.45\textwidth}
             \centering
-            \includegraphics[height=0.22\textheight]{figure/Hiller VZ-1.jpeg}
+            \includegraphics[height=0.18\textheight]{figure/chapter1/main_board.jpg}
             \caption{飞行控制板}
         \end{minipage}
         \hfill  % 产生弹性水平间距
         \begin{minipage}[b]{0.45\textwidth}
             \centering
-            \includegraphics[height=0.22\textheight]{figure/Piasecki VZ-8.jpg}
+            \includegraphics[height=0.18\textheight]{figure/chapter1/slave_board.jpg}
             \caption{舵机驱动板}
         \end{minipage}
     \end{figure}
@@ -345,12 +345,12 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{equation}
 其中，$C_{T0}$为涵道无人机在悬停状态下的拉力系数，$C_{T_{J0}}$和$C_{T_J}$是拉力随迎风角变化的调整系数，$C_{N_J}$是侧向力随迎风角变化的调整系数。
 
-结合式\ref{eq:J}，式\ref{eq:thrust}和式\ref{eq:thrust_k}可得侧向力$N_{df}$为：
+结合式\eqref{eq:J}，式\eqref{eq:thrust}和式\eqref{eq:thrust_k}可得侧向力$N_{df}$为：
 \begin{equation}
     N_{df} = \frac{1}{2}\rho \pi^2 R^3 C_{N_J} V_a \sin\alpha_{df} \Omega.
 \end{equation}
 
-已知风扇拉力的方向是指向机体系坐标轴$O_bZ_b$的负方向，那么结合式\ref{eq:thrust}和式\ref{eq:thrust_k}，风扇拉力矢量$\bm{T}_{df}^b$在机体系下的投影可写为：
+已知风扇拉力的方向是指向机体系坐标轴$O_bZ_b$的负方向，那么结合式\eqref{eq:thrust}和式\eqref{eq:thrust_k}，风扇拉力矢量$\bm{T}_{df}^b$在机体系下的投影可写为：
 \begin{equation}
     \bm{T}_{df}^b = -\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \bm{e}_3.
     \label{eq:T_df}
@@ -387,7 +387,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
     l_T = X_J J R \sin(X_\alpha \alpha_{df}).
 \end{equation}
-将式\ref{eq:J}代入可得：
+将式\eqref{eq:J}代入可得：
 \begin{equation}
     l_T = X_J \pi V_a \Omega ^{-1} \sin(X_\alpha \alpha_{df}).
     \label{eq:l_T}
@@ -536,7 +536,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{equation}
 由于舵面偏转角度较小，可近似认为距离$l_1$，$l_2$均不发生变化。
 
-根据几何关系，并结合式\ref{eq:F_cv}可得出控制舵面的作用力在机体系下的投影$\bm{F}_{vane}^b$为：
+根据几何关系，并结合式\eqref{eq:F_cv}可得出控制舵面的作用力在机体系下的投影$\bm{F}_{vane}^b$为：
 \begin{equation}
     \bm{F}_{vane}^b = 
     \begin{bmatrix}
@@ -568,7 +568,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{equation}
 
 \subsection{涵道无人机受力分析总结}
-至此，根据现有主流理论，涵道式无人机受到的主要的力和力矩均逐一分析完成。式\ref{eq:base_dynamic}中的$\bm{F}^b$和$\bm{M}^b$可以认为是这些力和力矩的合成，那么在机体系下，有：
+至此，根据现有主流理论，涵道式无人机受到的主要的力和力矩均逐一分析完成。式\eqref{eq:base_dynamic}中的$\bm{F}^b$和$\bm{M}^b$可以认为是这些力和力矩的合成，那么在机体系下，有：
 \begin{equation}
     \begin{cases}
         \bm{F}^b = \bm{F}_{df}^b + \bm{F}_{vane}^b \\

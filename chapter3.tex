@@ -26,7 +26,7 @@
         \label{eq:dynamic}
     \end{cases},
 \end{equation}
-其中$\bm{f}(\cdot)$和$\bm{h}(\cdot)$均为非线性向量值函数，$\bm{w}$和$\bm{v}$分别为系统的过程噪声和观测噪声。通常称式\ref{eq:dynamic}的第一式为系统的状态方程，第二式为系统的观测方程，相应地，$\bm{f}(\cdot)$和$\bm{h}(\cdot)$分别称为状态转移函数和观测函数。
+其中$\bm{f}(\cdot)$和$\bm{h}(\cdot)$均为非线性向量值函数，$\bm{w}$和$\bm{v}$分别为系统的过程噪声和观测噪声。通常称式\eqref{eq:dynamic}的第一式为系统的状态方程，第二式为系统的观测方程，相应地，$\bm{f}(\cdot)$和$\bm{h}(\cdot)$分别称为状态转移函数和观测函数。
 
 对上述非线性系统进行时间离散化，可得离散状态方程和观测方程为：
 \begin{equation}
@@ -91,7 +91,7 @@
 
 基于上述考虑，有必要在保留核心气动特性的前提下对模型进行合理简化。首先，根据实际飞行工况忽略对参数辨识贡献较小的非核心变量，如控制舵面的质量效应、部分高阶耦合项及弱非线性环节；其次，将原始模型中具有相似物理意义或成组出现的常系数进行整合，减少冗余参数，提升滤波器收敛性能。简化后的模型在保证描述精度的同时，降低状态空间维度和线性化复杂度。
 
-首先，忽略对系统动态影响可忽略的分量。在涵道风扇动力学小节，式\ref{eq:thrust_k}中的$C_T$解析式里包含分量$J(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$。其中，$C_{T_J}$的实际数值相比于$C_{T_{J0}}$较小，且本文研究的涵道无人机在实际飞行中迎风角$\alpha _{df}$的变化范围不超过15°，对应$\cos\alpha_{df}$的变化幅度小于5\%，因此，在飞行过程中，$(C_{T_J} \cos\alpha_{df})$的绝对变化量占$(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$总量的比例不足2\%，故可将$(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$整体近似为常量$C_{T_J}'$：
+首先，忽略对系统动态影响可忽略的分量。在涵道风扇动力学小节，式\eqref{eq:thrust_k}中的$C_T$解析式里包含分量$J(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$。其中，$C_{T_J}$的实际数值相比于$C_{T_{J0}}$较小，且本文研究的涵道无人机在实际飞行中迎风角$\alpha _{df}$的变化范围不超过15°，对应$\cos\alpha_{df}$的变化幅度小于5\%，因此，在飞行过程中，$(C_{T_J} \cos\alpha_{df})$的绝对变化量占$(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$总量的比例不足2\%，故可将$(C_{T_{J0}} + C_{T_J} \cos\alpha_{df})$整体近似为常量$C_{T_J}'$：
 \begin{equation}
     C_{T_J}' \approx (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})
 \end{equation}
@@ -101,7 +101,7 @@
     \label{eq:C_T}
 \end{equation}
 
-此外，在反扭距襟翼动力学小节中，涵道出口风速$V_e$的解析式\ref{eq:V_e}是基于动量定理的给出的，该式子针对宏观稳态气流进行分析，在动态场景下并不能预测出准确的出口风速。考虑到本文参数辨识实验主要在悬停及低速飞行工况下进行，此时无穷远处空速$V_0$接近于零，式\ref{eq:V_e}可简化为：
+此外，在反扭距襟翼动力学小节中，涵道出口风速$V_e$的解析式\eqref{eq:V_e}是基于动量定理的给出的，该式子针对宏观稳态气流进行分析，在动态场景下并不能预测出准确的出口风速。考虑到本文参数辨识实验主要在悬停及低速飞行工况下进行，此时无穷远处空速$V_0$接近于零，式\eqref{eq:V_e}可简化为：
 \begin{equation}
     V_e \approx \sqrt{T_{df}/\theta _d \rho S}.
 \end{equation}
@@ -127,7 +127,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 \end{tabular}
 \end{table}
 
-根据上述简化，结合式\ref{eq:C_T}第二章中的速度动态方程(式\ref{eq:v_dynamic})可被简化为：
+根据上述简化，结合式\eqref{eq:C_T}第二章中的速度动态方程(式\eqref{eq:v_dynamic})可被简化为：
 \begin{equation}
     \begin{aligned}
         \dot{v_x^b} =& -g\sin\theta + m^{-1}(-K_{N} u_r + K_{cv} (\delta_4 - \delta_2)) \\
@@ -139,7 +139,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
     \end{aligned}
     \label{eq:v_dynamic_sim}
 \end{equation}
-角速度动态方程(式\ref{eq:w_dynamic})可被简化为：
+角速度动态方程(式\eqref{eq:w_dynamic})可被简化为：
 \begin{equation}
     \begin{aligned}
         \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr + \biggl[ - (K_{T0} + K_{T_J}J) \Omega^2 \cdot \dfrac{K_{l_T} \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\
@@ -220,7 +220,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 \begin{equation}
     \dot{\bm{x}} = \bm{f}(\bm{x}, \bm{u})+\bm{w}.
 \end{equation}
-其中，$\bm{f}(\bm{x}, \bm{u}) \in \mathbb{R}^{18}$ 为连续时间状态转移函数，$\bm{w} \sim \mathcal{N}(0, \bm{Q})$为过程噪声，其中蕴含了无人机的建模误差与各种难以估计的扰动。为了便于表述，使用$\bm{f^p}$，$\bm{f^v}$，$\bm{f^{\eta}}$，$\bm{f^{\omega}}$和$\bm{f^{\theta}}$分别表示$\bm{f}$中的位置、速度、姿态、角速度和气动参数分量。根据第二章对系统动态的分析，由式\ref{eq:base_dynamic}可知：
+其中，$\bm{f}(\bm{x}, \bm{u}) \in \mathbb{R}^{18}$ 为连续时间状态转移函数，$\bm{w} \sim \mathcal{N}(0, \bm{Q})$为过程噪声，其中蕴含了无人机的建模误差与各种难以估计的扰动。为了便于表述，使用$\bm{f^p}$，$\bm{f^v}$，$\bm{f^{\eta}}$，$\bm{f^{\omega}}$和$\bm{f^{\theta}}$分别表示$\bm{f}$中的位置、速度、姿态、角速度和气动参数分量。根据第二章对系统动态的分析，由式\eqref{eq:base_dynamic}可知：
 \begin{equation}
     \bm{f}(\bm{x}, \bm{u}) = 
     \begin{bmatrix}
@@ -364,7 +364,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
     \end{bmatrix}.
     \label{eq:Lf1h}
 \end{equation}
-结合位置动态方程\ref{eq:p_dynamic}, 姿态动态方程\ref{eq:eta_dynamic}，以及简化后的速度动态方程\ref{eq:v_dynamic_sim}，角速度动态方程式\ref{eq:omega_dynamic_sim}，可对式(\ref{eq:Lf1h})求关于状态 $\bm{x}$ 的偏导数，得到一阶李导数的梯度矩阵：
+结合位置动态方程\ref{eq:p_dynamic}, 姿态动态方程\ref{eq:eta_dynamic}，以及简化后的速度动态方程\ref{eq:v_dynamic_sim}，角速度动态方程式\eqref{eq:omega_dynamic_sim}，可对式(\ref{eq:Lf1h})求关于状态 $\bm{x}$ 的偏导数，得到一阶李导数的梯度矩阵：
 \begin{equation}
     \frac{\partial}{\partial \bm{x}}\big( \mathcal{L}_f^1 \bm{h}(\bm{x}, \bm{u}_k) \big)\Big|_{\bm{x}=\bm{x}_k} = 
     \begin{bmatrix}
@@ -409,7 +409,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
     \end{bmatrix}\right|_{\hat{\bm{x}}_{k-1}^+, \bm{u}_{k-1}},
     \label{eq:F_km1}
 \end{equation}
-其中，各子块$\bm{F}_{\bm{ij}}$表示离散状态转移函数$\bm{f}_d(\bm{x},\bm{u})$中的$\bm{i}$分量对状态量$\bm{x}$中的$j$分量的偏导数。不难发现，式\ref{eq:F_km1}中的偏导数矩阵$\bm{F}_{\bm{ij}}$与式\ref{eq:lei_sim}中的偏导数矩阵$\bm{A}_{\bm{ij}}$一一对应，其具体表达式已在\ref{appendix:lei}中给出。
+其中，各子块$\bm{F}_{\bm{ij}}$表示离散状态转移函数$\bm{f}_d(\bm{x},\bm{u})$中的$\bm{i}$分量对状态量$\bm{x}$中的$j$分量的偏导数。不难发现，式\eqref{eq:F_km1}中的偏导数矩阵$\bm{F}_{\bm{ij}}$与式\eqref{eq:lei_sim}中的偏导数矩阵$\bm{A}_{\bm{ij}}$一一对应，其具体表达式已在\ref{appendix:lei}中给出。
 
 对于观测函数，由于观测向量 $\bm{z}$ 直接由部分状态分量构成，可直接给出其观测方程的雅可比矩阵$\bm{H}_k$:
 \begin{equation}
@@ -419,7 +419,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
     \end{bmatrix}.
     \label{eq:H_k}
 \end{equation}
-可见，$\bm{H}_k$为常矩阵，即前12列对应可直接观测的核心状态，后6列对应待辨识参数，此外还可以发现，$\bm{H}_k$恰与零阶李导数对应的梯度矩阵（式\ref{eq:L0fh}）完全一致。
+可见，$\bm{H}_k$为常矩阵，即前12列对应可直接观测的核心状态，后6列对应待辨识参数，此外还可以发现，$\bm{H}_k$恰与零阶李导数对应的梯度矩阵（式\eqref{eq:L0fh}）完全一致。
 
 上述两个雅可比矩阵在扩展卡尔曼滤波中具有明确的物理含义：
 
@@ -458,13 +458,13 @@ $\bm{H}_k$ 描述了当前时刻状态误差向观测残差的映射。由于观
     \begin{equation}
         \hat{\bm{x}}_{k}^{-} = \bm{f}_d(\hat{\bm{x}}_{k-1}^{+}, \bm{u}_{k-1}),
     \end{equation}
-    其中 $\bm{f}_d$ 的具体形式由式\ref{eq:f_d}给出，其计算中涉及的合外力 $\bm{F}^b$ 与合外力矩 $\bm{M}^b$ 需根据简化后的动力学方程式\ref{eq:v_dynamic_sim}和式\ref{eq:omega_dynamic_sim}，并结合当前状态估计值与控制输入实时求取。
+    其中 $\bm{f}_d$ 的具体形式由式\eqref{eq:f_d}给出，其计算中涉及的合外力 $\bm{F}^b$ 与合外力矩 $\bm{M}^b$ 需根据简化后的动力学方程式\eqref{eq:v_dynamic_sim}和式\eqref{eq:omega_dynamic_sim}，并结合当前状态估计值与控制输入实时求取。
 
     \item {计算先验误差协方差矩阵}
     \begin{equation}
         \bm{P}_{k}^{-} = \bm{F}_{k-1} \bm{P}_{k-1}^{+} \bm{F}_{k-1}^{T} + \bm{Q}_{k-1},
     \end{equation}
-    其中 $\bm{F}_{k-1}$ 为状态转移函数的雅可比矩阵，按式\ref{eq:F_km1}在点 $(\hat{\bm{x}}_{k-1}^{+}, \bm{u}_{k-1})$ 处实时更新该矩阵；$\bm{Q}_{k-1}$ 为过程噪声协方差矩阵，其取值需综合考虑模型简化引入的不确定性、未建模动态以及外界扰动等因素，通常通过经验试凑或自适应方法进行整定。
+    其中 $\bm{F}_{k-1}$ 为状态转移函数的雅可比矩阵，按式\eqref{eq:F_km1}在点 $(\hat{\bm{x}}_{k-1}^{+}, \bm{u}_{k-1})$ 处实时更新该矩阵；$\bm{Q}_{k-1}$ 为过程噪声协方差矩阵，其取值需综合考虑模型简化引入的不确定性、未建模动态以及外界扰动等因素，通常通过经验试凑或自适应方法进行整定。
 
     过程噪声协方差矩阵 $\bm{Q}$ 用于描述系统模型误差与未建模动态引起的不确定性。在实际工程应用中，为简化处理并保证滤波器稳定性，通常将其设定为常值对角阵，即 $\bm{Q}_k \equiv \bm{Q}$，其中:
     \begin{equation}
@@ -476,7 +476,7 @@ $\bm{H}_k$ 描述了当前时刻状态误差向观测残差的映射。由于观
     \begin{equation}
         \bm{K}_k = \bm{P}_{k}^{-} \bm{H}_k^{T} \left( \bm{H}_k \bm{P}_{k}^{-} \bm{H}_k^{T} + \bm{R}_k \right)^{-1},
     \end{equation}
-    其中 $\bm{H}_k$ 为观测函数的雅可比矩阵，由于观测向量直接选取部分状态分量，由式\ref{eq:H_k}可知 $\bm{H}_k = [\bm{I}_{12\times 12} \; \bm{0}_{12\times 6}]$ 为常矩阵；$\bm{R}_k$ 为观测噪声协方差矩阵，依据动作捕捉系统与机载IMU的实测噪声特性离线标定，并在滤波过程中保持为常值或根据信噪比进行适当调整。
+    其中 $\bm{H}_k$ 为观测函数的雅可比矩阵，由于观测向量直接选取部分状态分量，由式\eqref{eq:H_k}可知 $\bm{H}_k = [\bm{I}_{12\times 12} \; \bm{0}_{12\times 6}]$ 为常矩阵；$\bm{R}_k$ 为观测噪声协方差矩阵，依据动作捕捉系统与机载IMU的实测噪声特性离线标定，并在滤波过程中保持为常值或根据信噪比进行适当调整。
     
     在实际的工程应用中，通常认为各个观测量噪声之间不存在相关性。此外，在飞行期间，观测噪声的噪声模型基本保持一致，因此，为降低计算复杂度，可将$\bm{R}_k$设为常对角阵：
     \begin{equation}
@@ -488,7 +488,7 @@ $\bm{H}_k$ 描述了当前时刻状态误差向观测残差的映射。由于观
     \begin{equation}
         \hat{\bm{x}}_{k}^{+} = \hat{\bm{x}}_{k}^{-} + \bm{K}_k \left( \bm{z}_k - \bm{h}(\hat{\bm{x}}_{k}^{-}) \right),
     \end{equation}
-    式中新息项 $\bm{z}_k - \bm{h}(\hat{\bm{x}}_{k}^{-})$ 反映了模型预测与实际量测之间的偏差；观测函数 $\bm{h}(\cdot)$ 的形式见式\ref{eq:obs}。
+    式中新息项 $\bm{z}_k - \bm{h}(\hat{\bm{x}}_{k}^{-})$ 反映了模型预测与实际量测之间的偏差；观测函数 $\bm{h}(\cdot)$ 的形式见式\eqref{eq:obs}。
 
     \item {更新后验误差协方差矩阵}
     \begin{equation}
