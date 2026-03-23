@@ -224,9 +224,9 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
 \bm{Q} = 
 \begin{bmatrix}
-1 & \sin\varphi\tan\theta & \cos\varphi\tan\theta \\
-0 & \cos\varphi & -\sin\varphi \\
-0 & \sin\varphi & \cos\varphi
+1 & \sin\varphi\tan\theta & \cos\varphi\tan\theta \\[6pt]
+0 & \cos\varphi & -\sin\varphi \\[6pt]
+0 & \dfrac{\sin\varphi}{\cos\theta} & \dfrac{\cos\varphi}{\cos\theta}
 \end{bmatrix}.
 \end{equation}
 最终，能够得到无人机的角速度和姿态角的变化率之间的关系为：
@@ -397,20 +397,20 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
     \bm{L}_T^b = 
     \begin{bmatrix}
-        l_T \cdot \dfrac{u_r}{V_a \sin\alpha} \\
-        l_T \cdot \dfrac{v_r}{V_a \sin\alpha} \\
-        0
+        l_T \cdot \dfrac{u_r}{V_a \sin\alpha} \\[8pt]
+        l_T \cdot \dfrac{v_r}{V_a \sin\alpha} \\[8pt]
+        0 \\[8pt]
     \end{bmatrix} = 
     \begin{bmatrix}
-        \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
-        \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\
-        0
+        \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\[8pt]
+        \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\[8pt]
+        0 \\[8pt]
     \end{bmatrix},
     \bm{L}_N^b = 
     \begin{bmatrix}
-        0 \\
-        0 \\
-        -l_N
+        0 \\[8pt]
+        0 \\[8pt]
+        -l_N \\[8pt]
     \end{bmatrix},
 \end{equation}
 已知力和力臂，即可求出涵道风扇的气动力矩在机体系下的投影$\bm{M}_{df}^b$：
@@ -419,14 +419,14 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         \bm{M}_{df}^b = &\bm{L}_T^b \times \bm{T}_{df}^b + \bm{L}_N^b \times \bm{N}_{df}^b \\
         =
         &\begin{bmatrix}
-            -\dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
-            \dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
-            0
+            -\dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\[8pt]
+            \dfrac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\[8pt]
+            0 \\[8pt]
         \end{bmatrix} \\
         &+ \begin{bmatrix}
-            - \dfrac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r \cdot l_N \\
-            \dfrac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r \cdot l_N \\
-            0
+            - \dfrac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r \cdot l_N \\[8pt]
+            \dfrac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r \cdot l_N \\[8pt]
+            0 \\[8pt]
         \end{bmatrix}.
     \end{aligned}
 \end{equation}
@@ -527,7 +527,6 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 单个控制舵面包含一对平行翼面，且四个控制舵面具有对称性，可得各控制舵面受到的气动力：
 \begin{equation}
     F_{cv_{i}} = 2 F_{cv_{i}}' = \rho A_{cv} C_{cv} V_e^2 \delta _i, \quad i=1,2,3,4.
-    \label{eq:F_cv}
 \end{equation}
 
 值得注意的是，上述解析式是对控制力的近似，仅当控制舵面偏转角度较小时成立，对此，本文作出限制：
@@ -536,9 +535,9 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{equation}
 由于舵面偏转角度较小，可近似认为距离$l_1$，$l_2$均不发生变化。
 
-根据几何关系，并结合式\eqref{eq:F_cv}可得出控制舵面的作用力在机体系下的投影$\bm{F}_{vane}^b$为：
+根据几何关系，并结合式\eqref{eq:F_cv}可得出控制舵面的作用力在机体系下的投影$\bm{F}_{cv}^b$为：
 \begin{equation}
-    \bm{F}_{vane}^b = 
+    \bm{F}_{cv}^b = 
     \begin{bmatrix}
         F_{cv_{4}} - F_{cv_{2}} \\
         F_{cv_{1}} - F_{cv_{3}} \\
@@ -549,11 +548,11 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         \rho A_{cv} C_{cv} V_e^2 (\delta _1 - \delta _3) \\
         0
     \end{bmatrix},
-    \label{eq:F_vane}
+    \label{eq:F_cv}
 \end{equation}
-控制舵面的作用力矩在机体系下的投影$\bm{M}_{vane}^b$为：
+控制舵面的作用力矩在机体系下的投影$\bm{M}_{cv}^b$为：
 \begin{equation}
-    \bm{M}_{vane}^b = 
+    \bm{M}_{cv}^b = 
     \begin{bmatrix}
         -l_1 (F_{cv_{1}} - F_{cv_{3}}) \\
         l_1 (F_{cv_{4}} - F_{cv_{2}}) \\
@@ -564,15 +563,15 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         \rho A_{cv} C_{cv} V_e^2 l_1 (\delta _4 - \delta _2) \\
         \rho A_{cv} C_{cv} V_e^2 l_2 (\delta _1 + \delta _2 + \delta _3 + \delta _4)
     \end{bmatrix}.
-    \label{eq:M_vane}
+    \label{eq:M_cv}
 \end{equation}
 
 \subsection{涵道无人机受力分析总结}
 至此，根据现有主流理论，涵道式无人机受到的主要的力和力矩均逐一分析完成。式\eqref{eq:base_dynamic}中的$\bm{F}^b$和$\bm{M}^b$可以认为是这些力和力矩的合成，那么在机体系下，有：
 \begin{equation}
     \begin{cases}
-        \bm{F}^b = \bm{F}_{df}^b + \bm{F}_{vane}^b \\
-        \bm{M}^b = \bm{M}_{df}^b + \bm{M}_{fan}^b + \bm{M}_{gyro}^b + \bm{M}_{sta}^b + \bm{M}_{vane}^b
+        \bm{F}^b = \bm{F}_{df}^b + \bm{F}_{cv}^b \\
+        \bm{M}^b = \bm{M}_{df}^b + \bm{M}_{fan}^b + \bm{M}_{gyro}^b + \bm{M}_{sta}^b + \bm{M}_{cv}^b
     \end{cases}.
 \end{equation}
 表\ref{tab:F_and_M}总结了这些力和力矩的符号以及的含义：
@@ -585,7 +584,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
     \midrule
     $\bm{F}_{df}^b$ & 涵道风扇受到的气动力\tabularnewline
     
-    $\bm{F}_{vane}^b$ & 所有控制舵面受到的气动力的合力\tabularnewline
+    $\bm{F}_{cv}^b$ & 所有控制舵面受到的气动力的合力\tabularnewline
 
     $\bm{M}_{df}^b$ & 涵道风扇受到的气动力对机体的扭矩\tabularnewline
 
@@ -595,7 +594,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 
     $\bm{M}_{sta}^b$ & 反扭距襟翼受到气动力的对机体的扭矩\tabularnewline
 
-    $\bm{M}_{vane}^b$ & 所有控制舵面受到的气动力对机体的合扭矩\tabularnewline
+    $\bm{M}_{cv}^b$ & 所有控制舵面受到的气动力对机体的合扭矩\tabularnewline
     \bottomrule
     \end{tabular}
 \end{table}
