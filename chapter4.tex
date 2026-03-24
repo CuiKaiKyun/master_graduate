@@ -70,7 +70,7 @@ F_{cvGE_i} = C_{cvGE} K_{cv} \delta_i = K_{cvGE} \delta_i,
 K_{cvGE} = C_{cvGE} K_{cv}.
 \label{eq:KcvGE}
 \end{equation}
-根据式\eqref{eq:eq:M_cv}及表\ref{tab:lumped_parameters}中关于舵面偏转力系数的表达式，可得：
+根据式\eqref{eq:M_cv}及表\ref{tab:lumped_parameters}中关于舵面偏转力系数的表达式，可得：
 \begin{equation}
     M_{z}^b = K_{cvGE} l_2 (\delta_1 + \delta_2 + \delta_3 + \delta_4),
     \label{eq:M_cv_GE}
@@ -134,7 +134,64 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
 
 其次，将每一组稳态推力测量值减去实验前采集的静态零点偏置值，得到净气动力 $T_{GE}$。该值即反映了涵道风扇产生的净推力。
 
-最后，将处理后的数据按 $h/R$ 和 $\Omega$ 进行整理，形成用于后续参数辨识的样本数据集 $\{(h/R)_i, \Omega_i, T_{GE,i}\}$。
+最后，将处理后的数据按 $h/R$ 和 $\Omega$ 进行整理，形成用于后续参数辨识的样本数据集。
+
+\subsection{实验数据} % 2 Pages
+\label{subsec:thrust_exp}
+按照第\ref{subsec:thrust_exp}节所述的实验步骤完成数据采集与预处理后，可得到涵道风扇推力 $T$ 与无量纲高度 $h/R$ 以及螺旋桨转速 $\Omega$ 之间的映射关系。图\ref{fig:T-omega-h}以三维曲面的形式展示了该关系的全貌，其中横轴分别为无量纲高度 $h/R$ 与螺旋桨转速的平方 $\Omega^2$，纵轴为推力 $T{GE}$，曲面上叠加的白色曲线为等高线，颜色由黄色渐变至蓝色用以表示推力大小，黄色区域对应推力较大，蓝色区域对应推力较小。
+
+\begin{figure}
+    \centering
+    \includegraphics{figure/chapter4/surf_T-omega-h.pdf}
+    \caption{\label{fig:T-omega-h}涵道风扇推力和风扇转速、离地高度之间的关系}
+\end{figure}
+
+从整体趋势观察，推力随无量纲高度 $h/R$ 的变化呈现非单调特性：当无人机从高空下降时，推力首先逐渐增大，在 $h/R \approx 0.25$ 附近达到峰值，随后随高度进一步降低而迅速减小。这一变化规律与现有文献中关于涵道风扇地面效应的研究结论相符。文献\cite{luo2023numerical}通过CFD仿真发现，地面效应下涵道风扇总推力的变化是桨叶推力与涵道推力此消彼长的结果：当地面接近时，出口射流受阻形成高压区，桨叶推力显著增加，但同时涵道唇口处的低压区被削弱，涵道推力大幅下降。当高度比降至 $h/R < 0.5$ 时，涵道推力下降占主导地位，导致总推力出现损失。此外，当 $h/R < 0.2$ 时，叶片尖端发展出大量失速涡胞，流场呈现强烈的非定常特性，推力急剧下降且波动剧烈\cite{luo2023numerical}，该区域不在本文推力模型的有效拟合范围内。在 $h/R > 2.0$ 的范围内，地面效应逐渐减弱，推力缓慢趋近于无地效状态下的基准值，这与文献\cite{Antonio2021}中关于旋翼地效影响范围 $h/R \leq 2.0$ 的结论基本吻合。
+
+为深入分析推力特性与各变量之间的依赖关系，本文从两个维度对实验数据进行剖面分析。
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics{figure/chapter4/rotor_thrust_30mm.pdf}
+        \caption*{$h/R = 0.34$}
+    \end{minipage}
+    \hfill  % 产生弹性水平间距
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics{figure/chapter4/rotor_thrust_100mm.pdf}
+        \caption*{$h/R = 1.12$}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics{figure/chapter4/rotor_thrust_200mm.pdf}
+        \caption*{$h/R = 2.25$}
+    \end{minipage}
+    \hfill  % 产生弹性水平间距
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics{figure/chapter4/rotor_thrust_400mm.pdf}
+        \caption*{$h/R = 4.49$}
+    \end{minipage}
+    \caption{\label{fig:T-Omega}不同高度比$h/R$下推力$T$与风扇转速的平方$\Omega^2$的关系}
+\end{figure}
+
+首先，固定无量纲高度 $h/R$，考察推力 $T_{GE}$ 与螺旋桨转速平方 $\Omega^2$ 之间的关系。图\ref{fig:T-Omega}选取了四个典型高度比 $h/R = 0.34$、$1.12$、$2.25$ 和 $4.49$ 下的实验结果。图中浅蓝色带点标记的实线为该高度下的实测推力均值，橙色实线为通过最小二乘法拟合的正比例关系线，拟合式标注于曲线旁。可见，在不同高度比下，推力 $T_{GE}$ 与 $\Omega^2$ 之间均呈现良好的线性关系。这一结果验证了第\ref{subsec:thrust_model}节所建立推力模型的合理性，即地面效应下的推力可表示为无地效推力与一个仅与高度相关的衰减系数的乘积，如式\eqref{eq:GE_thrust_model}所示。此外，对比不同高度下的拟合直线可以发现：随着 $h/R$ 增大，推力 $T_{GE}$ 整体下降，且 $T$ 对 $\Omega^2$ 的斜率（即推力系数）也随之减小，这反映了地面效应衰减程度随高度增加而减弱的物理规律。
+
+\begin{figure}
+    \centering
+    \includegraphics{figure/chapter4/line_T-h.pdf}
+    \caption{\label{fig:T-h}典型工作转速下涵道风扇推力$T$和离地高度比$h/R$的关系}
+\end{figure}
+
+其次，固定螺旋桨转速为典型工作转速 $\Omega = 790\,\mathrm{rad/s}$（即无地效悬停转速），考察推力 $T_{GE}$ 与无量纲高度 $h/R$ 之间的关系。图\ref{fig:T-h}展示了该工况下的实验数据，其中浅蓝色带点标记的实线为实测推力均值。从图中可以看出，推力随高度增加呈现快速衰减后缓慢趋近于稳定值的趋势：当 $h/R < 1.0$ 时，推力随高度上升迅速下降；当 $h/R$ 介于 $1.0$ 至 $2.0$ 之间时，推力下降速度减缓；当 $h/R > 2.0$ 时，推力变化趋于平缓，并逐渐趋近于无地效状态下的基准推力 $T_{df} \approx 4.07\,\mathrm{N}$。这一变化趋势与第\ref{subsec:thrust_model}节提出的指数衰减模型高度吻合，为后续模型参数的辨识提供了可靠的数据基础。
+
+综合上述两个维度的分析，可以得出以下结论：地面效应对涵道风扇推力的影响主要体现在对推力系数的调制上，推力与转速平方的线性关系在不同高度下均成立；推力随高度变化的衰减规律呈现指数特性，在 $h/R < 0.5$ 时存在推力损失峰值区，在 $h/R > 2.0$ 时地面效应基本可忽略。这些实验数据将为第\ref{subsec:thrust_fitting}节的模型参数辨识提供直接的依据。
 
 \subsection{参数拟合}
 \label{subsec:thrust_fitting}
@@ -243,13 +300,13 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
 
 螺旋桨转速设定为典型悬停转速 $\Omega = 790\,\mathrm{rad/s}$，该转速与推力测试实验中的典型工作转速一致，以确保舵面所处的气流环境与实际飞行工况相符。通过数字直流电源向电机电调系统供电，并维持该转速稳定。
 
-舵面偏转角度 $\delta_c$ 的设定需覆盖控制舵面的有效线性工作范围。根据第\ref{subsec:cv_dynamics}节的分析，舵面偏转角应限制在 $\delta_i \in [-20^\circ, 20^\circ]$ 范围内以保证气动力的线性特性。在实验中，令四个舵面同时输出相同的偏转角度 $\delta_c$，并在此范围内以$2^\circ$为步长，均匀选取 $21$ 个角度点。对于每个固定的离地高度 $h$，均遍历上述所有舵面偏转角度。
+舵面偏转角度 $\delta_c$ 的设定需覆盖控制舵面的有效线性工作范围。根据第\ref{subsec:cv_dynamics}节的分析，舵面偏转角应限制在 $\delta_i \in [-20^\circ, 20^\circ]$ 范围内以保证气动力的线性特性。在实验中，令四个舵面同时输出相同的偏转角度 $\delta_c$，并在$[-20^\circ, 20^\circ]$范围内以$2^\circ$为步长，均匀选取 $21$ 个角度点。对于每个固定的离地高度 $h$，均遍历上述所有舵面偏转角度。
 
 \textbf{3. 数据采集流程}
 
 具体实验操作流程如下：首先将约束板调整至目标高度并锁紧，通过数字直流电源向电机电调系统供电，使螺旋桨达到并稳定在典型悬停转速 $\Omega = 790\,\mathrm{rad/s}$。待电机转速稳定 $2\,\mathrm{s}$ 后，飞控系统按照预设的舵面偏转角度序列，依次驱动四个舵面同步偏转至目标角度 $\delta_c$。每个舵面偏转角度维持输出 $10\,\mathrm{s}$，以保证气动状态达到稳态，并采集足够长度的数据用于后续统计平均处理。
 
-在舵面维持偏转的 $10\,\mathrm{s}$ 时间内，以 $200\,\mathrm{Hz}$ 的采样频率连续记录六维力/力矩传感器的输出数据，重点记录绕 $O_bZ_b$ 轴的扭矩分量 $M_{z}^b$。数据采集过程中，同步记录当前的无量纲高度 $h/R$ 与舵面偏转角 $\delta_c$。完成当前高度下所有舵面角度的测量后，将约束板调整至下一高度，重复上述过程。
+在舵面维持统一偏转角度$\delta_c$的 $10\,\mathrm{s}$ 时间内，以 $200\,\mathrm{Hz}$ 的采样频率连续记录六维力/力矩传感器的输出数据，重点记录绕 $O_bZ_b$ 轴的扭矩分量 $M_{z}^b$。数据采集过程中，同步记录当前的无量纲高度 $h/R$ 与舵面偏转角 $\delta_c$。完成当前高度下所有舵面角度的测量后，将约束板调整至下一高度，重复上述过程。
 
 所有实验数据均通过飞控板载的微控制器实时采集，并存储于机载SD卡中。数据记录的内容包括：时间戳、六维力/力矩传感器各通道原始数值、螺旋桨转速反馈值、当前离地高度以及舵面偏转角度指令。实验结束后，将SD卡中的数据导出至计算机，供后续的数据预处理与参数拟合使用。
 
@@ -498,7 +555,7 @@ K_{cvGE,i} = \frac{a_i}{4 l_2}.
 \end{equation}
 其中$K_{cvGE}$单位为$\mathrm{N/rad}$。其最终拟合结果即第$10$次迭代拟合曲线已在图\ref{fig:K_cv-h}给出。从图中可以看出，拟合曲线与实验数据吻合良好，验证了所提指数衰减模型能够准确描述控制舵面偏转力系数随离地高度的变化规律。该模型将在后续章节中用于近地面抗扰控制器的设计与补偿。
 
-\subsection{本章小结}
+\section{本章小结}
 
 本章围绕涵道式无人机在近地面飞行时的执行器控制效益问题，系统开展了地面效应下的推力与舵面偏转力离线辨识研究。针对涵道风扇在近地面工作时推力与舵面效率发生显著变化的物理特性，分别建立了推力模型与控制舵面偏转力模型，并通过静态台架实验完成了模型参数的辨识。
 
