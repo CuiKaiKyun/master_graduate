@@ -1,0 +1,2 @@
+time(s),moment_x(N·m),moment_y(N·m),moment_z(N·m),motor_angle_1(rad),motor_angle_2(rad),motor_angle_3(rad),motor_angle_4(rad),target_moment(N·m),rotor_speed(m/s)
+3.00053,-0.13961,-0.13726,-0.00642,0.00000,0.00000,0.00000,0.00000,0.00000,26.22576

@@ -1,0 +1,86 @@
+% 该脚本用于处理无人机力矩数据：包含零偏校准与力矩跟随分析
+% 逻辑：提取 time=0 的数据求均值作为零偏，正式数据减去该零偏后绘图
+
+clc;
+clear;
+close all;
+
+% 更改为你的文件名
+file_name = 'ge_moment_data/anti_moment_ge_raw_100mm_2.csv'; 
+
+%% 1. 数据预处理：剔除列数不一致的错误行
+if ~exist(file_name, 'file')
+    error('找不到文件: %s', file_name);
+end
+
+raw_text = fileread(file_name);
+lines = splitlines(raw_text);
+lines(cellfun('isempty', lines)) = []; 
+
+expected_commas = length(strfind(lines{1}, ','));
+valid_idx = cellfun(@(x) length(strfind(x, ',')) == expected_commas, lines);
+clean_lines = lines(valid_idx);
+
+temp_file = 'temp_clean_moment_data.csv';
+fid = fopen(temp_file, 'w');
+fprintf(fid, '%s\n', clean_lines{:});
+fclose(fid);
+
+%% 2. 读取与解析数据
+opts = detectImportOptions(temp_file);
+data = readtable(temp_file, opts);
+
+% 提取原始数据 (尝试自动匹配列名，若失败则按索引提取)
+try
+    raw_time = data.('time_s_');
+    raw_moment_z = data.('moment_z_N_m_');
+    raw_target_moment = data.('target_moment_N_m_');
+    raw_motor_angle = data.('motor_angle_1_rad_');
+catch
+    raw_time = data{:, 1};           % 第1列 time
+    raw_moment_z = data{:, 4};       % 第4列 moment_z
+    raw_target_moment = data{:, 9};  % 第9列 target_moment
+end
+
+%% 3. 零偏校准逻辑
+% 找到所有时间戳为 0 的行作为校准数据
+calib_mask = (raw_time == 0);
+
+if any(calib_mask)
+    zero_offset_z = mean(raw_moment_z(calib_mask));
+    fprintf('检测到校准数据，Moment_Z 零偏值: %.6f N·m\n', zero_offset_z);
+else
+    zero_offset_z = 0;
+    warning('未在数据中找到 time=0 的校准行，零偏设为 0。');
+end
+
+% 提取正式测试数据 (time > 0 的部分)
+test_idx = raw_time > 0;
+time = raw_time(test_idx);
+calibrated_moment_z = raw_moment_z(test_idx) - zero_offset_z;
+target_moment = raw_target_moment(test_idx);
+motor_angle = raw_motor_angle(test_idx);
+
+% 删除临时文件
+if exist(temp_file, 'file'), delete(temp_file); end
+
+%% 4. 绘制关系图
+figure('Color', 'w');
+
+% 按照要求：先画实际值 (moment_z)，再画目标值 (target_moment) 以凸显目标
+plot(time, calibrated_moment_z, 'Color', [0.7 0.7 0.7], 'LineWidth', 1.0); % 实际值用灰色细线
+hold on;
+plot(time, target_moment, 'r--', 'LineWidth', 1.5); % 目标值用红色虚线，更显著
+
+% 完善图表显示信息
+xlabel('Time (s)');
+ylabel('Moment (N·m)');
+title(['Z-Axis Moment Tracking (Offset Removed: ', num2str(zero_offset_z, '%.4f'), ')']);
+legend('moment\_z (Calibrated)', 'target\_moment', 'Interpreter', 'none', 'Location', 'best');
+grid on;
+
+figure;
+plot(time, motor_angle);
+
+% 打印提示
+fprintf('绘图完成。当前显示的是减去零偏后的力矩跟随曲线。\n');

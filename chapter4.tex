@@ -220,9 +220,9 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
 \begin{equation}
     \bm{E}_{TGE} = [E_{TGE,1}, E_{TGE,2}, \dots, E_{TGE,n}]^{T}.
 \end{equation}
-根据高斯-牛顿法，在第 $k$ 次迭代时，需计算误差向量关于参数的雅可比矩阵 $\bm{J}^{(k)} \in \mathbb{R}^{n \times 2}$，其元素为：
+根据高斯-牛顿法，在第 $k$ 次迭代时，需计算误差向量关于参数的雅可比矩阵 $\bm{J}_T^{(k)} \in \mathbb{R}^{n \times 2}$，其元素为：
 \begin{equation}
-    \bm{J}^{(k)} = 
+    \bm{J}_T^{(k)} = 
     \begin{bmatrix}
         \dfrac{\partial E_{TGE,1}}{\partial C_{TAmp}} & \dfrac{\partial E_{TGE,1}}{\partial C_{TExp}} \\[6pt]
         \vdots & \vdots \\[6pt]
@@ -238,15 +238,15 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
     ,\quad i = 1,2,\dots,n.
 \end{equation}
 
-高斯-牛顿迭代法中的迭代步长 $\bm{\delta}^{(k)} = [\Delta C_{TAmp}, \Delta C_{TExp}]^{T}$ 由正规方程确定：
+高斯-牛顿迭代法中的迭代步长 $\bm{\delta}_T^{(k)} = [\Delta C_{TAmp}, \Delta C_{TExp}]^{T}$ 由正规方程确定：
 \begin{equation}
-    \bm{\delta}^{(k)} = -\left( (\bm{J}^{(k)})^{T} \bm{J}^{(k)} \right)^{-1} (\bm{J}^{(k)})^{T} \bm{E}_{TGE}^{(k)}.
+    \bm{\delta}_T^{(k)} = -\left( (\bm{J}_T^{(k)})^{T} \bm{J}_T^{(k)} \right)^{-1} (\bm{J}_T^{(k)})^{T} \bm{E}_{TGE}^{(k)}.
 \end{equation}
 参数更新公式为：
 \begin{equation}
-    \bm{\theta}^{(k+1)} = \bm{\theta}^{(k)} + \bm{\delta}^{(k)},
+    \bm{\theta}_T^{(k+1)} = \bm{\theta}_T^{(k)} + \bm{\delta}_T^{(k)},
 \end{equation}
-其中 $\bm{\theta}^{(k)} = [C_{TAmp}^{(k)}, C_{TExp}^{(k)}]^{T}$。该迭代算法在收敛点附近具有二次收敛速度。
+其中 $\bm{\theta}_T^{(k)} = [C_{TAmp}^{(k)}, C_{TExp}^{(k)}]^{T}$。该迭代算法在收敛点附近具有二次收敛速度。
 
 本文选取参数初始值 $C_{TAmp}^{(0)} = 0.3$，$C_{TExp}^{(0)} = -0.25$，共执行 $10$ 次迭代。第$1$次，第$2$次以及第$10$次迭代的拟合结果如图\ref{fig:T-h}所示。迭代过程中参数的收敛曲线如图\ref{fig:T_param-iter}所示，误差平方和 $\sum E_{TGE,i}^2$ 随迭代次数的变化如图\ref{fig:T_err_iter}所示。
 
