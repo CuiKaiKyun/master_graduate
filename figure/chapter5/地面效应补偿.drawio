@@ -1,0 +1,13 @@
+<mxfile host="65bd71144e">
+    <diagram id="fqTjnkiyYY9nloa4WU7p" name="第 1 页">
+        <mxGraphModel dx="29" dy="415" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="抗地面效应扰动补偿系数算法&lt;div&gt;$$K_{cvGE} = K_{cv}(1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)})$$&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" vertex="1" parent="1">
+                    <mxGeometry x="209.5" y="477" width="219.5" height="70" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

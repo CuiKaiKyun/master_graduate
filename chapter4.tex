@@ -27,7 +27,7 @@
 \end{equation}
 其中，$C_{GE}$为地面效应推力系数，它仅是无量纲高度$h/R$的函数，反映了地面效应对推力的调制作用。将式\eqref{eq:thrust}代入式\eqref{eq:thrust_model}，可得：
 \begin{equation}
-    T_{GE} = \frac{1}{2}T_{GE} \rho \pi C_T R^4 \Omega^2
+    T_{GE} = \frac{1}{2}\rho \pi C_T R^4 \Omega^2
     \label{eq:GE_thrust_model}
 \end{equation}
 
@@ -36,7 +36,7 @@
 C_{GE} = 1 + C_{TAmp} \cdot e^{C_{TExp} \cdot (h/R)},
 \label{eq:ge_coefficient}
 \end{equation}
-式中，$C_{TAmp}$为幅值系数，决定了地面效应的最大影响程度；$C_{TExp}$为指数衰减系数，控制着$C_{GE}$随高度增加的衰减速率。式\eqref{eq:ge_coefficient}中的常数项$1$保证了当$h/R \to \infty$时，$C_{GE}$收敛于1，使模型满足无地效极限。该模型结构简洁，参数具有明确的物理意义，已被研究证实能够有效拟合实验数据\cite{matuz2021ground}。例如，文献\cite{luo2023numerical}通过对涵道风扇地面效应的CFD仿真数据进行拟合，得到了形如式\eqref{eq:ge_coefficient}的指数模型，其拟合优度$R^2$达到0.9926，验证了该模型的有效性。
+式中，$C_{TAmp}$为幅值系数，决定了地面效应的最大影响程度；$C_{TExp}$为指数衰减系数，控制着$C_{GE}$随高度增加的衰减速率。式\eqref{eq:ge_coefficient}中的常数项$1$保证了当$h/R \to \infty$时，$C_{GE}$收敛于1，使模型满足无地效极限。该模型结构简洁，参数具有明确的物理意义，已被研究证实能够有效拟合实验数据\cite{matuz2021ground}。例如，文献\cite{luo2023numerical}通过对涵道风扇地面效应的CFD仿真数据进行拟合，得到了形如式\eqref{eq:ge_coefficient}的指数模型，验证了该模型的有效性。
 
 需要指出的是，本节所建立的推力模型侧重于描述推力的时间平均特性。尽管近地面流场存在固有的非定常波动，例如叶片通过频率引起的周期性推力脉动及失速涡胞的迁移等\cite{luo2023numerical}，但考虑到本文的研究重点在于高度控制器的设计，平均推力模型已能反映主导的静态增益变化，为控制器提供必要的模型补偿。具体的参数$C_{TAmp}$与$C_{TExp}$将通过第\ref{sec:GE_exp}节的地面效应台架实验数据进行辨识确定。
 \subsection{控制舵面偏转力模型}
