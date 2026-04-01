@@ -7,7 +7,8 @@ BUILDDIR = build
 MAIN = main
 SOURCES = $(wildcard *.tex) $(wildcard chapters/*.tex) $(wildcard sections/*.tex)
 BIBFILES = $(wildcard *.bib)
-IMAGES = $(wildcard iamges/*.png) $(wildcard iamges/*.jpg)
+# IMAGES = $(wildcard figure/*.png figure/*.jpg figure/*.pdf)
+CHAPTERS = $(wildcard chapter/*.tex)
 
 .PHONY: all del_target clean
 
@@ -17,19 +18,19 @@ PDF = $(MAIN).pdf
 all: $(PDF)
 # all: del_target $(PDF)
 
-$(PDF): $(SOURCES) $(BIBFILES) $(IMAGES)| $(BUILDDIR)
-	$(TEX) $(TEXFLAGS) -output-directory=$(BUILDDIR) $(MAIN).tex
+
+$(PDF): $(SOURCES) $(BIBFILES) $(IMAGES) $(CHAPTERS)
+	$(TEX) $(TEXFLAGS) $(MAIN).tex
 	
 	echo compile the bib file
-	$(BIB) $(BUILDDIR)\$(MAIN)
+	$(BIB) $(MAIN)
 
 	echo second compile
-	$(TEX) $(TEXFLAGS) -output-directory=$(BUILDDIR) $(MAIN).tex
+	$(TEX) $(TEXFLAGS) $(MAIN).tex
 
 	echo third compile
-	$(TEX) $(TEXFLAGS) -output-directory=$(BUILDDIR) $(MAIN).tex
-	copy "$(BUILDDIR)\$(MAIN).pdf" "." > nul
-    
+	$(TEX) $(TEXFLAGS) $(MAIN).TEX
+
 # 创建 build 目录
 $(BUILDDIR):
 	mkdir -p $(BUILDDIR)
@@ -48,6 +49,6 @@ del_target:
 	del $(MAIN).pdf
 
 clean: del_target
-	cd $(BUILDDIR) && del /s /q *.xml *.bcf *.log *.aux *.synctex.gz *.hd *.idx *.out *.toc *.bbl *.blg *.lof *.lot
+	del /s /q *.xml *.bcf *.log *.aux *.synctex.gz *.hd *.idx *.out *.toc *.bbl *.blg *.lof *.lot
 	del /s /q main.pdf
 	cd ..

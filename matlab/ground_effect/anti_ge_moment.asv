@@ -1,0 +1,195 @@
+% 该脚本用于批量处理无人机力矩数据：包含零偏校准与配色方案优化
+% 颜色方案参考 test5_2_1_1.m：目标值深灰，测量值紫红
+clc;
+clear;
+close all;
+
+% 1. 全局配置参数
+output_folder = 'pdf/anti_ge_moment/';
+if ~exist(output_folder, 'dir'), mkdir(output_folder); end
+
+% 配色方案与排版尺寸
+cmp_resp_color = [0.4660, 0.6740, 0.1880];      % 绿色
+resp_color = [0.70, 0.22, 0.40];      % 测量值颜色 (紫红色)
+setpoint_color = [0.1, 0.1, 0.1];    % 目标值颜色 (深灰色)
+desire_delta_color = [0.3, 0.45, 0.8]; % 单线条颜色 (蓝色)
+cmp_desire_delta_color = [0.4940, 0.1840, 0.5560]; % 紫红色
+
+font_name = 'Times New Roman';
+font_size = 8;
+fig_width = 8;  
+fig_height = 5;
+
+% 全局样式设置 (移至循环外，只需设置一次)
+set(0, 'defaultAxesFontName', font_name);
+set(0, 'defaultTextFontName', font_name);
+set(0, 'defaultAxesFontSize', font_size);
+set(0, 'defaultTextInterpreter', 'latex');
+set(0, 'defaultLegendInterpreter', 'latex');
+
+% 2. 定义需要遍历的文件后缀
+suffixes = {'50mm', '100mm', '200mm'};
+
+%% 3. 循环处理每个文件
+for i = 1:length(suffixes)
+    current_suffix = suffixes{i};
+    file_name = sprintf('ge_moment_data/anti_moment_ge_raw_%s.csv', current_suffix);
+    cmp_file_name = sprintf('ge_moment_data/anti_moment_ge_raw_%s_cmp.csv', current_suffix);
+    
+    fprintf('正在处理文件: %s...\n', file_name);
+    
+    if ~exist(file_name, 'file')
+        warning('找不到文件: %s，跳过此文件。', file_name);
+        continue; 
+    end
+    if ~exist(cmp_file_name, 'file')
+        warning('找不到文件: %s，跳过此文件。', file_name);
+        continue; 
+    end
+    
+    % --- 数据预处理 ---
+    raw_text = fileread(file_name);
+    lines = splitlines(raw_text);
+    lines(cellfun('isempty', lines)) = []; 
+    expected_commas = length(strfind(lines{1}, ','));
+    valid_idx = cellfun(@(x) length(strfind(x, ',')) == expected_commas, lines);
+    clean_lines = lines(valid_idx);
+
+    % 为防止文件冲突，临时文件也加上后缀
+    temp_file = sprintf('temp_moment_final_%s.csv', current_suffix);
+    fid = fopen(temp_file, 'w');
+    fprintf(fid, '%s\n', clean_lines{:});
+    fclose(fid);
+
+    opts = detectImportOptions(temp_file);
+    data = readtable(temp_file, opts);
+
+    try
+        raw_time = data.('time_s_');
+        raw_moment_z = data.('moment_z_N_m_');
+        raw_target_moment = data.('target_moment_N_m_');
+        raw_motor_angle = data.('motor_angle_1_rad_');
+    catch
+        raw_time = data{:, 1}; raw_moment_z = data{:, 4};
+        raw_target_moment = data{:, 9}; raw_motor_angle = data{:, 10};
+    end
+
+    % --- 零偏校准 ---
+    calib_mask = (raw_time == 0);
+    zero_offset_z = mean(raw_moment_z(calib_mask));
+    if isnan(zero_offset_z), zero_offset_z = 0; end
+
+    test_idx = raw_time > 0;
+    time = raw_time(test_idx);
+    calibrated_moment_z = raw_moment_z(test_idx) - zero_offset_z;
+    target_moment = raw_target_moment(test_idx);
+    motor_angle = raw_motor_angle(test_idx);
+
+    delete(temp_file);
+    % --- 数据预处理 ---
+    raw_text = fileread(cmp_file_name);
+    lines = splitlines(raw_text);
+    lines(cellfun('isempty', lines)) = []; 
+    expected_commas = length(strfind(lines{1}, ','));
+    valid_idx = cellfun(@(x) length(strfind(x, ',')) == expected_commas, lines);
+    clean_lines = lines(valid_idx);
+
+    % 为防止文件冲突，临时文件也加上后缀
+    temp_file = sprintf('temp_moment_final_%s_cmp.csv', current_suffix);
+    fid = fopen(temp_file, 'w');
+    fprintf(fid, '%s\n', clean_lines{:});
+    fclose(fid);
+
+    opts = detectImportOptions(temp_file);
+    data = readtable(temp_file, opts);
+
+    try
+        cmp_raw_time = data.('time_s_');
+        cmp_raw_moment_z = data.('moment_z_N_m_');
+        cmp_raw_motor_angle = data.('motor_angle_1_rad_');
+    catch
+        cmp_raw_time = data{:, 1}; cmp_raw_moment_z = data{:, 4};
+        cmp_raw_motor_angle = data{:, 10};
+    end
+
+    % --- 零偏校准 ---
+    calib_mask = (cmp_raw_time == 0);
+    zero_cmp_offset_z = mean(cmp_raw_moment_z(calib_mask));
+    if isnan(zero_cmp_offset_z), zero_cmp_offset_z = 0; end
+
+    test_idx = cmp_raw_time > 0;
+    cmp_time = cmp_raw_time(test_idx);
+    calibrated_cmp_moment_z = cmp_raw_moment_z(test_idx) - zero_cmp_offset_z;
+    cmp_motor_angle = cmp_raw_motor_angle(test_idx);
+
+    delete(temp_file);
+
+    %% --- 4. 绘图与输出 ---
+    
+    % 计算动态 Figure 编号，保证独立窗口
+    fig1_num = i * 2 - 1;
+    fig2_num = i * 2;
+
+    % --- Figure 1: Moment Tracking ---
+    fig1 = figure(fig1_num);
+    % 稍微错开窗口位置，避免完全重叠
+    pos_x1 = 5 + (i-1)*2; 
+    set(fig1, 'Color', 'w', 'Units', 'centimeters', 'Position', [pos_x1, 5, fig_width, fig_height]);
+    set(fig1, 'Name', sprintf('Moment Tracking - %s', current_suffix));
+    hold on;
+
+    plot(cmp_time, calibrated_cmp_moment_z, '-', 'Color', cmp_resp_color, 'LineWidth', 0.8); 
+    plot(time, calibrated_moment_z, '-', 'Color', resp_color, 'LineWidth', 0.8); 
+    plot(time, target_moment, ':', 'Color', setpoint_color, 'LineWidth', 1.2);
+
+    xlabel('$t$ (s)');
+    ylabel('$M_z$ (N$\cdot$m)');
+    legend('$M_z$', '$M_z^{prime}$', '$M_{z,d}$', 'Location', 'southeast');
+    grid on;
+    set(gca, 'Layer', 'top', 'Box', 'on');
+    
+    % 边距优化
+    y_data = [calibrated_cmp_moment_z; calibrated_moment_z; target_moment];
+    y_range = max(y_data) - min(y_data);
+    if y_range == 0, y_range = 1; end
+    ylim([min(y_data) - 0.15*y_range, max(y_data) + 0.15*y_range]);
+    xlim([min(time) - 0.02*(max(time)-min(time)), max(time) + 0.02*(max(time)-min(time))]);
+
+    set(fig1, 'PaperUnits', 'centimeters', 'PaperSize', [fig_width fig_height], 'PaperPosition', [0 0 fig_width fig_height]);
+    
+    % 动态生成 PDF 保存路径
+    pdf_name_1 = fullfile(output_folder, sprintf('Moment_Tracking_%s.pdf', current_suffix));
+    print(fig1, pdf_name_1, '-dpdf', '-r300');
+
+    % --- Figure 2: Motor Angle ---
+    fig2 = figure(fig2_num);
+    pos_x2 = 14 + (i-1)*2;
+    set(fig2, 'Color', 'w', 'Units', 'centimeters', 'Position', [pos_x2, 5, fig_width, fig_height]);
+    set(fig2, 'Name', sprintf('Motor Angle - %s', current_suffix));
+    hold on;
+
+    plot(time, motor_angle, 'Color', desire_delta_color, 'LineWidth', 0.8);
+    plot(cmp_time, cmp_motor_angle, 'Color', cmp_desire_delta_color, 'LineWidth', 0.8);
+
+    xlabel('$t$ (s)');
+    ylabel('$\delta$ (rad)');
+    legend('$\delta_d$', '$M_z^{prime}$', '$M_{z,d}$', 'Location', 'southeast');
+    grid on;
+    set(gca, 'Layer', 'top', 'Box', 'on');
+    
+    % 边距优化
+    y_data = [motor_angle; cmp_motor_angle];
+    y_range = max(y_data) - min(y_data);
+    if y_range == 0, y_range = 1; end
+    ylim([min(y_data) - 0.15*y_range, max(y_data) + 0.15*y_range]);
+    xlim([min(time) - 0.02*(max(time)-min(time)), max(time) + 0.02*(max(time)-min(time))]);
+
+    set(fig2, 'PaperUnits', 'centimeters', 'PaperSize', [fig_width fig_height], 'PaperPosition', [0 0 fig_width fig_height]);
+    
+    % 动态生成 PDF 保存路径
+    pdf_name_2 = fullfile(output_folder, sprintf('Motor_Angle_%s.pdf', current_suffix));
+    print(fig2, pdf_name_2, '-dpdf', '-r300');
+    
+end
+
+fprintf('\n所有文件批量处理与图表配色更新完成！共生成 %d 个 PDF 文件。\n已保存至: %s\n', length(suffixes)*2, output_folder);

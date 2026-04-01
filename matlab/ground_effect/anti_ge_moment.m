@@ -9,9 +9,11 @@ output_folder = 'pdf/anti_ge_moment/';
 if ~exist(output_folder, 'dir'), mkdir(output_folder); end
 
 % 配色方案与排版尺寸
+cmp_resp_color = [0.4660, 0.6740, 0.1880];      % 绿色
 resp_color = [0.70, 0.22, 0.40];      % 测量值颜色 (紫红色)
 setpoint_color = [0.1, 0.1, 0.1];    % 目标值颜色 (深灰色)
-single_line_color = [0.3, 0.45, 0.8]; % 单线条颜色 (蓝色)
+desire_delta_color = [0.3, 0.45, 0.8]; % 单线条颜色 (蓝色)
+cmp_desire_delta_color = [0.4940, 0.1840, 0.5560]; % 紫红色
 
 font_name = 'Times New Roman';
 font_size = 8;
@@ -26,16 +28,21 @@ set(0, 'defaultTextInterpreter', 'latex');
 set(0, 'defaultLegendInterpreter', 'latex');
 
 % 2. 定义需要遍历的文件后缀
-suffixes = {'50mm', '100mm', '200mm', '400mm'};
+suffixes = {'50mm', '100mm', '200mm'};
 
 %% 3. 循环处理每个文件
 for i = 1:length(suffixes)
     current_suffix = suffixes{i};
     file_name = sprintf('ge_moment_data/anti_moment_ge_raw_%s.csv', current_suffix);
+    cmp_file_name = sprintf('ge_moment_data/anti_moment_ge_raw_%s_cmp.csv', current_suffix);
     
     fprintf('正在处理文件: %s...\n', file_name);
     
     if ~exist(file_name, 'file')
+        warning('找不到文件: %s，跳过此文件。', file_name);
+        continue; 
+    end
+    if ~exist(cmp_file_name, 'file')
         warning('找不到文件: %s，跳过此文件。', file_name);
         continue; 
     end
@@ -79,6 +86,43 @@ for i = 1:length(suffixes)
     motor_angle = raw_motor_angle(test_idx);
 
     delete(temp_file);
+    % --- 数据预处理 ---
+    raw_text = fileread(cmp_file_name);
+    lines = splitlines(raw_text);
+    lines(cellfun('isempty', lines)) = []; 
+    expected_commas = length(strfind(lines{1}, ','));
+    valid_idx = cellfun(@(x) length(strfind(x, ',')) == expected_commas, lines);
+    clean_lines = lines(valid_idx);
+
+    % 为防止文件冲突，临时文件也加上后缀
+    temp_file = sprintf('temp_moment_final_%s_cmp.csv', current_suffix);
+    fid = fopen(temp_file, 'w');
+    fprintf(fid, '%s\n', clean_lines{:});
+    fclose(fid);
+
+    opts = detectImportOptions(temp_file);
+    data = readtable(temp_file, opts);
+
+    try
+        cmp_raw_time = data.('time_s_');
+        cmp_raw_moment_z = data.('moment_z_N_m_');
+        cmp_raw_motor_angle = data.('motor_angle_1_rad_');
+    catch
+        cmp_raw_time = data{:, 1}; cmp_raw_moment_z = data{:, 4};
+        cmp_raw_motor_angle = data{:, 10};
+    end
+
+    % --- 零偏校准 ---
+    calib_mask = (cmp_raw_time == 0);
+    zero_cmp_offset_z = mean(cmp_raw_moment_z(calib_mask));
+    if isnan(zero_cmp_offset_z), zero_cmp_offset_z = 0; end
+
+    test_idx = cmp_raw_time > 0;
+    cmp_time = cmp_raw_time(test_idx);
+    calibrated_cmp_moment_z = cmp_raw_moment_z(test_idx) - zero_cmp_offset_z;
+    cmp_motor_angle = cmp_raw_motor_angle(test_idx);
+
+    delete(temp_file);
 
     %% --- 4. 绘图与输出 ---
     
@@ -94,14 +138,22 @@ for i = 1:length(suffixes)
     set(fig1, 'Name', sprintf('Moment Tracking - %s', current_suffix));
     hold on;
 
-    plot(time, calibrated_moment_z, '-', 'Color', resp_color, 'LineWidth', 0.7); 
-    plot(time, target_moment, '--', 'Color', setpoint_color, 'LineWidth', 1.0);
+    plot(cmp_time, calibrated_cmp_moment_z, '-', 'Color', cmp_resp_color, 'LineWidth', 0.8); 
+    plot(time, calibrated_moment_z, '-', 'Color', resp_color, 'LineWidth', 0.8); 
+    plot(time, target_moment, ':', 'Color', setpoint_color, 'LineWidth', 1.2);
 
-    xlabel('Time (s)');
-    ylabel('Moment (N$\cdot$m)');
-    legend('Measured $M_z$', 'Target $M_z$', 'Location', 'best');
+    xlabel('$t$ (s)');
+    ylabel('$M_z$ (N$\cdot$m)');
+    legend('$M_z$', '$M_z^{\prime}$', '$M_{z,d}$', 'Location', 'southeast');
     grid on;
     set(gca, 'Layer', 'top', 'Box', 'on');
+    
+    % 边距优化
+    y_data = [calibrated_cmp_moment_z; calibrated_moment_z; target_moment];
+    y_range = max(y_data) - min(y_data);
+    if y_range == 0, y_range = 1; end
+    ylim([min(y_data) - 0.15*y_range, max(y_data) + 0.15*y_range]);
+    xlim([min(time) - 0.02*(max(time)-min(time)), max(time) + 0.02*(max(time)-min(time))]);
 
     set(fig1, 'PaperUnits', 'centimeters', 'PaperSize', [fig_width fig_height], 'PaperPosition', [0 0 fig_width fig_height]);
     
@@ -116,12 +168,21 @@ for i = 1:length(suffixes)
     set(fig2, 'Name', sprintf('Motor Angle - %s', current_suffix));
     hold on;
 
-    plot(time, motor_angle, 'Color', single_line_color, 'LineWidth', 0.8);
+    plot(cmp_time, cmp_motor_angle, 'Color', cmp_desire_delta_color, 'LineWidth', 0.8);
+    plot(time, motor_angle, 'Color', desire_delta_color, 'LineWidth', 0.8);
 
-    xlabel('Time (s)');
-    ylabel('Motor Angle (rad)');
+    xlabel('$t$ (s)');
+    ylabel('$\delta$ (rad)');
+    legend('$\delta_d^{\primme}$', '$\delta_d$', 'Location', 'southeast');
     grid on;
     set(gca, 'Layer', 'top', 'Box', 'on');
+    
+    % 边距优化
+    y_data = [motor_angle; cmp_motor_angle];
+    y_range = max(y_data) - min(y_data);
+    if y_range == 0, y_range = 1; end
+    ylim([min(y_data) - 0.15*y_range, max(y_data) + 0.15*y_range]);
+    xlim([min(time) - 0.02*(max(time)-min(time)), max(time) + 0.02*(max(time)-min(time))]);
 
     set(fig2, 'PaperUnits', 'centimeters', 'PaperSize', [fig_width fig_height], 'PaperPosition', [0 0 fig_width fig_height]);
     

@@ -2,7 +2,16 @@ clc;
 clear;
 close all;
 
-set(0, 'defaultTextInterpreter', 'latex'); % 设置全局默认解释器为latex
+%% 全局绘图属性设置
+set(0, 'defaultTextInterpreter', 'latex');      % 默认使用 LaTeX 解释器
+set(0, 'DefaultLineLineWidth', 0.8);             % 线条宽度设置为 0.8
+set(0, 'DefaultAxesFontName', 'SimSun');         % 坐标轴字体设置为宋体
+set(0, 'DefaultTextFontName', 'SimSun');         % 文本字体设置为宋体
+set(0, 'DefaultAxesXGrid', 'on');                % 默认开启 X 轴网格
+set(0, 'DefaultAxesYGrid', 'on');                % 默认开启 Y 轴网格
+set(0, 'DefaultAxesZGrid', 'on');                % 默认开启 Z 轴网格
+
+output_ratio_num = 9;
 
 % 螺旋桨受到的扭矩是负的
 height = [15, 25, 40, 90, 100, 200, 300];
@@ -120,7 +129,7 @@ set(gcf, 'PaperSize', [figPos(3), figPos(4)]); % 将纸张大小设置为与图一致
 
 h_R = fit_line_height / R;
 plot(h_R, zero_moment, '.-');
-xlim([0, max(h_R)*1.2]);
+xlim([0, max(h_R)*1.1]);
 ylim(moment_range * 1.8);
 
 % 填充最大最小值
@@ -130,6 +139,8 @@ fill(x_fill, y_fill, 'r', 'FaceAlpha', 0.3, 'EdgeColor', 'none');
 % 添加水平边界线
 yline(moment_range(2), 'r--');
 yline(moment_range(1), 'r--');
+
+legend('舵面偏转角为零时Z轴力矩', 'Z轴力矩输出范围', 'Location', 'southeast', 'Interpreter', 'latex')
 
 % 设置图例
 xlabel('$h/R$');
@@ -240,14 +251,14 @@ set(gcf, 'PaperUnits', 'centimeters'); % 统一单位为厘米
 set(gcf, 'PaperPosition', [0, 0, figPos(3), figPos(4)]);
 set(gcf, 'PaperSize', [figPos(3), figPos(4)]); % 将纸张大小设置为与图一致
 
-h1 = plot(iteration, a_vector, 'b-*');
+h1 = plot(iteration, a_vector, '-*');
 xlabel('迭代次数');
 ylabel('$C_{cvAmp}$', 'Interpreter', 'latex');
 grid on;
 
 % 激活右侧 y 轴，并绘制第二条曲线
 yyaxis right;
-h2 = plot(iteration, b_vector, 'r-o');
+h2 = plot(iteration, b_vector, '-o');
 ylabel('$C_{cvExp}$', 'Interpreter', 'latex');
 legend([h1, h2], '$C_{cvAmp}$', '$C_{cvExp}$', 'Interpreter', 'latex', 'Location', 'southeast');
 

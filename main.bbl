@@ -1,0 +1,2204 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global}
+  \entry{liaoyong}{article}{}
+    \name{author}{3}{}{%
+      {{hash=�}{%
+         family={廖勇},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={覃录智},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={刘思其},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \keyw{无人机, 低空经济, 应用现状, 问题挑战, 发展趋势,
+  综述}
+    \strng{namehash}{�+1}
+    \strng{fullhash}{���1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+  低空经济是我国的战略性新兴产业，有希望成为促进经济社会发展的新动能。无人机作为低空经济的关键组成部分、核心载体和基础设备，对低空经济的发展起着决定性的作用。为此，本文对低空经济中的无人机应用进行了综述。首先，论文分析和归纳了无人机在低空经济中的代表性应用，包括农林植保、基础设施巡检、物流、生态保护和灾难预防与救援领域；其次，探讨了无人机在低空经济应用中存在的问题与挑战；最后，展望了其未来的发展趋势。%
+    }
+    \verb{doi}
+    \verb https://doi.org/10.15958/j.cnki.gdxbzrb.2025.04.08
+    \endverb
+    \field{issn}{1000-5269}
+    \field{pages}{60\bibrangedash 72}
+    \field{title}{无人机在低空经济中的应用综述}
+    \verb{url}
+    \verb https://cjournal.hep.com.cn/1000-5269/CN/10.15958/j.cnki.gdxbzrb.2025
+    \verb .04.08
+    \endverb
+    \field{volume}{42}
+    \field{journaltitle}{贵州大学学报（自然科学版）}
+    \field{year}{2025}
+  \endentry
+
+  \entry{wangbingjie}{article}{}
+    \name{author}{6}{}{%
+      {{hash=�}{%
+         family={王冰洁},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={潘波},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={杜长远},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={姜蕾},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={林勇},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={张少帅},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{organization}{3}{%
+      {中国热带农业科学院环境与植物保护研究所}%
+      {华中农业大学}%
+      {中国热带农业科学院}%
+    }
+    \strng{namehash}{�+1}
+    \strng{fullhash}{������1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{11}
+    \field{pages}{2398\bibrangedash 2406}
+  \field{title}{植保无人飞机作业参数对雾滴在杧果冠层沉积分布的影响}
+    \field{volume}{45}
+    \field{journaltitle}{热带作物学报}
+    \field{month}{11}
+    \field{year}{2024}
+  \endentry
+
+  \entry{fanzikang}{article}{}
+    \name{author}{6}{}{%
+      {{hash=�}{%
+         family={范子康},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={王春霞},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={俞靖},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={秦达},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={杨跃发},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={王宏鑫},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{organization}{2}{%
+      {石河子大学水利建筑工程学院}%
+      {奇台县水利管理站}%
+    }
+    \strng{namehash}{�+1}
+    \strng{fullhash}{������1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{11}
+    \field{pages}{112\bibrangedash 120}
+  \field{title}{基于无人机多光谱的春玉米秋耕农田水氮信息反演}
+    \field{volume}{45}
+    \field{journaltitle}{节水灌溉}
+    \field{month}{11}
+    \field{year}{2025}
+  \endentry
+
+  \entry{BZK-005E}{article}{}
+    \name{author}{1}{}{%
+      {{hash=WK}{%
+         family={Wong},
+         familyi={W\bibinitperiod},
+         given={Kelvin},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WK1}
+    \strng{fullhash}{WK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{Jan.}
+    \field{pages}{26}
+    \field{title}{China's Beihang UAS readies BZK-005E long-range
+  reconnaissance UAV for export}
+    \field{volume}{52}
+    \field{journaltitle}{Jane s international defense review: IHS Jane s
+  international defense review}
+    \field{month}{01}
+    \field{year}{2019}
+  \endentry
+
+  \entry{El-Sakka}{article}{}
+    \name{author}{3}{}{%
+      {{hash=AES}{%
+         family={A},
+         familyi={A},
+         given={El-Sakka},
+         giveni={E\bibinithyphendelim S\bibinitperiod},
+      }}%
+      {{hash=AO}{%
+         family={A},
+         familyi={A},
+         given={Osman},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=MH}{%
+         family={M},
+         familyi={M},
+         given={Househ},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AES+1}
+    \strng{fullhash}{AESAOMH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{Aug.}
+    \field{pages}{1515\bibrangedash 1519}
+    \field{title}{Revolutionizing Disaster Management: A Scoping Review of
+  Drone Technology and Informatics in Humanitarian Response}
+    \field{volume}{329}
+    \field{journaltitle}{Stud Health Technol Inform}
+    \field{month}{08}
+    \field{year}{2025}
+  \endentry
+
+  \entry{renxiaolu}{book}{}
+    \name{author}{1}{}{%
+      {{hash=�}{%
+         family={任小璐},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{language}{1}{%
+      {zh}%
+    }
+    \list{publisher}{1}{%
+      {电子工业出版社}%
+    }
+    \strng{namehash}{�1}
+    \strng{fullhash}{�1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{{基于涵道式单旋翼的无人飞行器研究}}
+    \list{location}{1}{%
+      {Beijing}%
+    }
+    \field{year}{2018}
+  \endentry
+
+  \entry{xuchang}{thesis}{}
+    \name{author}{1}{}{%
+      {{hash=�}{%
+         family={徐畅},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�1}
+    \strng{fullhash}{�2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{涵道共轴双旋翼无人机飞控算法关键技术研究}
+    \field{type}{博士论文}
+    \field{year}{2019}
+  \endentry
+
+  \entry{lijianbo}{article}{}
+    \name{author}{2}{}{%
+      {{hash=�}{%
+         family={李建波},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={高正},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{organization}{2}{%
+      {南京航空航天大学}%
+      {南京航空航天大学}%
+    }
+    \strng{namehash}{�+2}
+    \strng{fullhash}{��1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{6}
+    \field{pages}{680\bibrangedash 684}
+    \field{title}{涵道风扇空气动力学特性分析}
+    \field{volume}{37}
+    \field{journaltitle}{南京航空航天大学学报}
+    \field{month}{01}
+    \field{year}{2005}
+  \endentry
+
+  \entry{Numerical_and_Experimental_Analyses_of_the_Ducted_Fan}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CL}{%
+         family={CHO},
+         familyi={C\bibinitperiod},
+         given={Leesang},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={LEE},
+         familyi={L\bibinitperiod},
+         given={Seawook},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{organization}{2}{%
+      {汉松大学}%
+      {汉阳大学}%
+    }
+    \strng{namehash}{CL+1}
+    \strng{fullhash}{CLLS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{6}
+    \field{pages}{328\bibrangedash 336}
+    \field{title}{Numerical and Experimental Analyses of the Ducted Fan for the
+  Small VTOL UAV Propulsion}
+    \field{volume}{56}
+    \field{journaltitle}{TRANSACTIONS OF THE JAPAN SOCIETY FOR AERONAUTICAL AND
+  SPACE SCIENCES}
+    \field{month}{01}
+    \field{year}{2013}
+  \endentry
+
+  \entry{Aerodynamic_performance_assessment_of_a_ducted_fan_UAV}{article}{}
+    \name{author}{6}{}{%
+      {{hash=D}{%
+         family={Deng},
+         familyi={D\bibinitperiod},
+      }}%
+      {{hash=S}{%
+         family={Shuanghou},
+         familyi={S\bibinitperiod},
+      }}%
+      {{hash=W}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+      }}%
+      {{hash=S}{%
+         family={Siwei},
+         familyi={S\bibinitperiod},
+      }}%
+      {{hash=Z}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+      }}%
+      {{hash=Z}{%
+         family={Zheng},
+         familyi={Z\bibinitperiod},
+      }}%
+    }
+    \list{organization}{2}{%
+      {Nanjing Univ Aeronaut \& Astronaut}%
+      {Northwestern Polytech Univ}%
+    }
+    \strng{namehash}{D+1}
+    \strng{fullhash}{DSWSZZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{Aug.}
+    \field{pages}{105895.1\bibrangedash 105895.9}
+    \field{title}{Aerodynamic performance assessment of a ducted fan UAV for
+  VTOL applications}
+    \field{volume}{103}
+    \field{journaltitle}{Aerospace science and technology}
+    \field{month}{01}
+    \field{year}{2020}
+  \endentry
+
+  \entry{wangshuo}{article}{}
+    \name{author}{6}{}{%
+      {{hash=�}{%
+         family={王磊},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={苏冠廷},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={潘天宇},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={鹿哈男},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={郑孟宗},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={李秋实},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+2}
+    \strng{fullhash}{������1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{37\bibrangedash 49}
+  \field{title}{鼓包唇口对边界层抽吸涵道风扇的性能影响及作用机理研究}
+    \field{volume}{46}
+    \field{journaltitle}{推进技术}
+    \field{year}{2025}
+  \endentry
+
+  \entry{Xia}{article}{}
+    \name{author}{4}{}{%
+      {{hash=MT}{%
+         family={Manzoor},
+         familyi={M\bibinitperiod},
+         given={Tayyab},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=XY}{%
+         family={Xia},
+         familyi={X\bibinitperiod},
+         given={\{Yuan Qing\}},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=AY}{%
+         family={Ali},
+         familyi={A\bibinitperiod},
+         given={Yasir},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=HK}{%
+         family={Hussain},
+         familyi={H\bibinitperiod},
+         given={Khurram},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{language}{1}{%
+      {English}%
+    }
+    \list{publisher}{1}{%
+      {South China University of Technology}%
+    }
+    \keyw{Flight control, Flight dynamics, Tail-sitter, VTOL unmanned aerial
+  vehicle}
+    \strng{namehash}{MT+1}
+    \strng{fullhash}{MTXYAYHK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Recent progress in the flight control design has inspired sophisticated
+  autonomous aerial vehicles to accomplish various tasks. Among different
+  vertical take-off and landing airborne vehicles, the ducted fan aerial
+  vehicles (DFAVs) are a significantly important type of tail-sitter aircraft
+  because their moving and actuated parts are shielded by annular fuselage
+  called duct, which is crucial for aircraft protection as well as operator
+  safety with the vehicle's ability to fly in confined, cluttered, and
+  hazardous environments. Moreover, they exhibit the characteristics of both
+  fixed-wing airplanes and helicopters. Furthermore, these vehicles inherit
+  several other qualities such as long perch, stare capability and large
+  payload capacity. This first review paper on DFAVs aims to overview the
+  latest advances while focusing on several aspects related to these vehicles.
+  First, a comprehensive history and a novel categorization are provided with
+  available flying platforms developed worldwide, and their features with pros
+  and cons to other airborne configurations are summarized. Next, different
+  flight control approaches employed to control these aircraft are explained.
+  Finally, concluding remarks, key observations, existing challenges, and new
+  trends in the conducted survey are discussed.%
+    }
+    \verb{doi}
+    \verb 10.7641/CTA.2021.00779
+    \endverb
+    \field{issn}{1000-8152}
+    \field{note}{Publisher Copyright: {\textcopyright} 2022, Editorial
+  Department of Control Theory \& Applications. All right reserved.}
+    \field{number}{2}
+    \field{pages}{201\bibrangedash 221}
+    \field{title}{Flight control techniques and classification of ducted fan
+  aerial vehicles}
+    \field{volume}{39}
+    \field{journaltitle}{Kongzhi Lilun Yu Yinyong/Control Theory and
+  Applications}
+    \field{month}{02}
+    \field{year}{2022}
+  \endentry
+
+  \entry{coanda1938propelling}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=CH}{%
+         family={Coand{\u{a}}},
+         familyi={C\bibinitperiod},
+         given={Henri},
+         giveni={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CH1}
+    \strng{fullhash}{CH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{howpublished}{US Patent 2,108,652}
+    \field{note}{US Patent No. 2,108,652}
+    \field{title}{Propelling device}
+    \field{month}{02}
+    \field{year}{1938}
+  \endentry
+
+  \entry{stipa1932experiments}{report}{}
+    \name{author}{1}{}{%
+      {{hash=SL}{%
+         family={Stipa},
+         familyi={S\bibinitperiod},
+         given={Luigi},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SL1}
+    \strng{fullhash}{SL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{Translated from L'Aerotecnica (Rome), pp. 923-953, Aug 1931}
+    \field{number}{NACA TM 655}
+    \field{title}{Experiments with Intubed Propellers}
+    \list{location}{1}{%
+      {Langley Field, VA}%
+    }
+    \list{institution}{1}{%
+      {NACA}%
+    }
+    \field{type}{techreport}
+    \field{month}{01}
+    \field{year}{1932}
+  \endentry
+
+  \entry{kort1936combined}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=KL}{%
+         family={Kort},
+         familyi={K\bibinitperiod},
+         given={Ludwig},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KL1}
+    \strng{fullhash}{KL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{howpublished}{US Patent 2,030,375}
+    \field{note}{US Patent No. 2,030,375}
+    \field{title}{Combined device of a ship's propeller enclosed by a nozzle}
+    \field{month}{02}
+    \field{year}{1936}
+  \endentry
+
+  \entry{kruger1949wind}{report}{}
+    \name{author}{1}{}{%
+      {{hash=KW}{%
+         family={Krüger},
+         familyi={K\bibinitperiod},
+         given={W.},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KW1}
+    \strng{fullhash}{KW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{Translation of ZWB Forschungsbericht Nr. 1949, Aerodynamischen
+  Versuchsanstalt (AVA), Göttingen, Germany, Jan 21, 1944}
+    \field{number}{NACA TM 1202}
+    \field{title}{On Wind Tunnel Tests and Computations Concerning the Problem
+  of Shrouded Propellers}
+    \list{location}{1}{%
+      {Langley Field, VA}%
+    }
+    \list{institution}{1}{%
+      {NACA}%
+    }
+    \field{type}{techreport}
+    \field{month}{02}
+    \field{year}{1949}
+  \endentry
+
+  \entry{kuechemann1953aerodynamics}{book}{}
+    \name{author}{2}{}{%
+      {{hash=KD}{%
+         family={Küchemann},
+         familyi={K\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=WJ}{%
+         family={Weber},
+         familyi={W\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {McGraw-Hill Book Company, Inc.}%
+    }
+    \strng{namehash}{KD+1}
+    \strng{fullhash}{KDWJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{chapter}{6}
+    \field{title}{Aerodynamics of Propulsion}
+    \list{location}{1}{%
+      {New York, NY}%
+    }
+    \field{year}{1953}
+  \endentry
+
+  \entry{parlett1955aerodynamic}{report}{}
+    \name{author}{1}{}{%
+      {{hash=PLP}{%
+         family={Parlett},
+         familyi={P\bibinitperiod},
+         given={Lysle\bibnamedelima P.},
+         giveni={L\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PLP1}
+    \strng{fullhash}{PLP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{NACA TN 3547}
+    \field{title}{Aerodynamic Characteristics of a Small-Scale Shrouded
+  Propeller at Angles of Attack from 0° to 90°}
+    \list{location}{1}{%
+      {Langley Field, VA}%
+    }
+    \list{institution}{1}{%
+      {Langley Memorial Aeronautical Laboratory, NACA}%
+    }
+    \field{type}{techreport}
+    \field{month}{11}
+    \field{year}{1955}
+  \endentry
+
+  \entry{mouille1970fenestron}{article}{}
+    \name{author}{1}{}{%
+      {{hash=MR}{%
+         family={Mouille},
+         familyi={M\bibinitperiod},
+         given={R.},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MR1}
+    \strng{fullhash}{MR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{31\bibrangedash 37}
+    \field{title}{The “Fenestron,” Shrouded Tail Rotor of the SA.341
+  Gazelle}
+    \field{volume}{15}
+    \field{journaltitle}{Journal of the American Helicopter Society}
+    \field{year}{1970}
+  \endentry
+
+  \entry{vuillet1986new}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=VA}{%
+         family={Vuillet},
+         familyi={V\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MF}{%
+         family={Morelli},
+         familyi={M\bibinitperiod},
+         given={F.},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VA+1}
+    \strng{fullhash}{VAMF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Twelfth European Rotorcraft Forum}
+    \field{number}{Paper No. 8}
+    \field{title}{New Aerodynamic Design of the Fenestron for Improved
+  Performance}
+    \list{location}{1}{%
+      {Garmisch-Partenkirchen, Germany}%
+    }
+    \field{month}{09}
+    \field{year}{1986}
+  \endentry
+
+  \entry{spawar1999arod}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{Naval Command, Control and Ocean Surveillance Center}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N1}
+    \strng{fullhash}{N1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Airborne Remotely Operated Device (1982-1988)}
+    \verb{url}
+    \verb http://www.spawar.navy.mil/robots/air/arod/arod.html
+    \endverb
+    \field{year}{1999}
+  \endentry
+
+  \entry{murphy1995lookout}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MDW}{%
+         family={Murphy},
+         familyi={M\bibinitperiod},
+         given={D.\bibnamedelima W.},
+         giveni={D\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=BJP}{%
+         family={Bott},
+         familyi={B\bibinitperiod},
+         given={J.\bibnamedelima P.},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MDW+1}
+    \strng{fullhash}{MDWBJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{22\bibrangedash 27}
+    \field{title}{On the Lookout: The Air Mobile Ground Security and
+  Surveillance System (AMGSSS) Has Arrived}
+    \field{volume}{13}
+    \field{journaltitle}{Unmanned Systems}
+    \field{year}{1995}
+  \endentry
+
+  \entry{cycon1992sikorsky}{article}{}
+    \name{author}{1}{}{%
+      {{hash=CJP}{%
+         family={Cycon},
+         familyi={C\bibinitperiod},
+         given={James\bibnamedelima P.},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CJP1}
+    \strng{fullhash}{CJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{26\bibrangedash 30}
+    \field{title}{Sikorsky Aircraft UAV Program}
+    \field{volume}{38}
+    \field{journaltitle}{Vertiflite}
+    \field{year}{1992}
+  \endentry
+
+  \entry{walsh1998sikorsky}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=WD}{%
+         family={Walsh},
+         familyi={W\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CJP}{%
+         family={Cycon},
+         familyi={C\bibinitperiod},
+         given={J.\bibnamedelima P.},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WD+1}
+    \strng{fullhash}{WDCJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{AHS International 54th Annual Forum Proceedings}
+    \field{pages}{1410\bibrangedash 1418}
+    \field{title}{The Sikorsky Cypher(R) UAV: A Multi-Purpose Platform with
+  Demonstrated Mission Flexibility}
+    \list{location}{1}{%
+      {Washington, D.C.}%
+    }
+    \field{month}{05}
+    \field{year}{1998}
+  \endentry
+
+  \entry{weir1988aerodynamic}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=WRJ}{%
+         family={Weir},
+         familyi={W\bibinitperiod},
+         given={R.\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WRJ1}
+    \strng{fullhash}{WRJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{AIAA Atmospheric Flight Mechanics Conference}
+    \field{note}{AIAA-88-4377}
+    \field{pages}{420\bibrangedash 431}
+    \field{title}{Aerodynamic Design Considerations for a Free-Flying Ducted
+  Propeller}
+    \list{location}{1}{%
+      {Minneapolis, MN}%
+    }
+    \field{month}{08}
+    \field{year}{1988}
+  \endentry
+
+  \entry{cheng2022phd}{thesis}{}
+    \name{author}{1}{}{%
+      {{hash=�}{%
+         family={程子欢},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{language}{1}{%
+      {zh}%
+    }
+    \strng{namehash}{�1}
+    \strng{fullhash}{�1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{title}{涵道风扇动力尾座式垂直起降飞行器飞行模态转换控制研究}
+    \list{location}{1}{%
+      {广州}%
+    }
+    \list{institution}{1}{%
+      {华南理工大学}%
+    }
+    \field{type}{phdthesis}
+    \field{year}{2022}
+  \endentry
+
+  \entry{schaefer2003goldeneye}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=SC}{%
+         family={Schaefer},
+         familyi={S\bibinitperiod},
+         given={Carl},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BL}{%
+         family={Baskett},
+         familyi={B\bibinitperiod},
+         given={Louis},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SC+1}
+    \strng{fullhash}{SCBL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2nd AIAA “Unmanned Unlimited” Conference and Workshop
+  \& Exhibit}
+    \field{note}{AIAA 2003-6634}
+    \field{title}{GoldenEye: The Clandestine UAV}
+    \list{location}{1}{%
+      {San Diego, CA}%
+    }
+    \field{month}{09}
+    \field{year}{2003}
+  \endentry
+
+  \entry{jung2012development}{article}{}
+    \name{author}{2}{}{%
+      {{hash=JY}{%
+         family={Jung},
+         familyi={J\bibinitperiod},
+         given={Yeunduk},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=SDH}{%
+         family={Shim},
+         familyi={S\bibinitperiod},
+         given={David\bibnamedelima Hyunchul},
+         giveni={D\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JY+1}
+    \strng{fullhash}{JYSDH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1-4}
+    \field{pages}{137\bibrangedash 152}
+    \field{title}{Development and Application of Controller for Transition
+  Flight of Tail-Sitter UAV}
+    \field{volume}{65}
+    \field{journaltitle}{Journal of Intelligent \& Robotic Systems}
+    \field{year}{2012}
+  \endentry
+
+  \entry{yang2019vbat}{article}{}
+    \name{author}{6}{}{%
+      {{hash=�}{%
+         family={杨小川},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={罗巍},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={何炬恒},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={王运涛},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={黄勇},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={刘刚},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+4}
+    \strng{fullhash}{������1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{12}
+    \field{pages}{43\bibrangedash 48+54}
+  \field{title}{V-Bat——非航母舰载小型垂起无人机发展历程及技术特点}
+    \field{volume}{65}
+    \field{journaltitle}{飞航导弹}
+    \field{year}{2019}
+  \endentry
+
+  \entry{argyle2016modeling}{thesis}{}
+    \name{author}{1}{}{%
+      {{hash=AME}{%
+         family={Argyle},
+         familyi={A\bibinitperiod},
+         given={Matthew\bibnamedelima E.},
+         giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AME1}
+    \strng{fullhash}{AME1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Modeling and Control of a Tailsitter with a Ducted Fan}
+    \list{location}{1}{%
+      {Provo}%
+    }
+    \list{institution}{1}{%
+      {Brigham Young University}%
+    }
+    \field{type}{phdthesis}
+    \field{year}{2016}
+  \endentry
+
+  \entry{matuz2021ground}{article}{}
+    \name{author}{3}{}{%
+      {{hash=MVA}{%
+         family={Matus-Vargas},
+         familyi={M\bibinithyphendelim V\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=RGG}{%
+         family={Rodriguez-Gomez},
+         familyi={R\bibinithyphendelim G\bibinitperiod},
+         given={G.},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=MCJ}{%
+         family={Martinez-Carranza},
+         familyi={M\bibinithyphendelim C\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MVA+1}
+    \strng{fullhash}{MVARGGMCJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s11370-020-00345-6
+    \endverb
+    \field{number}{1}
+    \field{pages}{99\bibrangedash 118}
+    \field{title}{Ground effect on rotorcraft unmanned aerial vehicles: A
+  review}
+    \field{volume}{14}
+    \field{journaltitle}{Intelligent Service Robotics}
+    \field{year}{2021}
+  \endentry
+
+  \entry{yaggy1961aerodynamics}{report}{}
+    \name{author}{2}{}{%
+      {{hash=YPF}{%
+         family={Yaggy},
+         familyi={Y\bibinitperiod},
+         given={Paul\bibnamedelima F.},
+         giveni={P\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+      {{hash=GKW}{%
+         family={Goodson},
+         familyi={G\bibinitperiod},
+         given={Kenneth\bibnamedelima W.},
+         giveni={K\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YPF+1}
+    \strng{fullhash}{YPFGKW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{NASA TN D-785}
+    \field{title}{Aerodynamics of a tilting ducted fan configuration}
+    \list{location}{1}{%
+      {Washington, D.C.}%
+    }
+    \list{institution}{1}{%
+      {NASA}%
+    }
+    \field{type}{techreport}
+    \field{year}{1961}
+  \endentry
+
+  \entry{yaggy1961wind}{report}{}
+    \name{author}{2}{}{%
+      {{hash=YPF}{%
+         family={Yaggy},
+         familyi={Y\bibinitperiod},
+         given={Paul\bibnamedelima F.},
+         giveni={P\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+      {{hash=MKW}{%
+         family={Mort},
+         familyi={M\bibinitperiod},
+         given={Kenneth\bibnamedelima W.},
+         giveni={K\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YPF+1}
+    \strng{fullhash}{YPFMKW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{NASA TN D-776}
+    \field{title}{A wind-tunnel investigation of a 4-foot-diameter ducted fan
+  mounted on the tip of a semispan wing}
+    \list{location}{1}{%
+      {Washington, D.C.}%
+    }
+    \list{institution}{1}{%
+      {NASA}%
+    }
+    \field{type}{techreport}
+    \field{year}{1961}
+  \endentry
+
+  \entry{jardin2017aerodynamic}{article}{}
+    \name{author}{3}{}{%
+      {{hash=JT}{%
+         family={Jardin},
+         familyi={J\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=PS}{%
+         family={Prothin},
+         familyi={P\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=MCG}{%
+         family={Magana},
+         familyi={M\bibinitperiod},
+         given={C.\bibnamedelima G.},
+         giveni={C\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JT+1}
+    \strng{fullhash}{JTPSMCG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.4050/JAHS.62.022008
+    \endverb
+    \field{number}{2}
+    \field{pages}{1\bibrangedash 7}
+    \field{title}{Aerodynamic performance of a hovering microrotor in confined
+  environment}
+    \field{volume}{62}
+    \field{journaltitle}{Journal of the American Helicopter Society}
+    \field{year}{2017}
+  \endentry
+
+  \entry{prothin2019aerodynamics}{article}{}
+    \name{author}{5}{}{%
+      {{hash=PS}{%
+         family={Prothin},
+         familyi={P\bibinitperiod},
+         given={S.},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=FEC}{%
+         family={Fernandez\bibnamedelima Escudero},
+         familyi={F\bibinitperiod\bibinitdelim E\bibinitperiod},
+         given={C.},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=DN}{%
+         family={Doué},
+         familyi={D\bibinitperiod},
+         given={N.},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=JT}{%
+         family={Jardin},
+         familyi={J\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=MJM}{%
+         family={Moschetta},
+         familyi={M\bibinitperiod},
+         given={J.\bibnamedelima M.},
+         giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PS+1}
+    \strng{fullhash}{PSFECDNJTMJM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1177/1756829319861596
+    \endverb
+    \field{pages}{1756829319861596}
+    \field{title}{Aerodynamics of MAV rotors in ground and corner effect}
+    \field{volume}{11}
+    \field{journaltitle}{International Journal of Micro Air Vehicles}
+    \field{year}{2019}
+  \endentry
+
+  \entry{graber1990investigation}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=GA}{%
+         family={Graber},
+         familyi={G\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=RA}{%
+         family={Rosen},
+         familyi={R\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Seginer},
+         familyi={S\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GA+1}
+    \strng{fullhash}{GARASA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{16th European Rotorcraft Forum}
+    \field{pages}{161\bibrangedash 169}
+    \field{title}{An investigation of a hovering rotor in ground effect}
+    \list{location}{1}{%
+      {Glasgow, Scotland}%
+    }
+    \field{year}{1990}
+  \endentry
+
+  \entry{deng2020ground}{article}{}
+    \name{author}{4}{}{%
+      {{hash=�}{%
+         family={邓阳平},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={米百刚},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={詹浩},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={曹飞},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+1}
+    \strng{fullhash}{����1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{in Chinese}
+    \field{number}{5}
+    \field{pages}{1038\bibrangedash 1046}
+    \field{title}{涵道螺旋桨地面效应试验与数值计算研究}
+    \field{volume}{38}
+    \field{journaltitle}{西北工业大学学报}
+    \field{year}{2020}
+  \endentry
+
+  \entry{ai2020aerodynamic}{article}{}
+    \name{author}{5}{}{%
+      {{hash=AT}{%
+         family={Ai},
+         familyi={A\bibinitperiod},
+         given={Tianfu},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=XB}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Bin},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=XC}{%
+         family={Xiang},
+         familyi={X\bibinitperiod},
+         given={Changle},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=FW}{%
+         family={Fan},
+         familyi={F\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=ZY}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Yibo},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AT+1}
+    \strng{fullhash}{ATXBXCFWZY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1177/1729881420953022
+    \endverb
+    \field{number}{4}
+    \field{pages}{172988142095302}
+    \field{title}{Aerodynamic analysis and control for a novel coaxial ducted
+  fan aerial robot in ground effect}
+    \field{volume}{17}
+    \field{journaltitle}{International Journal of Advanced Robotic Systems}
+    \field{year}{2020}
+  \endentry
+
+  \entry{fan2022novel}{article}{}
+    \name{author}{4}{}{%
+      {{hash=FW}{%
+         family={Fan},
+         familyi={F\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=XB}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Bin},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=XCL}{%
+         family={Xiang},
+         familyi={X\bibinitperiod},
+         given={Changle\bibnamedelima L.},
+         giveni={C\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=WX}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Xuelian},
+         giveni={X\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FW+1}
+    \strng{fullhash}{FWXBXCLWX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/j.cja.2021.06.018
+    \endverb
+    \field{number}{2}
+    \field{pages}{250\bibrangedash 264}
+    \field{title}{A novel approach to the attitude stabilization structure for
+  ducted-fan operative aerial robots: finding improvements for modeling error
+  and strong external transient disturbance}
+    \field{volume}{35}
+    \field{journaltitle}{Chinese Journal of Aeronautics}
+    \field{year}{2022}
+  \endentry
+
+  \entry{luo2023numerical}{article}{}
+    \name{author}{6}{}{%
+      {{hash=LY}{%
+         family={Luo},
+         familyi={L\bibinitperiod},
+         given={Yiwei},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=AT}{%
+         family={Ai},
+         familyi={A\bibinitperiod},
+         given={Tianfu},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=HY}{%
+         family={He},
+         familyi={H\bibinitperiod},
+         given={Yuhang},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=XB}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Bin},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=QY}{%
+         family={Qian},
+         familyi={Q\bibinitperiod},
+         given={Yuping},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZY}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Yangjun},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LY+1}
+    \strng{fullhash}{LYATHYXBQYZY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1016/j.cja.2022.09.004
+    \endverb
+    \field{number}{2}
+    \field{pages}{201\bibrangedash 212}
+    \field{title}{Numerical investigation on unsteady characteristics of ducted
+  fans in ground effect}
+    \field{volume}{36}
+    \field{journaltitle}{Chinese Journal of Aeronautics}
+    \field{year}{2023}
+  \endentry
+
+  \entry{li2005aerodynamic}{article}{}
+    \name{author}{2}{}{%
+      {{hash=�}{%
+         family={李建波},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={高正},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+2}
+    \strng{fullhash}{��1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{in Chinese}
+    \field{number}{6}
+    \field{pages}{680\bibrangedash 684}
+    \field{title}{涵道风扇空气动力学特性分析}
+    \field{volume}{37}
+    \field{journaltitle}{南京航空航天大学学报}
+    \field{year}{2005}
+  \endentry
+
+  \entry{li2004experimental}{article}{}
+    \name{author}{4}{}{%
+      {{hash=�}{%
+         family={李建波},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={高正},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={唐正飞},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={等},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+2}
+    \strng{fullhash}{����1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{in Chinese}
+    \field{number}{2}
+    \field{pages}{164\bibrangedash 168}
+    \field{title}{涵道风扇升力系统的升阻特性试验研究}
+    \field{volume}{36}
+    \field{journaltitle}{南京航空航天大学学报}
+    \field{year}{2004}
+  \endentry
+
+  \entry{li2010robust}{article}{}
+    \name{author}{4}{}{%
+      {{hash=�}{%
+         family={李远伟},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={王常虹},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={伊国兴},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={奚伯齐},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+3}
+    \strng{fullhash}{����1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{英文标题: Robust control system design for a ducted fan
+  unmanned aerial vehicle}
+    \field{number}{9}
+    \field{pages}{81\bibrangedash 87}
+    \field{title}{涵道式无人机鲁棒控制系统设计}
+    \field{volume}{14}
+    \field{journaltitle}{电机与控制学报}
+    \field{year}{2010}
+  \endentry
+
+  \entry{pflimlin2007position}{article}{}
+    \name{author}{3}{}{%
+      {{hash=PJM}{%
+         family={Pflimlin},
+         familyi={P\bibinitperiod},
+         given={J.\bibnamedelima M.},
+         giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Sou{\`e}res},
+         familyi={S\bibinitperiod},
+         given={P.},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=HT}{%
+         family={Hamel},
+         familyi={H\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PJM+1}
+    \strng{fullhash}{PJMSPHT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1080/00207170601045034
+    \endverb
+    \field{number}{5}
+    \field{pages}{666\bibrangedash 683}
+    \field{title}{Position control of a ducted fan {VTOL} {UAV} in crosswind}
+    \field{volume}{80}
+    \field{journaltitle}{International Journal of Control}
+    \field{year}{2007}
+  \endentry
+
+  \entry{jeong2015control}{article}{}
+    \name{author}{3}{}{%
+      {{hash=JJ}{%
+         family={Jeong},
+         familyi={J\bibinitperiod},
+         given={Junho},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=KS}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Seungkeun},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Suk},
+         familyi={S\bibinitperiod},
+         given={Jinyoung},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JJ+1}
+    \strng{fullhash}{JJKSSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1155/2015/364926
+    \endverb
+    \field{pages}{1\bibrangedash 12}
+    \field{title}{Control system design for a ducted-fan unmanned aerial
+  vehicle using linear quadratic tracker}
+    \field{volume}{2015}
+    \field{journaltitle}{International Journal of Aerospace Engineering}
+    \field{year}{2015}
+  \endentry
+
+  \entry{fan2018modelling}{article}{}
+    \name{author}{3}{}{%
+      {{hash=FW}{%
+         family={Fan},
+         familyi={F\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=XC}{%
+         family={Xiang},
+         familyi={X\bibinitperiod},
+         given={Changle},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=XB}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Bin},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FW+1}
+    \strng{fullhash}{FWXCXB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1177/1687814018765569
+    \endverb
+    \field{number}{3}
+    \field{pages}{1\bibrangedash 16}
+    \field{title}{Modelling, attitude controller design and flight experiments
+  of a novel micro-ducted-fan aircraft}
+    \field{volume}{10}
+    \field{journaltitle}{Advances in Mechanical Engineering}
+    \field{year}{2018}
+  \endentry
+
+  \entry{manzoor2022composite}{article}{}
+    \name{author}{3}{}{%
+      {{hash=MT}{%
+         family={Manzoor},
+         familyi={M\bibinitperiod},
+         given={Tayyab},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=PH}{%
+         family={Pei},
+         familyi={P\bibinitperiod},
+         given={Hailong},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=CZ}{%
+         family={Cheng},
+         familyi={C\bibinitperiod},
+         given={Zihuan},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{MT+1}
+    \strng{fullhash}{MTPHCZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{3444\bibrangedash 3467}
+    \field{title}{Composite observer-based robust model predictive control
+  technique for ducted fan aerial vehicles}
+    \field{volume}{111}
+    \field{journaltitle}{Nonlinear Dynamics}
+    \field{year}{2023}
+  \endentry
+
+  \entry{ai2025robust}{article}{}
+    \name{author}{6}{}{%
+      {{hash=AT}{%
+         family={Ai},
+         familyi={A\bibinitperiod},
+         given={Tianfu},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=LY}{%
+         family={Luo},
+         familyi={L\bibinitperiod},
+         given={Yiwei},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZD}{%
+         family={Zeng},
+         familyi={Z\bibinitperiod},
+         given={Dequan},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=HY}{%
+         family={Hu},
+         familyi={H\bibinitperiod},
+         given={Yiming},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Liang},
+         familyi={L\bibinitperiod},
+         given={Chengcheng},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=PF}{%
+         family={Pan},
+         familyi={P\bibinitperiod},
+         given={Feige},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {华东交通大学}%
+    }
+    \strng{namehash}{AT+1}
+    \strng{fullhash}{ATLYZDHYLCPF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{36}
+    \field{title}{Robust Adaptive Control of a Coaxial-Ducted-Fan Aircraft with
+  Uncertainty Model}
+    \field{volume}{14}
+    \field{journaltitle}{Electronics}
+    \field{month}{01}
+    \field{year}{2025}
+  \endentry
+
+  \entry{chen2024ADRC}{article}{}
+    \name{author}{3}{}{%
+      {{hash=�}{%
+         family={陈伟杰},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={江博文},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={杨程},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+2}
+    \strng{fullhash}{���1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{8}
+    \field{pages}{16\bibrangedash 22}
+    \field{title}{基于改进自抗扰的涵道无人机姿态控制}
+    \field{volume}{31}
+    \field{journaltitle}{电光与控制}
+    \field{year}{2024}
+  \endentry
+
+  \entry{Manzoor2020VTOL}{article}{}
+    \name{author}{4}{}{%
+      {{hash=MT}{%
+         family={Manzoor},
+         familyi={M\bibinitperiod},
+         given={Tayyab},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=XY}{%
+         family={Xia},
+         familyi={X\bibinitperiod},
+         given={Yuanqing},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZDH}{%
+         family={Zhai},
+         familyi={Z\bibinitperiod},
+         given={Di-Hua},
+         giveni={D\bibinithyphendelim H\bibinitperiod},
+      }}%
+      {{hash=MD}{%
+         family={Ma},
+         familyi={M\bibinitperiod},
+         given={Dailiang},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{MT+1}
+    \strng{fullhash}{MTXYZDHMD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{7}
+    \field{pages}{2024\bibrangedash 2042}
+    \field{title}{Trajectory tracking control of a VTOL unmanned aerial vehicle
+  using offset-free tracking MPC}
+    \field{volume}{33}
+    \field{journaltitle}{Chinese Journal of Aeronautics}
+    \field{year}{2020}
+  \endentry
+
+  \entry{zhu1997NDI}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=�}{%
+         family={朱恩},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={郭锁凤},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={陈传德},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={蔡维黎},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{�+1}
+    \strng{fullhash}{����1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{航空学报}
+    \field{number}{1}
+    \field{title}{超机动飞机的非线性动态逆控制}
+    \field{volume}{18}
+    \list{location}{1}{%
+      {Beijing}%
+    }
+    \field{year}{1997}
+  \endentry
+
+  \entry{zhang2015NDI}{article}{}
+    \name{author}{4}{}{%
+      {{hash=�}{%
+         family={张旋},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={陈升泽},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={郝颖},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={王宇航},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {中国运载火箭技术研究院}%
+    }
+    \strng{namehash}{�+2}
+    \strng{fullhash}{����1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{12\bibrangedash 14}
+    \field{title}{基于动态逆的飞行器非线性鲁棒控制系统设计}
+    \field{volume}{1}
+    \field{journaltitle}{导弹与航天运载技术}
+    \field{month}{03}
+    \field{year}{2015}
+  \endentry
+
+  \entry{wang2019flexible}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=WX}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Xuerui},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=vKEJ}{%
+         prefix={van},
+         prefixi={v\bibinitperiod},
+         family={Kampen},
+         familyi={K\bibinitperiod},
+         given={Erik-Jan},
+         giveni={E\bibinithyphendelim J\bibinitperiod},
+      }}%
+      {{hash=CQ}{%
+         family={Chu},
+         familyi={C\bibinitperiod},
+         given={Qiping},
+         giveni={Q\bibinitperiod},
+      }}%
+      {{hash=BRD}{%
+         family={Breuker},
+         familyi={B\bibinitperiod},
+         given={Roeland\bibnamedelima De},
+         giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WX+1}
+    \strng{fullhash}{WXvKEJCQBRD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{AIAA atmospheric flight mechanics conference 2018}
+    \field{pages}{664\bibrangedash 685}
+    \field{title}{Flexible Aircraft Gust Load Alleviation with Incremental
+  Nonlinear Dynamic Inversion}
+    \list{location}{1}{%
+      {Kissimmee}%
+    }
+    \field{year}{2018}
+  \endentry
+
+  \entry{smeur2016adaptive}{article}{}
+    \name{author}{3}{}{%
+      {{hash=SEJJ}{%
+         family={Smeur},
+         familyi={S\bibinitperiod},
+         given={Ewoud J.\bibnamedelima J.},
+         giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim
+  J\bibinitperiod},
+      }}%
+      {{hash=CQ}{%
+         family={Chu},
+         familyi={C\bibinitperiod},
+         given={Qiping},
+         giveni={Q\bibinitperiod},
+      }}%
+      {{hash=dCGCHE}{%
+         prefix={de},
+         prefixi={d\bibinitperiod},
+         family={Croon},
+         familyi={C\bibinitperiod},
+         given={Guido C. H.\bibnamedelima E.},
+         giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim
+  H\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Delft Univ Technol}%
+    }
+    \strng{namehash}{SEJJ+1}
+    \strng{fullhash}{SEJJCQdCGCHE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{450\bibrangedash 461}
+    \field{title}{Adaptive Incremental Nonlinear Dynamic Inversion for Attitude
+  Control of Micro Air Vehicles}
+    \field{volume}{39}
+    \field{journaltitle}{Journal of Guidance, Control, and Dynamics: A
+  Publication of the American Institute of Aeronautics and Astronautics Devoted
+  to the Technology of Dynamics and Control}
+    \field{month}{01}
+    \field{year}{2016}
+  \endentry
+
+  \entry{ludena2020flight}{article}{}
+    \name{author}{3}{}{%
+      {{hash=LCTJ}{%
+         family={Ludena\bibnamedelima Cervantes},
+         familyi={L\bibinitperiod\bibinitdelim C\bibinitperiod},
+         given={Tito\bibnamedelima J.},
+         giveni={T\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=CSH}{%
+         family={Choi},
+         familyi={C\bibinitperiod},
+         given={Seong\bibnamedelima H.},
+         giveni={S\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=KBS}{%
+         family={Kim},
+         familyi={K\bibinitperiod},
+         given={Byoung\bibnamedelima S.},
+         giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{LCTJ+1}
+    \strng{fullhash}{LCTJCSHKBS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{1047\bibrangedash 1058}
+    \field{title}{Flight Control Design using Incremental Nonlinear Dynamic
+  Inversion with Fixed-lag Smoothing Estimation}
+    \field{volume}{21}
+    \field{journaltitle}{International Journal of Aeronautical and Space
+  Sciences}
+    \field{year}{2020}
+  \endentry
+
+  \entry{Cheng2024INDI}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=CZ}{%
+         family={Cheng},
+         familyi={C\bibinitperiod},
+         given={Zixiao},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=PH}{%
+         family={Pei},
+         familyi={P\bibinitperiod},
+         given={Hailong},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=FK}{%
+         family={Fang},
+         familyi={F\bibinitperiod},
+         given={Kai},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \keyw{Adaptation models;Fans;Attitude control;Atmospheric
+  modeling;Autonomous aerial vehicles;Stability analysis;Data models;Nonlinear
+  dynamical systems;Motion measurement;Aircraft;Dual ducted fan;incremental
+  nonlinear dynamic inversion(INDI);in-ground-effect(IGE);unmanned aerial
+  vehicle(UAV)}
+    \strng{namehash}{CZ+1}
+    \strng{fullhash}{CZPHFK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2024 International Conference on Intelligent Robotics and
+  Automatic Control (IRAC)}
+    \verb{doi}
+    \verb 10.1109/IRAC63143.2024.10871469
+    \endverb
+    \field{pages}{562\bibrangedash 569}
+    \field{title}{Incremental Nonlinear Dynamic Inversion for a Dual-Ducted-Fan
+  UAV Attitude Control under In-Ground-Effect}
+    \list{location}{1}{%
+      {n.p.}%
+    }
+    \field{year}{2024}
+  \endentry
+
+  \entry{SteffensenINDI}{article}{}
+    \name{author}{3}{}{%
+      {{hash=SR}{%
+         family={Steffensen},
+         familyi={S\bibinitperiod},
+         given={Rasmus},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Steinert},
+         familyi={S\bibinitperiod},
+         given={Agnes},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SEJJ}{%
+         family={Smeur},
+         familyi={S\bibinitperiod},
+         given={Ewoud J.\bibnamedelima J.},
+         giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim
+  J\bibinitperiod},
+      }}%
+    }
+    \list{organization}{2}{%
+      {Tech Univ Munich}%
+      {Delft Univ Technol}%
+    }
+    \strng{namehash}{SR+1}
+    \strng{fullhash}{SRSASEJJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{709\bibrangedash 717}
+    \field{title}{Nonlinear Dynamic Inversion with Actuator Dynamics: An
+  Incremental Control Perspective}
+    \field{volume}{46}
+    \field{journaltitle}{Journal of guidance, control, and dynamics: A
+  publication of the American Institute of Aeronautics and Astronautics devoted
+  to the technology of dynamics and control}
+    \field{month}{01}
+    \field{year}{2023}
+  \endentry
+
+  \entry{quan2018}{book}{}
+    \name{author}{1}{}{%
+      {{hash=�}{%
+         family={全权},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{language}{1}{%
+      {zh}%
+    }
+    \list{publisher}{1}{%
+      {电子工业出版社}%
+    }
+    \strng{namehash}{�1}
+    \strng{fullhash}{�1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{多旋翼飞行器设计与控制}
+    \list{location}{1}{%
+      {Beijing}%
+    }
+    \field{year}{2018}
+  \endentry
+
+  \entry{Ducard2009Flight}{book}{}
+    \name{author}{1}{}{%
+      {{hash=DG}{%
+         family={Ducard},
+         familyi={D\bibinitperiod},
+         given={Guillaume},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Science \& Business Media}%
+    }
+    \strng{namehash}{DG1}
+    \strng{fullhash}{DG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Fault-tolerant Flight Control and Guidance Systems: Practical
+  Methods for Small Unmanned Aerial Vehicles}
+    \list{location}{1}{%
+      {Berlin, German}%
+    }
+    \field{month}{01}
+    \field{year}{2009}
+  \endentry
+
+  \entry{cheng2021}{article}{}
+    \name{author}{5}{}{%
+      {{hash=�}{%
+         family={程钰锋},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={郑小梅},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={脱伟},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={董立伟},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={何秀然},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {北京航空工程技术中心}%
+    }
+    \strng{namehash}{�+1}
+    \strng{fullhash}{�����1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{8\bibrangedash 15}
+    \field{title}{涵道螺旋桨气动机理数值分析}
+    \field{volume}{32}
+    \field{journaltitle}{直升机技术}
+    \field{month}{06}
+    \field{year}{2021}
+  \endentry
+
+  \entry{han2022}{article}{}
+    \name{author}{4}{}{%
+      {{hash=�}{%
+         family={韩凯},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={白俊强},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={邱亚松},
+         familyi={�\bibinitperiod},
+      }}%
+      {{hash=�}{%
+         family={昌敏},
+         familyi={�\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {西北工业大学}%
+    }
+    \strng{namehash}{�+3}
+    \strng{fullhash}{����1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{7}
+    \field{pages}{160\bibrangedash 176}
+    \field{title}{涵道螺旋桨设计变量的影响及其流动机理}
+    \field{volume}{43}
+    \field{journaltitle}{航空学报}
+    \field{month}{07}
+    \field{year}{2022}
+  \endentry
+
+  \entry{2012Nondimensional}{article}{}
+    \name{author}{3}{}{%
+      {{hash=IOJO}{%
+         family={Iii},
+         familyi={I\bibinitperiod},
+         given={Osgar John\bibnamedelima Ohanian},
+         giveni={O\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim
+  O\bibinitperiod},
+      }}%
+      {{hash=GPA}{%
+         family={Gelhausen},
+         familyi={G\bibinitperiod},
+         given={Paul\bibnamedelima A.},
+         giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=IDJ}{%
+         family={Inman},
+         familyi={I\bibinitperiod},
+         given={Daniel\bibnamedelima J.},
+         giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IOJO+1}
+    \strng{fullhash}{IOJOGPAIDJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{126\bibrangedash 140}
+    \field{title}{Nondimensional Modeling of Ducted-Fan Aerodynamics}
+    \field{volume}{49}
+    \field{journaltitle}{Journal of Aircraft}
+    \field{year}{2012}
+  \endentry
+
+  \entry{MI2020105821}{article}{}
+    \name{author}{1}{}{%
+      {{hash=gMB}{%
+         prefix={gang},
+         prefixi={g\bibinitperiod},
+         family={Mi},
+         familyi={M\bibinitperiod},
+         given={Bai},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{gMB1}
+    \strng{fullhash}{gMB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb https://doi.org/10.1016/j.ast.2020.105821
+    \endverb
+    \field{issn}{1270-9638}
+    \field{pages}{105821}
+    \field{title}{Numerical investigation on aerodynamic performance of a
+  ducted fan under interferences from the ground, static water and dynamic
+  waves}
+    \verb{url}
+    \verb https://www.sciencedirect.com/science/article/pii/S1270963819328524
+    \endverb
+    \field{volume}{100}
+    \field{journaltitle}{Aerospace Science and Technology}
+    \field{year}{2020}
+  \endentry
+
+  \entry{Antonio2021}{article}{}
+    \name{author}{3}{}{%
+      {{hash=MVA}{%
+         family={Matus-Vargas},
+         familyi={M\bibinithyphendelim V\bibinitperiod},
+         given={Antonio},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=RGG}{%
+         family={Rodriguez-Gomez},
+         familyi={R\bibinithyphendelim G\bibinitperiod},
+         given={Gustavo},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=MCJ}{%
+         family={Martinez-Carranza},
+         familyi={M\bibinithyphendelim C\bibinitperiod},
+         given={Jose},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MVA+2}
+    \strng{fullhash}{MVARGGMCJ2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb https://doi.org/10.1007/s11370-020-00344-5
+    \endverb
+    \field{pages}{99\bibrangedash 118}
+    \field{title}{Ground effect on rotorcraft unmanned aerial vehicles: a
+  review}
+    \field{volume}{14}
+    \field{journaltitle}{Intel Serv Robotics}
+    \field{year}{2021}
+  \endentry
+\enddatalist
+\endinput

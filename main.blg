@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: biblatex.bst
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+Reallocating 'glb_str_end' (item size: 4) to 20 items.
+Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
+Reallocating 'global_strs' (item size: 1) to 4000000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'field_info' (item size: 4) to 14380 items.
+Database file #1: main-blx.bib
+Database file #2: biblibrary/refrence.bib
+Warning--I didn't find a database entry for "_"
+Warning--I didn't find a database entry for "_a"
+Biblatex version: 3.19
+Reallocating 'wiz_functions' (item size: 4) to 9000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+You've used 65 entries,
+            6399 wiz_defined-function locations,
+            1644 strings with 24030 characters,
+and the built_in function-call counts, 499914 in all, are:
+= -- 40420
+> -- 7629
+< -- 2336
++ -- 14196
+- -- 2569
+* -- 33753
+:= -- 54415
+add.period$ -- 0
+call.type$ -- 65
+change.case$ -- 1474
+chr.to.int$ -- 129
+cite$ -- 128
+duplicate$ -- 53176
+empty$ -- 43684
+format.name$ -- 4925
+if$ -- 101891
+int.to.chr$ -- 0
+int.to.str$ -- 195
+missing$ -- 0
+newline$ -- 2130
+num.names$ -- 3590
+pop$ -- 23578
+preamble$ -- 1
+purify$ -- 1886
+quote$ -- 0
+skip$ -- 13056
+stack$ -- 0
+substring$ -- 72274
+swap$ -- 10024
+text.length$ -- 1556
+text.prefix$ -- 3
+top$ -- 1
+type$ -- 2186
+warning$ -- 0
+while$ -- 6578
+width$ -- 0
+write$ -- 2066
+(There were 2 warnings)
