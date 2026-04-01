@@ -1,6 +1,6 @@
 # Makefile for LaTeX project
 TEX = xelatex
-BIB = bibtex
+BIB = biber
 TEXFLAGS = -synctex=1 -interaction=nonstopmode
 OUTPUTDIR = output
 BUILDDIR = build
@@ -9,6 +9,7 @@ SOURCES = $(wildcard *.tex) $(wildcard chapters/*.tex) $(wildcard sections/*.tex
 BIBFILES = $(wildcard *.bib)
 # IMAGES = $(wildcard figure/*.png figure/*.jpg figure/*.pdf)
 CHAPTERS = $(wildcard chapter/*.tex)
+MATLAB_PDF = $(wildcard matlab/ground_effect/pdf/thrust/*.pdf matlab/ground_effect/pdf/moment/*.pdf matlab/ground_effect/pdf/anti_ge_moment/*.pdf matlab/ground_effect/pdf/anti_ge_thrust/*.pdf)
 
 .PHONY: all del_target clean
 
@@ -19,7 +20,7 @@ all: $(PDF)
 # all: del_target $(PDF)
 
 
-$(PDF): $(SOURCES) $(BIBFILES) $(IMAGES) $(CHAPTERS)
+$(PDF): $(SOURCES) $(BIBFILES) $(IMAGES) $(CHAPTERS) $(MATLAB_PDF)
 	$(TEX) $(TEXFLAGS) $(MAIN).tex
 	
 	echo compile the bib file

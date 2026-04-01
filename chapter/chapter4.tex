@@ -155,13 +155,13 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics{matlab/ground_effect/pdf/thrust/rotor_thrust_30mm.pdf}
-        \caption*{$h/R = 0.34$}
+        \caption*{a. $h/R = 0.34$}
     \end{minipage}
     \hfill  % 产生弹性水平间距
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics{matlab/ground_effect/pdf/thrust/rotor_thrust_100mm.pdf}
-        \caption*{$h/R = 1.12$}
+        \caption*{b. $h/R = 1.12$}
     \end{minipage}
 
     \vspace{0.5cm}
@@ -170,13 +170,13 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics{matlab/ground_effect/pdf/thrust/rotor_thrust_200mm.pdf}
-        \caption*{$h/R = 2.25$}
+        \caption*{c. $h/R = 2.25$}
     \end{minipage}
     \hfill  % 产生弹性水平间距
     \begin{minipage}[b]{0.45\textwidth}
         \centering
         \includegraphics{matlab/ground_effect/pdf/thrust/rotor_thrust_400mm.pdf}
-        \caption*{$h/R = 4.49$}
+        \caption*{d. $h/R = 4.49$}
     \end{minipage}
     \caption{\label{fig:T-Omega}不同高度比$h/R$下推力$T$与风扇转速的平方$\Omega^2$的关系}
 \end{figure}
@@ -409,7 +409,7 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics{figure/chapter4/moment-h-delta.pdf}
+    \includegraphics{matlab/ground_effect/pdf/moment/moment-h-delta.pdf}
     \caption{气动力矩$M_z^b$与高度比$h/R$以及控制舵面偏转角度$\delta_c$之间的关系}
     \label{fig:moment-h-delta}
 \end{figure}
@@ -422,14 +422,14 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
     \centering
     \begin{minipage}[b]{0.45\textwidth}
         \centering
-        \includegraphics{figure/chapter4/cv_moment_15mm.pdf}
-        \caption*{$h/R = 0.17$}
+        \includegraphics{matlab/ground_effect/pdf/moment/cv_moment_15mm.pdf}
+        \caption*{a. $h/R = 0.17$}
     \end{minipage}
     \hfill  % 产生弹性水平间距
     \begin{minipage}[b]{0.45\textwidth}
         \centering
-        \includegraphics{figure/chapter4/cv_moment_40mm.pdf}
-        \caption*{$h/R = 0.45$}
+        \includegraphics{matlab/ground_effect/pdf/moment/cv_moment_40mm.pdf}
+        \caption*{b. $h/R = 0.45$}
     \end{minipage}
 
     \vspace{0.5cm}
@@ -437,36 +437,36 @@ C_{cvGE} = 1 - C_{cvAmp} \cdot e^{C_{cvExp} \cdot (h/R)},
     \centering
     \begin{minipage}[b]{0.45\textwidth}
         \centering
-        \includegraphics{figure/chapter4/cv_moment_100mm.pdf}
-        \caption*{$h/R = 1.12$}
+        \includegraphics{matlab/ground_effect/pdf/moment/cv_moment_100mm.pdf}
+        \caption*{c. $h/R = 1.12$}
     \end{minipage}
     \hfill  % 产生弹性水平间距
     \begin{minipage}[b]{0.45\textwidth}
         \centering
-        \includegraphics{figure/chapter4/cv_moment_300mm.pdf}
-        \caption*{$h/R = 3.36$}
+        \includegraphics{matlab/ground_effect/pdf/moment/cv_moment_300mm.pdf}
+        \caption*{d. $h/R = 3.36$}
     \end{minipage}
-    \caption{不同高度比$h/R$下扭矩$M_z^b$与舵面角度$\delta$的关系}
+    \caption{不同高度比$h/R$下扭矩$M_z^b$与舵面角度$\delta_c$的关系}
     \label{fig:cv_moment-delta}
 \end{figure}
 
-首先，固定无量纲高度 $h/R$，考察气动力矩 $M_z^b$ 与舵面偏转角 $\delta$ 之间的关系。图\ref{fig:cv_moment-delta}选取了四个典型高度比 $h/R = 0.17$、$0.45$、$1.12$ 和 $3.36$ 下的实验结果。图中浅蓝色带点标记的实线为该高度下的实测力矩均值，橙色实线为通过最小二乘法拟合的线性关系线。可见，在不同高度比下，即使近地面流场相对紊乱，气动力矩 $M_z^b$ 与舵面偏转角 $\delta$ 之间仍呈现良好的线性关系。这一结果验证了第\ref{subsec:cv_model}节所提假设的合理性，即地面效应下舵面产生的升力与其偏转角度仍保持线性关系，地面效应主要通过衰减系数 $C_{cvGE}$ 对线性增益进行调制。此外，对比不同高度下的拟合直线可以发现，随着 $h/R$ 增大，拟合直线的斜率 $a_i$ 逐渐增大，反映出控制舵面偏转力系数 $K_{cvGE}$ 随离地高度增加而增大的趋势，这与式\eqref{eq:CcvGE_model}所描述的指数衰减规律相吻合。
+首先，固定无量纲高度 $h/R$，考察气动力矩 $M_z^b$ 与舵面偏转角 $\delta_c$ 之间的关系。图\ref{fig:cv_moment-delta}选取了四个典型高度比 $h/R = 0.17$、$0.45$、$1.12$ 和 $3.36$ 下的实验结果。图中浅蓝色带点标记的实线为该高度下的实测力矩均值，橙色实线为通过最小二乘法拟合的线性关系线。可见，在不同高度比下，即使近地面流场相对紊乱，气动力矩 $M_z^b$ 与舵面偏转角 $\delta_c$ 之间仍呈现良好的线性关系。这一结果验证了第\ref{subsec:cv_model}节所提假设的合理性，即地面效应下舵面产生的升力与其偏转角度仍保持线性关系，地面效应主要通过衰减系数 $C_{cvGE}$ 对线性增益进行调制。此外，对比不同高度下的拟合直线可以发现，随着 $h/R$ 增大，拟合直线的斜率 $a_i$ 逐渐增大，反映出控制舵面偏转力系数 $K_{cvGE}$ 随离地高度增加而增大的趋势，这与式\eqref{eq:CcvGE_model}所描述的指数衰减规律相吻合。
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics{figure/chapter4/zero_output_moment.pdf}
+    \includegraphics{matlab/ground_effect/pdf/moment/zero_output_moment.pdf}
     \caption{零输出时扭矩$M_z^b$与离地高度$h$的关系}
     \label{fig:zero_output-moment}
 \end{figure}
 
-其次，考察舵面零偏转状态下的残余力矩特性。将各高度下 $M_z^b$ 与 $\delta$ 线性拟合的截距 $b_i$ 作为该高度下舵面无偏转时的气动力矩 $M_{z0}^b$，并将其与无量纲高度 $h/R$ 的关系绘制于图\ref{fig:zero_output-moment}中。图中浅蓝色带点标记的实线为各高度下的实测 $M_{z0}^b$，粉红色区域表示无地面效应时（$h/R > 4.0$）的力矩输出范围。从图中可以看出，在各高度下，$M_{z0}^b$ 并非为零，这是由涵道风扇反扭矩与反扭矩襟翼产生的平衡力矩未能完全抵消所致。由于加工与装配误差，两者之间存在的残余力矩在测量中表现为恒定的偏置。进一步分析可知，$M_{z0}^b$ 随高度变化的波动幅度仅占控制舵面产生力矩变化幅度的 $7\%$ 以内，表明该残余力矩受地面效应的影响较小。因此，在后续建模中将其视为与高度无关的固定偏置量，不予纳入地面效应的动态补偿范围。
+其次，考察舵面零偏转状态下的残余力矩特性。将各高度下 $M_z^b$ 与 $\delta_c$ 线性拟合的截距 $b_i$ 作为该高度下舵面无偏转时的气动力矩 $M_{z0}^b$，并将其与无量纲高度 $h/R$ 的关系绘制于图\ref{fig:zero_output-moment}中。图中浅蓝色带点标记的实线为各高度下的实测 $M_{z0}^b$，粉红色区域表示无地面效应时（$h/R > 4.0$）的力矩输出范围。从图中可以看出，在各高度下，$M_{z0}^b$ 并非为零，这是由涵道风扇反扭矩与反扭矩襟翼产生的平衡力矩未能完全抵消所致。由于加工与装配误差，两者之间存在的残余力矩在测量中表现为恒定的偏置。进一步分析可知，$M_{z0}^b$ 随高度变化的波动幅度仅占控制舵面产生力矩变化幅度的 $7\%$ 以内，表明该残余力矩受地面效应的影响较小。因此，在后续建模中将其视为与高度无关的固定偏置量，不予纳入地面效应的动态补偿范围。
 
 基于上述线性拟合结果，可进一步计算各高度下的控制舵面偏转力系数 $K_{cvGE}$。根据式\eqref{eq:M_cv_GE}，在四个舵面同步偏转相同角度 $\delta_c$ 的条件下，有：
 \begin{equation}
     K_{cvGE} = \frac{M_z^b}{l_2(\delta_1 + \delta_2 + \delta_3 + \delta_4)} = \frac{M_z^b}{4 l_2 \delta_c},
     \label{eq:KcvGE_exp}
 \end{equation}
-其中 $l_2$ 为控制舵面压心到机体坐标系 $O_bZ_b$ 轴的距离，由表\ref{tab:params}给出。由于气动力矩 $M_z^b$ 与舵面偏转角 $\delta$ 呈线性关系，其最小二乘拟合斜率 $a_i$ 即为 $M_z^b / \delta_c$ 的估计值。因此，高度 $h_i$ 对应的控制舵面偏转力系数可近似为：
+其中 $l_2$ 为控制舵面压心到机体坐标系 $O_bZ_b$ 轴的距离，由表\ref{tab:params}给出。由于气动力矩 $M_z^b$ 与舵面偏转角 $\delta_c$ 呈线性关系，其最小二乘拟合斜率 $a_i$ 即为 $M_z^b / \delta_c$ 的估计值。因此，高度 $h_i$ 对应的控制舵面偏转力系数可近似为：
 \begin{equation}
 K_{cvGE,i} = \frac{a_i}{4 l_2}.
 \label{eq:KcvGE_fit}
@@ -474,7 +474,7 @@ K_{cvGE,i} = \frac{a_i}{4 l_2}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics{figure/chapter4/K_cv-h.pdf}
+    \includegraphics{matlab/ground_effect/pdf/moment/K_cv-h.pdf}
     \caption{控制舵面偏转力系数$K_{cvGE}$与高度比$h/R$的关系}
     \label{fig:K_cv-h}
 \end{figure}
@@ -531,14 +531,14 @@ K_{cvGE,i} = \frac{a_i}{4 l_2}.
     \centering
     \begin{minipage}[b]{0.45\textwidth}
         \centering
-        \includegraphics{figure/chapter4/cv_param-iter.pdf}
+        \includegraphics{matlab/ground_effect/pdf/moment/cv_param-iter.pdf}
         \caption{拟合参数与迭代次数的关系}
         \label{fig:cv_param_iter}
     \end{minipage}
     \hfill  % 产生弹性水平间距
     \begin{minipage}[b]{0.45\textwidth}
         \centering
-        \includegraphics{figure/chapter4/errr-iter.pdf}
+        \includegraphics{matlab/ground_effect/pdf/moment/errr-iter.pdf}
         \caption{拟合误差平方和与迭代次数的关系}
         \label{fig:errr_iter}
     \end{minipage}
@@ -563,6 +563,6 @@ K_{cvGE,i} = \frac{a_i}{4 l_2}.
 
 其次，搭建了基于六维力/力矩传感器的变高度静态测试台架，设计了系统性的实验流程。通过调节约束板高度与螺旋桨转速，采集了不同高度下涵道风扇推力与舵面偏转力矩的稳态数据。实验结果表明，推力与转速平方在不同高度下均保持良好线性关系，控制力矩与舵面偏转角亦呈现显著线性关系，验证了模型假设的合理性。
 
-最后，采用高斯-牛顿迭代法对模型参数进行非线性最小二乘拟合。推力模型辨识结果为 $C_{T\mathrm{Amp}} = 0.378$、$C_{T\mathrm{Exp}} = -1.105$；控制舵面偏转力模型辨识结果为 $C_{cv\mathrm{Amp}} = 0.950$、$C_{cv\mathrm{Exp}} = -1.174$。两者均在三步迭代内收敛，残差平方和降至初始值的 $2\%$ 以内，表明模型能够准确刻画地面效应下执行器效益随高度的变化规律。
+最后，采用高斯-牛顿迭代法对模型参数进行非线性最小二乘拟合。推力模型辨识结果为 $C_{TAmp} = 0.378$、$C_{TExp} = -1.105$；控制舵面偏转力模型辨识结果为 $C_{cvAmp} = 0.950$、$C_{cvExp} = -1.174$。两者均在三步迭代内收敛，残差平方和降至初始值的 $2\%$ 以内，表明模型能够准确刻画地面效应下执行器效益随高度的变化规律。
 
 本章所建立的推力模型与舵面偏转力模型，为后续近地面抗扰控制器设计提供了精确的执行器效益补偿依据，是提升涵道式无人机在起降、低空悬停等工况下控制性能的重要基础。

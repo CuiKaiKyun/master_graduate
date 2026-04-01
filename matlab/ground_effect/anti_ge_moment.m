@@ -142,9 +142,9 @@ for i = 1:length(suffixes)
     plot(time, calibrated_moment_z, '-', 'Color', resp_color, 'LineWidth', 0.8); 
     plot(time, target_moment, ':', 'Color', setpoint_color, 'LineWidth', 1.2);
 
-    xlabel('$t$ (s)');
-    ylabel('$M_z$ (N$\cdot$m)');
-    legend('$M_z$', '$M_z^{\prime}$', '$M_{z,d}$', 'Location', 'southeast');
+    xlabel('$t$ (s)', 'FontSize', 9);
+    ylabel('$M_z$ (N$\cdot$m)', 'FontSize', 9);
+    legend('$M_z$', '$M_z^{\prime}$', '$M_{z,d}$', 'Location', 'southeast', 'FontSize', 9);
     grid on;
     set(gca, 'Layer', 'top', 'Box', 'on');
     
@@ -171,9 +171,9 @@ for i = 1:length(suffixes)
     plot(cmp_time, cmp_motor_angle, 'Color', cmp_desire_delta_color, 'LineWidth', 0.8);
     plot(time, motor_angle, 'Color', desire_delta_color, 'LineWidth', 0.8);
 
-    xlabel('$t$ (s)');
-    ylabel('$\delta$ (rad)');
-    legend('$\delta_d^{\primme}$', '$\delta_d$', 'Location', 'southeast');
+    xlabel('$t$ (s)', 'FontSize', 9);
+    ylabel('$\delta$ (rad)', 'FontSize', 9);
+    legend('$\delta_d^{\prime}$', '$\delta_d$', 'Location', 'southeast', 'FontSize', 9);
     grid on;
     set(gca, 'Layer', 'top', 'Box', 'on');
     

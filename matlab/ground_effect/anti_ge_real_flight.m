@@ -86,15 +86,15 @@ for i = 1:3
     plot(time, actual_angles(:, i), '-', 'Color', resp_color, 'LineWidth', 0.7); 
     plot(time, target_angles(:, i), '--', 'Color', setpoint_color, 'LineWidth', 1.0);
 
-    ylabel([angle_names{i}, ' (rad)'], 'Interpreter', 'latex');
-    legend('Measured', 'Target', 'Location', 'best', 'Interpreter', 'latex');
+    ylabel([angle_names{i}, ' (rad)'], 'Interpreter', 'latex', 'FontSize', 8);
+    legend('Measured', 'Target', 'Location', 'best', 'Interpreter', 'latex', 'FontSize', 8);
     
     grid on;
     set(gca, 'Layer', 'top', 'Box', 'on', 'TickLabelInterpreter', 'latex');
     
     % 仅在最底部的子图显示 X 轴标签
     if i == 3
-        xlabel('Time (s)', 'Interpreter', 'latex');
+        xlabel('Time (s)', 'Interpreter', 'latex', 'FontSize', 8);
     else
         set(gca, 'XTickLabel', []); 
     end
@@ -116,7 +116,7 @@ plot(time, actual_pos_z, '-', 'Color', resp_color, 'LineWidth', 0.7);
 plot(time, target_pos_z, '--', 'Color', setpoint_color, 'LineWidth', 1.0);
 
 ylabel('Z Position (m)', 'Interpreter', 'latex');
-legend('Measured $Z$', 'Target $Z$', 'Location', 'best', 'Interpreter', 'latex');
+legend('Measured $Z$', 'Target $Z$', 'Location', 'best', 'Interpreter', 'latex', 'FontSize', 8);
 grid on;
 set(gca, 'Layer', 'top', 'Box', 'on', 'TickLabelInterpreter', 'latex');
 set(gca, 'XTickLabel', []); % 隐藏 X 轴刻度，为了排版美观
@@ -127,9 +127,9 @@ hold on;
 plot(time, actual_vel_z, '-', 'Color', resp_color, 'LineWidth', 0.7); 
 plot(time, target_vel_z, '--', 'Color', setpoint_color, 'LineWidth', 1.0);
 
-xlabel('Time (s)', 'Interpreter', 'latex');
-ylabel('Z Velocity (m/s)', 'Interpreter', 'latex');
-legend('Measured $V_z$', 'Target $V_z$', 'Location', 'best', 'Interpreter', 'latex');
+xlabel('Time (s)', 'Interpreter', 'latex', 'FontSize', 8);
+ylabel('Z Velocity (m/s)', 'Interpreter', 'latex', 'FontSize', 8);
+legend('Measured $V_z$', 'Target $V_z$', 'Location', 'best', 'Interpreter', 'latex', 'FontSize', 8);
 grid on;
 set(gca, 'Layer', 'top', 'Box', 'on', 'TickLabelInterpreter', 'latex');
 

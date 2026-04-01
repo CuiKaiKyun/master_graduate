@@ -5,8 +5,10 @@ close all;
 %% 全局绘图属性设置
 set(0, 'defaultTextInterpreter', 'latex');      % 默认使用 LaTeX 解释器
 set(0, 'DefaultLineLineWidth', 0.8);             % 线条宽度设置为 0.8
-set(0, 'DefaultAxesFontName', 'SimSun');         % 坐标轴字体设置为宋体
-set(0, 'DefaultTextFontName', 'SimSun');         % 文本字体设置为宋体
+set(0, 'DefaultAxesFontName', 'Times New Roman');
+set(0, 'DefaultAxesFontSize', 10);
+set(0, 'DefaultTextFontName', 'Times New Roman');
+set(0, 'DefaultTextFontSize', 10);
 set(0, 'DefaultAxesXGrid', 'on');                % 默认开启 X 轴网格
 set(0, 'DefaultAxesYGrid', 'on');                % 默认开启 Y 轴网格
 set(0, 'DefaultAxesZGrid', 'on');                % 默认开启 Z 轴网格
@@ -92,14 +94,14 @@ for i = 1:length(plot_line_height)
         xlim([min(rotor_speed_sqr), max(rotor_speed_sqr)*1.002]);
         ylim([min(thrust)*0.95, max(thrust)*1.02]);
     
-        legend('原始数据', '拟合曲线', 'Location', 'southeast', 'FontName', 'SimSun');
-        xlabel('$\Omega^2 \mathrm{(rad^2 \cdot s^{-2})}$');
-        ylabel('$T_{GE}\mathrm{(N)}$');
+        legend('原始数据', '拟合曲线', 'Location', 'southeast', 'FontName', 'SimSun', 'FontSize', 9);
+        xlabel('$\Omega^2 \mathrm{(rad^2 \cdot s^{-2})}$', 'FontSize', 9);
+        ylabel('$T_{GE}\mathrm{(N)}$', 'FontSize', 9);
         
         k_exp = -6;
         fit_eq = sprintf('$T_{GE} = (%.2f \\times 10^{%d}) \\Omega^2$', k/10^k_exp, k_exp);
         text(0.2*x(1)+0.8*x(end), 0.07*y(1)+0.93*y(end), fit_eq, ...
-             'FontSize', 11, 'FontName', 'SimSun', ...
+             'FontSize', 9, 'FontName', 'SimSun', ...
              'HorizontalAlignment', 'right');  
         
         pdf_file_name = sprintf('pdf/thrust/rotor_thrust_%dmm.pdf', plot_line_height(i));
@@ -166,14 +168,14 @@ set(gcf, 'PaperSize', [figPos(3), figPos(4)]);
 
 iteration = 0:times;
 h1 = plot(iteration, a_vector, '-*', 'LineWidth', 0.8);
-xlabel('迭代次数', 'FontName', 'SimSun', 'Interpreter', 'none');
-ylabel('$C_{TAmp}$');
+xlabel('迭代次数', 'FontName', 'SimSun', 'Interpreter', 'none', 'FontSize', 9);
+ylabel('$C_{TAmp}$', 'FontSize', 9);
 
 yyaxis right;
 h2 = plot(iteration, b_vector, '-o', 'LineWidth', 0.8);
 ylabel('$C_{TExp}$');
 ylim([-2, 0]);
-legend([h1, h2], '$C_{TAmp}$', '$C_{TExp}$', 'Location', 'southeast', 'Interpreter', 'latex');
+legend([h1, h2], '$C_{TAmp}$', '$C_{TExp}$', 'Location', 'southeast', 'Interpreter', 'latex', 'FontSize', 9);
 
 ax = gca;
 ax.Units = 'centimeters';
@@ -196,8 +198,8 @@ set(gcf, 'PaperSize', [figPos(3), figPos(4)]);
 iteration = 0:times;
 plot(iteration, error_vector, '.-', 'LineWidth', 0.8);
 
-xlabel('迭代次数', 'FontName', 'SimSun', 'Interpreter', 'none');
-ylabel('$\sum E_{TGE,i}^2\mathrm{(N^2)}$');
+xlabel('迭代次数', 'FontName', 'SimSun', 'Interpreter', 'none', 'FontSize', 9);
+ylabel('$\sum E_{TGE,i}^2\mathrm{(N^2)}$', 'FontSize', 9);
 
 ax = gca;
 ax.Units = 'centimeters';
@@ -235,9 +237,9 @@ C_exp = b_vector(end);
 y_fit = (C_amp * exp(C_exp * x_range) + 1) * hover_thrust;
 plot(x_range, y_fit, '-', 'LineWidth', 0.8);
 
-xlabel('$h/R$');
-ylabel('$T_{GE}\mathrm{(N)}$');
-legend({'原始数据', '第1次迭代拟合曲线', '第2次迭代拟合曲线', '第10次拟合曲线'}, 'FontName', 'SimSun');
+xlabel('$h/R$', 'FontSize', 9);
+ylabel('$T_{GE}\mathrm{(N)}$', 'FontSize', 9);
+legend({'原始数据', '第1次迭代拟合曲线', '第2次迭代拟合曲线', '第10次拟合曲线'}, 'FontName', 'SimSun', 'FontSize', 9);
 
 print(gcf, '-dpdf', '-r300', 'pdf/thrust/line_T-h.pdf');
 
@@ -269,8 +271,8 @@ surf(RPM, HEIGHT, THRUST_GRID, 'EdgeAlpha', 0.2, 'FaceAlpha', 0.8);
 view(109, 46);       
 contour3(RPM, HEIGHT, THRUST_GRID, 15, 'LineWidth', 0.8, 'Color', 'w');
 
-xlabel('$\Omega^2 \mathrm{(rad^2 \cdot s^{-2})}$');
-ylabel('$h/R$');
-zlabel('$T_{GE}\mathrm{(N)}$');
+xlabel('$\Omega^2 \mathrm{(rad^2 \cdot s^{-2})}$', 'FontSize', 9);
+ylabel('$h/R$', 'FontSize', 9);
+zlabel('$T_{GE}\mathrm{(N)}$', 'FontSize', 9);
 
 print(gcf, '-dpdf', '-r300', 'pdf/thrust/surf_T-omega-h.pdf');

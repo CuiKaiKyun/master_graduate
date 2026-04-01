@@ -132,10 +132,10 @@ for i = 1:length(suffixes)
     plot(time, plot_actual_speed, '-', 'Color', color1_actual, 'LineWidth', 0.8); 
     plot(cmp_time, plot_desire_cmp_speed, ':', 'Color', color1_cmp_desire, 'LineWidth', 1.2);
     plot(time, plot_desire_speed, ':', 'Color', color1_desire, 'LineWidth', 1.2);
-    ylabel('$\Omega$ (rad/s)');
-    xlabel('$t$ (s)');
+    ylabel('$\Omega$ (rad/s)', 'FontSize', 9);
+    xlabel('$t$ (s)', 'FontSize', 9);
     lgd = legend('$\Omega^{\prime}$', '$\Omega$', '$\Omega_{d}^{\prime}$', '$\Omega_{d}$', 'Location', 'southeast');
-    set(lgd, 'Interpreter', 'latex', 'FontName', 'SimSun');
+    set(lgd, 'Interpreter', 'latex', 'FontName', 'SimSun', 'FontSize', 9);
     grid on; set(gca, 'Layer', 'top', 'Box', 'on');
     
     % 边距优化
@@ -155,10 +155,10 @@ for i = 1:length(suffixes)
     plot(cmp_time, calibrated_cmp_thrust, '-', 'Color', color2_cmp_actual, 'LineWidth', 0.8);
     plot(time, calibrated_thrust, '-', 'Color', color2_actual, 'LineWidth', 0.8); 
     plot(time, target_thrust, ':', 'Color', color2_target, 'LineWidth', 1.2);
-    ylabel('$T$ (N)');
-    xlabel('$t$ (s)');
+    ylabel('$T$ (N)', 'FontSize', 9);
+    xlabel('$t$ (s)', 'FontSize', 9);
     lgd = legend('$T^{\prime}$', '$T$', '$T_{d}$', 'Location', 'southeast');
-    set(lgd, 'Interpreter', 'latex', 'FontName', 'SimSun');
+    set(lgd, 'Interpreter', 'latex', 'FontName', 'SimSun', 'FontSize', 9);
     grid on; set(gca, 'Layer', 'top', 'Box', 'on');
     
     % 边距优化

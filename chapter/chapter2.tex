@@ -19,15 +19,22 @@
 \subsection{机电控制系统}
 机电控制系统是是无人机的“大脑”和“神经中枢”，负责感知自身状态、处理信息并精确控制各个执行机构。其主要包括微控制器，传感器和执行器。接下来将对该无人机附带的机电控制系统的各个模块进行逐一介绍。
 
-\begin{itemize}
-    \item \textbf{微控制器}：本文使用的为控制为意法半导体公司的STM32系列的STM32F767芯片，基于ARM架构的Cortex-M7内核设计。最高主频可达 216MHz。集成单精度浮点运算单元FPU和DSP指令集，能够轻松胜任飞行控制环节中的自身状态感知算法和闭环控制算法。此外，集成了PWM、IIC、SPI、UART等常用通信接口，能够与其它硬件模块实现低时延高可靠的通信。同时，片内集成2MB的的Flash存储器与 512KB 的SRAM存储器，能够提供充足空间来执行内存占用较大的高阶卡尔曼滤波等算法。
-    \item \textbf{惯性测量单元}：惯性测量单元（Inertial Measurement Unit，IMU）能够高频率地采集无人机的角速度和加速度，为飞控计算机提供解算飞行状态所需的原始数据，是无人机的“小脑”。本文使用的惯性测量单元是InvenSense公司的ICM-20602。该芯片量程范围大，支持±2000dps陀螺量程、±16g加速度量程。且测量噪声小，速率噪声典型值为0.004 °/s/√Hz，加速度计噪声典型值为 100 µg/√Hz，该芯片最高采样频率为1kHz。配合上卡尔曼滤波算法能够实现高精度的位姿估计。
-    \item \textbf{磁力计}：磁力计用于感知地磁北的方向，在小范围运动的情况下，该方向可以认为与地球北极的方向成一个固定的夹角。本文使用的磁力计是iSentek的IST8310三轴霍尔效应磁传感器。该传感器的测量范围大，支持三轴±1600µT磁感应强度，该量程足以测量地磁场的方向和大小。最高采样频率为200Hz。磁力计的数据能够保证位姿估计时，航向角的估计不会发散。
-    \item \textbf{激光测距模块}：激光测距模块被安装在飞机的底部，是无人机领域用于感知离地高度的常用传感器。本文使用的激光测距模块是意法半导体公司的VL53l1X激光测距传感器。测量精度为±5\%，采样频率为50Hz。读取测量数据能够感知离地高度进而能够对地面效应带来的扰动做抗扰控制。
-    \item \textbf{电池}：本文使用的电池是容量为1680mAh的4S1P的航模电池，电池的输出电压为16.8V，最大持续输出电流为20A。
-    \item \textbf{电机电调系统}：电机电调系统用于带动主螺旋桨的转动。本文使用的电机是翼飞的2806.5无刷直流电机，其KV值为1300KV，定子直径28mm，高度6.5mm。使用的电调的通信方式为PWM通信，控制频率为200Hz。其额定电压为16V，额定电流为30A。
-    \item \textbf{无刷电机测速模块}：该测速模块的本质是利用电机绕组在换相过程中产生的反电动势作为转子位置和速度的信息载体。通过检测两相电压，并辅以特定的开关时序，可以提取出反电动势的过零点，最终通过测量这些特征点的时间间隔来实现对电机转速的精确计算，模块通过PWM脉宽将转速信息输出给MCU。
-    \item \textbf{舵机}：舵机用于控制螺旋桨下方的控制舵面的转动，是无人机实现姿态闭环控制的关键。本文使用的舵机是银燕的ES9251舵机，该舵机为塑料齿轮舵机，单个舵机重量仅为2.8g，最大输出力矩为0.02646N·m。舵机的通信方式为PWM通信，最高控制频率为50Hz。
+\textbf{微控制器}：本文使用的为控制为意法半导体公司的STM32系列的STM32F767芯片，基于ARM架构的Cortex-M7内核设计。最高主频可达 216MHz。集成单精度浮点运算单元FPU和DSP指令集，能够轻松胜任飞行控制环节中的自身状态感知算法和闭环控制算法。此外，集成了PWM、IIC、SPI、UART等常用通信接口，能够与其它硬件模块实现低时延高可靠的通信。同时，片内集成2MB的的Flash存储器与 512KB 的SRAM存储器，能够提供充足空间来执行内存占用较大的高阶卡尔曼滤波等算法。
+
+\textbf{惯性测量单元}：惯性测量单元（Inertial Measurement Unit，IMU）能够高频率地采集无人机的角速度和加速度，为飞控计算机提供解算飞行状态所需的原始数据，是无人机的“小脑”。本文使用的惯性测量单元是InvenSense公司的ICM-20602。该芯片量程范围大，支持±2000dps陀螺量程、±16g加速度量程。且测量噪声小，速率噪声典型值为0.004 °/s/√Hz，加速度计噪声典型值为 100 µg/√Hz，该芯片最高采样频率为1kHz。配合上卡尔曼滤波算法能够实现高精度的位姿估计。
+
+\textbf{磁力计}：磁力计用于感知地磁北的方向，在小范围运动的情况下，该方向可以认为与地球北极的方向成一个固定的夹角。本文使用的磁力计是iSentek的IST8310三轴霍尔效应磁传感器。该传感器的测量范围大，支持三轴±1600µT磁感应强度，该量程足以测量地磁场的方向和大小。最高采样频率为200Hz。磁力计的数据能够保证位姿估计时，航向角的估计不会发散。
+
+\textbf{激光测距模块}：激光测距模块被安装在飞机的底部，是无人机领域用于感知离地高度的常用传感器。本文使用的激光测距模块是意法半导体公司的VL53l1X激光测距传感器。测量精度为±5\%，采样频率为50Hz。读取测量数据能够感知离地高度进而能够对地面效应带来的扰动做抗扰控制。
+
+\textbf{电池}：本文使用的电池是容量为1680mAh的4S1P的航模电池，电池的输出电压为16.8V，最大持续输出电流为20A。
+
+\textbf{电机电调系统}：电机电调系统用于带动主螺旋桨的转动。本文使用的电机是翼飞的2806.5无刷直流电机，其KV值为1300KV，定子直径28mm，高度6.5mm。使用的电调的通信方式为PWM通信，控制频率为200Hz。其额定电压为16V，额定电流为30A。
+
+\textbf{无刷电机测速模块}：该测速模块的本质是利用电机绕组在换相过程中产生的反电动势作为转子位置和速度的信息载体。通过检测两相电压，并辅以特定的开关时序，可以提取出反电动势的过零点，最终通过测量这些特征点的时间间隔来实现对电机转速的精确计算，模块通过PWM脉宽将转速信息输出给MCU。
+
+\textbf{舵机}：舵机用于控制螺旋桨下方的控制舵面的转动，是无人机实现姿态闭环控制的关键。本文使用的舵机是银燕的ES9251舵机，该舵机为塑料齿轮舵机，单个舵机重量仅为2.8g，最大输出力矩为0.02646N·m。舵机的通信方式为PWM通信，最高控制频率为50Hz。
+
     \begin{figure}[htbp]
         \centering
         \begin{minipage}[b]{0.45\textwidth}
@@ -58,7 +65,7 @@
         \end{minipage}
     \end{figure}
     
-    \item \textbf{电路板}：为了将整个电子系统的各个模块连接起来，独立设计了两块电路板，分别是飞行控制板和舵机驱动板。这两块电路板上各搭载了一块微控制器芯片。电路板将其中搭载的芯片和电子模块通过印制电路连接，并将微传感器的各个物理通信口，通过线对板针座引出。飞行控制板用于执行复杂的位姿估计算法，闭环控制算法，而舵机控制板主要执行指令控制舵机以及获取传感器输出。为了能够测出无人机质心的角速度和加速度，IMU被设计放置在更靠近质心的飞行控制板。而为了使磁力计尽量少地受到无刷电机的磁场干扰，它被设计放置在远离无刷电机的舵机驱动板。此外，激光测距传感器也需要放置在底部的舵机驱动板上，用于测量下方离地高度。
+\textbf{电路板}：为了将整个电子系统的各个模块连接起来，独立设计了两块电路板，分别是飞行控制板和舵机驱动板。这两块电路板上各搭载了一块微控制器芯片。电路板将其中搭载的芯片和电子模块通过印制电路连接，并将微传感器的各个物理通信口，通过线对板针座引出。飞行控制板用于执行复杂的位姿估计算法，闭环控制算法，而舵机控制板主要执行指令控制舵机以及获取传感器输出。为了能够测出无人机质心的角速度和加速度，IMU被设计放置在更靠近质心的飞行控制板。而为了使磁力计尽量少地受到无刷电机的磁场干扰，它被设计放置在远离无刷电机的舵机驱动板。此外，激光测距传感器也需要放置在底部的舵机驱动板上，用于测量下方离地高度。
     \begin{figure}
         \centering
         \begin{minipage}[b]{0.45\textwidth}
@@ -73,7 +80,6 @@
             \caption{舵机驱动板}
         \end{minipage}
     \end{figure}
-  \end{itemize}
 
 为明确机载各模块之间的供配电关系与通信链路，本文给出了无人机的电气系统拓扑结构，如图\ref{fig:hardware}所示。该图定义各个电子模块之间的电气连接与信号传输逻辑。
 \begin{figure}
@@ -105,7 +111,7 @@
     \caption{\label{fig:cordinate}地面坐标系和机体坐标系}
 \end{figure}
 
-地面坐标系和机体坐标系的关系如图\ref{fig:cordinate}所示。值得注意的是，在三维空间中，同一个矢量，在两个坐标系下的投影是不一样的。为了防止表述上出现歧义，此处定义，三维空间中的矢量在地面坐标系下的投影记为$(·)^e$，在机体坐标系下的投影记为$(·)^b$。
+地面坐标系和机体坐标系的关系如图\ref{fig:cordinate}所示。值得注意的是，在三维空间中，同一个矢量，在两个坐标系下的投影是不一样的。为了防止表述上出现歧义，此处定义，三维空间中的矢量在地面坐标系下的投影记为$(\cdot)^e$，在机体坐标系下的投影记为$(\cdot)^b$。
 
 \subsection{坐标系之间的旋转关系}
 坐标系之间的旋转关系是进行姿态控制、导航和传感器融合的基础。常用的表示方法主要有四种：欧拉角、旋转矩阵、四元数和轴角法。在现有的飞控程序中，最常用的是欧拉角和四元数。欧拉角是较为直观的表示方式，但是其存在万向锁的问题\cite{quan2018}，当俯仰角为±90°时，会出现自由度退化的问题。由于本文设计的无人机控制的俯仰角不会超过±45°，因此，不需要考虑万向锁所带来的问题。
@@ -117,6 +123,7 @@
 \begin{equation}
 \psi \in (-\pi,\ \pi], \quad \theta \in \left[-\frac{\pi}{2},\ \frac{\pi}{2}\right], \quad \varphi \in (-\pi,\ \pi].
 \end{equation}
+
 \begin{figure}
     \centering
     \includegraphics[scale=0.25]{figure/chapter2/eular_angle.png}
@@ -129,10 +136,12 @@
 \begin{equation}
 \boldsymbol{v}^b = \boldsymbol{R}_{b}^{e} \, \boldsymbol{v}^b.
 \end{equation}
+
 根据旋转矩阵的特性，从地面坐标系到机体坐标系的旋转矩阵$\boldsymbol{R}_{e}^{b} = \boldsymbol{R}_{b}^{eT}$ ，且满足：
 \begin{equation}
 \boldsymbol{v}^b = \boldsymbol{R}_{e}^{b} \, \boldsymbol{v}^b.
 \end{equation}
+
 按照上述顺序，旋转矩阵可通过依次左乘每次旋转对应的基本旋转矩阵得到。绕X、Y、Z轴旋转的基本旋转矩阵的定义分别如下：
 \begin{equation}
 \boldsymbol{R}_x(\varphi) = \begin{bmatrix}
@@ -140,11 +149,15 @@
 0 & \cos\varphi & -\sin\varphi \\
 0 & \sin\varphi & \cos\varphi
 \end{bmatrix},
+\end{equation}
+\begin{equation}
 \boldsymbol{R}_y(\theta) = \begin{bmatrix}
 \cos\theta & 0 & \sin\theta \\
 0 & 1 & 0 \\
 -\sin\theta & 0 & \cos\theta
 \end{bmatrix},
+\end{equation}
+\begin{equation}
 \boldsymbol{R}_z(\psi) = \begin{bmatrix}
 \cos\psi & -\sin\psi & 0 \\
 \sin\psi & \cos\psi & 0 \\
@@ -163,6 +176,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
 \boldsymbol{R}_{e}^{b} = \boldsymbol{R}_x(\varphi) \boldsymbol{R}_y(\theta) \boldsymbol{R}_z(\psi).
 \end{equation}
+
 展开后得从地面坐标系到机体坐标系的旋转矩阵$\boldsymbol{R}_{e}^{b}$：
 \begin{equation}
 \boldsymbol{R}_{e}^{b} = 
@@ -210,6 +224,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{bmatrix}.
 \label{eq:unit_vector}
 \end{equation}
+
 由式\eqref{eq:single_eular_R}，\eqref{eq:eular_rate}，\eqref{eq:unit_vector}，可得：
 \begin{equation}
 \dot{\boldsymbol{\eta}} = 
@@ -220,6 +235,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{bmatrix}
 \boldsymbol{\omega}^b,
 \end{equation}
+
 为了简化表述，令矩阵$\boldsymbol{Q}$为：
 \begin{equation}
 \boldsymbol{Q} = 
@@ -229,6 +245,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 0 & \dfrac{\sin\varphi}{\cos\theta} & \dfrac{\cos\varphi}{\cos\theta}
 \end{bmatrix}.
 \end{equation}
+
 最终，能够得到无人机的角速度和姿态角的变化率之间的关系为：
 \begin{equation}
     \dot{\boldsymbol{\eta}} = \boldsymbol{Q}\boldsymbol{\omega}^b.
@@ -251,10 +268,12 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
     \dot{\boldsymbol{v}}^e = \boldsymbol{R}_b^e(\dot{\boldsymbol{v}}^b + \boldsymbol{\omega}^{b} \times \boldsymbol{v}^b).
     \label{eq:transport}
 \end{equation}
+
 将式 \eqref{eq:transport} 代入式 \eqref{eq:a_e} 的左端 $\dot{\boldsymbol{v}}^e$，得到：
 \begin{equation}
-    \boldsymbol{R}_b^e(\dot{\boldsymbol{v}}^b + \boldsymbol{\omega}^{b} \times \boldsymbol{v}^b) = g\boldsymbol{e}_{3} + m^{-1} \boldsymbol{F}^e,
+    \boldsymbol{R}_b^e(\dot{\boldsymbol{v}}^b + \boldsymbol{\omega}^{b} \times \boldsymbol{v}^b) = g\boldsymbol{e}_{3} + m^{-1} \boldsymbol{F}^e.
 \end{equation}
+
 移项整理得到完全在机体坐标系下表达的平动动力学方程：
 \begin{equation}
     \dot{\boldsymbol{v}}^b = g\boldsymbol{R}_e^b\boldsymbol{e}_3 + m^{-1} \boldsymbol{F}^b - \boldsymbol{\omega}^b \times \boldsymbol{v}^b
@@ -271,6 +290,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         0 & 0 & J_z
     \end{bmatrix}.
 \end{equation}
+
 由欧拉方程，无人机受到的合外力矩在机体坐标系下的投影$\boldsymbol{M}^b$可直接给出：
 \begin{equation}
     \boldsymbol{M}^b = \boldsymbol{J}\cdot\dot{\boldsymbol{\omega}^b}+\boldsymbol{\omega}^b\times(\boldsymbol{J}\cdot\boldsymbol{\omega}^b),
@@ -332,7 +352,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
     \begin{cases}
         T_{df} = \frac{1}{2}\rho \pi C_T R^4 \Omega^2 \\
         N_{df} = \frac{1}{2}\rho \pi C_N R^4 \Omega^2 
-    \end{cases}.
+    \end{cases},
     \label{eq:thrust}
 \end{equation}
 其中，$C_T$和$C_N$都是无量纲系数，分别是涵道风扇的拉力系数和侧向力系数，且它们满足下面式子\cite{2012Nondimensional}：
@@ -340,7 +360,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
     \begin{cases}
         C_T = C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df}) \\
         C_N =  J C_{N_J} \sin\alpha_{df}
-    \end{cases}.
+    \end{cases},
     \label{eq:thrust_k}
 \end{equation}
 其中，$C_{T0}$为涵道无人机在悬停状态下的拉力系数，$C_{T_{J0}}$和$C_{T_J}$是拉力随迎风角变化的调整系数，$C_{N_J}$是侧向力随迎风角变化的调整系数。
@@ -381,13 +401,15 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 
 气动力矩是指涵道风扇的气动力给机体带来的的力矩，从图\ref{fig:ductedfan_force}不难看出，涵道风扇的拉力和侧向力并非经过质心，这些气动力的等效作用点位置的影响因素更为复杂。Ohanian等人所提出的模型是基于侧向力等效作用点不变的假设\cite{2012Nondimensional}，并通过较为简约的解析式描述了涵道风扇气动力矩$M_{df}$：
 \begin{equation}
-    M_{df} = -l_N N_{df} + l_T T_{df}.
+    M_{df} = -l_N N_{df} + l_T T_{df},
 \end{equation}
 式中，气动力矩$M_{df}$以使无人机具有抬头趋势的方向为正，$X_J$和$X_{\alpha}$均为无量纲的常系数，$l_N$和$l_T$分别是侧向力和拉力对机体重心的力臂，其关系如图\ref{fig:ductedfan_force}所示。根据该理论，侧向力的作用点固定且高度大致位于涵道入口平面，可认为侧向力力臂$l_N$为已知常量，拉力力臂$l_T$满足如下关系：
 \begin{equation}
     l_T = X_J J R \sin(X_\alpha \alpha_{df}).
+    \label{eq:l__T}
 \end{equation}
-将式\eqref{eq:J}代入可得：
+
+将式\eqref{eq:J}代入式\eqref{eq:l__T}可得：
 \begin{equation}
     l_T = X_J \pi V_a \Omega ^{-1} \sin(X_\alpha \alpha_{df}).
     \label{eq:l_T}
@@ -411,8 +433,9 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         0 \\[8pt]
         0 \\[8pt]
         -l_N \\[8pt]
-    \end{bmatrix},
+    \end{bmatrix}.
 \end{equation}
+
 已知力和力臂，即可求出涵道风扇的气动力矩在机体系下的投影$\boldsymbol{M}_{df}^b$：
 \begin{equation}
     \begin{aligned}
@@ -451,7 +474,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         -J_{fan} \Omega q \\
         J_{fan} \Omega p \\
         0
-    \end{bmatrix}
+    \end{bmatrix},
     \label{eq:M_gyro}
 \end{equation}
 式中，$J_{fan}$为涵道风扇对转轴的转动惯量。
@@ -474,19 +497,22 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \end{figure}
 设单位时间内，从涵道出风口排出的气体质量为$\dot{m}_{air}$，气体密度为$\rho$，根据动量定理可得，涵道风扇对气体的推力等于气流在单位时间内的动量的增加量，即：
 \begin{equation}
-    T_{df} = \dot{m}_{air} (V_e - V_0) = \rho S V_1 (V_e - V_0),
+    T_{df} = \dot{m}_{air} (V_e - V_0) = \rho S V_1 (V_e - V_0).
     \label{eq:dongliang}
 \end{equation}
+
 注意到无穷远处的速度为$V_0$的气流和涵道出口处速度为$V_e$的气流，它们的气压一致，均为外界气压，可认为单位时间内，流过出口截面的气体增加的动能即为这部分气体增加的能量。根据能量守恒定律可知，涵道风扇推力的功率等于单位时间内气体动能的变化量：
 \begin{equation}
     \frac{1}{2} \dot{m}_{air} V_e^2 - \frac{1}{2} \dot{m}_{air} V_0^2 = T_{df} V_1.
     \label{eq:nengliang}
 \end{equation}
+
 此外，设${\sigma}_d$为涵道扩张比，它指的是涵道下方出风口横截面面积$S'$与桨盘面积$S$之比，对于一个结构固定的涵道风扇而言，该扩展比 ${\sigma}_d$ 是常量。那么根据质量守恒定律，有：
 \begin{equation}
     \sigma_{d} S V_e = S V_1.
     \label{eq:kuozhangbi}
 \end{equation}
+
 联立\ref{eq:dongliang}，\ref{eq:nengliang}和\ref{eq:kuozhangbi}，可得
 \begin{equation}
     V_e = \frac{V_0}{2} + \sqrt{(\frac{V_0}{2})^2 + \frac{T_{df}}{{\sigma}_d \rho S}}.
@@ -497,6 +523,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
     F_{sta} = \frac{1}{2} \rho A_{sta} C_{sta} V_e^2.
 \end{equation}
+
 记叶片数量为$n_{sta}$，单个叶片受到的气动力的压心到机体轴的距离为$l_{sta}$襟翼扭矩$M_{sta}$可以表示为：
 \begin{equation}
     M_{sta} = n_{sta} l_{sta} F_{sta} = \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2.
@@ -523,8 +550,9 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 
 在给出控制舵面的气动力之前，有必要先定义几个物理量，如图\ref{fig:ctrl_surface}，设1号控制舵面的气动压力的压心为$O_{cs1}$，$O_{cs1}$到机体系坐标轴$O_bX_b$的距离是$l_1$，$O_{cs1}$到机体系坐标轴$O_bZ_b$的距离是$l_2$，设控制舵面的面积为$A_{cv}$，控制舵面的升力系数为$C_{cv}$。那么根据升力方程，1号舵面单个翼面受到的气动力为：
 \begin{equation}
-    F_{cv_{1}}' = \frac{1}{2}\rho A_{cv} C_{cv} V_e^2 \delta _1
+    F_{cv_{1}}' = \frac{1}{2}\rho A_{cv} C_{cv} V_e^2 \delta _1.
 \end{equation}
+
 单个控制舵面包含一对平行翼面，且四个控制舵面具有对称性，可得各控制舵面受到的气动力：
 \begin{equation}
     F_{cv_{i}} = 2 F_{cv_{i}}' = \rho A_{cv} C_{cv} V_e^2 \delta _i, \quad i=1,2,3,4.
@@ -534,6 +562,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
     \delta_i \in [-20^\circ, 20^\circ], \quad i=1,2,3,4.
 \end{equation}
+
 由于舵面偏转角度较小，可近似认为距离$l_1$，$l_2$均不发生变化。
 
 根据几何关系，并结合式\eqref{eq:F_cv}可得出控制舵面的作用力在机体系下的投影$\boldsymbol{F}_{cv}^b$为：
@@ -548,9 +577,10 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         \rho A_{cv} C_{cv} V_e^2 (\delta _4 - \delta _2) \\
         \rho A_{cv} C_{cv} V_e^2 (\delta _1 - \delta _3) \\
         0
-    \end{bmatrix},
+    \end{bmatrix}.
     \label{eq:F_cv}
 \end{equation}
+
 控制舵面的作用力矩在机体系下的投影$\boldsymbol{M}_{cv}^b$为：
 \begin{equation}
     \boldsymbol{M}_{cv}^b = 
@@ -575,6 +605,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         \boldsymbol{M}^b = \boldsymbol{M}_{df}^b + \boldsymbol{M}_{fan}^b + \boldsymbol{M}_{gyro}^b + \boldsymbol{M}_{sta}^b + \boldsymbol{M}_{cv}^b
     \end{cases}.
 \end{equation}
+
 表\ref{tab:F_and_M}总结了这些力和力矩的符号以及的含义：
 \begin{table}
     \caption{\label{tab:F_and_M}涵道式无人机受到的力和力矩}
@@ -640,6 +671,7 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
         r
     \end{bmatrix}.
 \end{equation}
+
 那么可以给出如下所示的无人机的各个状态量的动态方程。
 
 (1)位置动态方程：

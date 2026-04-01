@@ -5,8 +5,10 @@ close all;
 %% 全局绘图属性设置
 set(0, 'defaultTextInterpreter', 'latex');      % 默认使用 LaTeX 解释器
 set(0, 'DefaultLineLineWidth', 0.8);             % 线条宽度设置为 0.8
-set(0, 'DefaultAxesFontName', 'SimSun');         % 坐标轴字体设置为宋体
-set(0, 'DefaultTextFontName', 'SimSun');         % 文本字体设置为宋体
+set(0, 'DefaultAxesFontName', 'Times New Roman');
+set(0, 'DefaultAxesFontSize', 10);
+set(0, 'DefaultTextFontName', 'Times New Roman');
+set(0, 'DefaultTextFontSize', 10);
 set(0, 'DefaultAxesXGrid', 'on');                % 默认开启 X 轴网格
 set(0, 'DefaultAxesYGrid', 'on');                % 默认开启 Y 轴网格
 set(0, 'DefaultAxesZGrid', 'on');                % 默认开启 Z 轴网格
@@ -35,16 +37,30 @@ moment_range = [min(moment_z(:)), max(moment_z(:))];
 % diatance: 离地高度向量 (1×m)
 % target_angles: 舵面角度向量 (1×n)
 % moment: 力矩矩阵 (m×n)，moment(i,j) 对应 height(i) 和 angle(j)
+% 生成原始数据网格并扁平化，用于插值
+[Height_orig, Angle_orig] = meshgrid(height, target_angles);
+h_R_orig = Height_orig / R;
 
-% 生成网格
-[Height, Angle] = meshgrid(height, target_angles);
+% 定义细化后的绘图网格范围
+h_R_min = min(height) / R;
+h_R_max = max(height) / R;
+angle_min = min(target_angles);
+angle_max = max(target_angles);
+
+% 生成 50x100 的细化网格
+h_R_grid = linspace(h_R_min, h_R_max, 40); 
+angle_grid = linspace(angle_min, angle_max, 55);
+[H_R_GRID, ANGLE_GRID] = meshgrid(h_R_grid, angle_grid);
+
+% 使用 cubic 方法进行插值，得到平滑的曲面数据
+MOMENT_GRID = griddata(h_R_orig(:), Angle_orig(:), moment_z(:), H_R_GRID, ANGLE_GRID, 'cubic');
 
 % 创建曲面图
 fig = figure('Name', 'moment-h-delta');
 % 调整窗口大小
 fig.Units = 'centimeters';
 figPos = [1, 1, 12, 8]; % [左, 下, 宽, 高]
-fig.Position = figPos;  % 
+fig.Position = figPos;  
 
 % 调整纸张大小
 set(gcf, 'Units', 'centimeters');
@@ -52,16 +68,22 @@ set(gcf, 'PaperUnits', 'centimeters'); % 统一单位为厘米
 set(gcf, 'PaperPosition', [0, 0, figPos(3), figPos(4)]);
 set(gcf, 'PaperSize', [figPos(3), figPos(4)]); % 将纸张大小设置为与图一致
 
-% 基本曲面图
-% subplot(2,2,1);
-h_R = Height / R;
-surf(h_R, Angle, moment_z);
-xlabel('$h/R$', 'FontSize', 10);
-ylabel('$\delta_c \mathrm{(rad)}$', 'FontSize', 10);
-zlabel('$M_{z}^b \mathrm{(N \cdot m)}$', 'FontSize', 10);
-view(16, 19);
+hold on;
 grid on;
-print(gcf, '-dpdf', '-r300', 'moment-h-delta.pdf');
+
+% 基本曲面图：加入 EdgeAlpha 和 FaceAlpha 实现半透明效果
+surf(H_R_GRID, ANGLE_GRID, MOMENT_GRID, 'EdgeAlpha', 0.2, 'FaceAlpha', 0.8);
+
+% 加入三维白色等高线
+contour3(H_R_GRID, ANGLE_GRID, MOMENT_GRID, 15, 'LineWidth', 0.8, 'Color', 'w');
+
+xlabel('$h/R$', 'FontSize', 9);
+ylabel('$\delta_c \mathrm{(rad)}$', 'FontSize', 9);
+zlabel('$M_{z}^b \mathrm{(N \cdot m)}$', 'FontSize', 9);
+
+view(36, 29); % 保持了你原代码的视角，如果想完全一模一样可以改成 view(109, 46)
+
+print(gcf, '-dpdf', '-r300', 'pdf/moment/moment-h-delta.pdf');
 
 %% 各高度下扭矩-舵面角度
 k_cvGE = zeros(length(fit_line_height), 1);
@@ -101,15 +123,15 @@ for i = 1:length(fit_line_height)
     xlim([min(target_angles)*1.05, max(target_angles)*1.05]);
     ylim(moment_range*1.05);
     % 设置图例
-    legend('原始数据', '拟合曲线', 'Location', 'southeast');
-    xlabel('$\delta \mathrm{(rad)}$');
-    ylabel('$M_{z}^b\mathrm{(N \cdot m)}$');
+    legend('原始数据', '拟合曲线', 'Location', 'southeast', 'FontName', 'SimSun', 'FontSize', 9);
+    xlabel('$\delta_c \mathrm{(rad)}$', 'FontSize', 9);
+    ylabel('$M_{z}^b\mathrm{(N \cdot m)}$', 'FontSize', 9);
     
     ax = gca;
     ax.Units = 'centimeters';
     ax.Position = [1.4, 1.0, figPos(3) - 2.0, figPos(4) - 1.2];
 
-    pdf_file_name = sprintf('cv_moment_%dmm.pdf', fit_line_height(i));
+    pdf_file_name = sprintf('pdf/moment/cv_moment_%dmm.pdf', fit_line_height(i));
     print(gcf, '-dpdf', '-r300', pdf_file_name);
 end
 
@@ -140,18 +162,18 @@ fill(x_fill, y_fill, 'r', 'FaceAlpha', 0.3, 'EdgeColor', 'none');
 yline(moment_range(2), 'r--');
 yline(moment_range(1), 'r--');
 
-legend('舵面偏转角为零时Z轴力矩', 'Z轴力矩输出范围', 'Location', 'southeast', 'Interpreter', 'latex')
+legend('舵面偏转角为零时Z轴力矩', 'Z轴力矩输出范围', 'Location', 'southeast', 'Interpreter', 'latex', 'FontName', 'SimSun', 'FontSize', 9)
 
 % 设置图例
-xlabel('$h/R$');
-ylabel('$M_{z}^b\mathrm{(N \cdot m)}$');
+xlabel('$h/R$', 'FontSize', 9);
+ylabel('$M_{z}^b\mathrm{(N \cdot m)}$', 'FontSize', 9);
 
 % 设置坐标轴长度
 ax = gca;
 ax.Units = 'centimeters';
 ax.Position = [1.4, 1.0, figPos(3) - 2.0, figPos(4) - 1.2];
 
-print(gcf, '-dpdf', '-r300', 'zero_output_moment.pdf');
+print(gcf, '-dpdf', '-r300', 'pdf/moment/zero_output_moment.pdf');
 
 %% 拟合扭矩斜率-高度
 h_R = fit_line_height / R;
@@ -207,10 +229,10 @@ C_exp = b_vector(end);
 y = (1 - C_amp * exp(C_exp * x)) * K_cv;
 plot(x, y, '-');
 
-xlabel('$h/R$');
-ylabel('$K_{\mathrm{cvGE}}(\mathrm{N / rad})$');
-legend('原始数据', '第1次迭代拟合曲线', '第2次迭代拟合曲线', '第10次迭代拟合曲线', 'Location', 'southeast');
-print(gcf, '-dpdf', '-r300', 'K_cv-h.pdf');
+xlabel('$h/R$', 'FontSize', 9);
+ylabel('$K_{\mathrm{cvGE}}(\mathrm{N / rad})$', 'FontSize', 9);
+legend('原始数据', '第1次迭代拟合曲线', '第2次迭代拟合曲线', '第10次迭代拟合曲线', 'Location', 'southeast', 'FontSize', 9, 'FontName', 'SimSun', 'FontSize', 9);
+print(gcf, '-dpdf', '-r300', 'pdf/moment/K_cv-h.pdf');
 
 fig = figure('Name', '拟合误差随迭代次数的变化');
 hold on;
@@ -228,13 +250,13 @@ set(gcf, 'PaperSize', [figPos(3), figPos(4)]); % 将纸张大小设置为与图一致
 
 iteration = 0:times;
 plot(iteration, error_vector, '.-');
-ylabel('$\sum E_{cvGE,i}^2 \mathrm{(N^2\cdot rad^{-2})}$');
-xlabel('迭代次数');
+ylabel('$\sum E_{cvGE,i}^2 \mathrm{(N^2\cdot rad^{-2})}$', 'FontSize', 9);
+xlabel('迭代次数', 'FontSize', 9, 'FontName', 'SimSun');
 ax = gca;
 ax.Units = 'centimeters';
 ax.Position = [1.2, 1.0, figPos(3) - 2.0, figPos(4) - 1.2];
 
-print(gcf, '-dpdf', '-r300', 'errr-iter.pdf');
+print(gcf, '-dpdf', '-r300', 'pdf/moment/errr-iter.pdf');
 
 % 绘制参数迭代曲线
 fig = figure('Name', '参数迭代曲线');
@@ -252,17 +274,17 @@ set(gcf, 'PaperPosition', [0, 0, figPos(3), figPos(4)]);
 set(gcf, 'PaperSize', [figPos(3), figPos(4)]); % 将纸张大小设置为与图一致
 
 h1 = plot(iteration, a_vector, '-*');
-xlabel('迭代次数');
-ylabel('$C_{cvAmp}$', 'Interpreter', 'latex');
+xlabel('迭代次数', 'FontSize', 9, 'FontName', 'SimSun');
+ylabel('$C_{cvAmp}$', 'Interpreter', 'latex', 'FontSize', 9);
 grid on;
 
 % 激活右侧 y 轴，并绘制第二条曲线
 yyaxis right;
 h2 = plot(iteration, b_vector, '-o');
-ylabel('$C_{cvExp}$', 'Interpreter', 'latex');
-legend([h1, h2], '$C_{cvAmp}$', '$C_{cvExp}$', 'Interpreter', 'latex', 'Location', 'southeast');
+ylabel('$C_{cvExp}$', 'Interpreter', 'latex', 'FontSize', 9);
+legend([h1, h2], '$C_{cvAmp}$', '$C_{cvExp}$', 'Interpreter', 'latex', 'Location', 'southeast', 'FontSize', 9);
 
 ax = gca;
 ax.Units = 'centimeters';
 ax.Position = [1.2, 1.0, figPos(3) - 2.7, figPos(4) - 1.2];
-print(gcf, '-dpdf', '-r300', 'cv_param-iter.pdf');
+print(gcf, '-dpdf', '-r300', 'pdf/moment/cv_param-iter.pdf');
