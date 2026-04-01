@@ -53,7 +53,7 @@
 \contentsline {subsection}{\numberline {3.4.1}参数真值与初始估计}{55}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}滤波器参数配置}{55}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}实际飞行试验结果分析}{55}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}本章小结}{58}{section.3.5}%
+\contentsline {section}{\numberline {3.5}本章小结}{59}{section.3.5}%
 \contentsline {chapter}{\numberline {4}地面效应下的执行器控制效益离线辨识}{60}{chapter.4}%
 \contentsline {section}{\numberline {4.1}模型建立}{60}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}推力模型}{61}{subsection.4.1.1}%

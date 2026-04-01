@@ -6,9 +6,9 @@ close all;
 set(0, 'defaultTextInterpreter', 'latex');      % 默认使用 LaTeX 解释器
 set(0, 'DefaultLineLineWidth', 0.8);             % 线条宽度设置为 0.8
 set(0, 'DefaultAxesFontName', 'Times New Roman');
-set(0, 'DefaultAxesFontSize', 10);
+set(0, 'DefaultAxesFontSize', 9);
 set(0, 'DefaultTextFontName', 'Times New Roman');
-set(0, 'DefaultTextFontSize', 10);
+set(0, 'DefaultTextFontSize', 9);
 set(0, 'DefaultAxesXGrid', 'on');                % 默认开启 X 轴网格
 set(0, 'DefaultAxesYGrid', 'on');                % 默认开启 Y 轴网格
 set(0, 'DefaultAxesZGrid', 'on');                % 默认开启 Z 轴网格
