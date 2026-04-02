@@ -27,14 +27,15 @@
 
 位置分量对速度的偏导矩阵$\boldsymbol{A}_{\boldsymbol{pv}}$满足：
 \begin{equation}
-    \begin{aligned}
-        \boldsymbol{A}_{\boldsymbol{pv}} =& \frac{\partial \boldsymbol{B}_b^e \boldsymbol{v}^b \triangle t}{\partial \boldsymbol{v}} = \boldsymbol{B}_b^e \triangle t \\
-        =& \begin{bmatrix}
-            \cos\theta\cos\psi & \sin\varphi\sin\theta\cos\psi - \cos\varphi\sin\psi & \cos\varphi\sin\theta\cos\psi + \sin\varphi\sin\psi \\
-            \cos\theta\sin\psi & \sin\varphi\sin\theta\sin\psi + \cos\varphi\cos\psi & \cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi \\
-            -\sin\theta & \sin\varphi\cos\theta & \cos\varphi\cos\theta
-        \end{bmatrix} \triangle t.
-    \end{aligned}
+    \boldsymbol{A}_{\boldsymbol{pv}} = \frac{\partial \boldsymbol{B}_b^e \boldsymbol{v}^b \triangle t}{\partial \boldsymbol{v}} = \boldsymbol{B}_b^e \triangle t ,
+\end{equation}
+其中$\boldsymbol{B}_b^e$满足：
+\begin{equation}
+    \boldsymbol{B}_b^e = \begin{bmatrix}
+        \cos\theta\cos\psi & \sin\varphi\sin\theta\cos\psi - \cos\varphi\sin\psi & \cos\varphi\sin\theta\cos\psi + \sin\varphi\sin\psi \\
+        \cos\theta\sin\psi & \sin\varphi\sin\theta\sin\psi + \cos\varphi\cos\psi & \cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi \\
+        -\sin\theta & \sin\varphi\cos\theta & \cos\varphi\cos\theta
+    \end{bmatrix}.
 \end{equation}
 
 位置分量对姿态角的偏导矩阵$\boldsymbol{A}_{\boldsymbol{p\eta}}$满足：

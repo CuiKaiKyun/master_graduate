@@ -16,7 +16,7 @@
 \section{扩展卡尔曼滤波器理论}% 2Pages
 卡尔曼滤波是一种基于概率论的最优状态估计算法，由R. E. Kalman于20世纪60年代提出，其核心思想是在线性高斯系统假设下，针对线性系统，通过融合系统动态模型与带噪声的观测数据，以递推方式实时估计系统状态，并保证估计误差的均方值最小。该估计算法因其结构简洁、计算效率高且具有最优性，被广泛应用于导航、目标跟踪、信号处理等众多领域。
 
-然而，实际工程系统中的动态模型往往呈现出非线性特征，例如本文所研究的涵道式无人机，其气动特性与飞行状态之间存在复杂的非线性关系。在此类非线性系统中，标准卡尔曼滤波不再适用。为此，扩展卡尔曼滤波器（Extended Kalman Filter, EKF）应运而生。EKF的基本思想是在每一时刻将非线性系统方程与观测方程围绕当前状态估计值进行一阶泰勒展开，从而获得局部的线性化近似模型，继而沿用标准卡尔曼滤波的递推框架进行状态估计。具体而言，EKF通过计算状态转移函数与观测函数的雅可比矩阵，构造线性化的状态转移矩阵与观测矩阵，并在此基础上执行预测与更新流程。EKF的优势在于其能够以适中的计算代价处理一般的非线性系统，且保留了卡尔曼滤波的递推结构，便于在嵌入式平台上实时实现。
+然而，实际工程系统中的动态模型往往呈现出非线性特征，例如本文所研究的涵道式无人机，其气动特性与飞行状态之间存在复杂的非线性关系。在此类非线性系统中，标准卡尔曼滤波不再适用。为此，扩展卡尔曼滤波器应运而生。EKF的基本思想是在每一时刻将非线性系统方程与观测方程围绕当前状态估计值进行一阶泰勒展开，从而获得局部的线性化近似模型，继而沿用标准卡尔曼滤波的递推框架进行状态估计。具体而言，EKF通过计算状态转移函数与观测函数的雅可比矩阵，构造线性化的状态转移矩阵与观测矩阵，并在此基础上执行预测与更新流程。EKF的优势在于其能够以适中的计算代价处理一般的非线性系统，且保留了卡尔曼滤波的递推结构，便于在嵌入式平台上实时实现。
 \subsection{模型建立}
 考虑具有一般性的连续时间非线性系统，其状态向量 $\boldsymbol{x}$、控制输入 $\boldsymbol{u}$ 与观测向量 $\boldsymbol{z}$ 满足如下动态方程：
 \begin{equation}
@@ -334,7 +334,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
     \end{bmatrix}.
 \end{equation}
 
-为判断系统的局部弱能观性，需考察映射 $\boldsymbol{Y}_N(\cdot, \boldsymbol{U})$ 在状态空间中的局部单射性。这可通过分析该映射的微分（即雅可比矩阵）来实现。构造能观性矩阵 $\mathcal{O}_N(\boldsymbol{x}_k, \boldsymbol{U})$ 如下：
+为判断系统的局部弱能观性，需考察映射 $\boldsymbol{Y}_N(\cdot, \boldsymbol{U})$ 在状态空间中的局部单射性。这可通过分析该映射的微分来实现。构造能观性矩阵 $\mathcal{O}_N(\boldsymbol{x}_k, \boldsymbol{U})$ 如下：
 \begin{equation}\label{eq:observability_matrix}
 \mathcal{O}_N(\boldsymbol{x}_k, \boldsymbol{U}) \triangleq 
 \frac{\partial \boldsymbol{Y}_N}{\partial \boldsymbol{x}_k}(\boldsymbol{x}_k, \boldsymbol{U})
@@ -593,18 +593,62 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
 
 观测噪声协方差矩阵 $\boldsymbol{R}$ 直接由观测器噪声的标准差平方构造，观测器噪声标准差设定值与表\ref{tab:matlab_noise}保持一致。
 
-滤波器以 $100\,\mathrm{Hz}$ 的频率执行递推更新（即每 $10\,\mathrm{ms}$ 处理一次观测），该频率与动作捕捉系统的典型输出速率匹配。所有矩阵计算均在双精度浮点下进行，以保证数值稳定性。
+滤波器以 $100\,\mathrm{Hz}$ 的频率执行递推更新，即每 $10\,\mathrm{ms}$ 处理一次观测，该频率与动作捕捉系统的典型输出速率匹配。所有矩阵计算均在双精度浮点下进行，以保证数值稳定性。
 
 \subsection{仿真实验结果分析}
 为定量评估扩展卡尔曼滤波器对涵道式无人机气动参数的在线辨识性能，本节对所设计的仿真实验获取的数据进行处理与分析。在每一滤波周期 \(k\) 完成更新步骤后，记录各待估参数的后验估计值 \(\hat{\theta}_{i(k)}\) 及其对应的估计方差 \(\sigma_{i(k)}^2\)，其中方差取自后验协方差矩阵 \(\boldsymbol{P}_k^+\) 中与该参数相对应的对角线元素。以参数估计值叠加正负标准差的范围 \(\left[\hat{\theta}_{i(k)} - \sigma_{i(k)}, \hat{\theta}_{i(k)} + \sigma_{i(k)}\right]\) 作为衡量估计不确定性及判断收敛性的依据。
 
-将各参数的估计序列及其不确定性范围按时间顺序绘制，可得如图~\ref{fig:params_1} 所示的参数估计结果。图中黑色实线表示仿真环境中预设的参数真值，蓝色虚线为滤波器输出的参数估计值，浅蓝色区域表征估计值的不确定性区间（\(\pm 1\sigma\)）。横轴为仿真时间 \(t\)，纵轴对应各气动参数的数值。
+将各参数的估计序列及其不确定性范围按时间顺序绘制，可得如图~\ref{fig:params_1} 所示的参数估计结果。图中黑色实线表示仿真环境中预设的参数真值，蓝色虚线为滤波器输出的参数估计值，浅蓝色区域表征估计值的不确定性区间，即\(\pm 1\sigma\)区间。横轴为仿真时间 \(t\)，纵轴对应各气动参数的数值。
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics{figure/chapter3/params_1.pdf}
-    \caption{仿真实验气动参数估计结果（一）}
+    \begin{minipage}[b]{1.0\textwidth}
+        \centering
+        \includegraphics{figure/chapter3/sim_params_K_T.pdf}
+        \caption*{(a)}
+    \end{minipage}
+
+    \vspace{0.1cm}
+    \begin{minipage}[b]{1.0\textwidth}
+        \centering
+        \includegraphics{figure/chapter3/sim_params_K_T_J.pdf}
+        \caption*{(b)}
+    \end{minipage}
+
+    \vspace{0.1cm}
+    \begin{minipage}[b]{1.0\textwidth}
+        \centering
+        \includegraphics{figure/chapter3/sim_params_K_N.pdf}
+        \caption*{(c)}
+    \end{minipage}
+    \caption{仿真实验参数估计结果（一）}
     \label{fig:params_1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \centering
+        \includegraphics{figure/chapter3/sim_params_K_l_T.pdf}
+        \caption*{(a)}
+    \end{minipage}
+
+    \vspace{0.1cm}
+    \begin{minipage}[b]{1.0\textwidth}
+        \centering
+        \includegraphics{figure/chapter3/sim_params_K_sta.pdf}
+        \caption*{(b)}
+    \end{minipage}
+
+    \vspace{0.1cm}
+    \begin{minipage}[b]{1.0\textwidth}
+        \centering
+        \includegraphics{figure/chapter3/sim_params_K_cv.pdf}
+        \caption*{(c)}
+    \end{minipage}
+
+    \caption{仿真实验参数估计结果（二）}
+    \label{fig:params_2}
 \end{figure}
 
 从图中可直观看出，随着滤波迭代的推进，各参数的估计值均呈现向真值收敛的趋势，且其不确定性区间（浅蓝色区域）逐渐收窄，表明滤波器对参数的认识不断深化，估计置信度逐步提升。然而，不同参数的收敛速度与稳态精度存在显著差异，这主要取决于各参数与系统可观性的关联程度、在动态方程中的激励条件以及参数间的耦合关系。
@@ -634,9 +678,9 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
     
 \textbf{拉力随前进比衰减系数 \(K_{T_J}\)}：该参数表征前飞速度对涵道风扇拉力的影响，其动态特性需在较大速度变化范围内方可充分激发。由于仿真工况以前飞速度较小的模态为主，对 \(K_{T_J}\) 的激励不足，导致其收敛缓慢且稳态误差较大（\(12.46\%\)），同时估计方差始终维持较高水平。这一结果符合预期，表明该参数在低速工况下的可辨识性较弱。
 
-\textbf{侧向力系数 \(K_{N}\)}：该参数直接影响机体系下速度动力学方程（式~\eqref{eq:v_dynamic_sim}）中的侧向力项，进而通过运动学关系（式~\eqref{eq:p_dynamic}）耦合至位置状态。由于位置测量由动作捕捉系统提供，具有较高的精度（标准差 \(2\times10^{-3}\,\mathrm{m}\)），使得与位置状态间接关联的参数可观测性显著增强。此外，在姿态调整过程中，侧向速度动态得到充分激励，从而加速了参数的收敛。因此，\(K_{N}\) 的收敛速度较快，约在 \(1.5\,\mathrm{s}\) 内达到 \(10\%\) 误差带，稳态相对误差仅为 \(0.55\%\)，估计效果良好。
+\textbf{侧向力系数 \(K_{N}\)}：该参数直接影响机体系下速度动力学方程\eqref{eq:v_dynamic_sim}中的侧向力项，进而通过运动学关系\eqref{eq:p_dynamic}耦合至位置状态。由于位置测量由动作捕捉系统提供，具有较高的精度（标准差 \(2\times10^{-3}\,\mathrm{m}\)），使得与位置状态间接关联的参数可观测性显著增强。此外，在姿态调整过程中，侧向速度动态得到充分激励，从而加速了参数的收敛。因此，\(K_{N}\) 的收敛速度较快，约在 \(1.5\,\mathrm{s}\) 内达到 \(10\%\) 误差带，稳态相对误差仅为 \(0.55\%\)，估计效果良好。
 
-\textbf{侧向力力臂系数 \(K_{l_T}\)}：该参数的收敛过程表现出一定的超调现象，且收敛时间较长（\(27.44\,\mathrm{s}\)）。深入分析表明，\(K_{l_T}\) 与舵面效率系数 \(K_{cv}\) 在角速度动态方程（式~\eqref{eq:omega_dynamic_sim}）中均对力矩项有贡献，二者存在耦合。因此，\(K_{l_T}\) 的收敛在一定程度上依赖于 \(K_{cv}\) 估计值的先期收敛。随着迭代进行，\(K_{l_T}\) 逐步趋近真值，最终相对误差为 \(3.96\%\)，且由图可见其方差持续减小，若延长仿真时间，精度有望进一步提升。
+\textbf{侧向力力臂系数 \(K_{l_T}\)}：该参数的收敛过程表现出一定的超调现象，且收敛时间较长（\(27.44\,\mathrm{s}\)）。深入分析表明，\(K_{l_T}\) 与舵面效率系数 \(K_{cv}\) 在角速度动态方程\eqref{eq:omega_dynamic_sim}中均对力矩项有贡献，二者存在耦合。因此，\(K_{l_T}\) 的收敛在一定程度上依赖于 \(K_{cv}\) 估计值的先期收敛。随着迭代进行，\(K_{l_T}\) 逐步趋近真值，最终相对误差为 \(3.96\%\)，且由图可见其方差持续减小，若延长仿真时间，精度有望进一步提升。
 
 \textbf{反扭矩襟翼系数 \(K_{sta}\)}：该参数同样与 \(K_{cv}\) 存在耦合，收敛初期出现超调。但随着 \(K_{cv}\) 趋于稳定，\(K_{sta}\) 的估计值稳态表现优异，最终相对误差仅 \(0.69\%\)，最终估计的方差也相对较小。
 
@@ -646,7 +690,7 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
 综上所述，仿真实验结果表明本文设计的基于扩展卡尔曼滤波器的气动参数在线辨识算法能够在典型飞行工况下有效工作。此外各参数的收敛速度与稳态精度与其可观性及激励条件密切相关，其中与垂向、侧向动力学强相关的参数（如 \(K_{T0}\)、\(K_{N}\)、\(K_{cv}\)）估计效果最佳。而对于存在耦合的参数对（如 \(K_{l_T}\) 与 \(K_{T_J}\)），滤波器仍能通过信息融合实现渐进收敛，验证了增广状态空间模型设计的合理性。该仿真研究为后续实际飞行试验的参数配置与结果分析提供了重要参考。
 
 \section{实际飞行试验}% 3Pages
-为验证本文提出的基于扩展卡尔曼滤波器的气动参数在线辨识算法在实际飞行环境中的有效性与鲁棒性，本节开展涵道式无人机实际飞行试验。实验对象为第2.6节所述实验样机，实验场景布置于室内动作捕捉系统的有效测量空间内。通过遥控器以 \(100\,\mathrm{Hz}\) 频率发送姿态指令，机载串级PID控制器实现姿态跟踪，同时以相同频率采集动作捕捉系统的位姿数据、机载IMU的角速度数据以及执行器指令（螺旋桨转速 \(\Omega\) 与舵面偏角 \(\boldsymbol{\delta}\)）。实验过程中，操作人员控制无人机在测量空间内完成悬停、加减速、前后左右平飞等多种机动，以尽可能激发各气动参数的动态特性。数据采集自无人机稳定起飞后开始，持续约 \(80\,\mathrm{s}\)。图\ref{fig:real_flight} 展示了实验过程中的无人机飞行场景。
+为验证本文提出的基于扩展卡尔曼滤波器的气动参数在线辨识算法在实际飞行环境中的有效性与鲁棒性，本节开展涵道式无人机实际飞行试验。实验对象为第2.6节所述实验样机，实验场景布置于室内动作捕捉系统的有效测量空间内。通过遥控器以 \(100\,\mathrm{Hz}\) 频率发送姿态指令，机载串级PID控制器实现姿态跟踪，同时以相同频率采集动作捕捉系统的位姿数据、机载IMU的角速度数据以及执行器指令，即螺旋桨转速 \(\Omega\) 与舵面偏角 \(\boldsymbol{\delta}\)。实验过程中，操作人员控制无人机在测量空间内完成悬停、加减速、前后左右平飞等多种机动，以尽可能激发各气动参数的动态特性。数据采集自无人机稳定起飞后开始，持续约 \(80\,\mathrm{s}\)。图\ref{fig:real_flight} 展示了实验过程中的无人机飞行场景。
 
 \begin{figure}[htbp]
     \centering
@@ -687,21 +731,21 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
     \centering
     \begin{minipage}[b]{1.0\textwidth}
         \centering
-        \includegraphics{figure/chapter3/params_K_T.pdf}
+        \includegraphics{figure/chapter3/real_params_K_T.pdf}
         \caption*{(a)}
     \end{minipage}
 
     \vspace{0.1cm}
     \begin{minipage}[b]{1.0\textwidth}
         \centering
-        \includegraphics{figure/chapter3/params_K_T_J.pdf}
+        \includegraphics{figure/chapter3/real_params_K_T_J.pdf}
         \caption*{(b)}
     \end{minipage}
 
     \vspace{0.1cm}
     \begin{minipage}[b]{1.0\textwidth}
         \centering
-        \includegraphics{figure/chapter3/params_K_N.pdf}
+        \includegraphics{figure/chapter3/real_params_K_N.pdf}
         \caption*{(c)}
     \end{minipage}
     \caption{实际飞行试验参数估计结果（一）}
@@ -712,21 +756,21 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
     \centering
     \begin{minipage}[b]{1.0\textwidth}
         \centering
-        \includegraphics{figure/chapter3/params_K_l_T.pdf}
+        \includegraphics{figure/chapter3/real_params_K_l_T.pdf}
         \caption*{(a)}
     \end{minipage}
 
     \vspace{0.1cm}
     \begin{minipage}[b]{1.0\textwidth}
         \centering
-        \includegraphics{figure/chapter3/params_K_sta.pdf}
+        \includegraphics{figure/chapter3/real_params_K_sta.pdf}
         \caption*{(b)}
     \end{minipage}
 
     \vspace{0.1cm}
     \begin{minipage}[b]{1.0\textwidth}
         \centering
-        \includegraphics{figure/chapter3/params_K_cv.pdf}
+        \includegraphics{figure/chapter3/real_params_K_cv.pdf}
         \caption*{(c)}
     \end{minipage}
 
@@ -759,7 +803,7 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
 
 \textbf{1. 涵道风扇基础拉力系数 \(K_{T0}\)}：与仿真结果一致，该参数在悬停状态下能够获得充分激励，其收敛速度极快，在 \(0.1\,\mathrm{s}\) 内即完成收敛，最终相对误差仅为 \(0.66\%\)，动态和稳态收敛特性都较为理想。
     
-\textbf{2. 拉力随前进比衰减系数 \(K_{T_J}\)}：该参数收敛效果与仿真下的结果差异较大，估计曲线呈现较大波动。分析认为，该参数在高速前飞时对系统动态贡献显著，而实飞中高速阶段存在较强的未建模气动扰动（如湍流、侧风等），导致其收敛缓慢且波动剧烈。最终相对误差为 \(3.73\%\)，估计值大致在真值附近 \(\pm20\%\) 范围内波动，基本符合预期。
+\textbf{2. 拉力随前进比衰减系数 \(K_{T_J}\)}：该参数收敛效果与仿真下的结果差异较大，估计曲线呈现较大波动。分析认为，该参数在高速前飞时对系统动态贡献显著，而实飞中高速阶段存在较强的未建模气动扰动，如湍流、侧风等，导致其收敛缓慢且波动剧烈。最终相对误差为 \(3.73\%\)，估计值大致在真值附近 \(\pm20\%\) 范围内波动，基本符合预期。
 
 \textbf{3. 侧向力系数 \(K_{N}\)}：该参数随时间推移，呈现出缓慢收敛至真实值的现象，且不确定性区间逐渐收窄，在$16.18$内完成收敛。其最终估计结果相对误差为$0.44\%$，与仿真结果相似。
 
@@ -769,7 +813,7 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
 
 \textbf{6. 舵面偏转力系数 \(K_{cv}\)}：作为影响力矩平衡的关键参数，与仿真结果类似，\(K_{cv}\) 在初期因其他参数估计偏差出现一定波动。然而，随着迭代的推进，估计值逐渐收敛至真值附近，最终相对误差为 \(1.18\%\)，稳态精度较高。
 
-综上所述，实际飞行试验结果表明：本文提出的基于扩展卡尔曼滤波器的气动参数在线辨识算法在实际飞行条件下能够有效工作，各参数估计值均呈现收敛趋势，且真值基本被不确定性区间覆盖。此外与仿真结果相比，实飞中参数估计的波动性有所增加，这主要源于真实环境中存在的未建模扰动与传感器噪声的复杂性。参数的可辨识性与激励条件、观测精度及参数间耦合程度密切相关，其中与高精度测量状态（如位置）直接或间接耦合的参数（如 \(K_{T0}\)、\(K_{cv}\)）估计效果最佳。该实飞研究为后续基于在线辨识参数的自适应抗扰控制器设计提供了可靠的实验依据。
+综上所述，实际飞行试验结果表明：本文提出的基于扩展卡尔曼滤波器的气动参数在线辨识算法在实际飞行条件下能够有效工作，各参数估计值均呈现收敛趋势，且真值基本被不确定性区间覆盖。此外与仿真结果相比，实飞中参数估计的波动性有所增加，这主要源于真实环境中存在的未建模扰动与传感器噪声的复杂性。参数的可辨识性与激励条件、观测精度及参数间耦合程度密切相关，其中与高精度测量状态直接或间接耦合的参数例如 \(K_{T0}\)、\(K_{cv}\)，估计效果最佳。该实飞研究为后续基于在线辨识参数的自适应抗扰控制器设计提供了可靠的实验依据。
 
 \section{本章小结}% 1Pages
 本章针对涵道式无人机气动参数难以离线精确标定、个体差异显著且易受环境影响的问题，开展了基于扩展卡尔曼滤波器的在线参数辨识方法研究，旨在为后续高精度非线性控制器的设计提供准确的模型支撑。

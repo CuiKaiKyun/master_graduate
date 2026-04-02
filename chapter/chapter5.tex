@@ -31,7 +31,7 @@
         0 & -K_{cv} l_1 & 0 & K_{cv} l_1 & 0 \\
         0 & 0 & -K_{cv} l_1 & 0 & K_{cv} l_1 \\
         0 & K_{cv} l_2 & K_{cv} l_2 & K_{cv} l_2 & K_{cv} l_2
-    \end{bmatrix}.
+    \end{bmatrix},
 \end{equation}
 式中，\(K_T\) 为涵道风扇推力系数，\(K_{cv}\) 为控制舵面偏转力系数，\(l_1\) 和 \(l_2\) 分别为舵面压心到机体坐标系 \(O_bX_b\) 轴和 \(O_bZ_b\) 轴的距离。该矩阵为行满秩矩阵，其伪逆存在。
 
@@ -48,6 +48,7 @@
     \end{bmatrix}.
     \label{eq:B_matrix}
 \end{equation}
+
 由于控制效率矩阵 \(\boldsymbol{B}\) 仅取决于无人机的几何参数与气动系数，在飞行过程中变化缓慢，因此其伪逆 \(\boldsymbol{B}^+\) 可以离线计算并预先存储于飞控程序中，从而在实时控制中仅需执行一次矩阵乘法即可获得唯一的执行器指令。本文后续章节的所有飞行实验与仿真，均采用上述伪逆法进行控制分配。
 \section{涵道式无人机的PID控制器设计}
 
@@ -151,7 +152,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
         0 & -K_{cvGE} l_1 & 0 & K_{cvGE} l_1 & 0 \\
         0 & 0 & -K_{cvGE} l_1 & 0 & K_{cvGE} l_1 \\
         0 & K_{cvGE} l_2 & K_{cvGE} l_2 & K_{cvGE} l_2 & K_{cvGE} l_2
-    \end{bmatrix}.
+    \end{bmatrix},
     \label{eq:B_GE}
 \end{equation}
 其中，\(K_{TGE}\) 与 \(K_{cvGE}\) 采用第四章辨识得到的指数模型进行估计，具体表达式为：
@@ -163,6 +164,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
     K_{cvGE} = K_{cv}\left(1 - 0.950 \cdot e^{-1.174 \cdot (h/R)}\right).
     \label{eq:K_cvGE}
 \end{equation}
+
 上述两式中，\(K_T\) 和 \(K_{cv}\) 分别为无地效状态下的基准推力系数与舵面偏转力系数，其数值由表2-2给出。在飞行过程中，将实时测得的离地高度 \(h\) 代入式\eqref{eq:KTGE}与式\eqref{eq:K_cvGE}，即可在线计算当前高度下的实际气动系数，进而通过式\eqref{eq:B_GE}更新控制效率矩阵。在控制分配环节，将 \(\boldsymbol{B}_{GE}\) 代入伪逆分配律（式\eqref{eq:B_matrix}），即可实现期望推力与力矩向执行器指令的准确映射。实验结果表明，该方法能够补偿绝大部分由地面效应引起的推力与舵效变化，有效抑制了近地面飞行时的垂向振荡与姿态漂移。
 
 值得注意的是，推力补偿模型的实现还需考虑执行器层面的映射关系。由式\eqref{eq:KTGE}可知，在给定期望推力 \(T_{des}\) 的情况下，期望螺旋桨转速 \(\Omega_d\) 可通过下式解算：
@@ -170,6 +172,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
     \Omega_d = \sqrt{\frac{T_{des}}{K_{TGE}}}.
     \label{eq:omega_from_thrust}
 \end{equation}
+
 然而，飞控系统实际输出的是电机的油门百分比指令 \(t_{motor}\)，且螺旋桨转速与油门百分比之间的关系受电池电压影响显著。为建立准确的转速-油门映射，本文在恒定电压 \(V_{ref}=13.00\,\mathrm{V}\) 的条件下开展了静态台架实验，通过采集不同油门百分比下的稳态转速数据，拟合得到如下线性关系：
 \[
 \Omega = 1115.01 \cdot t_{motor} + 158.8,
