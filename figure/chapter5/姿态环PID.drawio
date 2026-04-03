@@ -1,18 +1,18 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0" version="29.6.6">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0">
   <diagram name="第 1 页" id="rDU5VazWkskTaKzXzy12">
-    <mxGraphModel dx="615" dy="200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="638" pageHeight="157" math="1" shadow="0">
+    <mxGraphModel dx="415" dy="88" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="638" pageHeight="157" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="Q2f1X5a2St32t1X3O_o9-13" edge="1" parent="1" source="Q2f1X5a2St32t1X3O_o9-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q2f1X5a2St32t1X3O_o9-12" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-15" connectable="0" parent="Q2f1X5a2St32t1X3O_o9-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;labelBackgroundColor=none;" value="$$\boldsymbol{M}_d$$" vertex="1">
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-15" connectable="0" parent="Q2f1X5a2St32t1X3O_o9-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;labelBackgroundColor=none;" value="$$\boldsymbol{\alpha}_d$$" vertex="1">
           <mxGeometry relative="1" x="-0.1296" as="geometry">
             <mxPoint x="-6" y="-8" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" value="角速度PID控制" vertex="1">
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;fillColor=#E8EAF6;strokeColor=#7986CB;" value="角速度PID控制" vertex="1">
           <mxGeometry height="30" width="90" x="219" y="194" as="geometry" />
         </mxCell>
         <mxCell id="Q2f1X5a2St32t1X3O_o9-34" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
@@ -31,7 +31,12 @@
             <mxPoint x="554" y="262" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" value="无人机动态" vertex="1">
+        <mxCell id="NA2qWlhjTLsnU1yJq7eu-2" edge="1" parent="1" source="Q2f1X5a2St32t1X3O_o9-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="396" y="209" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;fillColor=#d5e8d4;strokeColor=#82b366;" value="无人机动态" vertex="1">
           <mxGeometry height="30" width="90" x="476" y="194" as="geometry" />
         </mxCell>
         <mxCell id="Q2f1X5a2St32t1X3O_o9-38" edge="1" parent="1" source="Q2f1X5a2St32t1X3O_o9-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="Q2f1X5a2St32t1X3O_o9-26">
@@ -46,13 +51,13 @@
         <mxCell id="Q2f1X5a2St32t1X3O_o9-66" edge="1" parent="1" source="Q2f1X5a2St32t1X3O_o9-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Q2f1X5a2St32t1X3O_o9-45">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" value="ESKF姿态估计" vertex="1">
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;fillColor=#f8cecc;strokeColor=#b85450;" value="ESKF姿态估计" vertex="1">
           <mxGeometry height="30" width="90" x="204" y="257" as="geometry" />
         </mxCell>
         <mxCell id="Q2f1X5a2St32t1X3O_o9-17" edge="1" parent="1" source="Q2f1X5a2St32t1X3O_o9-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q2f1X5a2St32t1X3O_o9-6" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" value="控制分配" vertex="1">
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;fillColor=#fff2cc;strokeColor=#d6b656;" value="控制分配" vertex="1">
           <mxGeometry height="30" width="90" x="343" y="194" as="geometry" />
         </mxCell>
         <mxCell id="Q2f1X5a2St32t1X3O_o9-16" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;labelBackgroundColor=none;" value="$$\boldsymbol{\delta}_d, \Omega_d$$" vertex="1">
@@ -96,7 +101,7 @@
             <mxPoint x="14" y="-5" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-42" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" value="姿态PID控制" vertex="1">
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-42" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;fillColor=#E8EAF6;strokeColor=#7986CB;" value="姿态PID控制" vertex="1">
           <mxGeometry height="30" width="90" x="66" y="194" as="geometry" />
         </mxCell>
         <mxCell id="Q2f1X5a2St32t1X3O_o9-44" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;labelBackgroundColor=none;" value="$$\boldsymbol{e}_{\omega}$$" vertex="1">
@@ -149,13 +154,13 @@
             <mxPoint x="334" y="256" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-63" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" value="低通滤波器" vertex="1">
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-63" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;fillColor=#f8cecc;strokeColor=#b85450;" value="低通滤波器" vertex="1">
           <mxGeometry height="30" width="90" x="343" y="233" as="geometry" />
         </mxCell>
         <mxCell id="Q2f1X5a2St32t1X3O_o9-68" edge="1" parent="1" source="Q2f1X5a2St32t1X3O_o9-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q2f1X5a2St32t1X3O_o9-63" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Q2f1X5a2St32t1X3O_o9-67" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;" value="传感器" vertex="1">
+        <mxCell id="Q2f1X5a2St32t1X3O_o9-67" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=宋体;fillColor=#E6F2FF;strokeColor=#4C8BF5;" value="传感器" vertex="1">
           <mxGeometry height="30" width="90" x="476" y="233" as="geometry" />
         </mxCell>
       </root>

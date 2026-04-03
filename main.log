@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.12.20)  2 APR 2026 12:02
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.12.20)  3 APR 2026 22:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1287,32 +1287,31 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ] (main.toc
 [3
 
-] [4])
+] [4] [5])
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [5] (main.lof [6
+ [6] (main.lof [7
 
-] [7])
+] [8])
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
- [8] (main.lot)
+ [9] (main.lot)
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- (chapter/symbols.tex [9
+ (chapter/symbols.tex
+[10
 
-])
-(chapter/abbreviation.tex [10
+]) (chapter/abbreviation.tex [11
 
-]) [11
-
-] [12
+]) [12
 
 ] (chapter/chapter1.tex
 第\xCJKnumber {1}章 1.
 [1
+
 
 ]
 File: figure/DJI_T40.jpeg Graphic file (type bmp)
@@ -1372,11 +1371,11 @@ File: figure/chapter1/main_board.jpg Graphic file (type bmp)
 <figure/chapter1/main_board.jpg>
 File: figure/chapter1/slave_board.jpg Graphic file (type bmp)
 <figure/chapter1/slave_board.jpg>
-File: figure/chapter2/hardware_topo.png Graphic file (type bmp)
-<figure/chapter2/hardware_topo.png>
+File: figure/chapter2/hardware_topo.pdf Graphic file (type pdf)
+<use figure/chapter2/hardware_topo.pdf>
  [13]
-File: figure/chapter2/software.png Graphic file (type bmp)
-<figure/chapter2/software.png>
+File: figure/chapter2/software.pdf Graphic file (type pdf)
+<use figure/chapter2/software.pdf>
  [14] [15]
 File: figure/chapter2/coordinary.png Graphic file (type bmp)
 <figure/chapter2/coordinary.png>
@@ -1566,18 +1565,19 @@ Overfull \hbox (22.99223pt too wide) in paragraph at lines 548--549
 File: figure/chapter5/姿态环PID.pdf Graphic file (type pdf)
 <use figure/chapter5/姿态环PID.pdf>
 
-Overfull \hbox (1.50114pt too wide) in paragraph at lines 61--62
+Overfull \hbox (138.09111pt too wide) in paragraph at lines 65--66
  [][] 
  []
 
+[83]
 File: figure/chapter5/位置环PID.pdf Graphic file (type pdf)
 <use figure/chapter5/位置环PID.pdf>
 
-Overfull \hbox (5.35556pt too wide) in paragraph at lines 68--69
+Overfull \hbox (5.35556pt too wide) in paragraph at lines 86--87
  [][] 
  []
 
-[83] [84] [85]
+[84] [85]
 File: matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_speed_track.p
 df Graphic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_speed_track.pd
@@ -1695,27 +1695,82 @@ Overfull \hbox (22.99223pt too wide) in paragraph at lines 415--416
  []
 
 [90] [91]
-File: matlab/ground_effect/Attitude_Tracking_Combined.pdf Graphic file (type pd
-f)
-<use matlab/ground_effect/Attitude_Tracking_Combined.pdf>
-File: matlab/ground_effect/Z_Pos_Vel_Combined.pdf Graphic file (type pdf)
-<use matlab/ground_effect/Z_Pos_Vel_Combined.pdf>
-) (chapter/chapter6.tex [92] [93]
+File: figure/chapter5/地面效应抗扰控制.pdf Graphic file (type pdf)
+<use figure/chapter5/地面效应抗扰控制.pdf>
+
+Overfull \hbox (0.53755pt too wide) in paragraph at lines 439--440
+ [][] 
+ []
+
+File: figure/chapter5/real_flght_scene_1.jpg Graphic file (type bmp)
+<figure/chapter5/real_flght_scene_1.jpg>
+File: figure/chapter5/real_flght_scene_2.jpg Graphic file (type bmp)
+<figure/chapter5/real_flght_scene_2.jpg>
+File: figure/chapter5/real_flght_scene_3.jpg Graphic file (type bmp)
+<figure/chapter5/real_flght_scene_3.jpg>
+File: figure/chapter5/real_flght_scene_4.jpg Graphic file (type bmp)
+<figure/chapter5/real_flght_scene_4.jpg>
+[92] [93]
+File: matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_pos.pdf Graphi
+c file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_pos.pdf>
+File: matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_vel.pdf Graphi
+c file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_vel.pdf>
+File: matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_pos.pdf Graphic fi
+le (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_pos.pdf>
+File: matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_vel.pdf Graphic fi
+le (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_vel.pdf>
+ [94] [95] [96]
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_cmp_yaw.pdf Graphi
+c file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_cmp_yaw.pdf>
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_cmp_gyro_z.pdf Gra
+phic file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_cmp_gyro_z.pdf>
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_yaw.pdf Graphic fi
+le (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_yaw.pdf>
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_gyro_z.pdf Graphic
+ file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_gyro_z.pdf>
+
+
+LaTeX Warning: Float too large for page by 5.28354pt on input line 650.
+
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_cmp_yaw.pdf Graphi
+c file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_cmp_yaw.pdf>
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_cmp_gyro_z.pdf Gra
+phic file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_cmp_gyro_z.pdf>
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_yaw.pdf Graphic fi
+le (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_yaw.pdf>
+File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_gyro_z.pdf Graphic
+ file (type pdf)
+<use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_gyro_z.pdf>
+
+LaTeX Warning: Float too large for page by 5.28354pt on input line 678.
+
+[97] [98] [99] [100] [101]) (chapter/chapter6.tex [102]
 第\xCJKnumber {6}章 6.
-) [94
+) [103
 
-] (chapter/conclusion.tex) [95
+] (chapter/conclusion.tex) [104
 
 
-] [96
+] [105
 
-] [97] [98] [99] [100]
-(chapter/appendix.tex [101] [102
+] [106] [107] [108] [109]
+(chapter/appendix.tex [110] [111
 
-] [103] [104]) (chapter/pub.tex [105])
-(chapter/ack.tex [106
+] [112] [113]) (chapter/pub.tex [114])
+(chapter/ack.tex [115
 
-]) [107
+]) [116
 
 ] (main.aux)
  ***********
@@ -1723,18 +1778,18 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: EC9876ACB76C07CB3EF7ED80FB8DEA19;12463.
+(rerunfilecheck)             Checksum: ABC46AB9A4659C982453A23F3C41BC5B;13592.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36075 strings out of 409616
- 725061 string characters out of 5778254
+ 36211 strings out of 409616
+ 732973 string characters out of 5778254
  1955191 words of memory out of 5000000
- 57634 multiletter control sequences out of 15000+600000
+ 57754 multiletter control sequences out of 15000+600000
  572354 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 94i,16n,107p,1396b,5009s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,16n,107p,1396b,5011s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (120 pages).
+Output written on main.pdf (129 pages).

@@ -8,15 +8,15 @@
 
 \section{涵道式无人机的控制分配器的设计}
 
-控制分配器是飞行控制系统中的一个关键环节，其作用是将控制器计算得到的期望力和力矩，按照一定的优化准则，合理地分配给各个执行器。对于涵道式无人机而言，控制器输出为期望的总推力 \(T_{df}\) 和期望的控制力矩 \(\boldsymbol{M}_{cv} = [M_x, M_y, M_z]^T\)，而执行器包括螺旋桨转速 \(\Omega\) 和四个控制舵面的偏转角 \(\boldsymbol{\delta} = [\delta_1, \delta_2, \delta_3, \delta_4]^T\)。由于执行器数目（5个）多于控制量数目（4个），系统为过驱动系统。对于控制可达范围内的任意期望控制效应，均存在无穷多组执行器指令能够实现，因此必须设计控制分配器以确定唯一、可行的执行器解。
+控制分配器是飞行控制系统中的一个关键环节，其作用是将控制器计算得到的期望力和力矩，按照一定的优化准则，合理地分配给各个执行器。对于涵道式无人机而言，控制器输出为期望的总推力 \(T_d\) 和期望的控制力矩 \(\boldsymbol{M}_d = [M_x, M_y, M_z]^T\)，而执行器包括螺旋桨转速 \(\Omega\) 和四个控制舵面的偏转角 \(\boldsymbol{\delta} = [\delta_1, \delta_2, \delta_3, \delta_4]^T\)。由于执行器数目（5个）多于控制量数目（4个），系统为过驱动系统。对于控制可达范围内的任意期望控制效应，均存在无穷多组执行器指令能够实现，因此必须设计控制分配器以确定唯一、可行的执行器解。
 
 伪逆法是目前工程中应用最广泛的控制分配方法之一。该方法通过求解最小二乘问题，在满足期望控制效应的前提下，使得执行器指令的加权范数最小。伪逆解具有唯一解析形式，且计算量小，适合实时嵌入式实现。对于线性控制效率模型，伪逆法通过计算控制效率矩阵的Moore-Penrose伪逆，直接得到执行器指令。
 
 假设涵道式无人机的执行器输出与期望推力、控制力矩之间满足如下线性关系：
 \begin{equation}
     \begin{bmatrix}
-        T_{df} \\
-        \boldsymbol{M}_{cv}
+        T_d \\
+        \boldsymbol{M}_d
     \end{bmatrix} = \boldsymbol{B}
     \begin{bmatrix}
         \Omega \\
@@ -35,16 +35,16 @@
 \end{equation}
 式中，\(K_T\) 为涵道风扇推力系数，\(K_{cv}\) 为控制舵面偏转力系数，\(l_1\) 和 \(l_2\) 分别为舵面压心到机体坐标系 \(O_bX_b\) 轴和 \(O_bZ_b\) 轴的距离。该矩阵为行满秩矩阵，其伪逆存在。
 
-采用伪逆法，在给定期望推力 \(T_{df}\) 和期望力矩 \(\boldsymbol{M}_{cv}\) 的前提下，执行器向量 \(\boldsymbol{u} = [\Omega, \boldsymbol{\delta}^T]^T\) 可由下式唯一确定：
+采用伪逆法，在给定期望推力 \(T_d\) 和期望力矩 \(\boldsymbol{M}_d\) 的前提下，执行器向量 \(\boldsymbol{u} = [\Omega, \boldsymbol{\delta}^T]^T\) 可由下式唯一确定：
 \begin{equation}
     \boldsymbol{u} = \boldsymbol{B}^+ \cdot \begin{bmatrix}
-        T_{df} \\
-        \boldsymbol{M}_{cv}
+        T_d \\
+        \boldsymbol{M}_d
     \end{bmatrix} = 
         \boldsymbol{B}^T(\boldsymbol{B}\boldsymbol{B}^T)^{-1} \cdot 
     \begin{bmatrix}
-        T_{df} \\
-        \boldsymbol{M}_{cv}
+        T_d \\
+        \boldsymbol{M}_d
     \end{bmatrix}.
     \label{eq:B_matrix}
 \end{equation}
@@ -52,9 +52,13 @@
 由于控制效率矩阵 \(\boldsymbol{B}\) 仅取决于无人机的几何参数与气动系数，在飞行过程中变化缓慢，因此其伪逆 \(\boldsymbol{B}^+\) 可以离线计算并预先存储于飞控程序中，从而在实时控制中仅需执行一次矩阵乘法即可获得唯一的执行器指令。本文后续章节的所有飞行实验与仿真，均采用上述伪逆法进行控制分配。
 \section{涵道式无人机的PID控制器设计}
 
-本文设计的控制器在经典PID控制器的基础上进行优化，本小节介绍串级PID控制器的基本结构。PID控制器因其结构简单、参数物理意义明确、易于工程实现且在不依赖精确模型的情况下仍能保证一定的鲁棒性，在工业控制与无人机领域中得到了广泛应用。其控制律由比例（Proportional）、积分（Integral）和微分（Derivative）三个环节线性组合而成，分别用于响应当前误差、消除稳态偏差和预测误差变化趋势。
+本文设计的控制器在经典PID控制器的基础上进行优化，本小节介绍串级PID控制器的基本结构。PID控制器因其结构简单、参数物理意义明确、易于工程实现且在不依赖精确模型的情况下仍能保证一定的鲁棒性，在工业控制与无人机领域中得到了广泛应用。
 
-本节所采用的串级PID控制器分为外环与内环两个层次：外环为位置环和速度环，负责生成期望姿态与期望角速度；内环为姿态环和角速度环，负责实现期望姿态的快速跟踪。完整的控制系统结构如图\ref{fig:angle_PID}（姿态环）和图\ref{fig:pos_PID}（位置环）所示。下面从内环到外环依次阐述各控制器的设计。
+本节所采用的串级PID控制器分为外环与内环两个层次：外环为位置环和速度环，负责生成期望姿态与期望角速度；内环为姿态环和角速度环，负责实现期望姿态的快速跟踪。内环和外环完整的控制系统结构分别如图\ref{fig:angle_PID}和图\ref{fig:pos_PID}所示。下面从内环到外环依次阐述各控制器的设计。
+
+\subsection{内环控制器}
+
+内环控制器包括角速度环与姿态环，以较高的带宽保证无人机的姿态稳定。
 
 \begin{figure}[htbp]
     \centering
@@ -63,18 +67,7 @@
     \label{fig:angle_PID}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics{figure/chapter5/位置环PID.pdf}
-    \caption{位置PID闭环控制系统框图}
-    \label{fig:pos_PID}
-\end{figure}
-
-\subsection{内环控制器}
-
-内环控制器包括角速度环与姿态环，以较高的带宽保证无人机的姿态稳定。
-
-角速度环以机体坐标系下的角速度 \(\boldsymbol{\omega}^b = [p, q, r]^T\) 为被控量。三个通道各自独立使用一个PID控制器，控制器的输出为期望的控制力矩 \(\boldsymbol{M}_{cv}\in\mathbb{R}^3\)。设期望角速度为 \(\boldsymbol{\omega}_d^b\)，则角速度误差为 \(\boldsymbol{e}_{\boldsymbol{\omega}} = \boldsymbol{\omega}_d^b - \boldsymbol{\omega}^b\)。第 \(i\) 个通道的PID控制律可表示为：
+角速度环以机体坐标系下的角速度 \(\boldsymbol{\omega}^b = [p, q, r]^T\) 为被控量。三个通道各自独立使用一个PID控制器，控制器的输出为期望的控制力矩 \(\boldsymbol{M}_d\in\mathbb{R}^3\)。设期望角速度为 \(\boldsymbol{\omega}_d^b\)，则角速度误差为 \(\boldsymbol{e}_{\boldsymbol{\omega}} = \boldsymbol{\omega}_d^b - \boldsymbol{\omega}^b\)。第 \(i\) 个通道的PID控制律可表示为：
 \[
 M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt + K_{d,\omega_i} \frac{d e_{\omega,i}}{dt}, \quad i = p,q,r.
 \]
@@ -88,6 +81,13 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 
 外环控制器包括速度环与位置环，用于实现期望的位置与速度跟踪。
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{figure/chapter5/位置环PID.pdf}
+    \caption{位置PID闭环控制系统框图}
+    \label{fig:pos_PID}
+\end{figure}
+
 速度环以地面坐标系下的速度 \(\boldsymbol{v}^e = [v_x^e, v_y^e, v_z^e]^T\) 为被控量，其输出为期望加速度在世界坐标系下的投影 \(\boldsymbol{a}_d^e\)。设期望速度为 \(\boldsymbol{v}_d\)，速度误差为 \(\boldsymbol{e}_{\boldsymbol{v}} = \boldsymbol{v}_d - \boldsymbol{v}\)，则速度环PID控制律为：
 \[
 \boldsymbol{a}_d^e = K_{p,v} \boldsymbol{e}_{\boldsymbol{v}} + K_{i,v} \int \boldsymbol{e}_{\boldsymbol{v}}\, dt + K_{d,v} \frac{d \boldsymbol{e}_{\boldsymbol{v}}}{dt}.
@@ -98,7 +98,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 \boldsymbol{v}_d = K_{p,p} \boldsymbol{e}_{\boldsymbol{p}} + K_{i,p} \int \boldsymbol{e}_{\boldsymbol{p}}\, dt + K_{d,p} \frac{d \boldsymbol{e}_{\boldsymbol{p}}}{dt}.
 \]
 
-值得注意的是，内环的输入为期望姿态 \(\boldsymbol{\eta}_d\)，而外环（速度环）的输出为期望加速度 \(\boldsymbol{a}_d^e\)。为实现两者的衔接，需采用几何控制算法将期望加速度转换为期望姿态。具体而言，由于涵道无人机是欠驱动系统，平动加速度主要由总推力向量在空间中的指向决定。因此，算法需要将期望加速度 $\boldsymbol{a}_d^e$ 分解为沿机体轴向的期望推力加速度 $a_{d,z}^b$ 以及用于确定机体指向的方向向量。该方向向量结合当前旋转矩阵，进一步解算出无人机达成该加速度所需的期望姿态角 $\boldsymbol{\eta}_d$，从而实现了从外环平动需求到内环转动指令的物理映射。该几何变换保证了外环输出的加速度指令能够被内环姿态控制器有效执行。
+值得注意的是，内环的输入为期望姿态 \(\boldsymbol{\eta}_d\)，而外环的输出为期望加速度 \(\boldsymbol{a}_d^e\)。为实现两者的衔接，需采用几何控制算法将期望加速度转换为期望姿态。具体而言，由于涵道无人机是欠驱动系统，平动加速度主要由总推力向量在空间中的指向决定。因此，算法需要将期望加速度 $\boldsymbol{a}_d^e$ 分解为沿机体轴向的期望推力加速度 $a_{d,z}^b$ 以及用于确定机体指向的方向向量。该方向向量结合当前旋转矩阵，进一步解算出无人机达成该加速度所需的期望姿态角 $\boldsymbol{\eta}_d$，从而实现了从外环平动需求到内环转动指令的物理映射。该几何变换保证了外环输出的加速度指令能够被内环姿态控制器有效执行。
 
 所有PID控制器的参数均通过试凑法进行整定，并在实际飞行试验中进行了迭代优化。实验表明，尽管涵道无人机受到地面效应或外部气流的扰动，由于PID的鲁棒性，基于该串级PID控制器的涵道式无人机系统依然能够在悬停点附近稳定飞行，具有良好的鲁棒性和动态响应特性。
 
@@ -125,7 +125,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 
 % \subsection{内环控制器}
 % 角速度环以\(\boldsymbol{\omega}^b = [p, q, r]^T\)为被控量。
-% 三个被控量各自使用一个PID控制器，以$\boldsymbol{M}_{cv}$为输出量。
+% 三个被控量各自使用一个PID控制器，以$\boldsymbol{M}_d$为输出量。
 % 设期望角速度为 \(\boldsymbol{\omega}_d^b\)，角速度误差为 \(\boldsymbol{e}_\boldsymbol{\omega} = \boldsymbol{\omega}_d^b - \boldsymbol{\omega}^b\)。
 
 % 姿态环以欧拉角 \(\boldsymbol{\eta} = [\varphi, \theta, \psi]^T\) 为被控量。以期望角速度$\boldsymbol{\omega}^b$为输出量。
@@ -165,11 +165,11 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
     \label{eq:K_cvGE}
 \end{equation}
 
-上述两式中，\(K_T\) 和 \(K_{cv}\) 分别为无地效状态下的基准推力系数与舵面偏转力系数，其数值由表2-2给出。在飞行过程中，将实时测得的离地高度 \(h\) 代入式\eqref{eq:KTGE}与式\eqref{eq:K_cvGE}，即可在线计算当前高度下的实际气动系数，进而通过式\eqref{eq:B_GE}更新控制效率矩阵。在控制分配环节，将 \(\boldsymbol{B}_{GE}\) 代入伪逆分配律（式\eqref{eq:B_matrix}），即可实现期望推力与力矩向执行器指令的准确映射。实验结果表明，该方法能够补偿绝大部分由地面效应引起的推力与舵效变化，有效抑制了近地面飞行时的垂向振荡与姿态漂移。
+上述两式中，\(K_T\) 和 \(K_{cv}\) 分别为无地效状态下的基准推力系数与舵面偏转力系数，其数值由表2-2给出。在飞行过程中，将实时测得的离地高度 \(h\) 代入式\eqref{eq:KTGE}与式\eqref{eq:K_cvGE}，即可在线计算当前高度下的实际气动系数，进而通过式\eqref{eq:B_GE}更新控制效率矩阵。在控制分配环节，将 \(\boldsymbol{B}_{GE}\) 代入伪逆分配律式\eqref{eq:B_matrix}，即可实现期望推力与力矩向执行器指令的准确映射。实验结果表明，该方法能够补偿绝大部分由地面效应引起的推力与舵效变化，有效抑制了近地面飞行时的垂向振荡与姿态漂移。
 
-值得注意的是，推力补偿模型的实现还需考虑执行器层面的映射关系。由式\eqref{eq:KTGE}可知，在给定期望推力 \(T_{des}\) 的情况下，期望螺旋桨转速 \(\Omega_d\) 可通过下式解算：
+值得注意的是，推力补偿模型的实现还需考虑执行器层面的映射关系。由式\eqref{eq:KTGE}可知，在给定期望推力 \(T_{d}\) 的情况下，期望螺旋桨转速 \(\Omega_d\) 可通过下式解算：
 \begin{equation}
-    \Omega_d = \sqrt{\frac{T_{des}}{K_{TGE}}}.
+    \Omega_d = \sqrt{\frac{T_{d}}{K_{TGE}}}.
     \label{eq:omega_from_thrust}
 \end{equation}
 
@@ -250,7 +250,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
     
 \textbf{2. 高度工况设定}：根据涵道风扇地面效应的作用范围，选取三个具有代表性的离地高度进行测试，分别为 \(h = 50\,\mathrm{mm}\)、\(100\,\mathrm{mm}\) 和 \(200\,\mathrm{mm}\)，对应的无量纲高度比分别为 \(h/R = 0.56\)、\(1.12\) 和 \(2.25\)。其中 \(h/R = 0.56\) 处于强地面效应区，\(h/R = 1.12\) 处于地效过渡区，\(h/R = 2.25\) 处于弱地效区。通过调节龙门架上的竖直导轨，将气流约束板依次固定至各高度位置。
     
-\textbf{3. 期望推力序列设定}：在每个固定的离地高度下，依次给控制分配模块设定一系列期望推力值 \(T_d\)。期望推力的设定范围覆盖无人机悬停工况及小幅度加减速工况，以悬停推力 \(T_{\mathrm{hover}} = 4.48\,\mathrm{N}\)（对应样机重量）为中心，在 \(3.5\,\mathrm{N}\) 至 \(5.0\,\mathrm{N}\) 范围内，以\(0.1\,\mathrm{N}\)为步长均匀选取多个测试点。控制分配模块根据当前高度下的地面效应模型，通过式\eqref{eq:omega_from_thrust}解算期望螺旋桨转速 \(\Omega_d\)。
+\textbf{3. 期望推力序列设定}：在每个固定的离地高度下，依次给控制分配模块设定一系列期望推力值 \(T_d\)。期望推力的设定范围覆盖无人机悬停工况及小幅度加减速工况，以悬停推力 \(T_{\mathrm{hover}} = 4.48\,\mathrm{N}\)为中心，在 \(3.5\,\mathrm{N}\) 至 \(5.0\,\mathrm{N}\) 范围内，以\(0.1\,\mathrm{N}\)为步长均匀选取多个测试点。控制分配模块根据当前高度下的地面效应模型，通过式\eqref{eq:omega_from_thrust}解算期望螺旋桨转速 \(\Omega_d\)。
     
 \textbf{4. 执行器指令映射}：将解算得到的期望转速 \(\Omega_d\) 代入转速-油门映射关系式\eqref{eq:throttle_mapping}，结合实时采集的电池电压 \(V_{bat}\)，计算出对应的电机油门百分比指令 \(t_{motor}\)，并通过飞控系统输出至电机电调。
     
@@ -276,7 +276,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 
 \subsubsection{实验数据}
 
-按照上述实验步骤完成数据采集与预处理后，本小节对推力补偿效果进行定量分析与可视化展示。实验数据覆盖三个典型无量纲高度 \(h/R = 0.56\)、\(1.12\) 和 \(2.25\)，在每个高度下，通过对比推力补偿算法部署前后（实验组与对照组）的实际推力输出与螺旋桨转速跟踪情况，验证补偿方法的有效性。
+按照上述实验步骤完成数据采集与预处理后，本小节对推力补偿效果进行定量分析与可视化展示。实验数据覆盖三个典型无量纲高度 \(h/R = 0.56\)、\(1.12\) 和 \(2.25\)，在每个高度下，通过对比推力补偿算法部署前后的实际推力输出与螺旋桨转速跟踪情况，验证补偿方法的有效性。
 
 % \subsubsection{实验数据}
 % 按照上述实验步骤完成数据采集与预处理后，本小节对推力补偿效果进行定量分析与可视化展示。
@@ -365,7 +365,7 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 
 \subsubsection{实验数据}
 
-按照上述实验步骤完成数据采集与预处理后，本小节对舵面偏转力补偿效果进行定量分析与可视化展示。实验数据覆盖三个典型无量纲高度 \(h/R = 0.56\)、\(1.12\) 和 \(2.25\)，在每个高度下，通过对比补偿算法部署前后（实验组与对照组）的实际 \(Z\) 轴扭矩输出跟踪情况，验证补偿方法的有效性。
+按照上述实验步骤完成数据采集与预处理后，本小节对舵面偏转力补偿效果进行定量分析与可视化展示。实验数据覆盖三个典型无量纲高度 \(h/R = 0.56\)、\(1.12\) 和 \(2.25\)，在每个高度下，通过对比补偿算法部署前后的实际 \(Z\) 轴扭矩输出跟踪情况，验证补偿方法的有效性。
 
 \begin{figure}[htbp]
     \centering
@@ -421,25 +421,328 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 为直观展示舵面偏转力补偿效果，将各高度下期望扭矩 \(M_{z,d}\)、补偿后实测扭矩 \(M_z\) 以及未补偿时实测扭矩 \(M_z^{\prime}\) 绘制于同一图中，结果如图\ref{fig:moemnt_tracking_50mm}、\ref{fig:moemnt_tracking_100mm}和\ref{fig:moemnt_tracking_200mm}所示。从图中可以观察到，未施加补偿时，实测扭矩 \(M_z^{\prime}\) 与期望扭矩 \(M_{z,d}\) 存在显著偏差：在强地效区（\(h/R = 0.56\)），实际输出扭矩较期望值偏大约 \(20\%\)～\(25\%\)；在地效过渡区（\(h/R = 1.12\)），偏差缩小至 \(10\%\) 左右；在弱地效区（\(h/R = 2.25\)），偏差进一步减小至 \(5\%\) 以内。这一现象与第四章地面效应辨识结果一致：近地面时舵面偏转力高于无地效基准值，且偏差随高度降低而增大。采用补偿算法后，实测扭矩 \(M_z\) 与期望扭矩 \(M_{z,d}\) 在各高度下均表现出良好的一致性，稳态误差稳定控制在 \(10\%\) 以内，验证了补偿模型的有效性。
 
 为直观展示 \(K_{cvGE}\) 动态补偿的作用机理，本小节将各高度下两组实验的控制舵面期望偏转角进行对比分析。记录未补偿时解算的期望偏转角 \(\delta_d^{\prime}\) 与补偿时解算的期望偏转角 \(\delta_d\)，绘制结果如图\ref{fig:motor_angle_50mm}、\ref{fig:motor_angle_100mm}和\ref{fig:motor_angle_200mm}所示。从图中可以看出，在相同期望扭矩指令下，补偿组解算的期望偏转角 \(\delta_d\) 显著小于未补偿组 \(\delta_d^{\prime}\)。以 \(h/R = 0.56\)、期望扭矩 \(0.03\,\mathrm{N\cdot m}\) 为例，补偿组期望偏转角约为 \(10^\circ\)，而未补偿组约为 \(13^\circ\)，两者相差约 \(3^\circ\)。这正是补偿算法通过动态调整舵面偏角来抵消地效引起的舵面效率增益的具体体现。
-\section{无人机地面效应抗扰控制}
-部署上述抗扰算法后，进行无人机实飞测试。
+
+\section{涵道式无人机地面效应抗扰控制}
+为验证本文所提出的地面效应补偿算法在实际飞行环境中的有效性与鲁棒性，本小节以涵道式无人机实验样机为对象，开展近地面抗扰控制实飞实验。实验在室内动作捕捉系统的有效测量空间内进行，通过对比是否部署地面效应补偿算法时无人机在近地面端的高度位置阶跃响应与偏航角阶跃响应，定量评估推力补偿与舵面偏转力补偿对控制性能的改善效果。
+
+部署上述抗扰算法后，无人机飞行控制系统的局部框图如图\ref{fig:anti_ge_system}所示。几何控制模块根据期望加速度与当前姿态解算期望推力与期望力矩，内环姿态控制器输出期望角加速度。上述期望量共同输入至控制分配模块。控制分配模块首先根据无人机质量 \(m\) 与转动惯量矩阵 \(\boldsymbol{J}\)，将期望加速度与角加速度转换为期望推力 \(T_d\) 与期望控制力矩 \(\boldsymbol{M}_d\)；同时，通过机载激光测距模块实时获取当前离地高度 \(h\)，据此动态更新地面效应下的推力系数 \(K_{TGE}\) 与舵面偏转力系数 \(K_{cvGE}\)，进而构建修正控制效率矩阵 \(\boldsymbol{B}_{GE}\)。最后，采用伪逆法解算执行器期望输出（螺旋桨转速 \(\Omega_d\) 与舵面偏转角 \(\boldsymbol{\delta}_d\)），实现期望控制效应的准确分配。
+% 本小节将使用本文研究的涵道式无人机执行实际飞行试验。
+
+% 部署上述抗扰算法后，进行无人机实飞测试。
+
+% 部署抗扰动控制后的实际飞行测试的局部系统框图如下图\ref{fig:anti_ge_system}所示。
+
+% 几何控制输出的期望加速度和内环输出的期望角加速度给到控制分配模块。控制分配模块首先根据无人机的质量$m$和无人机的转动惯量矩阵$\boldsymbol{J}$，将其转换为期望的推力$T_d$以及期望控制力矩$M_d$。并且获取当前离地高度$h$。更新当前系数$K_{TGE}$和$K_{cvGE}$，获取控制效应矩阵$B_{GE}$。从而通过伪逆法计算出执行器的期望输出。
 
 \begin{figure}[htbp]
     \centering
+    \includegraphics{figure/chapter5/地面效应抗扰控制.pdf}
+    \caption{抗扰控制局部系统框图}
+    \label{fig:anti_ge_system}
+\end{figure}
+
+无人机实际飞行试验过程如图\ref{fig:anti_ge_flight}所示，涵盖了近地面悬停、高度阶跃响应等典型工况。
+
+\begin{figure}[htbp]
     \centering
-    \includegraphics{matlab/ground_effect/Attitude_Tracking_Combined.pdf}
-    \caption{实飞过程中姿态角跟随曲线}
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.20\textheight]{figure/chapter5/real_flght_scene_1.jpg}
+        \caption*{(a)}
+    \end{minipage}
+    \hfill  % 产生弹性水平间距
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.20\textheight]{figure/chapter5/real_flght_scene_2.jpg}
+        \caption*{(b)}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.20\textheight]{figure/chapter5/real_flght_scene_3.jpg}
+        \caption*{(c)}
+    \end{minipage}
+    \hfill  % 产生弹性水平间距
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.20\textheight]{figure/chapter5/real_flght_scene_4.jpg}
+        \caption*{(d)}
+    \end{minipage}
+    \caption{无人机地面效应抗扰控制实际飞行试验}
+    \label{fig:anti_ge_flight}
+\end{figure}
+
+为保证系统在开放空间与近地面端具有一致的动态特性，两组实验均采用相同的串级PID控制器及其参数，且PID参数事先在开放空间下通过飞行试验整定完成。实验分为两组：第一组启用地面效应补偿算法（实验组），第二组不启用补偿算法（对照组）。通过对比无人机在近地面端的高度位置 \(p_z^e\) 阶跃响应以及不同高度下的偏航角 \(\psi\) 阶跃响应，分别验证推力补偿算法与控制舵面偏转角补偿算法的实际效果。
+
+% 为保持系统能够在开放空间和近地面端能够有相同的动态特性，系统的PID控制器以及其参数在这两个环境下保持统一。
+
+% 实验分两组进行，一组使用地面效应补偿算法，一组不使用。实验比较无人机在近地面端的高度位置$p_z^e$阶跃响应以及不同高度下的偏航角$\psi$阶跃响应以展示推力和控制舵面偏转角的地面效应补偿算法效果。
+
+% 实验开始前，事先在开放空间下进行飞行试验并整定PID参数。
+\subsection{高度位置阶跃响应实验步骤}
+高度位置阶跃响应实验旨在验证推力补偿算法对地面效应下高度控制的改善效果。具体实验步骤如下：
+
+1. 无人机上电后静置 \(10\,\mathrm{s}\)，待位姿估计滤波器收敛且动态捕捉系统数据稳定。
+
+2. 向无人机发送起飞指令，无人机起飞并在高度 \(0.65\,\mathrm{m}\) 处保持稳定悬停。
+
+3. 待无人机在空中稳定悬停 \(5\,\mathrm{s}\) 后，开始施加高度阶跃指令序列：依次给定期望高度为 \(0.3\,\mathrm{m}\) 和 \(0.1\,\mathrm{m}\)，分别对应无量纲高度 \(h/R \approx 3.37\) 与 \(h/R \approx 1.12\)，覆盖地效过渡区与强地效区。每个期望高度指令持续 \(5\,\mathrm{s}\)，并重复上述阶跃序列共三次，以验证算法的重复性与稳定性。
+
+4. 飞行过程中，以 \(100\,\mathrm{Hz}\) 的采样频率记录以下数据：期望位置高度 \(p_{z,d}^e\)、实际位置高度 \(p_z^e\)、期望 \(Z\) 轴速度 \(v_{z,d}^e\)、实际 \(Z\) 轴速度 \(v_z^e\)、期望加速度 \(a_{z,d}^e\) 以及期望螺旋桨转速 \(\Omega_d\)，所有数据连同对应时间戳一并保存至机载 SD 卡。
+
+5. 完成所有高度阶跃测试后，向无人机发送降落指令，结束本次实验。
+
+6. 每组实验重复三至四次，以排除单次飞行中的偶然误差，保证实验结论的可靠性。
+
+实验结束后，将 SD 卡中记录的数据导出至计算机进行离线处理与分析。通过对比实验组与对照组在不同高度阶跃指令下的高度跟踪误差、响应速度及稳态精度，定量评估推力补偿算法对近地面高度控制的改善效果。
+
+% \subsection{高度位置阶跃响应实验步骤}
+% 具体实验步骤如下
+% 1. 无人机上电后静置10秒待位姿估计收敛，以及动态捕捉系统数据稳定。
+% 2. 向无人机发送起飞指令，无人机起飞并在高度为0.65m处保持稳定
+% 3. 待无人机在空中稳定悬停5s后，开始给定高度阶跃指令，轮流给定期望高度为0.3m，0.1m，给定高度后保持指令5s，反复执行3次。
+% 4. 记录飞行过程中的期望位置高度，实际位置高度，期望z轴速度，实际z轴速度，期望加速度以及期望螺旋桨转速，并将这些数据以及对应的时间戳保存在SD卡中。
+% 5. 向无人机发送降落指令。
+% 6. 上述步骤每个实验重复三到四次。
+\subsection{高度位置阶跃响应实验数据分析}
+
+按照上述实验步骤完成飞行测试后，对采集到的高度位置与速度数据进行离线处理与分析。本小节通过对比未引入补偿与引入补偿两组实验的 $Z$ 轴高度 $p_z^e$ 跟随曲线和 $Z$ 轴速度 $v_z^e$ 跟随曲线，定量评估推力补偿算法对近地面高度控制的改善效果。
+
+未引入地面效应补偿时，$Z$ 轴高度 $p_z^e$ 跟随曲线和速度 $v_z^e$ 跟随曲线分别如图\ref{fig:anti_height_cmp_p}和图\ref{fig:anti_height_cmp_v}所示；引入补偿后，相应的跟随曲线如图\ref{fig:anti_height_p}和图\ref{fig:anti_height_v}所示。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_pos.pdf}
+    \caption{未引入补偿时 $Z$ 轴高度 $p_z^e$ 跟随曲线}
+    \label{fig:anti_height_cmp_p}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \centering
-    \includegraphics{matlab/ground_effect/Z_Pos_Vel_Combined.pdf}
-    \caption{位置速度跟随曲线}
+    \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_vel.pdf}
+    \caption{未引入补偿时 $Z$ 轴速度 $v_z^e$ 跟随曲线}
+    \label{fig:anti_height_cmp_v}
 \end{figure}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_pos.pdf}
+    \caption{引入补偿后 $Z$ 轴高度 $p_z^e$ 跟随曲线}
+    \label{fig:anti_height_p}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_vel.pdf}
+    \caption{引入补偿后 $Z$ 轴速度 $v_z^e$ 跟随曲线}
+    \label{fig:anti_height_v}
+\end{figure}
+
+从图中可以看出，实验开始后，无人机先由 $0.65\,\mathrm{m}$ 阶跃至 $0.3\,\mathrm{m}$，之后在 $0.3\,\mathrm{m}$ 与 $0.1\,\mathrm{m}$ 之间周期性地来回切换。其中 $0.3\,\mathrm{m}$ 对应弱地效区（$h/R \approx 3.4$），$0.1\,\mathrm{m}$ 对应强地效区（$h/R \approx 1.1$）。
+
+由图\ref{fig:anti_height_cmp_p}可见，在 $t = 0\,\mathrm{s}$ 附近，无人机高度位置从 $0.65\,\mathrm{m}$ 向 $0.3\,\mathrm{m}$ 的阶跃响应中，高度位置跟踪较为平缓，未出现明显超调。这是由于 $0.3\,\mathrm{m}$ 处于弱地效区，地面效应对推力的增益尚不显著，在开放空间整定的 PID 参数仍能较好地维持系统稳定。相应地，由图\ref{fig:anti_height_cmp_v}可见，速度跟随曲线也表现良好，未出现明显超调，响应迅速。这说明在无地效区及弱地效范围内，原有 PID 参数具有足够的鲁棒性。
+
+然而，当无人机在 $t \approx 6\,\mathrm{s}$ 处从 $0.3\,\mathrm{m}$ 阶跃下降至 $0.1\,\mathrm{m}$ 时，控制品质显著恶化。从图\ref{fig:anti_height_cmp_p}可以看出，实际高度虽然能够对阶跃指令做出响应，但难以收敛至稳态值，出现持续的振荡与稳态误差。同时，速度跟随曲线（图\ref{fig:anti_height_cmp_v}）呈现出明显的超调与多次振荡，在高度切换瞬间速度峰值远超期望值，且调节时间显著延长。
+
+造成上述现象的根本原因在于：$0.1\,\mathrm{m}$ 处于强地效区，根据第四章辨识结果，该高度下涵道风扇的推力系数 $K_{TGE}$ 较无地效状态显著增大。在相同的螺旋桨转速指令下，实际产生的推力远大于控制器预期，导致高度下降过程中减速不足，甚至出现“触底反弹”式的振荡。此外，推力对转速变化的灵敏度增强，使得原本在开放空间整定的 PID 增益相对过高，进一步放大了系统的超调与振荡。速度环需要依赖积分项缓慢地降低转速指令以抵消多余推力，这一过程严重拖慢了系统响应，降低了起飞与降落阶段的安全性。
+
+相比之下，引入地面效应补偿算法后，系统的近地面控制性能得到显著改善。从图\ref{fig:anti_height_p}可以看出，在 $t \approx 6\,\mathrm{s}$ 处从 $0.3\,\mathrm{m}$ 向 $0.1\,\mathrm{m}$ 的阶跃响应中，实际高度能够迅速、平滑地跟踪期望轨迹，两者高度贴合，稳态误差在 $2\,\mathrm{s}$ 内基本收敛至零，过渡过程平稳且无明显超调。更为重要的是，无人机在 $0.3\,\mathrm{m}$ 与 $0.1\,\mathrm{m}$ 两个高度上的动态表现高度一致，均展现出良好的跟踪性能，表明补偿算法有效消除了地面效应对推力特性的非线性调制，使得闭环系统在不同高度下具有一致的动态特性。
+
+从速度跟随曲线（图\ref{fig:anti_height_v}）同样可以看出，引入补偿后速度环的超调与振荡现象基本消除，实际速度能够平稳地跟随期望速度曲线，稳态误差控制在可接受范围内，响应速度与无地效区相当。
+
+高度位置阶跃响应实验结果表明：本文所提出的地面效应推力补偿算法能够有效克服强地效区推力增益带来的不利影响，显著改善近地面高度控制的稳态精度与动态品质，使无人机在 $0.1\,\mathrm{m}$ 与 $0.3\,\mathrm{m}$ 高度上展现出高度一致的动态特性，为安全起降与低空悬停提供了可靠保障。
+% \subsection{高度位置阶跃响应实验数据分析}
+% 经整理，实验数据如下。
+% 未引入补偿时的$Z$轴高度$p_z^e$跟随曲线和$Z$轴速度$v_z^e$跟随曲线分别如图\ref{fig:anti_height_cmp_p}和图\ref{fig:anti_height_cmp_v}所示。引入补偿后的$Z$轴高度$p_z^e$跟随曲线和$Z$轴速度$v_z^e$跟随曲线分别如图\ref{fig:anti_height_p}和图\ref{fig:anti_height_v}所示。
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_pos.pdf}
+%     \caption{未引入补偿时$Z$轴高度$p_z^e$跟随曲线}
+%     \label{fig:anti_height_cmp_p}
+% \end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_cmp_vel.pdf}
+%     \caption{未引入补偿时$Z$轴速度$v_z^e$跟随曲线}
+%     \label{fig:anti_height_cmp_v}
+% \end{figure}
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_pos.pdf}
+%     \caption{引入补偿后$Z$轴高度$p_z^e$跟随曲线}
+%     \label{fig:anti_height_p}
+% \end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics{matlab/ground_effect/pdf/anti_ge_height/anti_ge_height_vel.pdf}
+%     \caption{引入补偿后$Z$轴速度$v_z^e$跟随曲线}
+%     \label{fig:anti_height_v}
+% \end{figure}
+
+% 由图可见，实验开始时，给出从0.65m到0.3m的阶跃信号，此后周期性地产生从0.3m和0.1m之间来回切换的阶跃信号。
+
+% 在未引入地面效应补偿时，由图\ref{fig:anti_height_cmp_p}可见，第0s时高度位置对于期望值从0.6m到0.3m的阶跃信号的跟随较为平缓，未出现超调现象，这是0.3m为弱地效区域，处于开放区域整定的PID参数能够在该位置较为良好地维持系统稳定。此时速度跟随也表现良好，未出现明显超调，且响应迅速。这说明在开放空间以及弱地效范围，该PID参数的有效性。
+
+% 而第6s时从0.3m到0.1m的阶跃信号的位置跟随系统虽然能够对期望高度的阶跃信号做出响应，但控制品质较差。表现出难以收敛到稳态值的现象，此外速度跟随曲线也呈现出明显的超调震荡，并且在切换的时候，。这是由于0.1m的区域为强地效区，相同的螺旋桨转速下，推力相比开放空间更加明显，在该区域里，速度需要通过速度环PID控制器的积分项缓慢降低输出的螺旋桨转速。这种现象将大大降低无人机的起飞和降落安全性。
+
+% 此外由于此时螺旋桨的推力系数$K_{TGE}$相比开放空间更大，因此，推力对螺旋桨转速变化的响应更加敏感。因此，使用相同的PID参数会输出动态变化更加明显的推力，从而令原有系统发生超调。
+
+% 相比之下，加入地面效应补偿算法后，面对第6s时从0.3m到0.1m的阶跃信号，位置跟随曲线表现出了较为优异的控制性能。无人机的高度测量值能够迅速、平滑地追踪上期望轨迹。实际测量曲线与期望曲线保持高度贴合，稳态误差在2s内基本趋近于零，过渡过程平稳且快速。在0.3m和0.1m的表现较为一致。
+
+% 此外，速度环的超调现象也基本消除，能够平稳地跟上目标曲线，并且不存在明显的稳态误差。
+
+% 可见引入抗地面效应补偿后，在近地面端尤其是h=100mm时，高度的实际位置能够较为迅速且平缓地跟随期望位置，并且在h=100mm和h=300mm展现出较为一致的动态特性。
+
+
+\subsection{偏航角阶跃响应实验步骤}
+偏航角阶跃响应实验旨在验证舵面偏转力补偿算法在不同离地高度下对偏航通道控制效果的改善作用。由于偏航力矩完全由四个控制舵面的偏转力产生，且地面效应对舵面效率的衰减随高度变化显著，该实验能够直接反映 \(K_{cvGE}\) 补偿算法的有效性。具体实验步骤如下：
+
+1. 无人机上电静置 \(10\,\mathrm{s}\) 待系统稳定，随后起飞到\(0.65\mathrm{m}\)待无人机稳定后，开始给无人机施加指令。
+
+2. 令无人机依次悬停于两个个典型高度：\(0.20\,\mathrm{m}\)（地效过渡区）和 \(0.10\,\mathrm{m}\)（强地效区）。
+
+3. 在每个固定高度上，待无人机悬停稳定 \(5\,\mathrm{s}\) 后，施加偏航角阶跃指令：期望偏航角 \(\psi_d\) 从当前值阶跃增加 \(30^\circ\)（即 \(\Delta\psi = 30^\circ\)），保持该指令 \(5\,\mathrm{s}\)，随后阶跃返回原角度，再保持 \(5\,\mathrm{s}\)。重复该阶跃序列三次。
+
+4. 飞行过程中，以 \(100\,\mathrm{Hz}\) 的采样频率记录以下数据：期望偏航角 \(\psi_d\)、实际偏航角 \(\psi\)、期望偏航角速度 \(r_d\)、实际偏航角速度 \(r\)、四个舵面的期望偏转角 \(\delta_{i,d}\) 与实际偏转角 \(\delta_i\)，以及当前离地高度 \(h\)。所有数据连同时间戳保存至 SD 卡。
+
+5. 完成所有高度下的偏航阶跃测试后，发送降落指令结束实验。每组高度工况重复三次。
+
+\subsection{偏航角阶跃响应实验数据分析}
+按照上述实验步骤完成飞行测试后，对采集到的偏航角与角速度数据进行离线处理与分析。本小节通过对比未引入补偿与引入补偿两组实验的偏航角 \(\psi\) 跟随曲线和 \(Z\) 轴角速度 \(r\) 跟随曲线，定量评估舵面偏转力补偿算法对近地面偏航通道控制性能的改善效果。
+
+在强地效区（\(h = 100\,\mathrm{mm}\)，对应 \(h/R = 0.56\)）和地效过渡区（\(h = 200\,\mathrm{mm}\)，对应 \(h/R = 1.12\)）的偏航角与角速度跟随曲线分别如图\ref{fig:anti_ge_yaw_100mm_yaw}和图\ref{fig:anti_ge_yaw_200mm_yaw}所示。需要说明的是，实验开始时，无人机首先从无地效高度 \(0.65\,\mathrm{m}\) 快速下降至指定的近地面测试高度。由于螺旋桨转速的突变，涵道出口气流状态发生剧烈变化，导致偏航轴在 \(t \approx 0\,\mathrm{s}\) 时刻受到较大的初始扰动，因此各子图中均可见短暂的初始波动，随后系统迅速收敛至稳定状态。
+
+% 按照上述实验步骤完成飞行测试后，对采集到的偏航角和角速度数据进行离线处理与分析。本小节通过对比未引入补偿与引入补偿两组实验的 偏航角 $\psi$ 跟随曲线和 $Z$ 轴速度 $r$ 跟随曲线，定量评估推力补偿算法对近地面姿态控制的改善效果。
+
+% 高度为100mm时和高度为200mm时，偏航角$\psi$和角速度$r$的跟随曲线分别如图\ref{fig:anti_ge_yaw_100mm_yaw}和图\ref{fig:anti_ge_yaw_200mm_yaw}所示。
+
+\begin{figure}[htbp]
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_cmp_yaw.pdf}
+        \caption*{(a)未补偿时偏航角$\psi$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_cmp_gyro_z.pdf}
+        \caption*{(b)未补偿时角速度$r$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_yaw.pdf}
+        \caption*{(c)补偿后偏航角$\psi$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_gyro_z.pdf}
+        \caption*{(d)补偿后角速度$r$跟随曲线}
+    \end{minipage}
+    \caption{实际飞行试验$h/R = 0.56$时偏航角$\psi$和角速度$r$跟随曲线}
+    \label{fig:anti_ge_yaw_100mm_yaw}
+\end{figure}
+
+\begin{figure}[htbp]
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_cmp_yaw.pdf}
+        \caption*{(a)未补偿时偏航角$\psi$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_cmp_gyro_z.pdf}
+        \caption*{(b)未补偿时角速度$r$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_yaw.pdf}
+        \caption*{(c)补偿后偏航角$\psi$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_gyro_z.pdf}
+        \caption*{(d)补偿后角速度$r$跟随曲线}
+    \end{minipage}
+    \caption{实际飞行试验$h/R = 1.12$时偏航角$\psi$和角速度$r$跟随曲线}
+    \label{fig:anti_ge_yaw_200mm_yaw}
+\end{figure}
+
+从图\ref{fig:anti_ge_yaw_100mm_yaw}(a)和图\ref{fig:anti_ge_yaw_200mm_yaw}(a)可以看出，在未引入舵面偏转力补偿的情况下，无人机虽然能够对 \(30^\circ\) 的偏航角阶跃指令做出响应，但控制品质较差，主要体现在以下两个方面：
+
+其一，姿态抗扰动能力不足。在初始扰动阶段（\(t \approx 0\,\mathrm{s}\)），偏航角出现明显的瞬时偏差，且收敛速度较慢，需要约 \(2\,\mathrm{s}\) 才能基本回到指令值附近。在随后的阶跃响应过程中，实际偏航角与期望曲线之间存在持续的稳态偏差，尤其在 \(h = 100\,\mathrm{mm}\) 的强地效区，稳态误差达到 \(5^\circ\) 以上，调节时间超过 \(3\,\mathrm{s}\)。
+
+其二，角速度跟踪响应滞后。从角速度曲线（图\ref{fig:anti_ge_yaw_100mm_yaw}(b)和图\ref{fig:anti_ge_yaw_200mm_yaw}(b)）可见，当偏航角误差出现时，角速度难以迅速响应并产生足够的反向角速度来抑制误差。在阶跃指令发出后，角速度上升缓慢，峰值角速度明显低于期望值，且存在多次振荡。这说明在近地面区域，由于地面对气流的约束与阻塞效应，控制舵面的偏转力系数 \(K_{cvGE}\) 显著衰减，导致相同舵面偏转角下产生的控制力矩大幅降低。角速度环需要更长的积分作用来累积足够的控制量，从而使响应变慢、超调增大。
+
+相比之下，引入舵面偏转力补偿算法后，系统在近地面的偏航控制性能得到显著改善。从图\ref{fig:anti_ge_yaw_100mm_yaw}(c)和图\ref{fig:anti_ge_yaw_200mm_yaw}(c)可以看出，补偿后的偏航角能够迅速、平滑地跟踪期望轨迹，实际测量曲线与期望曲线高度贴合。在阶跃指令发出后，偏航角以近似一阶系统的响应形式平滑过渡，无超调，稳态误差在 \(0.5\,\mathrm{s}\) 内基本收敛至零。更为重要的是，无人机在 \(h = 100\,\mathrm{mm}\) 与 \(h = 200\,\mathrm{mm}\) 两个高度上的偏航动态表现高度一致，均展现出快速、准确的跟踪能力。
+
+从角速度跟随曲线（图\ref{fig:anti_ge_yaw_100mm_yaw}(d)和图\ref{fig:anti_ge_yaw_200mm_yaw}(d)）同样可以看出，补偿后的角速度环能够快速响应误差信号，峰值角速度与期望值基本一致，且无明显振荡或长时间延迟。这表明通过动态更新控制效率矩阵 \(\boldsymbol{B}_{GE}\) 中的 \(K_{cvGE}\) 系数，控制分配模块能够准确补偿地面效应造成的舵面效率衰减，使得实际产生的偏航力矩与控制器期望值保持一致。
+
+综合上述分析，偏航角阶跃响应实验结果表明：本文所提出的舵面偏转力补偿算法能够有效克服地面效应对偏航通道的不利影响，显著提升近地面姿态控制的响应速度与稳态精度。引入补偿后，无人机在 \(h = 100\,\mathrm{mm}\) 与 \(h = 200\,\mathrm{mm}\) 两个高度上展现出高度一致的动态特性，验证了补偿模型在不同地效强度下的有效性与鲁棒性。
+% 由图可见，实验开始时，由于高度先从0.65m骤降到实验条件指定的近地面高度，受螺旋桨转速突变的影响，偏航轴会受到较大的扰动，因此在各组实验曲线上会呈现出在第0s存在扰动，然后迅速收敛。
+
+% 在未引入地面效应补偿时，由图可见，面对30度的阶跃信号的偏航角跟随系统虽然能够对期望高度的阶跃信号做出响应，但控制品质较差。
+% 主要表现无人机姿态角抗扰动性能较差，控制响应相对较慢。
+% 在出现扰动后，Z轴角速度难以迅速跟随该误差，存在误差收敛慢的现象。
+% 这是在0.1m和0.2m区域存在较强的气流扰动，且控制舵面的控制效果下降，面对近地面处的复杂气流扰动，对无人机的产生难以预测的力矩。与此同时，由于地面对气流的约束作用，导致系统的角速度增益下降，使角速度难以跟随。
+
+% 相比之下，加入地面效应补偿算法后，面对30度偏航角阶跃信号，位置跟随曲线表现出了较为优异的控制性能。无人机的偏航角能够迅速、平滑地追踪上期望轨迹。实际测量曲线与期望曲线保持高度贴合，稳态误差在0.5s内基本趋近于零，过渡过程平稳且快速。并且在0.2m和0.1m的表现较为一致。
+
+% 此外，角速度环基本上能够快速目标曲线，并且不存在明显长时间的误差。
+
+% 可见引入抗地面效应补偿后，在近地面端尤其是h=100mm时，偏航角的能够较为迅速且平缓地跟随期望偏航角，并且在h=0.1m和h=0.2m展现出较为一致的动态特性。
+\subsection{地面效应抗扰控制结论}
+
+本小节针对涵道式无人机近地面飞行时的地面效应扰动问题，提出了基于动态补偿的抗扰控制方法。通过实时更新控制效率矩阵中的推力系数 \(K_{TGE}\) 与舵面偏转力系数 \(K_{cvGE}\)，在控制分配环节实现了对地效影响的精确补偿。静态台架实验表明，补偿后推力与力矩的稳态误差分别控制在 \(3\%\) 与 \(10\%\) 以内。实飞验证进一步证明，引入补偿后无人机在强地效区的高度与偏航角跟踪性能显著提升，稳态误差快速收敛且动态品质一致。所提方法有效抑制了地面效应对飞行控制的不利影响，为涵道式无人机安全起降与低空悬停提供了可靠保障。
+
+\section{非线性动态逆控制器}
+
+前文重点解决了涵道式无人机在近地面飞行时由地面效应引起的执行器效益变化问题。然而，当无人机在开放环境中执行大机动、大迎角飞行或遭遇阵风扰动时，涵道风扇及控制舵面所受到的气动力与力矩呈现出强烈的非线性耦合特性。具体而言，涵道风扇的侧向力、拉力随迎角与前进比的变化具有明显的非线性依赖关系，陀螺力矩与反扭矩襟翼的平衡效果亦随飞行状态而改变。这些非线性气动特性难以通过简单的线性控制器实现精确补偿，若仍采用PID控制结构，往往会导致模型失配、控制精度下降，甚至在极端工况下引发系统失稳。
+
+针对上述问题，非线性控制方法成为提升涵道式无人机全包线飞行品质的必然选择。目前学术界广泛采用的非线性控制策略包括反步控制、滑模控制、模型预测控制以及非线性动态逆控制等。其中，增量式非线性动态逆控制（Incremental Nonlinear Dynamic Inversion, INDI）因其对模型误差和外部扰动具有较强鲁棒性而受到关注\cite{Cheng2024INDI}。然而，INDI控制器依赖于高带宽的角加速度反馈，且对传感器噪声较为敏感，而单螺旋桨涵道式无人机的震动较大，传感器噪声难以被忽略；在模型精度较高的前提下，其性能优势并不明显。相比之下，非线性动态逆控制（Nonlinear Dynamic Inversion, NDI）直接基于系统精确模型进行反馈线性化，能够将原始非线性系统映射为期望的线性解耦形式，具有响应速度快、控制精度高、结构清晰等优点。由于本文已通过第三章的在线参数辨识获得了较为准确的气动参数模型，具备部署NDI控制器的先验条件，因此选用NDI作为开放环境下的抗扰控制器，并在仿真环境中验证其效果。
 
 \subsection{NDI控制器介绍}
+
+非线性动态逆控制是一种基于反馈线性化原理的非线性控制方法。考虑一类仿射非线性系统，其状态方程可写为：
+\begin{equation}
+    \dot{\boldsymbol{x}} = \boldsymbol{f}(\boldsymbol{x}) + \boldsymbol{g}(\boldsymbol{x}) \boldsymbol{u},
+\end{equation}
+其中 \(\boldsymbol{x}\) 为系统状态向量，\(\boldsymbol{u}\) 为控制输入向量，\(\boldsymbol{f}(\cdot)\) 和 \(\boldsymbol{g}(\cdot)\) 为光滑的非线性函数。NDI控制的核心思想是：选择合适的输出变量 \(\boldsymbol{y} = \boldsymbol{h}(\boldsymbol{x})\)，并通过求解该输出变量与输入之间的微分关系，构造控制律使得闭环系统呈现期望的线性动态特性。
+
+对于本文所研究的涵道式无人机，通常选取姿态角 \(\boldsymbol{\eta} = [\phi, \theta, \psi]^T\) 作为被控输出。对输出求导直至控制输入显式出现，可得：
+\begin{equation}
+    \ddot{\boldsymbol{\eta}} = \boldsymbol{\alpha}(\boldsymbol{x}) + \boldsymbol{\beta}(\boldsymbol{x}) \boldsymbol{u},
+\end{equation}
+其中 \(\boldsymbol{\beta}(\boldsymbol{x})\) 称为解耦矩阵，在飞行器的有效工作范围内通常可逆。NDI控制律设计为：
+\begin{equation}
+    \boldsymbol{u} = \boldsymbol{\beta}^{-1}(\boldsymbol{x}) \left( \boldsymbol{\nu} - \boldsymbol{\alpha}(\boldsymbol{x}) \right),
+\end{equation}
+式中 \(\boldsymbol{\nu}\) 为伪控制量，通常根据期望的闭环动态选取，如 \(\boldsymbol{\nu} = \ddot{\boldsymbol{\eta}}_d + \boldsymbol{K}_d \dot{\boldsymbol{e}} + \boldsymbol{K}_p \boldsymbol{e}\)，其中 \(\boldsymbol{e} = \boldsymbol{\eta}_d - \boldsymbol{\eta}\) 为姿态跟踪误差，\(\boldsymbol{K}_p\)、\(\boldsymbol{K}_d\) 为增益矩阵。代入后，闭环系统退化为线性二阶系统：
+\begin{equation}
+    \ddot{\boldsymbol{e}} + \boldsymbol{K}_d \dot{\boldsymbol{e}} + \boldsymbol{K}_p \boldsymbol{e} = \boldsymbol{0},
+\end{equation}
+从而可以通过极点配置或线性二次型调节等方法设计期望的动态响应。
+
+NDI控制器的优势在于：当系统模型足够精确时，它能够完全抵消系统的非线性项，实现大范围内的全局线性化和解耦控制，响应速度快、稳态精度高。然而，其性能高度依赖于模型精度，对未建模动态和外部扰动较为敏感。在本文中，第三章辨识得到的气动参数为NDI控制器提供了较为精确的先验模型，使其能够充分发挥非线性补偿的优势。后续仿真将对比NDI控制器与串级PID控制器在典型机动工况下的控制效果，验证其对非线性气动扰动的抑制能力。
+% \section{NDI抗扰控制器}
+% 本小节针对涵道式无人机在开放环境飞行中的非线性气动力和气动力矩，设计非线性抗扰控制器。
+% 阐述开放环境中无人机受到的复杂气动力矩。
+% 阐述非线性抗扰控制器的必要性。
+% 阐述当前学界普遍使用的INDI控制器\cite{Cheng2024INDI}，相比于INDI控制器，NDI控制器的针对性更强，已有先验模型能够对扰动有较为优异的预判功能。
+% 本小节将在仿真环境中验证该抗扰控制器的效果。
+
+% \subsection{NDI控制器介绍}
+% 介绍什么是NDI控制器。
+% 介绍NDI控制器的原理和结构
 
 \subsection{NDI控制器与PID控制器对比}
 
