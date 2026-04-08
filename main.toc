@@ -1,9 +1,8 @@
 \contentsline {chapter}{摘\hskip 1em\relax 要}{I}{chapter*.1}%
-\contentsline {chapter}{Abstract}{II}{chapter*.2}%
-\contentsline {chapter}{插图目录}{VII}{chapter*.4}%
-\contentsline {chapter}{表格目录}{X}{chapter*.5}%
-\contentsline {chapter}{主要符号对照表}{XI}{chapter*.6}%
-\contentsline {chapter}{英文缩略词}{XII}{chapter*.8}%
+\contentsline {chapter}{Abstract}{III}{chapter*.2}%
+\contentsline {chapter}{插图目录}{IX}{chapter*.4}%
+\contentsline {chapter}{表格目录}{XII}{chapter*.5}%
+\contentsline {chapter}{主要符号对照表}{XIII}{chapter*.6}%
 \contentsline {chapter}{\numberline {1}绪论}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}涵道式无人机的研究背景}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}涵道式无人机的研究历史和现状}{4}{section.1.2}%
@@ -71,31 +70,30 @@
 \contentsline {chapter}{\numberline {5}涵道式无人机抗扰控制}{82}{chapter.5}%
 \contentsline {section}{\numberline {5.1}涵道式无人机的控制分配器的设计}{82}{section.5.1}%
 \contentsline {section}{\numberline {5.2}涵道式无人机的PID控制器设计}{83}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}内环控制器}{83}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.1}内环控制器}{84}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2}外环控制器}{84}{subsection.5.2.2}%
 \contentsline {section}{\numberline {5.3}地面效应控制补偿}{85}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1}推力补偿效果实验}{87}{subsection.5.3.1}%
 \contentsline {subsubsection}{\numberline {5.3.1.1}实验工况与步骤}{87}{subsubsection.5.3.1.1}%
-\contentsline {subsubsection}{\numberline {5.3.1.2}实验数据}{88}{subsubsection.5.3.1.2}%
-\contentsline {subsection}{\numberline {5.3.2}控制舵面偏转力补偿效果实验}{89}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.1.2}实验数据}{89}{subsubsection.5.3.1.2}%
+\contentsline {subsection}{\numberline {5.3.2}控制舵面偏转力补偿效果实验}{90}{subsection.5.3.2}%
 \contentsline {subsubsection}{\numberline {5.3.2.1}实验工况与步骤}{90}{subsubsection.5.3.2.1}%
-\contentsline {subsubsection}{\numberline {5.3.2.2}实验数据}{90}{subsubsection.5.3.2.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.2}实验数据}{91}{subsubsection.5.3.2.2}%
 \contentsline {section}{\numberline {5.4}涵道式无人机地面效应抗扰控制}{92}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}高度位置阶跃响应实验步骤}{93}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}高度位置阶跃响应实验数据分析}{94}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.2}高度位置阶跃响应实验数据分析}{95}{subsection.5.4.2}%
 \contentsline {subsection}{\numberline {5.4.3}偏航角阶跃响应实验步骤}{97}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}偏航角阶跃响应实验数据分析}{97}{subsection.5.4.4}%
-\contentsline {subsection}{\numberline {5.4.5}地面效应抗扰控制结论}{100}{subsection.5.4.5}%
+\contentsline {subsection}{\numberline {5.4.4}偏航角阶跃响应实验数据分析}{98}{subsection.5.4.4}%
 \contentsline {section}{\numberline {5.5}非线性动态逆控制器}{101}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}NDI控制器介绍}{101}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}NDI控制器与PID控制器对比}{102}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}在线辨识气动参数与补偿}{102}{subsection.5.5.3}%
-\contentsline {chapter}{\numberline {6}展望与总结}{103}{chapter.6}%
-\contentsline {chapter}{结\hskip 1em\relax 论}{104}{chapter*.70}%
-\contentsline {chapter}{参考文献}{104}{section*.71}%
-\contentsline {chapter}{附\hskip 1em\relax 录}{111}{chapter*.73}%
-\contentsline {section}{\numberline {1.1}一阶李导数对状态量偏导}{111}{section.1.1}%
-\contentsline {section}{\numberline {1.2}可观性矩阵行满秩证明}{114}{section.1.2}%
-\contentsline {chapter}{攻读硕士学位期间取得的研究成果}{115}{chapter*.74}%
-\contentsline {chapter}{致\hskip 1em\relax 谢}{116}{chapter*.76}%
+\contentsline {subsection}{\numberline {5.5.1}NDI控制器介绍}{102}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}NDI控制器与PID控制器对比实验设计}{104}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}NDI控制器与PID控制器对比实验数据分析}{105}{subsection.5.5.3}%
+\contentsline {section}{\numberline {5.6}本章小结}{108}{section.5.6}%
+\contentsline {chapter}{结\hskip 1em\relax 论}{110}{chapter*.73}%
+\contentsline {chapter}{参考文献}{111}{section*.74}%
+\contentsline {chapter}{附\hskip 1em\relax 录}{118}{chapter*.76}%
+\contentsline {section}{\numberline {1.1}一阶李导数对状态量偏导}{118}{section.1.1}%
+\contentsline {section}{\numberline {1.2}可观性矩阵行满秩证明}{121}{section.1.2}%
+\contentsline {chapter}{攻读硕士学位期间取得的研究成果}{122}{chapter*.77}%
+\contentsline {chapter}{致\hskip 1em\relax 谢}{123}{chapter*.79}%
 \contentsfinish 

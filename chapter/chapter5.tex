@@ -1,10 +1,18 @@
 \chapter{涵道式无人机抗扰控制}
-本文设计涵道式无人机抗扰控制器。
-首先设计了控制分配器，用于将期望力和力矩转换为执行器输出。
-然后设计了串级PID控制器进行无人机位置的闭环控制。
-然后基于第四章拟合出来的模型，设计了抗地面效应的补偿方法，并通过实机实验验证了该工作的有效性。
-然后在近地面进行实机飞行测试，对比未作抗地面效应的控制方法，验证了本文提出方法的有效性。
-最后基于第二章建立的气动模型，设计了NDI控制器，使用第三章辨识出的参数作抗扰控制，并通过数值仿真验证该方法的有效性。
+本章围绕涵道式无人机抗扰控制问题展开系统研究。首先，针对多执行器冗余配置的特点，设计了基于伪逆法的控制分配器，实现期望力与力矩向螺旋桨转速及舵面偏转角的唯一映射。其次，为满足悬停与低速飞行工况下的基本控制需求，设计了串级PID控制器，分别构建内环姿态控制与外环位置控制结构，并通过实际飞行验证了其有效性。
+
+然而，当无人机进入近地面区域时，地面效应导致涵道风扇推力特性与控制舵面效率发生显著非线性变化。第四章通过静态台架实验辨识得到的推力衰减模型与舵面偏转力衰减模型表明，若在控制分配环节仍采用无地效状态下的恒定气动系数，将导致模型失配，实际产生的推力和力矩严重偏离期望值，进而引发高度振荡与姿态漂移。为此，本章基于实时离地高度信息，动态更新控制效率矩阵中的推力系数 \(K_{TGE}\) 与舵面偏转力系数 \(K_{cvGE}\)，在控制分配层面对地面效应进行前馈补偿。静态台架实验与近地面实飞测试结果表明，该补偿方法能够有效抑制地效扰动，显著提升高度与偏航通道的跟踪精度与动态品质。
+
+进一步地，当无人机在开放环境中执行大机动飞行或遭遇阵风扰动时，涵道风扇的侧向力、陀螺力矩及反扭矩襟翼平衡效应等呈现强烈的非线性耦合特性，单纯依赖串级PID控制器难以实现精确补偿。得益于第三章基于扩展卡尔曼滤波器在线辨识得到的关键气动参数，如 \(K_{sta}\)、\(K_{cv}\)，本章进一步设计了非线性动态逆控制器。NDI控制器通过直接对系统动力学模型求逆，将原始非线性系统映射为期望的线性解耦形式，从而主动抵消非线性耦合与参数不确定性带来的不利影响。仿真环境下，对比串级PID控制器与NDI控制器在姿态阶跃响应中的表现，验证了NDI控制器在响应速度、抗耦合能力及动态一致性方面的显著优势。
+
+本章从执行器分配、基本姿态位置控制、地面效应补偿到非线性鲁棒控制，构建了涵道式无人机抗扰控制的完整技术链条，为提升无人机在全飞行包线内的控制品质提供了系统解决方案。
+
+% 本文设计涵道式无人机抗扰控制器。
+% 首先设计了控制分配器，用于将期望力和力矩转换为执行器输出。
+% 然后设计了串级PID控制器进行无人机位置的闭环控制。
+% 然后基于第四章拟合出来的模型，设计了抗地面效应的补偿方法，并通过实机实验验证了该工作的有效性。
+% 然后在近地面进行实机飞行测试，对比未作抗地面效应的控制方法，验证了本文提出方法的有效性。
+% 最后基于第二章建立的气动模型，以及第三章的拟合的气动参数设计了NDI控制器，使用第三章辨识出的参数作抗扰控制，并通过数值仿真验证该方法的有效性。
 
 \section{涵道式无人机的控制分配器的设计}
 
@@ -68,14 +76,14 @@
 \end{figure}
 
 角速度环以机体坐标系下的角速度 \(\boldsymbol{\omega}^b = [p, q, r]^T\) 为被控量。三个通道各自独立使用一个PID控制器，控制器的输出为期望的控制力矩 \(\boldsymbol{M}_d\in\mathbb{R}^3\)。设期望角速度为 \(\boldsymbol{\omega}_d^b\)，则角速度误差为 \(\boldsymbol{e}_{\boldsymbol{\omega}} = \boldsymbol{\omega}_d^b - \boldsymbol{\omega}^b\)。第 \(i\) 个通道的PID控制律可表示为：
-\[
+\begin{equation}
 M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt + K_{d,\omega_i} \frac{d e_{\omega,i}}{dt}, \quad i = p,q,r.
-\]
+\end{equation}
 
-姿态环以欧拉角 \(\boldsymbol{\eta} = [\phi, \theta, \psi]^T\) 为被控量，其输出作为角速度环的期望值。设期望姿态为 \(\boldsymbol{\eta}_d\)，姿态误差为 \(\boldsymbol{e}_{\boldsymbol{\eta}} = \boldsymbol{\eta}_d - \boldsymbol{\eta}\)。姿态环PID控制器根据姿态误差生成期望角速度 \(\boldsymbol{\omega}_d^b\)：
-\[
+姿态环以欧拉角 \(\boldsymbol{\eta} = [\varphi, \theta, \psi]^T\) 为被控量，其输出作为角速度环的期望值。设期望姿态为 \(\boldsymbol{\eta}_d\)，姿态误差为 \(\boldsymbol{e}_{\boldsymbol{\eta}} = \boldsymbol{\eta}_d - \boldsymbol{\eta}\)。姿态环PID控制器根据姿态误差生成期望角速度 \(\boldsymbol{\omega}_d^b\)：
+\begin{equation}
 \boldsymbol{\omega}_d^b = K_{p,\eta} \boldsymbol{e}_{\boldsymbol{\eta}} + K_{i,\eta} \int \boldsymbol{e}_{\boldsymbol{\eta}}\, dt + K_{d,\eta} \frac{d \boldsymbol{e}_{\boldsymbol{\eta}}}{dt}.
-\]
+\end{equation}
 
 \subsection{外环控制器}
 
@@ -89,14 +97,14 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 \end{figure}
 
 速度环以地面坐标系下的速度 \(\boldsymbol{v}^e = [v_x^e, v_y^e, v_z^e]^T\) 为被控量，其输出为期望加速度在世界坐标系下的投影 \(\boldsymbol{a}_d^e\)。设期望速度为 \(\boldsymbol{v}_d\)，速度误差为 \(\boldsymbol{e}_{\boldsymbol{v}} = \boldsymbol{v}_d - \boldsymbol{v}\)，则速度环PID控制律为：
-\[
+\begin{equation}
 \boldsymbol{a}_d^e = K_{p,v} \boldsymbol{e}_{\boldsymbol{v}} + K_{i,v} \int \boldsymbol{e}_{\boldsymbol{v}}\, dt + K_{d,v} \frac{d \boldsymbol{e}_{\boldsymbol{v}}}{dt}.
-\]
+\end{equation}
 
 位置环以地面坐标系下的位置 \(\boldsymbol{p}^e = [p_x^e, p_y^e, p_z^e]^T\) 为被控量，其输出作为速度环的期望值。设期望位置为 \(\boldsymbol{p}_d\)，位置误差为 \(\boldsymbol{e}_{\boldsymbol{p}} = \boldsymbol{p}_d - \boldsymbol{p}\)，则位置环PID控制律为：
-\[
+\begin{equation}
 \boldsymbol{v}_d = K_{p,p} \boldsymbol{e}_{\boldsymbol{p}} + K_{i,p} \int \boldsymbol{e}_{\boldsymbol{p}}\, dt + K_{d,p} \frac{d \boldsymbol{e}_{\boldsymbol{p}}}{dt}.
-\]
+\end{equation}
 
 值得注意的是，内环的输入为期望姿态 \(\boldsymbol{\eta}_d\)，而外环的输出为期望加速度 \(\boldsymbol{a}_d^e\)。为实现两者的衔接，需采用几何控制算法将期望加速度转换为期望姿态。具体而言，由于涵道无人机是欠驱动系统，平动加速度主要由总推力向量在空间中的指向决定。因此，算法需要将期望加速度 $\boldsymbol{a}_d^e$ 分解为沿机体轴向的期望推力加速度 $a_{d,z}^b$ 以及用于确定机体指向的方向向量。该方向向量结合当前旋转矩阵，进一步解算出无人机达成该加速度所需的期望姿态角 $\boldsymbol{\eta}_d$，从而实现了从外环平动需求到内环转动指令的物理映射。该几何变换保证了外环输出的加速度指令能够被内环姿态控制器有效执行。
 
@@ -174,9 +182,9 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 \end{equation}
 
 然而，飞控系统实际输出的是电机的油门百分比指令 \(t_{motor}\)，且螺旋桨转速与油门百分比之间的关系受电池电压影响显著。为建立准确的转速-油门映射，本文在恒定电压 \(V_{ref}=13.00\,\mathrm{V}\) 的条件下开展了静态台架实验，通过采集不同油门百分比下的稳态转速数据，拟合得到如下线性关系：
-\[
+\begin{equation}
 \Omega = 1115.01 \cdot t_{motor} + 158.8,
-\]
+\end{equation}
 其中 \(\Omega_d\) 的单位为 \(\mathrm{rad/s}\)，\(V_{bat}\) 的单位为 \(\mathrm{V}\)，\(t_{motor}\) 为取值在 \([0, 1]\) 范围内的油门输出百分比。实际飞行中电池电压 \(V_{bat}\) 会随放电而波动，导致相同油门百分比下的转速发生变化。根据无刷直流电机的调速特性，引入电压补偿系数 \(13.00 / V_{bat}\) 对期望转速进行修正。综合上述关系，由期望转速 \(\Omega_d\) 反解油门百分比的表达式为：
 \begin{equation}
     t_{motor} = \frac{\Omega_d - 158.8}{1115.01} \cdot \frac{13.00}{V_{bat}},
@@ -700,7 +708,6 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 % 此外，角速度环基本上能够快速目标曲线，并且不存在明显长时间的误差。
 
 % 可见引入抗地面效应补偿后，在近地面端尤其是h=100mm时，偏航角的能够较为迅速且平缓地跟随期望偏航角，并且在h=0.1m和h=0.2m展现出较为一致的动态特性。
-\subsection{地面效应抗扰控制结论}
 
 本小节针对涵道式无人机近地面飞行时的地面效应扰动问题，提出了基于动态补偿的抗扰控制方法。通过实时更新控制效率矩阵中的推力系数 \(K_{TGE}\) 与舵面偏转力系数 \(K_{cvGE}\)，在控制分配环节实现了对地效影响的精确补偿。静态台架实验表明，补偿后推力与力矩的稳态误差分别控制在 \(3\%\) 与 \(10\%\) 以内。实飞验证进一步证明，引入补偿后无人机在强地效区的高度与偏航角跟踪性能显著提升，稳态误差快速收敛且动态品质一致。所提方法有效抑制了地面效应对飞行控制的不利影响，为涵道式无人机安全起降与低空悬停提供了可靠保障。
 
@@ -711,28 +718,96 @@ M_{cv,i} = K_{p,\omega_i} e_{\omega,i} + K_{i,\omega_i} \int e_{\omega,i}\, dt +
 针对上述问题，非线性控制方法成为提升涵道式无人机全包线飞行品质的必然选择。目前学术界广泛采用的非线性控制策略包括反步控制、滑模控制、模型预测控制以及非线性动态逆控制等。其中，增量式非线性动态逆控制（Incremental Nonlinear Dynamic Inversion, INDI）因其对模型误差和外部扰动具有较强鲁棒性而受到关注\cite{Cheng2024INDI}。然而，INDI控制器依赖于高带宽的角加速度反馈，且对传感器噪声较为敏感，而单螺旋桨涵道式无人机的震动较大，传感器噪声难以被忽略；在模型精度较高的前提下，其性能优势并不明显。相比之下，非线性动态逆控制（Nonlinear Dynamic Inversion, NDI）直接基于系统精确模型进行反馈线性化，能够将原始非线性系统映射为期望的线性解耦形式，具有响应速度快、控制精度高、结构清晰等优点。由于本文已通过第三章的在线参数辨识获得了较为准确的气动参数模型，具备部署NDI控制器的先验条件，因此选用NDI作为开放环境下的抗扰控制器，并在仿真环境中验证其效果。
 
 \subsection{NDI控制器介绍}
+\label{sec:NDI_intro}
 
-非线性动态逆控制是一种基于反馈线性化原理的非线性控制方法。考虑一类仿射非线性系统，其状态方程可写为：
-\begin{equation}
-    \dot{\boldsymbol{x}} = \boldsymbol{f}(\boldsymbol{x}) + \boldsymbol{g}(\boldsymbol{x}) \boldsymbol{u},
-\end{equation}
-其中 \(\boldsymbol{x}\) 为系统状态向量，\(\boldsymbol{u}\) 为控制输入向量，\(\boldsymbol{f}(\cdot)\) 和 \(\boldsymbol{g}(\cdot)\) 为光滑的非线性函数。NDI控制的核心思想是：选择合适的输出变量 \(\boldsymbol{y} = \boldsymbol{h}(\boldsymbol{x})\)，并通过求解该输出变量与输入之间的微分关系，构造控制律使得闭环系统呈现期望的线性动态特性。
+非线性动态逆控制是一种基于反馈线性化思想的非线性控制方法，其核心思路是：通过对被控对象的动力学模型求逆，构造一个伪线性系统，从而将复杂的非线性控制问题转化为线性系统的综合问题。具体而言，对于一类输入仿射的非线性系统，NDI控制律通过引入与系统非线性部分相反的项，直接抵消原系统的非线性特性，使闭环系统呈现出期望的线性动态行为。该方法在模型精确已知的前提下，能够实现大范围内的解耦与线性化，具有响应速度快、稳态精度高的优点。
 
-对于本文所研究的涵道式无人机，通常选取姿态角 \(\boldsymbol{\eta} = [\phi, \theta, \psi]^T\) 作为被控输出。对输出求导直至控制输入显式出现，可得：
-\begin{equation}
-    \ddot{\boldsymbol{\eta}} = \boldsymbol{\alpha}(\boldsymbol{x}) + \boldsymbol{\beta}(\boldsymbol{x}) \boldsymbol{u},
-\end{equation}
-其中 \(\boldsymbol{\beta}(\boldsymbol{x})\) 称为解耦矩阵，在飞行器的有效工作范围内通常可逆。NDI控制律设计为：
-\begin{equation}
-    \boldsymbol{u} = \boldsymbol{\beta}^{-1}(\boldsymbol{x}) \left( \boldsymbol{\nu} - \boldsymbol{\alpha}(\boldsymbol{x}) \right),
-\end{equation}
-式中 \(\boldsymbol{\nu}\) 为伪控制量，通常根据期望的闭环动态选取，如 \(\boldsymbol{\nu} = \ddot{\boldsymbol{\eta}}_d + \boldsymbol{K}_d \dot{\boldsymbol{e}} + \boldsymbol{K}_p \boldsymbol{e}\)，其中 \(\boldsymbol{e} = \boldsymbol{\eta}_d - \boldsymbol{\eta}\) 为姿态跟踪误差，\(\boldsymbol{K}_p\)、\(\boldsymbol{K}_d\) 为增益矩阵。代入后，闭环系统退化为线性二阶系统：
-\begin{equation}
-    \ddot{\boldsymbol{e}} + \boldsymbol{K}_d \dot{\boldsymbol{e}} + \boldsymbol{K}_p \boldsymbol{e} = \boldsymbol{0},
-\end{equation}
-从而可以通过极点配置或线性二次型调节等方法设计期望的动态响应。
+针对本文所研究的涵道式无人机，NDI控制器的设计以姿态控制为例进行阐述。选取无人机的姿态角（滚转角 \(\varphi\)、俯仰角 \(\theta\)、偏航角 \(\psi\)）作为被控输出。首先，根据第二章建立的动力学模型，推导姿态角加速度与控制输入（即控制舵面产生的力矩 \(\boldsymbol{M}_{cv}^b\)）之间的解析关系。
 
-NDI控制器的优势在于：当系统模型足够精确时，它能够完全抵消系统的非线性项，实现大范围内的全局线性化和解耦控制，响应速度快、稳态精度高。然而，其性能高度依赖于模型精度，对未建模动态和外部扰动较为敏感。在本文中，第三章辨识得到的气动参数为NDI控制器提供了较为精确的先验模型，使其能够充分发挥非线性补偿的优势。后续仿真将对比NDI控制器与串级PID控制器在典型机动工况下的控制效果，验证其对非线性气动扰动的抑制能力。
+由式\eqref{eq:d_eular}可知：
+\begin{equation}
+    \dot{\boldsymbol{\eta}} = \boldsymbol{Q} \cdot \boldsymbol{\omega}^b.
+    \label{eq:Q_ref}
+\end{equation}
+
+式\eqref{eq:Q_ref}对时间求导可得：
+\begin{equation}
+    \ddot{\boldsymbol{\eta}} = \dot{\boldsymbol{Q}} \cdot \boldsymbol{\omega}^b + \boldsymbol{Q} \cdot \dot{\boldsymbol{\omega}}^b,
+    \label{eq:ddot_eta}
+\end{equation}
+其中\(\dot{\boldsymbol{\omega}}^b\)是角速度对时间的导数，在式\eqref{eq:d_omega}已给出，\(\dot{\boldsymbol{Q}}\)是矩阵\(\boldsymbol{Q}\)对时间的导数，可由下式给出：
+\begin{equation}
+    \dot{\boldsymbol{Q}} = 
+    \begin{bmatrix}
+        0 & \dot{Q}_{12} & \dot{Q}_{13} \\
+        0 & \dot{Q}_{22} & \dot{Q}_{23} \\
+        0 & \dot{Q}_{32} & \dot{Q}_{33}
+    \end{bmatrix},
+\end{equation}
+且各元素的定义如下：
+\begin{equation}
+    \begin{aligned}
+        \dot{Q}_{12} =& \dot{\varphi}\cos\varphi\tan\theta + \dot{\theta}\sin\varphi\sec^2\theta, \\
+        \dot{Q}_{13} =& -\dot{\varphi}\sin\varphi\tan\theta + \dot{\theta}\cos\varphi\sec^2\theta, \\
+        \dot{Q}_{22} =& -\dot{\varphi}\sin\varphi, \\
+        \dot{Q}_{23} =& -\dot{\varphi}\cos\varphi, \\
+        \dot{Q}_{32} =& \dot{\varphi}\cos\varphi\sec\theta + \dot{\theta}\sin\varphi\sec\theta\tan\theta, \\
+        \dot{Q}_{33} =& -\dot{\varphi}\sin\varphi\sec\theta + \dot{\theta}\cos\varphi\sec\theta\tan\theta.
+    \end{aligned}
+\end{equation}
+
+将式\eqref{eq:d_omega}代入式\eqref{eq:ddot_eta}中，可得：
+\begin{equation}
+    \ddot{\boldsymbol{\eta}} = \dot{\boldsymbol{Q}} \cdot \boldsymbol{\omega}^b + \boldsymbol{Q} \cdot \boldsymbol{J}^{-1}(\boldsymbol{M}^b - \boldsymbol{\omega}^b\times(\boldsymbol{J}\cdot\boldsymbol{\omega}^b)).
+    \label{eq:ddot_eta_ref}
+\end{equation}
+
+并根据式\eqref{eq:total_effort}将\(\boldsymbol{M}^b\)展开，可得：
+\begin{equation}
+    \ddot{\boldsymbol{\eta}} = \dot{\boldsymbol{Q}} \cdot \boldsymbol{\omega}^b + \boldsymbol{Q} \cdot \boldsymbol{J}^{-1}(\boldsymbol{M}_{df}^b + \boldsymbol{M}_{fan}^b + \boldsymbol{M}_{gyro}^b + \boldsymbol{M}_{sta}^b + \boldsymbol{M}_{cv}^b - \boldsymbol{\omega}^b\times(\boldsymbol{J}\cdot\boldsymbol{\omega}^b)).
+\end{equation}
+
+% 忽略次要耦合项后，该关系可抽象为如下形式：
+
+% \begin{equation}
+% \ddot{\boldsymbol{\eta}} = \boldsymbol{f}_{\eta}(\boldsymbol{x}) + \boldsymbol{G}_{\eta}(\boldsymbol{x}) \, \boldsymbol{M}_{cv}^b,
+% \end{equation}
+% 其中 \(\boldsymbol{\eta} = [\varphi, \theta, \psi]^T\) 为姿态角向量，\(\boldsymbol{x}\) 表示系统的全部状态（包括角速度、线速度等），\(\boldsymbol{f}_{\eta}(\cdot)\) 是与当前状态有关的非线性函数（包含陀螺力矩、气动阻尼等），\(\boldsymbol{G}_{\eta}(\cdot)\) 是控制效率矩阵，反映了控制力矩对姿态角加速度的影响。
+
+NDI控制律的核心是求取上述关系的逆。设期望的姿态角加速度为 \(\boldsymbol{\nu}\)，则通过下式反解出所需施加的控制力矩：
+\begin{equation}
+\boldsymbol{M}_{cv}^b = \boldsymbol{J} \cdot \boldsymbol{Q}^{-1}\left( \boldsymbol{\nu} - \dot{\boldsymbol{Q}} \cdot \boldsymbol{\omega}^b \right) + \boldsymbol{\omega}^b\times(\boldsymbol{J}\cdot\boldsymbol{\omega}^b) - \boldsymbol{M}_{df}^b - \boldsymbol{M}_{fan}^b - \boldsymbol{M}_{gyro}^b - \boldsymbol{M}_{sta}^b.
+\end{equation}
+
+可见，\(\boldsymbol{M}_{cv}^b\)是系统状态\(\boldsymbol{x}\)的函数，令\(\boldsymbol{M}_{cv}^b\)为：
+\begin{equation}
+    \boldsymbol{M}_{cv}^b = \boldsymbol{G}(\boldsymbol{x}).
+\end{equation}
+
+将上述控制力矩代入原系统，即可抵消非线性项，使得闭环系统退化为一个简单的双积分器形式：\(\ddot{\boldsymbol{\eta}} = \boldsymbol{\nu}\)。
+
+进一步地，期望的角加速度 \(\boldsymbol{\nu}\) 可根据姿态跟踪误差设计为线性反馈形式。定义姿态误差 \(\boldsymbol{e}_{\eta} = \boldsymbol{\eta}_d - \boldsymbol{\eta}\)，则选取：
+\begin{equation}
+\boldsymbol{\nu} = \ddot{\boldsymbol{\eta}}_d + \boldsymbol{K}_d \dot{\boldsymbol{e}}_{\eta} + \boldsymbol{K}_p \boldsymbol{e}_{\eta},
+\end{equation}
+其中 \(\boldsymbol{K}_p\)、\(\boldsymbol{K}_d\) 为对角正定增益矩阵。代入后，闭环误差动态满足：
+\begin{equation}
+\ddot{\boldsymbol{e}}_{\eta} + \boldsymbol{K}_d \dot{\boldsymbol{e}}_{\eta} + \boldsymbol{K}_p \boldsymbol{e}_{\eta} = \boldsymbol{0}.
+\end{equation}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics{figure/chapter5/非线性动态逆系统框图.pdf}
+    \caption{NDI控制器系统框图}
+    \label{fig:NDI_controller}
+\end{figure}
+
+通过合理配置 \(\boldsymbol{K}_p\) 和 \(\boldsymbol{K}_d\)，即可使姿态误差按照期望的收敛特性（如临界阻尼或指定带宽）趋近于零。
+
+部署NDI控制器后的系统框图如图\ref{fig:NDI_controller}所示。图中展示了从期望姿态角到控制力矩再到无人机动力学模型的完整信号流向，其中NDI控制律模块依据当前状态估计在线计算非线性逆，实现对姿态通道的解耦与线性化。
+
+在实际实现中，式中的非线性函数 \(\boldsymbol{f}_{\eta}(\boldsymbol{x})\) 和控制效率矩阵 \(\boldsymbol{G}_{\eta}(\boldsymbol{x})\) 需要依据第二章的动力学模型以及第三章辨识得到的气动参数进行计算。由于本文已经通过扩展卡尔曼滤波器在线估计了关键气动参数，NDI控制器能够获得较为准确的先验模型，从而充分发挥其非线性补偿能力。后续仿真将对比NDI控制器与串级PID控制器在典型机动工况下的控制效果，验证其对非线性气动扰动的抑制能力。
+
 % \section{NDI抗扰控制器}
 % 本小节针对涵道式无人机在开放环境飞行中的非线性气动力和气动力矩，设计非线性抗扰控制器。
 % 阐述开放环境中无人机受到的复杂气动力矩。
@@ -744,7 +819,153 @@ NDI控制器的优势在于：当系统模型足够精确时，它能够完全�
 % 介绍什么是NDI控制器。
 % 介绍NDI控制器的原理和结构
 
-\subsection{NDI控制器与PID控制器对比}
+\subsection{NDI控制器与PID控制器对比实验设计}
 
-\subsection{在线辨识气动参数与补偿}
+为验证NDI控制器对非线性气动扰动的抑制能力，本小节在第三章所建立的数值仿真环境中开展对比实验。第三章的仿真平台已集成了涵道式无人机的六自由度非线性动力学模型、传感器噪声模型以及一套串级PID控制器。在此基础上，额外部署了第\ref{sec:NDI_intro}节所设计的NDI控制器，并保持相同的飞行任务与扰动条件，以公平评估两种控制器的性能差异。
 
+需要说明的是，NDI控制器的实际性能高度依赖于模型精度与状态估计的准确性。为使仿真尽可能贴近真实飞行条件，NDI控制律中的非线性函数 \(\boldsymbol{f}_{\eta}(\boldsymbol{x})\) 与控制效率矩阵 \(\boldsymbol{G}_{\eta}(\boldsymbol{x})\) 并非直接使用仿真模型中的真实状态 \(\boldsymbol{x}\)，而是采用第三章扩展卡尔曼滤波器实时估计出的状态 \(\hat{\boldsymbol{x}}\)。这模拟了实际飞控系统中状态观测器输出存在估计误差的情况，能够更真实地反映NDI控制器在工程应用中的鲁棒性。
+
+\textbf{仿真实验步骤}
+
+1. 初始化：无人机初始状态设置为开放空间中的悬停静止状态，初始姿态角均为零，即\(\phi_0 = \theta_0 = \psi_0 = 0\)，初始角速度为零。
+
+2. 俯仰角阶跃响应：由于俯仰角与滚转角具有对称性，本文仅展示俯仰角的姿态阶跃响应结果。依次轮流给定期望俯仰角 \(\theta_d\) 为 \(20^\circ\) 和 \(0^\circ\) 的阶跃指令，每个指令维持 \(5\,\mathrm{s}\)，重复三次。
+
+3. 偏航角阶跃响应：依次轮流给定期望偏航角 \(\psi_d\) 为 \(30^\circ\) 和 \(0^\circ\) 的阶跃指令，每个指令维持 \(5\,\mathrm{s}\)，重复三次。
+
+ 4. 数据采集：仿真过程中以 \(100\,\mathrm{Hz}\) 的频率记录无人机的期望姿态角\(\boldsymbol{\eta}_d\)、实际姿态角\(\boldsymbol{\eta}\)，以及控制力矩\(\boldsymbol{M}_{cv}\)，用于后续分析跟踪曲线。
+
+ \subsection{NDI控制器与PID控制器对比实验数据分析}
+按照上述实验步骤执行仿真实验后，所得结果经整理，分为横滚角阶跃响应与偏航角阶跃响应两组实验分别展示。对于横滚角阶跃响应，两个控制器的三轴姿态角跟踪曲线对比如图\ref{fig:angle_cmp}所示，对应的控制力矩输出对比如图\ref{fig:effort_cmp}所示。对于偏航角阶跃响应，姿态角跟踪曲线对比如图\ref{fig:angle_cmp_yaw}所示，控制力矩输出对比如图\ref{fig:effort_cmp_yaw}所示。
+% 按照上述实验步骤执行仿真实验后，得到的结果经整理，两个控制器的横滚角阶跃响应以及对应的控制量输出对比如图\ref{fig:angle_cmp}和图\ref{fig:effort_cmp}所示，偏航角阶跃响应以及对应的控制量输出对比如图\ref{fig:angle_cmp}和图\ref{fig:effort_cmp}所示。
+
+\begin{figure}[htbp]
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_eular_roll.pdf}
+        \caption*{(a)横滚角$\varphi$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_eular_pitch.pdf}
+        \caption*{(b)俯仰角$\theta$跟随曲线}
+    \end{minipage}
+    \vspace{0.1cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_eular_yaw.pdf}
+        \caption*{(c)偏航角$\psi$跟随曲线}
+    \end{minipage}
+    \caption{PID控制器和NDI控制器横滚角$\varphi$跟随曲线对比}
+    \label{fig:angle_cmp}
+\end{figure}
+
+\begin{figure}[htbp]
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_effort_M_cv_x.pdf}
+        \caption*{(a)控制力矩在机体系$X$轴的投影$M_{cv, x}$}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_effort_M_cv_y.pdf}
+        \caption*{(b)控制力矩在机体系$Y$轴的投影$M_{cv, y}$}
+    \end{minipage}
+    \vspace{0.1cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_effort_M_cv_z.pdf}
+        \caption*{(c)控制力矩在机体系$Z$轴的投影$M_{cv, z}$}
+    \end{minipage}
+    \caption{PID控制器和NDI控制器横滚角$\varphi$跟随实验控制力矩对比}
+    \label{fig:effort_cmp}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_yaw/cmp_eular_roll.pdf}
+        \caption*{(a)横滚角$\varphi$跟随曲线}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_yaw/cmp_eular_pitch.pdf}
+        \caption*{(b)俯仰角$\theta$跟随曲线}
+    \end{minipage}
+    \vspace{0.1cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_yaw/cmp_eular_yaw.pdf}
+        \caption*{(c)偏航角$\psi$跟随曲线}
+    \end{minipage}
+    \caption{PID控制器和NDI控制器偏航角$\psi$跟随曲线对比}
+    \label{fig:angle_cmp_yaw}
+\end{figure}
+
+\begin{figure}[htbp]
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_yaw/cmp_effort_M_cv_x.pdf}
+        \caption*{(a)控制力矩在机体系$X$轴的投影$M_{cv, x}$}
+    \end{minipage}
+    \vspace{0.3cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_yaw/cmp_effort_M_cv_y.pdf}
+        \caption*{(b)控制力矩在机体系$Y$轴的投影$M_{cv, y}$}
+    \end{minipage}
+    \vspace{0.1cm}
+    \begin{minipage}{1.0\textwidth}
+        \centering
+        \includegraphics{matlab/param_recgnize/pdf/NDI_controler_track_yaw/cmp_effort_M_cv_z.pdf}
+        \caption*{(c)控制力矩在机体系$Z$轴的投影$M_{cv, z}$}
+    \end{minipage}
+    \caption{PID控制器和NDI控制器偏航角$\psi$跟随实验控制力矩对比}
+    \label{fig:effort_cmp_yaw}
+\end{figure}
+
+\textbf{横滚角阶跃响应实验分析}
+
+从图\ref{fig:angle_cmp}(a)可以看出，在横滚角阶跃指令下，PID控制器与NDI控制器的横滚角响应速度基本相当，两者均能在约 \(1.5\,\mathrm{s}\) 内完成对 \(20^\circ\) 阶跃指令的跟踪。然而，由于系统固有的非线性耦合特性，PID控制器的表现暴露出两个短板。
+
+其一，姿态通道之间存在显著的交叉耦合。观察图\ref{fig:angle_cmp}(b)，当横滚角发生阶跃变化时，PID控制下的俯仰角出现了约 \(1^\circ\) 的扰动，而NDI控制下的俯仰角则几乎不受影响。这一耦合主要源于涵道风扇高速旋转产生的陀螺力矩效应——横滚角速度的变化会诱发俯仰轴上的干扰力矩，而PID控制器缺乏对这种非线性耦合的显式补偿机制，只能被动地依赖姿态环的误差反馈来抑制扰动。相比之下，在已知控制舵面偏转力系数$K_{cv}$的情况下，NDI控制器通过在线求解逆动力学模型，主动在俯仰通道上输出额外的补偿控制力矩，从而提前抵消了陀螺力矩的耦合影响，如图\ref{fig:effort_cmp}(b)中NDI曲线在横滚阶跃瞬间出现的尖峰所示。
+
+其二，偏航通道的初始偏差显著。从图\ref{fig:angle_cmp}(c)可以看到，在仿真初始阶段，PID控制下的偏航角出现了高达 \(30^\circ\) 的偏离，随后才逐渐回归期望值。这是由于第三章参数辨识实验中，反扭矩襟翼系数 \(K_{sta}\) 的初始估计值与真实值存在偏差，导致控制分配模块在初始时刻未能准确抵消涵道风扇反扭矩与襟翼平衡力矩之间的残差。PID控制器需要依赖偏航通道积分项的累积作用来逐步修正这一偏差，因此表现出较长的调节时间。而NDI控制器在控制律中直接利用了当前状态估计 \(\hat{\boldsymbol{x}}\) 中的气动参数信息，能够更准确地计算所需的偏航力矩，从图\ref{fig:effort_cmp}(c)可以看出，NDI输出的 \(M_{cv,z}\) 在初始时刻即与PID输出存在明显差异，这使得偏航角能够迅速稳定在期望值附近，几乎无初始偏移。
+
+\textbf{偏航角阶跃响应实验分析}
+
+从图\ref{fig:angle_cmp_yaw}(c)可以看出，NDI控制器在每次偏航角阶跃指令下的响应曲线几乎完全一致，表现出良好的动态一致性。而PID控制器的响应则存在明显差异：第一次阶跃响应出现约 \(4^\circ\) 的超调，后续阶跃响应的超调量有所变化，且每次调节时间不尽相同。这是由于PID控制器中的积分项具有记忆效应，其数值依赖于前一阶段的误差累积，导致在不同阶跃周期内控制器的初始状态不同，从而影响了响应的重复性。NDI控制器则不存在积分项，其控制量完全由当前状态和模型逆决定，因此能够保证每次阶跃响应具有相同的动态特性。
+
+从图\ref{fig:angle_cmp_yaw}(a)和(b)同样可以观察到PID控制器在横滚与俯仰通道之间的耦合现象，表现与横滚角阶跃实验一致：当偏航角阶跃时，由于偏航运动本身对横滚和俯仰的耦合较弱，俯仰角扰动在 \(0.3^\circ\) 以内，扰动幅度较小，但PID控制下的横滚角仍出现可较为明显的波动，而NDI控制下的横滚与俯仰角则保持平稳。此外，图\ref{fig:angle_cmp_yaw}(c)再次验证了PID控制器在初始阶段的偏航角偏移问题，即前 \(2\,\mathrm{s}\) 存在最大约 \(30^\circ\) 的偏差，而NDI控制器则无此现象，再一次验证了已知反扭矩襟翼系数 \(K_{sta}\)情况下，NDI控制器的优势。
+
+仿真结果表明：在模型精确已知且状态估计可信的前提下，NDI控制器能够有效解耦姿态通道之间的非线性耦合，消除积分项带来的动态不一致性，并利用先验模型信息补偿气动参数偏差引起的初始扰动。相较于PID控制器，NDI控制器在姿态跟踪的快速性、稳定性和一致性方面均具有显著优势。
+% 横滚角阶跃信号响应实验：
+
+% 从图\ref{fig:angle_cmp}横滚角阶跃响应的三轴姿态跟随曲线能够看出，在两个控制器的横滚角响应速度相当的情况下，由于系统呈现出非线性，PID控制器的横滚角和俯仰角、偏航角存在明显的耦合现象，主要体现在，横滚角的姿态变化会给俯仰角带来扰动，俯仰角姿态受到最大$1$度的影响。这主要是陀螺力矩带来的俯仰角和横滚角的耦合。响应地，NDI控制器为了平衡这一作用力，从图\ref{fig:effort_cmp}(b)可以看出，在Y轴会输出额外的控制力矩以平衡该耦合带来的扰动。
+
+% 此外，从图\ref{fig:angle_cmp}(c)可以看出，初始阶段偏航角难以被控制，出现了高达$30$度的偏差。这是由于部署PID控制器时，在初始阶段对反扭距襟翼的偏转力系数估计不准确，未能准确消除反扭距襟翼和涵道风扇相抵消后，剩余的Z轴扭矩，经过2s的积分项修正后，偏航角姿态才重新回到期望值附近。响应地，从图\ref{fig:effort_cmp}(c)可以看出，PID控制器和NDI控制器之间的输出存在差距，正是对反扭距襟翼的偏转力系数估计不准确引起的。
+
+% 偏航角阶跃信号响应实验：
+
+% 从图\ref{fig:angle_cmp_yaw}(c)能够看出，NDI控制器的对每个阶跃信号的响应曲线几乎一致，这反映了其动态特性的一致性。而PID控制器的响应曲线则存在小幅度超调$4$度，且每次偏航角跟随一致性较差。这是由于PID控制器存在积分项，在控制过程中，积分项在实时地动态调整，积分结果取决于上一阶跃响应的误差积分。
+
+% 从图\ref{fig:angle_cmp_yaw}(a)(b)能够看出，仿真实验的初始阶段，横滚角在滚随期望值的过程中，也能看出使用PID控制器时横滚角和俯仰角之间的耦合关系，其表现与横滚角阶跃信号响应实验一致。从图\ref{fig:angle_cmp_yaw}(c)也能看出，使用PID控制器时，初始两秒内，偏航角存在较为明显的误差，这页与横滚角阶跃信号响应实验表现一致。此外，能够从\ref{fig:angle_cmp_yaw}看出，偏航角和其他两个姿态轴的耦合并不明显，PID控制器在跟随偏航角的期望值时，俯仰角的扰动范围在$0.3$度以内。
+
+% \section{本章小结}
+
+% 本章围绕涵道式无人机的抗扰动控制问题，从控制分配、经典PID控制、地面效应补偿到非线性动态逆控制，开展了系统性的设计与验证工作。首先，针对涵道式无人机的过驱动特性，设计了基于伪逆法的控制分配器，实现了期望推力与力矩向执行器指令的合理映射。其次，建立了串级PID控制器作为基础控制框架，并通过试凑法整定参数。针对近地面飞行中的地面效应扰动，基于第四章辨识得到的推力与舵面偏转力随高度变化的模型，提出了动态更新控制效率矩阵的补偿策略。静态台架实验表明，补偿后推力与力矩的稳态误差分别控制在 \(3\%\) 与 \(10\%\) 以内；实飞验证进一步证明，引入补偿后无人机在强地效区的高度与偏航角跟踪性能显著提升，动态品质一致。最后，针对开放环境中的非线性气动耦合问题，设计了非线性动态逆控制器，并在仿真环境中与PID控制器进行了对比。结果表明，NDI控制器能够有效解耦姿态通道间的耦合影响，消除初始气动参数偏差带来的扰动，且具有更好的动态一致性。本章工作为涵道式无人机在全飞行包线内的抗扰控制提供了完整的技术方案与实验支撑。
+\section{本章小结}
+
+本章围绕涵道式无人机的抗扰控制问题，从执行器分配、基本姿态位置控制、地面效应补偿到非线性鲁棒控制，构建了完整的控制技术链条。
+
+首先，针对涵道式无人机过驱动的执行器配置，设计了基于伪逆法的控制分配器，将期望推力与期望力矩唯一映射为螺旋桨转速与四个舵面偏转角，为后续控制律的工程实现奠定了基础。其次，设计了串级PID控制器，内环为姿态与角速度环，外环为位置与速度环，通过几何变换实现平动加速度到期望姿态的转换。实际飞行试验表明，该控制器在无地效及弱地效区域内能够保证系统稳定飞行，具有良好的鲁棒性。
+
+针对近地面飞行时地面效应引起的推力增益与舵面效率衰减问题，本章基于第四章辨识得到的半经验模型，在控制分配环节实时更新推力系数 \(K_{TGE}\) 与舵面偏转力系数 \(K_{cvGE}\)，实现了对地效扰动的动态前馈补偿。静态台架实验表明，补偿后推力与力矩的稳态误差分别控制在 \(3\%\) 与 \(10\%\) 以内；近地面实飞验证进一步证明，引入补偿后无人机在强地效区的高度与偏航角跟踪性能显著提升，稳态误差快速收敛且动态品质一致，有效克服了地效对飞行控制的不利影响。
+
+最后，为应对开放环境中非线性气动耦合与参数不确定性，基于第三章在线辨识得到的关键气动参数，设计了非线性动态逆控制器。仿真对比实验表明，NDI控制器能够主动解耦姿态通道间的陀螺力矩耦合，消除积分项引起的动态不一致性，并利用先验模型信息补偿气动参数偏差带来的初始扰动。相比于串级PID控制器，NDI控制器在姿态跟踪的快速性、稳定性和一致性方面均具有显著优势。
+
+综上，本章所提出的抗扰控制方法兼顾了工程实用性与理论先进性，为涵道式无人机在全飞行包线内的高品质控制提供了系统解决方案。
