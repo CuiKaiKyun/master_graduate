@@ -4,24 +4,24 @@
 	\begin{tabular}{l>{\centering}p{0.5cm}l}
 	 $\boldsymbol{X}_n\boldsymbol{Y}_n\boldsymbol{Z}_n$ - 地面坐标系 &  & $\boldsymbol{X}_b\boldsymbol{Y}_b\boldsymbol{Z}_b$ - 机体坐标系\tabularnewline
 	 $\psi$ - 偏航角 &  & $\theta$ - 俯仰角\tabularnewline
-	 $\phi$ - 滚转角 &  & $\boldsymbol{R}_b^n$（或$\boldsymbol{R}$） - 机体系到地面系的旋转矩阵\tabularnewline
-	 $\boldsymbol{\eta}=[\phi,\theta,\psi]^{\mathrm{T}}$ - 欧拉角向量 &  & $\boldsymbol{\omega}^b=[p,q,r]^{\mathrm{T}}$ - 机体角速度\tabularnewline
-	 $\boldsymbol{p}^e=[p_x^e,p_y^e,p_z^e]^{\mathrm{T}}$ - 地面系位置 &  & $\boldsymbol{v}^b=[v_x^b,v_y^b,v_z^b]^{\mathrm{T}}$ - 机体系速度\tabularnewline
+	 $\phi$ - 滚转角 &  & $\boldsymbol{R}_b^n$ - 机体系到地面系的旋转矩阵\tabularnewline
+	 $\boldsymbol{\eta}=[\phi,\theta,\psi]^{T}$ - 欧拉角向量 &  & $\boldsymbol{\omega}^b=[p,q,r]^{T}$ - 机体角速度\tabularnewline
+	 $\boldsymbol{p}^e=[p_x^e,p_y^e,p_z^e]^{T}$ - 地面系位置 &  & $\boldsymbol{v}^b=[v_x^b,v_y^b,v_z^b]^{T}$ - 机体系速度\tabularnewline
 	 $\boldsymbol{F}^b$ - 机体系合外力（除重力） &  & $\boldsymbol{M}^b$ - 机体系合外力矩\tabularnewline
-	 $m$ - 无人机质量 &  & $\boldsymbol{J}=\operatorname{diag}(J_x,J_y,J_z)$ - 转动惯量矩阵\tabularnewline
+	 $m$ - 无人机质量 &  & $\boldsymbol{J}$ - 转动惯量矩阵\tabularnewline
 	 $g$ - 重力加速度 &  & $\rho$ - 空气密度\tabularnewline
 	 $\Omega$ - 螺旋桨角速度 &  & $R$ - 螺旋桨半径\tabularnewline
 	 $h$ - 离地高度 &  & $h/R$ - 无量纲高度比\tabularnewline
-	 $T_{df}$ - 涵道风扇无地效推力 &  & $T_{GE}$ - 地面效应下推力\tabularnewline
+	 $T$ - 涵道风扇无地效推力 &  & $T_{GE}$ - 地面效应下推力\tabularnewline
 	 $K_{T0}$ - 涵道风扇基础拉力系数 &  & $K_{TJ}$ - 拉力随前进比衰减系数\tabularnewline
 	 $K_N$ - 涵道风扇侧向力系数 &  & $K_{l_T}$ - 涵道风扇拉力力臂系数\tabularnewline
 	 $K_{sta}$ - 反扭矩襟翼扭矩系数 &  & $K_{cv}$ - 无地效舵面偏转力系数\tabularnewline
 	 $K_{cvGE}$ - 地效下舵面偏转力系数 &  & $\delta_i$（$i=1,\ldots,4$） - 舵面偏转角\tabularnewline
-	 $V_e$ - 涵道出口风速 &  & $\boldsymbol{Q}$ - 姿态角与角速度转换矩阵\tabularnewline
-	 $\boldsymbol{B}$ - 控制效率矩阵 &  & $\boldsymbol{B}^+$ - 伪逆矩阵\tabularnewline
+	 $V_e$ - 涵道出口风速 &  & $\boldsymbol{Q}$ - 姿态角变化率与角速度转换矩阵\tabularnewline
+	 $\boldsymbol{B}$ - 控制效率矩阵 &  & $\boldsymbol{B}^+$ - 控制分配伪逆矩阵\tabularnewline
 	 $\hat{\boldsymbol{x}}_k^-$ - 先验状态估计 &  & $\hat{\boldsymbol{x}}_k^+$ - 后验状态估计\tabularnewline
-	 $\boldsymbol{P}_k^-$ - 先验估计协方差 &  & $\boldsymbol{P}_k^+$ - 后验估计协方差\tabularnewline
-	 $\boldsymbol{Q}_k$ - 过程噪声协方差 &  & $\boldsymbol{R}_k$ - 观测噪声协方差\tabularnewline
-	 $C_{TAmp},C_{TExp}$ - 推力地效模型参数 &  & $C_{cvAmp},C_{cvExp}$ - 舵面力地效模型参数\tabularnewline
+	 $\boldsymbol{P}_k^-$ - 先验估计协方差矩阵 &  & $\boldsymbol{P}_k^+$ - 后验估计协方差矩阵\tabularnewline
+	 $\boldsymbol{Q}_k$ - 过程噪声协方差矩阵 &  & $\boldsymbol{R}_k$ - 观测噪声协方差矩阵\tabularnewline
+	 $C_{TAmp},C_{TExp}$ - 地效推力模型参数 &  & $C_{cvAmp},C_{cvExp}$ - 地效舵面力模型参数\tabularnewline
 	\end{tabular}
 \end{table}
