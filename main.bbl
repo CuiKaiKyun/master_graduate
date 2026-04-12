@@ -3693,75 +3693,6 @@
       \endverb
       \keyw{pflimlin2007position}
     \endentry
-    \entry{jeong2015control}{article}{}
-      \name{author}{3}{}{%
-        {{hash=7b9654170db0e4f9401b8c73ddf01db6}{%
-           family={Jeong},
-           familyi={J\bibinitperiod},
-           given={Junho},
-           giveni={J\bibinitperiod}}}%
-        {{hash=d3f228654d9377a46f38ef717d7c778e}{%
-           family={Kim},
-           familyi={K\bibinitperiod},
-           given={Seungkeun},
-           giveni={S\bibinitperiod}}}%
-        {{hash=dd2e88fc7190ea7638675092f9f39138}{%
-           family={Suk},
-           familyi={S\bibinitperiod},
-           given={Jinyoung},
-           giveni={J\bibinitperiod}}}%
-      }
-      \name{namea}{3}{}{%
-        {{hash=7b9654170db0e4f9401b8c73ddf01db6}{%
-           family={Jeong},
-           familyi={J\bibinitperiod},
-           given={Junho},
-           giveni={J\bibinitperiod}}}%
-        {{hash=d3f228654d9377a46f38ef717d7c778e}{%
-           family={Kim},
-           familyi={K\bibinitperiod},
-           given={Seungkeun},
-           giveni={S\bibinitperiod}}}%
-        {{hash=dd2e88fc7190ea7638675092f9f39138}{%
-           family={Suk},
-           familyi={S\bibinitperiod},
-           given={Jinyoung},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{d34bbfc0049c83d30e474dd9c1f07c2f}
-      \strng{fullhash}{3911ae067b12cff2b4e4c5ec69d1b24e}
-      \strng{bibnamehash}{3911ae067b12cff2b4e4c5ec69d1b24e}
-      \strng{authorbibnamehash}{3911ae067b12cff2b4e4c5ec69d1b24e}
-      \strng{authornamehash}{d34bbfc0049c83d30e474dd9c1f07c2f}
-      \strng{authorfullhash}{3911ae067b12cff2b4e4c5ec69d1b24e}
-      \strng{nameabibnamehash}{3911ae067b12cff2b4e4c5ec69d1b24e}
-      \strng{nameanamehash}{d34bbfc0049c83d30e474dd9c1f07c2f}
-      \strng{nameafullhash}{3911ae067b12cff2b4e4c5ec69d1b24e}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{International Journal of Aerospace Engineering}
-      \field{langid}{english}
-      \field{languageid}{english}
-      \field{lansortorder}{4}
-      \field{title}{Control system design for a ducted-fan unmanned aerial vehicle using linear quadratic tracker}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{volume}{2015}
-      \field{year}{2015}
-      \field{dateera}{ce}
-      \field{pages}{1\bibrangedash 12}
-      \range{pages}{12}
-      \verb{doi}
-      \verb 10.1155/2015/364926
-      \endverb
-      \keyw{jeong2015control}
-    \endentry
     \entry{fan2018modelling}{article}{}
       \name{author}{3}{}{%
         {{hash=a3166e33c48f3979fb2eb732457cdab1}{%
@@ -3833,6 +3764,141 @@
       \endverb
       \keyw{fan2018modelling}
     \endentry
+    \entry{chen2024ADRC}{article}{}
+      \name{author}{3}{}{%
+        {{hash=4b642426f9c63c95612065b4a1c848e7}{%
+           family={陈伟杰},
+           familyi={陈\bibinitperiod}}}%
+        {{hash=0f0a81a6d3b5740dfabaa95cfcfe95aa}{%
+           family={江博文},
+           familyi={江\bibinitperiod}}}%
+        {{hash=360d309c26461834ae86c7324b2f3c7a}{%
+           family={杨程},
+           familyi={杨\bibinitperiod}}}%
+      }
+      \name{namea}{3}{}{%
+        {{hash=4b642426f9c63c95612065b4a1c848e7}{%
+           family={陈伟杰},
+           familyi={陈\bibinitperiod}}}%
+        {{hash=0f0a81a6d3b5740dfabaa95cfcfe95aa}{%
+           family={江博文},
+           familyi={江\bibinitperiod}}}%
+        {{hash=360d309c26461834ae86c7324b2f3c7a}{%
+           family={杨程},
+           familyi={杨\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{a40e478eaf286325bbec56a39e322f15}
+      \strng{fullhash}{231be04119940c50981516f96db81335}
+      \strng{bibnamehash}{231be04119940c50981516f96db81335}
+      \strng{authorbibnamehash}{231be04119940c50981516f96db81335}
+      \strng{authornamehash}{a40e478eaf286325bbec56a39e322f15}
+      \strng{authorfullhash}{231be04119940c50981516f96db81335}
+      \strng{nameabibnamehash}{231be04119940c50981516f96db81335}
+      \strng{nameanamehash}{a40e478eaf286325bbec56a39e322f15}
+      \strng{nameafullhash}{231be04119940c50981516f96db81335}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{电光与控制}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{8}
+      \field{title}{基于改进自抗扰的涵道无人机姿态控制}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{31}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{pages}{16\bibrangedash 22}
+      \range{pages}{7}
+      \keyw{chen2024ADRC}
+    \endentry
+    \entry{Manzoor2020CFC}{article}{}
+      \name{author}{4}{}{%
+        {{hash=eacf8ddc59b2b80fb879b64f54f3d921}{%
+           family={Manzoor},
+           familyi={M\bibinitperiod},
+           given={Tayyab},
+           giveni={T\bibinitperiod}}}%
+        {{hash=4ce0ef4256cb0aaec2ed82a7e47b4746}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Zhongqi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=07f30161eacd22efed850429b59ae3fa}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Yuanqing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=96fabf74af095894649ba237587d11c0}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Dailiang},
+           giveni={D\bibinitperiod}}}%
+      }
+      \name{namea}{4}{}{%
+        {{hash=eacf8ddc59b2b80fb879b64f54f3d921}{%
+           family={Manzoor},
+           familyi={M\bibinitperiod},
+           given={Tayyab},
+           giveni={T\bibinitperiod}}}%
+        {{hash=4ce0ef4256cb0aaec2ed82a7e47b4746}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Zhongqi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=07f30161eacd22efed850429b59ae3fa}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Yuanqing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=96fabf74af095894649ba237587d11c0}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Dailiang},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{fa76fbe300cf247365cb70ef683bdef8}
+      \strng{fullhash}{735e56355371dce3f184537e6020c2b6}
+      \strng{bibnamehash}{8590fcbc94f331883a90248226fc7c4a}
+      \strng{authorbibnamehash}{8590fcbc94f331883a90248226fc7c4a}
+      \strng{authornamehash}{fa76fbe300cf247365cb70ef683bdef8}
+      \strng{authorfullhash}{735e56355371dce3f184537e6020c2b6}
+      \strng{nameabibnamehash}{8590fcbc94f331883a90248226fc7c4a}
+      \strng{nameanamehash}{fa76fbe300cf247365cb70ef683bdef8}
+      \strng{nameafullhash}{735e56355371dce3f184537e6020c2b6}
+      \field{extraname}{2}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Aerospace Science and Technology}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{title}{MPC based compound flight control strategy for a ducted fan aircraft}
+      \field{usera}{J}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{volume}{107}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{pages}{106264}
+      \range{pages}{1}
+      \keyw{Manzoor2020CFC}
+    \endentry
     \entry{manzoor2022composite}{article}{}
       \name{author}{3}{}{%
         {{hash=eacf8ddc59b2b80fb879b64f54f3d921}{%
@@ -3883,7 +3949,7 @@
       \strng{nameabibnamehash}{714b81a07c45282efe58f5012a916fc9}
       \strng{nameanamehash}{fa76fbe300cf247365cb70ef683bdef8}
       \strng{nameafullhash}{714b81a07c45282efe58f5012a916fc9}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{sortinit}{6}
       \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
@@ -4006,142 +4072,6 @@
       \range{pages}{1}
       \keyw{ai2025robust}
     \endentry
-    \entry{chen2024ADRC}{article}{}
-      \name{author}{3}{}{%
-        {{hash=4b642426f9c63c95612065b4a1c848e7}{%
-           family={陈伟杰},
-           familyi={陈\bibinitperiod}}}%
-        {{hash=0f0a81a6d3b5740dfabaa95cfcfe95aa}{%
-           family={江博文},
-           familyi={江\bibinitperiod}}}%
-        {{hash=360d309c26461834ae86c7324b2f3c7a}{%
-           family={杨程},
-           familyi={杨\bibinitperiod}}}%
-      }
-      \name{namea}{3}{}{%
-        {{hash=4b642426f9c63c95612065b4a1c848e7}{%
-           family={陈伟杰},
-           familyi={陈\bibinitperiod}}}%
-        {{hash=0f0a81a6d3b5740dfabaa95cfcfe95aa}{%
-           family={江博文},
-           familyi={江\bibinitperiod}}}%
-        {{hash=360d309c26461834ae86c7324b2f3c7a}{%
-           family={杨程},
-           familyi={杨\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {chinese}%
-      }
-      \strng{namehash}{a40e478eaf286325bbec56a39e322f15}
-      \strng{fullhash}{231be04119940c50981516f96db81335}
-      \strng{bibnamehash}{231be04119940c50981516f96db81335}
-      \strng{authorbibnamehash}{231be04119940c50981516f96db81335}
-      \strng{authornamehash}{a40e478eaf286325bbec56a39e322f15}
-      \strng{authorfullhash}{231be04119940c50981516f96db81335}
-      \strng{nameabibnamehash}{231be04119940c50981516f96db81335}
-      \strng{nameanamehash}{a40e478eaf286325bbec56a39e322f15}
-      \strng{nameafullhash}{231be04119940c50981516f96db81335}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{电光与控制}
-      \field{langid}{english}
-      \field{languageid}{chinese}
-      \field{lansortorder}{1}
-      \field{number}{8}
-      \field{title}{基于改进自抗扰的涵道无人机姿态控制}
-      \field{usera}{J}
-      \field{userd}{chinese}
-      \field{userf}{chinese}
-      \field{volume}{31}
-      \field{year}{2024}
-      \field{dateera}{ce}
-      \field{pages}{16\bibrangedash 22}
-      \range{pages}{7}
-      \keyw{chen2024ADRC}
-    \endentry
-    \entry{Manzoor2020VTOL}{article}{}
-      \name{author}{4}{}{%
-        {{hash=eacf8ddc59b2b80fb879b64f54f3d921}{%
-           family={Manzoor},
-           familyi={M\bibinitperiod},
-           given={Tayyab},
-           giveni={T\bibinitperiod}}}%
-        {{hash=07f30161eacd22efed850429b59ae3fa}{%
-           family={Xia},
-           familyi={X\bibinitperiod},
-           given={Yuanqing},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=c70b202165019c5b6a39d5f8f2ef33d2}{%
-           family={Zhai},
-           familyi={Z\bibinitperiod},
-           given={Di-Hua},
-           giveni={D\bibinithyphendelim H\bibinitperiod}}}%
-        {{hash=96fabf74af095894649ba237587d11c0}{%
-           family={Ma},
-           familyi={M\bibinitperiod},
-           given={Dailiang},
-           giveni={D\bibinitperiod}}}%
-      }
-      \name{namea}{4}{}{%
-        {{hash=eacf8ddc59b2b80fb879b64f54f3d921}{%
-           family={Manzoor},
-           familyi={M\bibinitperiod},
-           given={Tayyab},
-           giveni={T\bibinitperiod}}}%
-        {{hash=07f30161eacd22efed850429b59ae3fa}{%
-           family={Xia},
-           familyi={X\bibinitperiod},
-           given={Yuanqing},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=c70b202165019c5b6a39d5f8f2ef33d2}{%
-           family={Zhai},
-           familyi={Z\bibinitperiod},
-           given={Di-Hua},
-           giveni={D\bibinithyphendelim H\bibinitperiod}}}%
-        {{hash=96fabf74af095894649ba237587d11c0}{%
-           family={Ma},
-           familyi={M\bibinitperiod},
-           given={Dailiang},
-           giveni={D\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{publisher}{1}{%
-        {Elsevier}%
-      }
-      \strng{namehash}{fa76fbe300cf247365cb70ef683bdef8}
-      \strng{fullhash}{49dc807f719140be94bdfe93e33e9850}
-      \strng{bibnamehash}{37a519b510cdcfdf09219d63b51836ab}
-      \strng{authorbibnamehash}{37a519b510cdcfdf09219d63b51836ab}
-      \strng{authornamehash}{fa76fbe300cf247365cb70ef683bdef8}
-      \strng{authorfullhash}{49dc807f719140be94bdfe93e33e9850}
-      \strng{nameabibnamehash}{37a519b510cdcfdf09219d63b51836ab}
-      \strng{nameanamehash}{fa76fbe300cf247365cb70ef683bdef8}
-      \strng{nameafullhash}{49dc807f719140be94bdfe93e33e9850}
-      \field{extraname}{3}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Chinese Journal of Aeronautics}
-      \field{langid}{english}
-      \field{languageid}{english}
-      \field{lansortorder}{4}
-      \field{number}{7}
-      \field{title}{Trajectory tracking control of a VTOL unmanned aerial vehicle using offset-free tracking MPC}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{volume}{33}
-      \field{year}{2020}
-      \field{dateera}{ce}
-      \field{pages}{2024\bibrangedash 2042}
-      \range{pages}{19}
-      \keyw{Manzoor2020VTOL}
-    \endentry
     \entry{zhu1997NDI}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=112f4cc04ed02e7a1faed634be94b5bd}{%
@@ -4186,8 +4116,8 @@
       \strng{nameabibnamehash}{d7728979eed76fbafbf44c88f7bf0645}
       \strng{nameanamehash}{4932fb1a8b22052e72269c56841d0613}
       \strng{nameafullhash}{368eab5c5caf223be6bbee5f0f015baf}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{航空学报}
@@ -4248,8 +4178,8 @@
       \strng{nameabibnamehash}{7465213343306e1f5f4ee16fb76d6b8a}
       \strng{nameanamehash}{fe29441dc5556f9c74c3b0607bc782dc}
       \strng{nameafullhash}{fded8ca4687839ad47ef8d1cb623bc3c}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{导弹与航天运载技术}
@@ -4269,232 +4199,77 @@
       \range{pages}{3}
       \keyw{zhang2015NDI}
     \endentry
-    \entry{wang2019flexible}{inproceedings}{}
-      \name{author}{4}{}{%
-        {{hash=0e608b7b50401c7d859e07223958bb00}{%
-           family={Wang},
-           familyi={W\bibinitperiod},
-           given={Xuerui},
-           giveni={X\bibinitperiod}}}%
-        {{hash=ae9ec7cfd654ee928427da9716e6e762}{%
-           family={Kampen},
-           familyi={K\bibinitperiod},
-           given={Erik-Jan},
-           giveni={E\bibinithyphendelim J\bibinitperiod},
-           prefix={van},
-           prefixi={v\bibinitperiod}}}%
-        {{hash=a36acd744d791fb0f3c287ad4815b028}{%
-           family={Chu},
+    \entry{Cheng2024INDI}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=32d6815905571cddab149b0a7a731383}{%
+           family={Cheng},
            familyi={C\bibinitperiod},
-           given={Qiping},
-           giveni={Q\bibinitperiod}}}%
-        {{hash=95074516e0bef4992d60581b2b1b7000}{%
-           family={Breuker},
-           familyi={B\bibinitperiod},
-           given={Roeland\bibnamedelima De},
-           giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+           given={Zixiao},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=dbaa82f59751914a611b9d2212896d75}{%
+           family={Pei},
+           familyi={P\bibinitperiod},
+           given={Hailong},
+           giveni={H\bibinitperiod}}}%
+        {{hash=ee5fdd872d59926532b2b320ed30429b}{%
+           family={Fang},
+           familyi={F\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod}}}%
       }
-      \name{namea}{4}{}{%
-        {{hash=0e608b7b50401c7d859e07223958bb00}{%
-           family={Wang},
-           familyi={W\bibinitperiod},
-           given={Xuerui},
-           giveni={X\bibinitperiod}}}%
-        {{hash=ae9ec7cfd654ee928427da9716e6e762}{%
-           family={Kampen},
-           familyi={K\bibinitperiod},
-           given={Erik-Jan},
-           giveni={E\bibinithyphendelim J\bibinitperiod},
-           prefix={van},
-           prefixi={v\bibinitperiod}}}%
-        {{hash=a36acd744d791fb0f3c287ad4815b028}{%
-           family={Chu},
+      \name{namea}{3}{}{%
+        {{hash=32d6815905571cddab149b0a7a731383}{%
+           family={Cheng},
            familyi={C\bibinitperiod},
-           given={Qiping},
-           giveni={Q\bibinitperiod}}}%
-        {{hash=95074516e0bef4992d60581b2b1b7000}{%
-           family={Breuker},
-           familyi={B\bibinitperiod},
-           given={Roeland\bibnamedelima De},
-           giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+           given={Zixiao},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=dbaa82f59751914a611b9d2212896d75}{%
+           family={Pei},
+           familyi={P\bibinitperiod},
+           given={Hailong},
+           giveni={H\bibinitperiod}}}%
+        {{hash=ee5fdd872d59926532b2b320ed30429b}{%
+           family={Fang},
+           familyi={F\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {english}%
       }
       \list{location}{1}{%
-        {Kissimmee}%
+        {n.p.}%
       }
-      \strng{namehash}{192fd666f8e58bd0e801819502468c5c}
-      \strng{fullhash}{b124f4856627e6fde5ccb13018f0c580}
-      \strng{bibnamehash}{d4d1e2bc669ac19e5baa3e10b87cfedc}
-      \strng{authorbibnamehash}{d4d1e2bc669ac19e5baa3e10b87cfedc}
-      \strng{authornamehash}{192fd666f8e58bd0e801819502468c5c}
-      \strng{authorfullhash}{b124f4856627e6fde5ccb13018f0c580}
-      \strng{nameabibnamehash}{d4d1e2bc669ac19e5baa3e10b87cfedc}
-      \strng{nameanamehash}{192fd666f8e58bd0e801819502468c5c}
-      \strng{nameafullhash}{b124f4856627e6fde5ccb13018f0c580}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \strng{namehash}{0dd170f4a82264ae0b087209662ed561}
+      \strng{fullhash}{9829476500da14b2d644c0e1ac139b07}
+      \strng{bibnamehash}{9829476500da14b2d644c0e1ac139b07}
+      \strng{authorbibnamehash}{9829476500da14b2d644c0e1ac139b07}
+      \strng{authornamehash}{0dd170f4a82264ae0b087209662ed561}
+      \strng{authorfullhash}{9829476500da14b2d644c0e1ac139b07}
+      \strng{nameabibnamehash}{9829476500da14b2d644c0e1ac139b07}
+      \strng{nameanamehash}{0dd170f4a82264ae0b087209662ed561}
+      \strng{nameafullhash}{9829476500da14b2d644c0e1ac139b07}
+      \field{extraname}{3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{AIAA atmospheric flight mechanics conference 2018}
+      \field{booktitle}{2024 International Conference on Intelligent Robotics and Automatic Control (IRAC)}
       \field{langid}{english}
       \field{languageid}{english}
       \field{lansortorder}{4}
-      \field{title}{Flexible Aircraft Gust Load Alleviation with Incremental Nonlinear Dynamic Inversion}
+      \field{title}{Incremental Nonlinear Dynamic Inversion for a Dual-Ducted-Fan UAV Attitude Control under In-Ground-Effect}
       \field{usera}{C}
       \field{userd}{english}
       \field{userf}{english}
-      \field{year}{2018}
+      \field{year}{2024}
       \field{dateera}{ce}
-      \field{pages}{664\bibrangedash 685}
-      \range{pages}{22}
-      \keyw{wang2019flexible}
-    \endentry
-    \entry{smeur2016adaptive}{article}{}
-      \name{author}{3}{}{%
-        {{hash=a368af7127407106603c7eec366d9fa0}{%
-           family={Smeur},
-           familyi={S\bibinitperiod},
-           given={Ewoud\bibnamedelimb J.\bibnamedelimi J.},
-           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=a36acd744d791fb0f3c287ad4815b028}{%
-           family={Chu},
-           familyi={C\bibinitperiod},
-           given={Qiping},
-           giveni={Q\bibinitperiod}}}%
-        {{hash=302d1c3dcb3386b97fe055026b715177}{%
-           family={Croon},
-           familyi={C\bibinitperiod},
-           given={Guido\bibnamedelimb C.\bibnamedelimi H.\bibnamedelimi E.},
-           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim E\bibinitperiod},
-           prefix={de},
-           prefixi={d\bibinitperiod}}}%
-      }
-      \name{namea}{3}{}{%
-        {{hash=a368af7127407106603c7eec366d9fa0}{%
-           family={Smeur},
-           familyi={S\bibinitperiod},
-           given={Ewoud\bibnamedelimb J.\bibnamedelimi J.},
-           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=a36acd744d791fb0f3c287ad4815b028}{%
-           family={Chu},
-           familyi={C\bibinitperiod},
-           given={Qiping},
-           giveni={Q\bibinitperiod}}}%
-        {{hash=302d1c3dcb3386b97fe055026b715177}{%
-           family={Croon},
-           familyi={C\bibinitperiod},
-           given={Guido\bibnamedelimb C.\bibnamedelimi H.\bibnamedelimi E.},
-           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim E\bibinitperiod},
-           prefix={de},
-           prefixi={d\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{organization}{1}{%
-        {Delft Univ Technol}%
-      }
-      \strng{namehash}{feac90ff717277f3d49cd6a6b068e03c}
-      \strng{fullhash}{5c14489d0eb9e4b6a4f27daafa1ab802}
-      \strng{bibnamehash}{5c14489d0eb9e4b6a4f27daafa1ab802}
-      \strng{authorbibnamehash}{5c14489d0eb9e4b6a4f27daafa1ab802}
-      \strng{authornamehash}{feac90ff717277f3d49cd6a6b068e03c}
-      \strng{authorfullhash}{5c14489d0eb9e4b6a4f27daafa1ab802}
-      \strng{nameabibnamehash}{5c14489d0eb9e4b6a4f27daafa1ab802}
-      \strng{nameanamehash}{feac90ff717277f3d49cd6a6b068e03c}
-      \strng{nameafullhash}{5c14489d0eb9e4b6a4f27daafa1ab802}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of Guidance, Control, and Dynamics: A Publication of the American Institute of Aeronautics and Astronautics Devoted to the Technology of Dynamics and Control}
-      \field{langid}{english}
-      \field{languageid}{english}
-      \field{lansortorder}{4}
-      \field{month}{1}
-      \field{number}{3}
-      \field{title}{Adaptive Incremental Nonlinear Dynamic Inversion for Attitude Control of Micro Air Vehicles}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{volume}{39}
-      \field{year}{2016}
-      \field{dateera}{ce}
-      \field{pages}{450\bibrangedash 461}
-      \range{pages}{12}
-      \keyw{smeur2016adaptive}
-    \endentry
-    \entry{ludena2020flight}{article}{}
-      \name{author}{3}{}{%
-        {{hash=1a9e2de9615d225292c0da6fb0a542e2}{%
-           family={Ludena\bibnamedelima Cervantes},
-           familyi={L\bibinitperiod\bibinitdelim C\bibinitperiod},
-           given={Tito\bibnamedelima J.},
-           giveni={T\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=996dd1e5c946a8bfc874c347bf1f454e}{%
-           family={Choi},
-           familyi={C\bibinitperiod},
-           given={Seong\bibnamedelima H.},
-           giveni={S\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
-        {{hash=9e3112bf865bda76a12fe7c18d4324db}{%
-           family={Kim},
-           familyi={K\bibinitperiod},
-           given={Byoung\bibnamedelima S.},
-           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-      }
-      \name{namea}{3}{}{%
-        {{hash=1a9e2de9615d225292c0da6fb0a542e2}{%
-           family={Ludena\bibnamedelima Cervantes},
-           familyi={L\bibinitperiod\bibinitdelim C\bibinitperiod},
-           given={Tito\bibnamedelima J.},
-           giveni={T\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=996dd1e5c946a8bfc874c347bf1f454e}{%
-           family={Choi},
-           familyi={C\bibinitperiod},
-           given={Seong\bibnamedelima H.},
-           giveni={S\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
-        {{hash=9e3112bf865bda76a12fe7c18d4324db}{%
-           family={Kim},
-           familyi={K\bibinitperiod},
-           given={Byoung\bibnamedelima S.},
-           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{publisher}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{b118efc89d830786be166bb54e1cb84c}
-      \strng{fullhash}{2d6f35a66c67b68d62d1c492f56b776a}
-      \strng{bibnamehash}{2d6f35a66c67b68d62d1c492f56b776a}
-      \strng{authorbibnamehash}{2d6f35a66c67b68d62d1c492f56b776a}
-      \strng{authornamehash}{b118efc89d830786be166bb54e1cb84c}
-      \strng{authorfullhash}{2d6f35a66c67b68d62d1c492f56b776a}
-      \strng{nameabibnamehash}{2d6f35a66c67b68d62d1c492f56b776a}
-      \strng{nameanamehash}{b118efc89d830786be166bb54e1cb84c}
-      \strng{nameafullhash}{2d6f35a66c67b68d62d1c492f56b776a}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{International Journal of Aeronautical and Space Sciences}
-      \field{langid}{english}
-      \field{languageid}{english}
-      \field{lansortorder}{4}
-      \field{number}{4}
-      \field{title}{Flight Control Design using Incremental Nonlinear Dynamic Inversion with Fixed-lag Smoothing Estimation}
-      \field{usera}{J}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{volume}{21}
-      \field{year}{2020}
-      \field{dateera}{ce}
-      \field{pages}{1047\bibrangedash 1058}
-      \range{pages}{12}
-      \keyw{ludena2020flight}
+      \field{pages}{562\bibrangedash 569}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/IRAC63143.2024.10871469
+      \endverb
+      \keyw{Adaptation models;Fans;Attitude control;Atmospheric modeling;Autonomous aerial vehicles;Stability analysis;Data models;Nonlinear dynamical systems;Motion measurement;Aircraft;Dual ducted fan;incremental nonlinear dynamic inversion(INDI);in-ground-effect(IGE);unmanned aerial vehicle(UAV)}
     \endentry
     \entry{SteffensenINDI}{article}{}
       \name{author}{3}{}{%
@@ -4708,8 +4483,8 @@
       \strng{nameabibnamehash}{2703b51d81ce659162e89e0e83821069}
       \strng{nameanamehash}{65f0d8e3645ce3078d31733da538a533}
       \strng{nameafullhash}{80f15237f70308b82c647e82e9343ec3}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{直升机技术}
@@ -4773,8 +4548,8 @@
       \strng{nameabibnamehash}{42bb79ac5693ac783bb6b91efe16fac7}
       \strng{nameanamehash}{5d5ecbc57b1503e9096f710493e0379a}
       \strng{nameafullhash}{a5ef049bd821b79614c30fb6809f8452}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{航空学报}
@@ -4841,8 +4616,8 @@
       \strng{nameabibnamehash}{b06103ca95abac9610a2c28cdbe104de}
       \strng{nameanamehash}{26bd5fa0db1fee362154ebaa30c82e8c}
       \strng{nameafullhash}{b06103ca95abac9610a2c28cdbe104de}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Aircraft}
@@ -4986,78 +4761,6 @@
       \verb https://doi.org/10.1007/s11370-020-00344-5
       \endverb
       \keyw{Antonio2021}
-    \endentry
-    \entry{Cheng2024INDI}{inproceedings}{}
-      \name{author}{3}{}{%
-        {{hash=32d6815905571cddab149b0a7a731383}{%
-           family={Cheng},
-           familyi={C\bibinitperiod},
-           given={Zixiao},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=dbaa82f59751914a611b9d2212896d75}{%
-           family={Pei},
-           familyi={P\bibinitperiod},
-           given={Hailong},
-           giveni={H\bibinitperiod}}}%
-        {{hash=ee5fdd872d59926532b2b320ed30429b}{%
-           family={Fang},
-           familyi={F\bibinitperiod},
-           given={Kai},
-           giveni={K\bibinitperiod}}}%
-      }
-      \name{namea}{3}{}{%
-        {{hash=32d6815905571cddab149b0a7a731383}{%
-           family={Cheng},
-           familyi={C\bibinitperiod},
-           given={Zixiao},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=dbaa82f59751914a611b9d2212896d75}{%
-           family={Pei},
-           familyi={P\bibinitperiod},
-           given={Hailong},
-           giveni={H\bibinitperiod}}}%
-        {{hash=ee5fdd872d59926532b2b320ed30429b}{%
-           family={Fang},
-           familyi={F\bibinitperiod},
-           given={Kai},
-           giveni={K\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \list{location}{1}{%
-        {n.p.}%
-      }
-      \strng{namehash}{0dd170f4a82264ae0b087209662ed561}
-      \strng{fullhash}{9829476500da14b2d644c0e1ac139b07}
-      \strng{bibnamehash}{9829476500da14b2d644c0e1ac139b07}
-      \strng{authorbibnamehash}{9829476500da14b2d644c0e1ac139b07}
-      \strng{authornamehash}{0dd170f4a82264ae0b087209662ed561}
-      \strng{authorfullhash}{9829476500da14b2d644c0e1ac139b07}
-      \strng{nameabibnamehash}{9829476500da14b2d644c0e1ac139b07}
-      \strng{nameanamehash}{0dd170f4a82264ae0b087209662ed561}
-      \strng{nameafullhash}{9829476500da14b2d644c0e1ac139b07}
-      \field{extraname}{3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{2024 International Conference on Intelligent Robotics and Automatic Control (IRAC)}
-      \field{langid}{english}
-      \field{languageid}{english}
-      \field{lansortorder}{4}
-      \field{title}{Incremental Nonlinear Dynamic Inversion for a Dual-Ducted-Fan UAV Attitude Control under In-Ground-Effect}
-      \field{usera}{C}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2024}
-      \field{dateera}{ce}
-      \field{pages}{562\bibrangedash 569}
-      \range{pages}{8}
-      \verb{doi}
-      \verb 10.1109/IRAC63143.2024.10871469
-      \endverb
-      \keyw{Adaptation models;Fans;Attitude control;Atmospheric modeling;Autonomous aerial vehicles;Stability analysis;Data models;Nonlinear dynamical systems;Motion measurement;Aircraft;Dual ducted fan;incremental nonlinear dynamic inversion(INDI);in-ground-effect(IGE);unmanned aerial vehicle(UAV)}
     \endentry
   \enddatalist
 \endrefsection

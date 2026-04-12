@@ -27,7 +27,7 @@
 \contentsline {figure}{\numberline {2-10}{\ignorespaces 地面坐标系和机体坐标系}}{18}{figure.caption.19}%
 \contentsline {figure}{\numberline {2-11}{\ignorespaces “ZYX欧拉角”的定义}}{19}{figure.caption.20}%
 \contentsline {figure}{\numberline {2-12}{\ignorespaces 涵道风扇气动力分析}}{24}{figure.caption.21}%
-\contentsline {figure}{\numberline {2-13}{\ignorespaces 反扭距襟翼作用示意图}}{27}{figure.caption.22}%
+\contentsline {figure}{\numberline {2-13}{\ignorespaces 反扭矩襟翼作用示意图}}{27}{figure.caption.22}%
 \contentsline {figure}{\numberline {2-14}{\ignorespaces 轴流状态的气动分析}}{28}{figure.caption.23}%
 \contentsline {figure}{\numberline {2-15}{\ignorespaces 控制舵面示意图}}{30}{figure.caption.24}%
 \addvspace {10\p@ }
@@ -59,8 +59,8 @@
 \contentsline {figure}{\numberline {5-6}{\ignorespaces $h/R=0.56$，期望转速与实际转速}}{91}{figure.caption.54}%
 \contentsline {figure}{\numberline {5-7}{\ignorespaces $h/R=1.12$，期望推力与实际推力}}{91}{figure.caption.55}%
 \contentsline {figure}{\numberline {5-8}{\ignorespaces $h/R=1.12$，期望转速与实际转速}}{91}{figure.caption.55}%
-\contentsline {figure}{\numberline {5-9}{\ignorespaces $h/R=2.25$，期望推力与实际推力}}{91}{figure.caption.56}%
-\contentsline {figure}{\numberline {5-10}{\ignorespaces $h/R=2.25$，期望转速与实际转速}}{91}{figure.caption.56}%
+\contentsline {figure}{\numberline {5-9}{\ignorespaces $h/R=2.25$，期望推力与实际推力}}{92}{figure.caption.56}%
+\contentsline {figure}{\numberline {5-10}{\ignorespaces $h/R=2.25$，期望转速与实际转速}}{92}{figure.caption.56}%
 \contentsline {figure}{\numberline {5-11}{\ignorespaces $h/R=0.56$，期望扭矩与实际扭矩}}{93}{figure.caption.57}%
 \contentsline {figure}{\numberline {5-12}{\ignorespaces $h/R=0.56$，期望舵面偏转角}}{93}{figure.caption.57}%
 \contentsline {figure}{\numberline {5-13}{\ignorespaces $h/R=1.12$，期望扭矩与实际扭矩}}{94}{figure.caption.58}%
@@ -76,11 +76,10 @@
 \contentsline {figure}{\numberline {5-23}{\ignorespaces 实际飞行试验$h/R = 0.56$时偏航角$\psi $和角速度$r$跟随曲线}}{101}{figure.caption.66}%
 \contentsline {figure}{\numberline {5-24}{\ignorespaces 实际飞行试验$h/R = 1.12$时偏航角$\psi $和角速度$r$跟随曲线}}{102}{figure.caption.67}%
 \contentsline {figure}{\numberline {5-25}{\ignorespaces NDI控制器系统框图}}{106}{figure.caption.68}%
-\contentsline {figure}{\numberline {5-26}{\ignorespaces PID控制器和NDI控制器横滚角$\varphi $跟随曲线对比}}{107}{figure.caption.69}%
-\contentsline {figure}{\numberline {5-27}{\ignorespaces PID控制器和NDI控制器横滚角$\varphi $跟随实验控制力矩对比}}{108}{figure.caption.70}%
-\contentsline {figure}{\numberline {5-28}{\ignorespaces PID控制器和NDI控制器偏航角$\psi $跟随曲线对比}}{108}{figure.caption.71}%
-\contentsline {figure}{\numberline {5-29}{\ignorespaces PID控制器和NDI控制器偏航角$\psi $跟随实验控制力矩对比}}{109}{figure.caption.72}%
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5-26}{\ignorespaces INDI控制器和NDI控制器横滚角$\varphi $跟随曲线对比}}{108}{figure.caption.69}%
+\contentsline {figure}{\numberline {5-27}{\ignorespaces INDI控制器和NDI控制器横滚角$\varphi $跟随实验控制力矩对比}}{108}{figure.caption.70}%
+\contentsline {figure}{\numberline {5-28}{\ignorespaces INDI控制器和NDI控制器偏航角$\psi $跟随曲线对比}}{109}{figure.caption.71}%
+\contentsline {figure}{\numberline {5-29}{\ignorespaces INDI控制器和NDI控制器偏航角$\psi $跟随实验控制力矩对比}}{109}{figure.caption.72}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

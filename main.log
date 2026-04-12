@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.12.20)  9 APR 2026 20:45
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.12.20)  13 APR 2026 00:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1266,9 +1266,9 @@ Package fontspec Info: Font family 'SimHei(0)' created for font 'SimHei' with
 ] (chapter/abstract.tex [1
 
 
-] [2] [3
+] [2
 
-]) [4] (main.toc
+]) [3] (main.toc
 LaTeX Font Info:    Trying to load font information for U+rsfs on input line 1.
 
 
@@ -1284,32 +1284,30 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 1.
 
 (D:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [5
+) [4
 
-] [6] [7])
+] [5] [6])
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [8] (main.lof [9
+ [7] (main.lof [8
 
-] [10])
+] [9])
 \tf@lof=\write7
 \openout7 = `main.lof'.
 
- [11] (main.lot)
+ [10] (main.lot)
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- (chapter/symbols.tex [12
+ (chapter/symbols.tex [11
 
-]) [13
+]) [12
 
-] [14
-
-]
-(chapter/chapter1.tex
+] (chapter/chapter1.tex
 第\xCJKnumber {1}章 1.
 [1
+
 
 ]
 File: figure/DJI_T40.jpeg Graphic file (type bmp)
@@ -1562,14 +1560,14 @@ Overfull \hbox (22.99223pt too wide) in paragraph at lines 548--549
 File: figure/chapter5/姿态环PID.pdf Graphic file (type pdf)
 <use figure/chapter5/姿态环PID.pdf>
 
-Overfull \hbox (1.50114pt too wide) in paragraph at lines 73--74
+Overfull \hbox (1.50114pt too wide) in paragraph at lines 72--73
  [][] 
  []
 
 File: figure/chapter5/位置环PID.pdf Graphic file (type pdf)
 <use figure/chapter5/位置环PID.pdf>
 
-Overfull \hbox (5.35556pt too wide) in paragraph at lines 94--95
+Overfull \hbox (5.35556pt too wide) in paragraph at lines 93--94
  [][] 
  []
 
@@ -1579,7 +1577,7 @@ df Graphic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_speed_track.pd
 f>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 200--201
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 199--200
  [][] 
  []
 
@@ -1588,7 +1586,7 @@ pdf Graphic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Battery_Voltage_speed_track.p
 df>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 207--208
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 206--207
  [][] 
  []
 
@@ -1597,7 +1595,7 @@ File: matlab/ground_effect/pdf/anti_ge_thrust/Plot_Thrust_Tracking_50mm.pdf Gra
 phic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Thrust_Tracking_50mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 300--301
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 299--300
  [][] 
  []
 
@@ -1605,7 +1603,7 @@ File: matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_50mm.pdf Grap
 hic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_50mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 307--308
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 306--307
  [][] 
  []
 
@@ -1613,7 +1611,7 @@ File: matlab/ground_effect/pdf/anti_ge_thrust/Plot_Thrust_Tracking_100mm.pdf Gr
 aphic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Thrust_Tracking_100mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 318--319
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 317--318
  [][] 
  []
 
@@ -1621,7 +1619,7 @@ File: matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_100mm.pdf Gra
 phic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_100mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 325--326
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 324--325
  [][] 
  []
 
@@ -1629,7 +1627,7 @@ File: matlab/ground_effect/pdf/anti_ge_thrust/Plot_Thrust_Tracking_200mm.pdf Gr
 aphic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Thrust_Tracking_200mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 336--337
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 335--336
  [][] 
  []
 
@@ -1637,7 +1635,7 @@ File: matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_200mm.pdf Gra
 phic file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_thrust/Plot_Speed_Tracking_200mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 343--344
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 342--343
  [][] 
  []
 
@@ -1646,7 +1644,7 @@ File: matlab/ground_effect/pdf/anti_ge_moment/Moment_Tracking_50mm.pdf Graphic
 file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_moment/Moment_Tracking_50mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 382--383
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 381--382
  [][] 
  []
 
@@ -1654,7 +1652,7 @@ File: matlab/ground_effect/pdf/anti_ge_moment/Motor_Angle_50mm.pdf Graphic file
  (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_moment/Motor_Angle_50mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 389--390
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 388--389
  [][] 
  []
 
@@ -1662,7 +1660,7 @@ File: matlab/ground_effect/pdf/anti_ge_moment/Moment_Tracking_100mm.pdf Graphic
  file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_moment/Moment_Tracking_100mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 399--400
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 398--399
  [][] 
  []
 
@@ -1670,7 +1668,7 @@ File: matlab/ground_effect/pdf/anti_ge_moment/Motor_Angle_100mm.pdf Graphic fil
 e (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_moment/Motor_Angle_100mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 406--407
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 405--406
  [][] 
  []
 
@@ -1678,7 +1676,7 @@ File: matlab/ground_effect/pdf/anti_ge_moment/Moment_Tracking_200mm.pdf Graphic
  file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_moment/Moment_Tracking_200mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 416--417
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 415--416
  [][] 
  []
 
@@ -1686,7 +1684,7 @@ File: matlab/ground_effect/pdf/anti_ge_moment/Motor_Angle_200mm.pdf Graphic fil
 e (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_moment/Motor_Angle_200mm.pdf>
 
-Overfull \hbox (22.99223pt too wide) in paragraph at lines 423--424
+Overfull \hbox (22.99223pt too wide) in paragraph at lines 422--423
  [][] 
  []
 
@@ -1694,7 +1692,7 @@ Overfull \hbox (22.99223pt too wide) in paragraph at lines 423--424
 File: figure/chapter5/地面效应抗扰控制.pdf Graphic file (type pdf)
 <use figure/chapter5/地面效应抗扰控制.pdf>
 
-Overfull \hbox (0.53755pt too wide) in paragraph at lines 447--448
+Overfull \hbox (0.53755pt too wide) in paragraph at lines 446--447
  [][] 
  []
 
@@ -1734,7 +1732,7 @@ File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_gyro_z.pdf Graphic
 <use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_100mm_gyro_z.pdf>
 
 
-LaTeX Warning: Float too large for page by 5.28354pt on input line 658.
+LaTeX Warning: Float too large for page by 5.28354pt on input line 657.
 
 File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_cmp_yaw.pdf Graphi
 c file (type pdf)
@@ -1749,17 +1747,17 @@ File: matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_gyro_z.pdf Graphic
  file (type pdf)
 <use matlab/ground_effect/pdf/anti_ge_yaw/anti_ge_yaw_200mm_gyro_z.pdf>
 
-LaTeX Warning: Float too large for page by 5.28354pt on input line 686.
+LaTeX Warning: Float too large for page by 5.28354pt on input line 685.
 
-[100] [101] [102] [103] [104]
+[100] [101] [102] [103] [104] [105]
 File: figure/chapter5/非线性动态逆系统框图.pdf Graphic file (type pdf)
 <use figure/chapter5/非线性动态逆系统框图.pdf>
 
-Overfull \hbox (8.48726pt too wide) in paragraph at lines 800--801
+Overfull \hbox (8.48726pt too wide) in paragraph at lines 801--802
  [][] 
  []
 
-[105] [106]
+[106]
 File: matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_eular_roll.pdf Gra
 phic file (type pdf)
 <use matlab/param_recgnize/pdf/NDI_controler_track_roll/cmp_eular_roll.pdf>
@@ -1798,14 +1796,13 @@ raphic file (type pdf)
 <use matlab/param_recgnize/pdf/NDI_controler_track_yaw/cmp_effort_M_cv_z.pdf>
  [107] [108] [109] [110]) [111] (chapter/conclusion.tex [112
 
-
-])
-[113] [114
+]) [113]
+[114
 
 ] [115] [116] [117] [118] [119] (chapter/appendix.tex [120] [121
 
-]
-[122] [123]) (chapter/pub.tex [124]) (chapter/ack.tex [125
+] [122]
+[123]) (chapter/pub.tex [124]) (chapter/ack.tex [125
 
 ]) [126
 
@@ -1815,18 +1812,18 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A501D6562B6E12ECFE112BFFC79A3544;13439.
+(rerunfilecheck)             Checksum: EBFD3E50DB2589AEE79DC3E9F267FAA4;13476.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36341 strings out of 409616
- 740991 string characters out of 5778254
+ 36326 strings out of 409616
+ 740304 string characters out of 5778254
  1955191 words of memory out of 5000000
- 57881 multiletter control sequences out of 15000+600000
+ 57866 multiletter control sequences out of 15000+600000
  572354 words of font info for 130 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 94i,15n,107p,1396b,5009s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,15n,107p,1396b,5013s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (141 pages).
+Output written on main.pdf (139 pages).

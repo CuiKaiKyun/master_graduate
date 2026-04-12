@@ -3004,55 +3004,46 @@
     <bcf:citekey order="59" intorder="1">ai2020aerodynamic</bcf:citekey>
     <bcf:citekey order="60" intorder="1">li2010robust</bcf:citekey>
     <bcf:citekey order="61" intorder="1">pflimlin2007position</bcf:citekey>
-    <bcf:citekey order="62" intorder="1">jeong2015control</bcf:citekey>
-    <bcf:citekey order="63" intorder="1">li2010robust</bcf:citekey>
-    <bcf:citekey order="64" intorder="1">fan2018modelling</bcf:citekey>
-    <bcf:citekey order="65" intorder="1">pflimlin2007position</bcf:citekey>
-    <bcf:citekey order="66" intorder="1">manzoor2022composite</bcf:citekey>
-    <bcf:citekey order="67" intorder="1">ai2025robust</bcf:citekey>
-    <bcf:citekey order="68" intorder="1">chen2024ADRC</bcf:citekey>
-    <bcf:citekey order="69" intorder="1">Manzoor2020VTOL</bcf:citekey>
-    <bcf:citekey order="69" intorder="2">manzoor2022composite</bcf:citekey>
-    <bcf:citekey order="70" intorder="1">zhu1997NDI</bcf:citekey>
-    <bcf:citekey order="70" intorder="2">zhang2015NDI</bcf:citekey>
-    <bcf:citekey order="71" intorder="1">zhu1997NDI</bcf:citekey>
-    <bcf:citekey order="72" intorder="1">zhang2015NDI</bcf:citekey>
-    <bcf:citekey order="73" intorder="1">wang2019flexible</bcf:citekey>
-    <bcf:citekey order="73" intorder="2">smeur2016adaptive</bcf:citekey>
-    <bcf:citekey order="74" intorder="1">ludena2020flight</bcf:citekey>
-    <bcf:citekey order="75" intorder="1">ieee2025incremental</bcf:citekey>
-    <bcf:citekey order="76" intorder="1">SteffensenINDI</bcf:citekey>
-    <bcf:citekey order="77" intorder="1">SteffensenINDI</bcf:citekey>
-    <bcf:citekey order="78" intorder="1">quan2018</bcf:citekey>
-    <bcf:citekey order="79" intorder="1">Ducard2009Flight</bcf:citekey>
-    <bcf:citekey order="80" intorder="1">quan2018</bcf:citekey>
-    <bcf:citekey order="81" intorder="1">cheng2021</bcf:citekey>
-    <bcf:citekey order="81" intorder="2">han2022</bcf:citekey>
-    <bcf:citekey order="82" intorder="1">2012Nondimensional</bcf:citekey>
-    <bcf:citekey order="83" intorder="1">2012Nondimensional</bcf:citekey>
-    <bcf:citekey order="84" intorder="1">2012Nondimensional</bcf:citekey>
-    <bcf:citekey order="85" intorder="1">2012Nondimensional</bcf:citekey>
-    <bcf:citekey order="86" intorder="1">matuz2021ground</bcf:citekey>
-    <bcf:citekey order="87" intorder="1">MI2020105821</bcf:citekey>
-    <bcf:citekey order="87" intorder="2">matuz2021ground</bcf:citekey>
+    <bcf:citekey order="62" intorder="1">fan2018modelling</bcf:citekey>
+    <bcf:citekey order="63" intorder="1">chen2024ADRC</bcf:citekey>
+    <bcf:citekey order="64" intorder="1">Manzoor2020CFC</bcf:citekey>
+    <bcf:citekey order="65" intorder="1">manzoor2022composite</bcf:citekey>
+    <bcf:citekey order="66" intorder="1">ai2025robust</bcf:citekey>
+    <bcf:citekey order="67" intorder="1">zhu1997NDI</bcf:citekey>
+    <bcf:citekey order="68" intorder="1">zhang2015NDI</bcf:citekey>
+    <bcf:citekey order="69" intorder="1">Cheng2024INDI</bcf:citekey>
+    <bcf:citekey order="70" intorder="1">SteffensenINDI</bcf:citekey>
+    <bcf:citekey order="71" intorder="1">quan2018</bcf:citekey>
+    <bcf:citekey order="72" intorder="1">Ducard2009Flight</bcf:citekey>
+    <bcf:citekey order="73" intorder="1">quan2018</bcf:citekey>
+    <bcf:citekey order="74" intorder="1">cheng2021</bcf:citekey>
+    <bcf:citekey order="74" intorder="2">han2022</bcf:citekey>
+    <bcf:citekey order="75" intorder="1">2012Nondimensional</bcf:citekey>
+    <bcf:citekey order="76" intorder="1">2012Nondimensional</bcf:citekey>
+    <bcf:citekey order="77" intorder="1">2012Nondimensional</bcf:citekey>
+    <bcf:citekey order="78" intorder="1">2012Nondimensional</bcf:citekey>
+    <bcf:citekey order="79" intorder="1">matuz2021ground</bcf:citekey>
+    <bcf:citekey order="80" intorder="1">MI2020105821</bcf:citekey>
+    <bcf:citekey order="80" intorder="2">matuz2021ground</bcf:citekey>
+    <bcf:citekey order="81" intorder="1">luo2023numerical</bcf:citekey>
+    <bcf:citekey order="82" intorder="1">luo2023numerical</bcf:citekey>
+    <bcf:citekey order="82" intorder="2">MI2020105821</bcf:citekey>
+    <bcf:citekey order="83" intorder="1">luo2023numerical</bcf:citekey>
+    <bcf:citekey order="84" intorder="1">luo2023numerical</bcf:citekey>
+    <bcf:citekey order="85" intorder="1">matuz2021ground</bcf:citekey>
+    <bcf:citekey order="86" intorder="1">luo2023numerical</bcf:citekey>
+    <bcf:citekey order="86" intorder="2">MI2020105821</bcf:citekey>
+    <bcf:citekey order="86" intorder="3">matuz2021ground</bcf:citekey>
+    <bcf:citekey order="87" intorder="1">matuz2021ground</bcf:citekey>
     <bcf:citekey order="88" intorder="1">luo2023numerical</bcf:citekey>
     <bcf:citekey order="89" intorder="1">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="89" intorder="2">MI2020105821</bcf:citekey>
     <bcf:citekey order="90" intorder="1">luo2023numerical</bcf:citekey>
     <bcf:citekey order="91" intorder="1">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="92" intorder="1">matuz2021ground</bcf:citekey>
-    <bcf:citekey order="93" intorder="1">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="93" intorder="2">MI2020105821</bcf:citekey>
-    <bcf:citekey order="93" intorder="3">matuz2021ground</bcf:citekey>
-    <bcf:citekey order="94" intorder="1">matuz2021ground</bcf:citekey>
-    <bcf:citekey order="95" intorder="1">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="96" intorder="1">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="97" intorder="1">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="98" intorder="1">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="99" intorder="1">Antonio2021</bcf:citekey>
-    <bcf:citekey order="100" intorder="1">Antonio2021</bcf:citekey>
-    <bcf:citekey order="100" intorder="2">luo2023numerical</bcf:citekey>
-    <bcf:citekey order="101" intorder="1">Cheng2024INDI</bcf:citekey>
+    <bcf:citekey order="92" intorder="1">Antonio2021</bcf:citekey>
+    <bcf:citekey order="93" intorder="1">Antonio2021</bcf:citekey>
+    <bcf:citekey order="93" intorder="2">luo2023numerical</bcf:citekey>
+    <bcf:citekey order="94" intorder="1">Cheng2024INDI</bcf:citekey>
+    <bcf:citekey order="95" intorder="1">Cheng2024INDI</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
