@@ -622,8 +622,8 @@
       \field{volume}{103}
       \field{year}{2020}
       \field{dateera}{ce}
-      \field{pages}{105895.1\bibrangedash 105895.9}
-      \range{pages}{-1}
+      \field{pages}{105895}
+      \range{pages}{1}
       \keyw{Aerodynamic_performance_assessment_of_a_ducted_fan_UAV}
     \endentry
     \entry{wangshuo}{article}{}

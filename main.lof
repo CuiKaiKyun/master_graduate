@@ -36,50 +36,51 @@
 \contentsline {figure}{\numberline {3-3}{\ignorespaces 无人机实际飞行试验}}{57}{figure.caption.35}%
 \contentsline {figure}{\numberline {3-4}{\ignorespaces 实际飞行试验参数估计结果（一）}}{59}{figure.caption.37}%
 \contentsline {figure}{\numberline {3-5}{\ignorespaces 实际飞行试验参数估计结果（二）}}{60}{figure.caption.38}%
+\contentsline {figure}{\numberline {3-6}{\ignorespaces 真实飞行角速度与两种模型仿真角速度的对比曲线}}{62}{figure.caption.39}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4-1}{\ignorespaces 地面效应下气体流动示意图}}{65}{figure.caption.40}%
-\contentsline {figure}{\numberline {4-2}{\ignorespaces 地面效应数据采集实验平台}}{67}{figure.caption.41}%
-\contentsline {figure}{\numberline {4-3}{\ignorespaces 涵道风扇推力和风扇转速、离地高度之间的关系}}{71}{figure.caption.42}%
-\contentsline {figure}{\numberline {4-4}{\ignorespaces 不同高度比$h/R$下推力$T$与风扇转速的平方$\Omega ^2$的关系}}{72}{figure.caption.43}%
-\contentsline {figure}{\numberline {4-5}{\ignorespaces 典型工作转速下涵道风扇推力$T$和离地高度比$h/R$的关系}}{73}{figure.caption.44}%
-\contentsline {figure}{\numberline {4-6}{\ignorespaces 拟合参数与迭代次数的关系}}{75}{figure.caption.45}%
-\contentsline {figure}{\numberline {4-7}{\ignorespaces 拟合误差平方和与迭代次数的关系}}{75}{figure.caption.45}%
-\contentsline {figure}{\numberline {4-8}{\ignorespaces 气动力矩$M_z^b$与高度比$h/R$以及控制舵面偏转角度$\delta _c$之间的关系}}{78}{figure.caption.46}%
-\contentsline {figure}{\numberline {4-9}{\ignorespaces 不同高度比$h/R$下扭矩$M_z^b$与舵面角度$\delta _c$的关系}}{78}{figure.caption.47}%
-\contentsline {figure}{\numberline {4-10}{\ignorespaces 零输出时扭矩$M_z^b$与离地高度$h$的关系}}{79}{figure.caption.48}%
-\contentsline {figure}{\numberline {4-11}{\ignorespaces 控制舵面偏转力系数$K_{cvGE}$与高度比$h/R$的关系}}{80}{figure.caption.49}%
-\contentsline {figure}{\numberline {4-12}{\ignorespaces 拟合参数与迭代次数的关系}}{82}{figure.caption.50}%
-\contentsline {figure}{\numberline {4-13}{\ignorespaces 拟合误差平方和与迭代次数的关系}}{82}{figure.caption.50}%
+\contentsline {figure}{\numberline {4-1}{\ignorespaces 地面效应下气体流动示意图}}{66}{figure.caption.40}%
+\contentsline {figure}{\numberline {4-2}{\ignorespaces 地面效应数据采集实验平台}}{68}{figure.caption.41}%
+\contentsline {figure}{\numberline {4-3}{\ignorespaces 涵道风扇推力和风扇转速、离地高度之间的关系}}{72}{figure.caption.42}%
+\contentsline {figure}{\numberline {4-4}{\ignorespaces 不同高度比$h/R$下推力$T$与风扇转速的平方$\Omega ^2$的关系}}{73}{figure.caption.43}%
+\contentsline {figure}{\numberline {4-5}{\ignorespaces 典型工作转速下涵道风扇推力$T$和离地高度比$h/R$的关系}}{74}{figure.caption.44}%
+\contentsline {figure}{\numberline {4-6}{\ignorespaces 拟合参数与迭代次数的关系}}{76}{figure.caption.45}%
+\contentsline {figure}{\numberline {4-7}{\ignorespaces 拟合误差平方和与迭代次数的关系}}{76}{figure.caption.45}%
+\contentsline {figure}{\numberline {4-8}{\ignorespaces 气动力矩$M_z^b$与高度比$h/R$以及控制舵面偏转角度$\delta _c$之间的关系}}{79}{figure.caption.46}%
+\contentsline {figure}{\numberline {4-9}{\ignorespaces 不同高度比$h/R$下扭矩$M_z^b$与舵面角度$\delta _c$的关系}}{79}{figure.caption.47}%
+\contentsline {figure}{\numberline {4-10}{\ignorespaces 零输出时扭矩$M_z^b$与离地高度$h$的关系}}{80}{figure.caption.48}%
+\contentsline {figure}{\numberline {4-11}{\ignorespaces 控制舵面偏转力系数$K_{cvGE}$与高度比$h/R$的关系}}{81}{figure.caption.49}%
+\contentsline {figure}{\numberline {4-12}{\ignorespaces 拟合参数与迭代次数的关系}}{83}{figure.caption.50}%
+\contentsline {figure}{\numberline {4-13}{\ignorespaces 拟合误差平方和与迭代次数的关系}}{83}{figure.caption.50}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5-1}{\ignorespaces 姿态PID闭环控制系统框图}}{86}{figure.caption.51}%
-\contentsline {figure}{\numberline {5-2}{\ignorespaces 位置PID闭环控制系统框图}}{87}{figure.caption.52}%
-\contentsline {figure}{\numberline {5-3}{\ignorespaces 实际转速与期望转速的跟随曲线}}{89}{figure.caption.53}%
-\contentsline {figure}{\numberline {5-4}{\ignorespaces 实验过程电压波动曲线}}{89}{figure.caption.53}%
-\contentsline {figure}{\numberline {5-5}{\ignorespaces $h/R=0.56$，期望推力与实际推力}}{91}{figure.caption.54}%
-\contentsline {figure}{\numberline {5-6}{\ignorespaces $h/R=0.56$，期望转速与实际转速}}{91}{figure.caption.54}%
-\contentsline {figure}{\numberline {5-7}{\ignorespaces $h/R=1.12$，期望推力与实际推力}}{91}{figure.caption.55}%
-\contentsline {figure}{\numberline {5-8}{\ignorespaces $h/R=1.12$，期望转速与实际转速}}{91}{figure.caption.55}%
-\contentsline {figure}{\numberline {5-9}{\ignorespaces $h/R=2.25$，期望推力与实际推力}}{92}{figure.caption.56}%
-\contentsline {figure}{\numberline {5-10}{\ignorespaces $h/R=2.25$，期望转速与实际转速}}{92}{figure.caption.56}%
-\contentsline {figure}{\numberline {5-11}{\ignorespaces $h/R=0.56$，期望扭矩与实际扭矩}}{93}{figure.caption.57}%
-\contentsline {figure}{\numberline {5-12}{\ignorespaces $h/R=0.56$，期望舵面偏转角}}{93}{figure.caption.57}%
-\contentsline {figure}{\numberline {5-13}{\ignorespaces $h/R=1.12$，期望扭矩与实际扭矩}}{94}{figure.caption.58}%
-\contentsline {figure}{\numberline {5-14}{\ignorespaces $h/R=1.12$，期望舵面偏转角}}{94}{figure.caption.58}%
-\contentsline {figure}{\numberline {5-15}{\ignorespaces $h/R=2.25$，期望扭矩与实际扭矩}}{94}{figure.caption.59}%
-\contentsline {figure}{\numberline {5-16}{\ignorespaces $h/R=2.25$，期望舵面偏转角}}{94}{figure.caption.59}%
-\contentsline {figure}{\numberline {5-17}{\ignorespaces 抗扰控制局部系统框图}}{95}{figure.caption.60}%
-\contentsline {figure}{\numberline {5-18}{\ignorespaces 无人机地面效应抗扰控制实际飞行试验}}{96}{figure.caption.61}%
-\contentsline {figure}{\numberline {5-19}{\ignorespaces 未引入补偿时 $Z$ 轴高度 $p_z^e$ 跟随曲线}}{97}{figure.caption.62}%
-\contentsline {figure}{\numberline {5-20}{\ignorespaces 未引入补偿时 $Z$ 轴速度 $v_z^e$ 跟随曲线}}{97}{figure.caption.63}%
-\contentsline {figure}{\numberline {5-21}{\ignorespaces 引入补偿后 $Z$ 轴高度 $p_z^e$ 跟随曲线}}{98}{figure.caption.64}%
-\contentsline {figure}{\numberline {5-22}{\ignorespaces 引入补偿后 $Z$ 轴速度 $v_z^e$ 跟随曲线}}{98}{figure.caption.65}%
-\contentsline {figure}{\numberline {5-23}{\ignorespaces 实际飞行试验$h/R = 0.56$时偏航角$\psi $和角速度$r$跟随曲线}}{101}{figure.caption.66}%
-\contentsline {figure}{\numberline {5-24}{\ignorespaces 实际飞行试验$h/R = 1.12$时偏航角$\psi $和角速度$r$跟随曲线}}{102}{figure.caption.67}%
-\contentsline {figure}{\numberline {5-25}{\ignorespaces NDI控制器系统框图}}{106}{figure.caption.68}%
-\contentsline {figure}{\numberline {5-26}{\ignorespaces INDI控制器和NDI控制器横滚角$\varphi $跟随曲线对比}}{108}{figure.caption.69}%
-\contentsline {figure}{\numberline {5-27}{\ignorespaces INDI控制器和NDI控制器横滚角$\varphi $跟随实验控制力矩对比}}{108}{figure.caption.70}%
-\contentsline {figure}{\numberline {5-28}{\ignorespaces INDI控制器和NDI控制器偏航角$\psi $跟随曲线对比}}{109}{figure.caption.71}%
-\contentsline {figure}{\numberline {5-29}{\ignorespaces INDI控制器和NDI控制器偏航角$\psi $跟随实验控制力矩对比}}{109}{figure.caption.72}%
+\contentsline {figure}{\numberline {5-1}{\ignorespaces 姿态PID闭环控制系统框图}}{87}{figure.caption.51}%
+\contentsline {figure}{\numberline {5-2}{\ignorespaces 位置PID闭环控制系统框图}}{88}{figure.caption.52}%
+\contentsline {figure}{\numberline {5-3}{\ignorespaces 实际转速与期望转速的跟随曲线}}{90}{figure.caption.53}%
+\contentsline {figure}{\numberline {5-4}{\ignorespaces 实验过程电压波动曲线}}{90}{figure.caption.53}%
+\contentsline {figure}{\numberline {5-5}{\ignorespaces $h/R = 0.56$，期望推力与实际推力}}{92}{figure.caption.54}%
+\contentsline {figure}{\numberline {5-6}{\ignorespaces $h/R = 0.56$，期望转速与实际转速}}{92}{figure.caption.54}%
+\contentsline {figure}{\numberline {5-7}{\ignorespaces $h/R=1.12$，期望推力与实际推力}}{92}{figure.caption.55}%
+\contentsline {figure}{\numberline {5-8}{\ignorespaces $h/R=1.12$，期望转速与实际转速}}{92}{figure.caption.55}%
+\contentsline {figure}{\numberline {5-9}{\ignorespaces $h/R=2.25$，期望推力与实际推力}}{93}{figure.caption.56}%
+\contentsline {figure}{\numberline {5-10}{\ignorespaces $h/R=2.25$，期望转速与实际转速}}{93}{figure.caption.56}%
+\contentsline {figure}{\numberline {5-11}{\ignorespaces $h/R = 0.56$，期望扭矩与实际扭矩}}{94}{figure.caption.57}%
+\contentsline {figure}{\numberline {5-12}{\ignorespaces $h/R = 0.56$，期望舵面偏转角}}{94}{figure.caption.57}%
+\contentsline {figure}{\numberline {5-13}{\ignorespaces $h/R=1.12$，期望扭矩与实际扭矩}}{95}{figure.caption.58}%
+\contentsline {figure}{\numberline {5-14}{\ignorespaces $h/R=1.12$，期望舵面偏转角}}{95}{figure.caption.58}%
+\contentsline {figure}{\numberline {5-15}{\ignorespaces $h/R=2.25$，期望扭矩与实际扭矩}}{95}{figure.caption.59}%
+\contentsline {figure}{\numberline {5-16}{\ignorespaces $h/R=2.25$，期望舵面偏转角}}{95}{figure.caption.59}%
+\contentsline {figure}{\numberline {5-17}{\ignorespaces 抗扰控制局部系统框图}}{96}{figure.caption.60}%
+\contentsline {figure}{\numberline {5-18}{\ignorespaces 无人机地面效应抗扰控制实际飞行试验}}{97}{figure.caption.61}%
+\contentsline {figure}{\numberline {5-19}{\ignorespaces 未引入补偿时 $Z$ 轴高度 $p_z^e$ 跟随曲线}}{98}{figure.caption.62}%
+\contentsline {figure}{\numberline {5-20}{\ignorespaces 未引入补偿时 $Z$ 轴速度 $v_z^e$ 跟随曲线}}{98}{figure.caption.63}%
+\contentsline {figure}{\numberline {5-21}{\ignorespaces 引入补偿后 $Z$ 轴高度 $p_z^e$ 跟随曲线}}{99}{figure.caption.64}%
+\contentsline {figure}{\numberline {5-22}{\ignorespaces 引入补偿后 $Z$ 轴速度 $v_z^e$ 跟随曲线}}{99}{figure.caption.65}%
+\contentsline {figure}{\numberline {5-23}{\ignorespaces 实际飞行试验$h/R = 0.56$时偏航角$\psi $和角速度$r$跟随曲线}}{102}{figure.caption.66}%
+\contentsline {figure}{\numberline {5-24}{\ignorespaces 实际飞行试验$h/R = 1.12$时偏航角$\psi $和角速度$r$跟随曲线}}{103}{figure.caption.67}%
+\contentsline {figure}{\numberline {5-25}{\ignorespaces NDI控制器系统框图}}{107}{figure.caption.68}%
+\contentsline {figure}{\numberline {5-26}{\ignorespaces INDI控制器和NDI控制器横滚角$\varphi $跟随曲线对比}}{109}{figure.caption.69}%
+\contentsline {figure}{\numberline {5-27}{\ignorespaces INDI控制器和NDI控制器横滚角$\varphi $跟随实验控制力矩对比}}{109}{figure.caption.70}%
+\contentsline {figure}{\numberline {5-28}{\ignorespaces INDI控制器和NDI控制器偏航角$\psi $跟随曲线对比}}{110}{figure.caption.71}%
+\contentsline {figure}{\numberline {5-29}{\ignorespaces INDI控制器和NDI控制器偏航角$\psi $跟随实验控制力矩对比}}{110}{figure.caption.72}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

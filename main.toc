@@ -10,7 +10,6 @@
 \contentsline {subsection}{\numberline {1.2.2}涵道式无人机的地面效应}{9}{subsection.1.2.2}%
 \contentsline {subsection}{\numberline {1.2.3}涵道式无人机的飞行控制}{10}{subsection.1.2.3}%
 \contentsline {section}{\numberline {1.3}本文的主要内容以及章节安排}{12}{section.1.3}%
-\contentsline {section}{\numberline {1.4}课题来源}{12}{section.1.4}%
 \contentsline {chapter}{\numberline {2}小型涵道式无人机的系统构成与建模}{13}{chapter.2}%
 \contentsline {section}{\numberline {2.1}涵道式无人机的系统构成}{13}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}机体结构}{13}{subsection.2.1.1}%
@@ -34,7 +33,7 @@
 \contentsline {subsection}{\numberline {3.1.1}模型建立}{37}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}线性化近似}{38}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3}递推更新}{38}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}基于卡尔曼滤波器的模型参数辨识算法}{39}{section.3.2}%
+\contentsline {section}{\numberline {3.2}基于扩展卡尔曼滤波器的模型参数辨识算法}{39}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}模型简化}{39}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}待估参数选取}{42}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}状态空间方程和观测方程}{43}{subsection.3.2.3}%
@@ -52,49 +51,50 @@
 \contentsline {subsection}{\numberline {3.4.1}参数真值与初始估计}{57}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}滤波器参数配置}{58}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}实际飞行试验结果分析}{58}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}本章小结}{61}{section.3.5}%
-\contentsline {chapter}{\numberline {4}涵道式无人机地面效应建模与辨识}{63}{chapter.4}%
-\contentsline {section}{\numberline {4.1}模型建立}{63}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}推力模型}{64}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}控制舵面偏转力模型}{65}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}实验平台}{67}{section.4.2}%
-\contentsline {section}{\numberline {4.3}地面效应下涵道风扇推力模型辨识}{68}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}实验步骤}{69}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}实验数据}{70}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}参数拟合}{73}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}地面效应下控制舵面偏转力模型辨识}{75}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}实验步骤}{76}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}实验数据}{77}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}参数拟合}{80}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}本章小结}{82}{section.4.5}%
-\contentsline {chapter}{\numberline {5}涵道式无人机抗扰控制}{84}{chapter.5}%
-\contentsline {section}{\numberline {5.1}涵道式无人机的控制分配器的设计}{84}{section.5.1}%
-\contentsline {section}{\numberline {5.2}涵道式无人机的PID控制器设计}{86}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}内环控制器}{86}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}外环控制器}{86}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}地面效应控制补偿}{87}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}推力补偿效果实验}{89}{subsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.1.1}实验工况与步骤}{90}{subsubsection.5.3.1.1}%
-\contentsline {subsubsection}{\numberline {5.3.1.2}实验数据}{91}{subsubsection.5.3.1.2}%
-\contentsline {subsection}{\numberline {5.3.2}控制舵面偏转力补偿效果实验}{92}{subsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.2.1}实验工况与步骤}{92}{subsubsection.5.3.2.1}%
-\contentsline {subsubsection}{\numberline {5.3.2.2}实验数据}{93}{subsubsection.5.3.2.2}%
-\contentsline {section}{\numberline {5.4}涵道式无人机地面效应抗扰控制}{95}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}高度位置阶跃响应实验步骤}{96}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}高度位置阶跃响应实验数据分析}{97}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}偏航角阶跃响应实验步骤}{99}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}偏航角阶跃响应实验数据分析}{100}{subsection.5.4.4}%
-\contentsline {section}{\numberline {5.5}非线性动态逆控制器}{103}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}NDI控制器介绍}{104}{subsection.5.5.1}%
-\contentsline {section}{\numberline {5.6}INDI控制器与NDI控制器对比实验}{106}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}实验设计}{107}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}数据分析}{107}{subsection.5.6.2}%
-\contentsline {section}{\numberline {5.7}本章小结}{111}{section.5.7}%
-\contentsline {section}{\numberline {5.8}总结与展望}{112}{section.5.8}%
-\contentsline {chapter}{参考文献}{113}{section*.73}%
-\contentsline {chapter}{附\hskip 1em\relax 录}{121}{chapter*.75}%
-\contentsline {section}{\numberline {1.1}一阶李导数对状态量偏导}{121}{section.1.1}%
-\contentsline {section}{\numberline {1.2}可观性矩阵行满秩证明}{124}{section.1.2}%
-\contentsline {chapter}{攻读硕士学位期间取得的研究成果}{125}{chapter*.76}%
-\contentsline {chapter}{致\hskip 1em\relax 谢}{126}{chapter*.78}%
+\contentsline {section}{\numberline {3.5}模型实际飞行验证}{61}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}实验步骤}{61}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}实验结果与分析}{61}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}本章小结}{62}{section.3.6}%
+\contentsline {chapter}{\numberline {4}涵道式无人机地面效应建模与辨识}{64}{chapter.4}%
+\contentsline {section}{\numberline {4.1}模型建立}{64}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}推力模型}{65}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}控制舵面偏转力模型}{66}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}实验平台}{68}{section.4.2}%
+\contentsline {section}{\numberline {4.3}地面效应下涵道风扇推力模型辨识}{69}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}实验步骤}{70}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}实验数据}{71}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}参数拟合}{74}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}地面效应下控制舵面偏转力模型辨识}{76}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}实验步骤}{77}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}实验数据}{78}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}参数拟合}{81}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}本章小结}{83}{section.4.5}%
+\contentsline {chapter}{\numberline {5}涵道式无人机抗扰控制}{85}{chapter.5}%
+\contentsline {section}{\numberline {5.1}涵道式无人机的控制分配器的设计}{85}{section.5.1}%
+\contentsline {section}{\numberline {5.2}涵道式无人机的PID控制器设计}{87}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}内环控制器}{87}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}外环控制器}{87}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}地面效应控制补偿}{88}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}推力补偿效果实验}{90}{subsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.1.1}实验工况与步骤}{91}{subsubsection.5.3.1.1}%
+\contentsline {subsubsection}{\numberline {5.3.1.2}实验数据}{92}{subsubsection.5.3.1.2}%
+\contentsline {subsection}{\numberline {5.3.2}控制舵面偏转力补偿效果实验}{93}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.1}实验工况与步骤}{93}{subsubsection.5.3.2.1}%
+\contentsline {subsubsection}{\numberline {5.3.2.2}实验数据}{94}{subsubsection.5.3.2.2}%
+\contentsline {section}{\numberline {5.4}涵道式无人机地面效应抗扰控制}{96}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}高度位置阶跃响应实验步骤}{97}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}高度位置阶跃响应实验数据分析}{98}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}偏航角阶跃响应实验步骤}{100}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}偏航角阶跃响应实验数据分析}{101}{subsection.5.4.4}%
+\contentsline {section}{\numberline {5.5}非线性动态逆控制器}{104}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}NDI控制器介绍}{105}{subsection.5.5.1}%
+\contentsline {section}{\numberline {5.6}INDI控制器与NDI控制器对比实验}{107}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}实验设计}{108}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}数据分析}{108}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7}本章小结}{112}{section.5.7}%
+\contentsline {chapter}{总结与展望}{113}{chapter*.73}%
+\contentsline {chapter}{参考文献}{114}{section*.74}%
+\contentsline {chapter}{附\hskip 1em\relax 录}{122}{chapter*.76}%
+\contentsline {section}{\numberline {1.1}一阶李导数对状态量偏导}{122}{section.1.1}%
+\contentsline {chapter}{攻读硕士学位期间取得的研究成果}{126}{chapter*.77}%
 \contentsfinish 
