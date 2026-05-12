@@ -680,12 +680,12 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
     \begin{aligned}
         \dot{p_x^e} =& (\cos\theta\cos\psi) v_x^b + (\sin\varphi\sin\theta\cos\psi - \cos\varphi\sin\psi) v_y^b \\
         &+ 
-        (\cos\varphi\sin\theta\cos\psi + \sin\varphi\sin\psi) v_z^b \\
+        (\cos\varphi\sin\theta\cos\psi + \sin\varphi\sin\psi) v_z^b, \\
         \dot{p_y^e} =& (\cos\theta\sin\psi) v_x^b + (\sin\varphi\sin\theta\sin\psi + \cos\varphi\cos\psi) v_y^b \\
         &+ 
-        (\cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi) v_z^b \\
+        (\cos\varphi\sin\theta\sin\psi - \sin\varphi\cos\psi) v_z^b, \\
         \dot{p_z^e} =& (-\sin\theta) v_x^b + (\sin\varphi\cos\theta) v_y^b + 
-        (\cos\varphi\cos\theta) v_z^b
+        (\cos\varphi\cos\theta) v_z^b.
     \end{aligned}
     \label{eq:p_dynamic}
 \end{equation}
@@ -694,11 +694,11 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 \begin{equation}
     \begin{aligned}
         \dot{v_x^b} =& -g\sin\theta + m^{-1}(-\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r + \rho A_{cv} C_{cv} V_e^2 (\delta_4 - \delta_2)) \\
-        &+ (v_y^e r - v_z^e q)\\
+        &+ (v_y^e r - v_z^e q), \\
         \dot{v_y^b} =& g\sin\phi\cos\theta + m^{-1}(-\frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r + \rho A_{cv} C_{cv} V_e^2 (\delta_1 - \delta_3)) \\
-        &+ (v_z^e p - v_x^e r)\\
+        &+ (v_z^e p - v_x^e r), \\
         \dot{v_z^b} =& g\cos\phi\cos\theta + m^{-1}(-\frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df}))) \\
-        &+ (v_x^e q - v_y^e p)
+        &+ (v_x^e q - v_y^e p).
     \end{aligned}
     \label{eq:v_dynamic}
 \end{equation}
@@ -706,9 +706,9 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
 (3)姿态动态方程：
 \begin{equation}
     \begin{aligned}
-        \dot{\varphi} &= p + \sin\varphi \tan\theta \, q + \cos\varphi \tan\theta \, r \\
-        \dot{\theta}  &= \cos\varphi \, q - \sin\varphi \, r \\
-        \dot{\psi}    &= \frac{\sin\varphi}{\cos\theta} \, q + \frac{\cos\varphi}{\cos\theta} \, r
+        \dot{\varphi} &= p + \sin\varphi \tan\theta \, q + \cos\varphi \tan\theta \, r, \\
+        \dot{\theta}  &= \cos\varphi \, q - \sin\varphi \, r, \\
+        \dot{\psi}    &= \frac{\sin\varphi}{\cos\theta} \, q + \frac{\cos\varphi}{\cos\theta} \, r.
     \end{aligned}
     \label{eq:eta_dynamic}
 \end{equation}
@@ -719,13 +719,13 @@ c. 第三次旋转绕坐标系 $\{2\}$ 的 $O_e''X_e''$ 轴旋转 $\varphi$，�
     \begin{aligned}
         \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr \\[4pt]
         &+ \biggl[ - \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\[4pt]
-        & - \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r l_N - J_{{fan}} \Omega q - \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_1 - \delta_3) \biggr] \biggr\} \\[4pt]
+        & - \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} v_r l_N - J_{{fan}} \Omega q - \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_1 - \delta_3) \biggr] \biggr\}, \\[4pt]
         \dot{q} = & \frac{1}{J_y} \biggl\{(J_z - J_x)pr \\[4pt]
         &+ \biggl[  \frac{1}{2}\rho \pi R^4 \Omega^2 (C_{T0} + J (C_{T_{J0}} + C_{T_J} \cos\alpha_{df})) \cdot \dfrac{X_J \pi \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\[4pt]
-        & + \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r l_N + J_{{fan}} \Omega p + \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_4 - \delta_2) \biggr] \biggr\} \\[4pt]
+        & + \frac{1}{2}\rho \pi^2 R^3 \Omega C_{N_J} u_r l_N + J_{{fan}} \Omega p + \rho A_{cv} C_{cv} V_e^2 l_1 (\delta_4 - \delta_2) \biggr] \biggr\}, \\[4pt]
         \dot{r} = & \frac{1}{J_z} \biggl\{ (J_x - J_y)pq \\[4pt]
         &+\biggl[ - \frac{1}{2}\rho \pi C_Q R^5 \Omega^2  + \rho A_{cv} C_{cv} V_e^2 l_2 (\delta_1 + \delta_2 + \delta_3 + \delta_4) \\[4pt]
-        & + \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2 \biggr] \biggr\}
+        & + \frac{n_{sta}}{2} \rho A_{sta} C_{sta} l_{sta} V_e^2 \biggr] \biggr\}.
     \end{aligned}
 \end{equation}
 

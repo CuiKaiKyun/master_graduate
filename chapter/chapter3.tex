@@ -67,14 +67,14 @@
 \begin{equation}
     \begin{aligned}
     \hat{\boldsymbol{x}}_{k}^{-} &= \boldsymbol{f}_d(\hat{\boldsymbol{x}}_{k-1}^{+}, \boldsymbol{u}_{k-1}), \\
-    \boldsymbol{P}_{k}^{-} &= \boldsymbol{F}_{k-1} \boldsymbol{P}_{k-1}^{+} \boldsymbol{F}_{k-1}^{\top} + \boldsymbol{Q}_{k-1}.
+    \boldsymbol{P}_{k}^{-} &= \boldsymbol{F}_{k-1} \boldsymbol{P}_{k-1}^{+} \boldsymbol{F}_{k-1}^{T} + \boldsymbol{Q}_{k-1}.
     \end{aligned}
 \end{equation}
 
 更新阶段根据$k$时刻的先验估计$\hat{\boldsymbol{x}}_{k}^-$，观测变量$\boldsymbol{z}_k$，先验估计的协方差矩阵$\boldsymbol{P}_{k}^{-}$，观测噪声$\boldsymbol{R}_k$，对该时刻的先验估计进行修正，计算出该时刻的后验估计$\hat{\boldsymbol{x}}_{k}^+$和该估计的协方差矩阵$\boldsymbol{P}_{k}^{+}$。具体计算步骤如下
 \begin{equation}
     \begin{aligned}
-        \boldsymbol{K}_{k} &= \boldsymbol{P}_{k}^{-} \boldsymbol{H}_{k}^{\top} (\boldsymbol{H}_{k} \boldsymbol{P}_{k}^{-} \boldsymbol{H}_{k}^{\top} + \boldsymbol{R}_{k})^{-1}, \\
+        \boldsymbol{K}_{k} &= \boldsymbol{P}_{k}^{-} \boldsymbol{H}_{k}^{T} (\boldsymbol{H}_{k} \boldsymbol{P}_{k}^{-} \boldsymbol{H}_{k}^{T} + \boldsymbol{R}_{k})^{-1}, \\
         \hat{\boldsymbol{x}}_{k}^{+} &= \hat{\boldsymbol{x}}_{k}^{-} + \boldsymbol{K}_{k} \big( \boldsymbol{z}_{k} - \boldsymbol{h}(\hat{\boldsymbol{x}}_{k}^{-}) \big), \\
         \boldsymbol{P}_{k}^{+} &= (\boldsymbol{I} - \boldsymbol{K}_{k} \boldsymbol{H}_{k}) \boldsymbol{P}_{k}^{-}.
     \end{aligned}
@@ -134,11 +134,11 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 \begin{equation}
     \begin{aligned}
         \dot{v_x^b} =& -g\sin\theta + m^{-1}(-K_{N} u_r + K_{cv} (\delta_4 - \delta_2)) \\
-        &+ (v_y^e r - v_z^e q)\\
+        &+ (v_y^e r - v_z^e q), \\
         \dot{v_y^b} =& g\sin\phi\cos\theta + m^{-1}(-K_{N} v_r + K_{cv} (\delta_1 - \delta_3)) \\
-        &+ (v_z^e p - v_x^e r)\\
+        &+ (v_z^e p - v_x^e r), \\
         \dot{v_z^b} =& g\cos\phi\cos\theta + m^{-1}(-(K_{T0} + K_{T_J}J) \Omega^2) \\
-        &+ (v_x^e q - v_y^e p)
+        &+ (v_x^e q - v_y^e p).
     \end{aligned}
     \label{eq:v_dynamic_sim}
 \end{equation}
@@ -147,11 +147,11 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
 \begin{equation}
     \begin{aligned}
         \dot{p} = & \frac{1}{J_x} \biggl\{ (J_y - J_z)qr + \biggl[ - (K_{T0} + K_{T_J}J) \Omega^2 \cdot \dfrac{K_{l_T} \sin(X_\alpha \alpha_{df}) v_r}{\Omega \sin\alpha} \\
-        & - K_{N} \Omega v_r l_N - J_{{fan}} \Omega q - K_{cv} l_1 (\delta_1 - \delta_3) \biggr] \biggr\} \\
+        & - K_{N} \Omega v_r l_N - J_{{fan}} \Omega q - K_{cv} l_1 (\delta_1 - \delta_3) \biggr] \biggr\}, \\
         \dot{q} = & \frac{1}{J_y} \biggl\{(J_z - J_x)pr + \biggl[  (K_{T0} + K_{T_J}J) \Omega^2 \cdot \dfrac{K_{l_T} \sin(X_\alpha \alpha_{df}) u_r}{\Omega \sin\alpha} \\
-        & + K_{N} \Omega u_r l_N + J_{{fan}} \Omega p + K_{cv} l_1 (\delta_4 - \delta_2) \biggr] \biggr\} \\
+        & + K_{N} \Omega u_r l_N + J_{{fan}} \Omega p + K_{cv} l_1 (\delta_4 - \delta_2) \biggr] \biggr\}, \\
         \dot{r} = & \frac{1}{J_z} \biggl\{ (J_x - J_y)pq + \biggl[ - K_{fan} \Omega^2  + K_{cv} l_2 (\delta_1 + \delta_2 + \delta_3 + \delta_4) \\
-        & + K_{sta} V_e^2 \biggr] \biggr\}
+        & + K_{sta} V_e^2 \biggr] \biggr\}.
     \end{aligned}
     \label{eq:omega_dynamic_sim}
 \end{equation}
@@ -242,7 +242,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
         \boldsymbol{Q}\boldsymbol{\omega}^b \\
         \boldsymbol{J}^{-1}(\boldsymbol{M}^b - \boldsymbol{\omega}^b\times(\boldsymbol{J}\cdot\boldsymbol{\omega}^b)) \\
         \boldsymbol{0}
-    \end{bmatrix}
+    \end{bmatrix}.
 \end{equation}
 
 为便于计算机实现，将连续时间方程以采样周期$\triangle t$离散化，得到离散状态方程：
@@ -265,7 +265,7 @@ $K_{cv}$ & $ \rho A_{cv} C_{cv} V_e^2$ \hfill & 控制舵面偏转力系数 \tab
         \boldsymbol{\eta}_{k-1} + \boldsymbol{Q}\boldsymbol{\omega}_{k-1}^b \triangle t \\
         \boldsymbol{\omega}_{k-1}^b + \boldsymbol{J}^{-1}(\boldsymbol{M}^b - \boldsymbol{\omega}_{k-1}^b\times(\boldsymbol{J}\cdot\boldsymbol{\omega}_{k-1}^b)) \triangle t \\
         \boldsymbol{\theta}_{k-1}
-    \end{bmatrix}
+    \end{bmatrix}.
     \label{eq:f_d}
 \end{equation}
 
@@ -466,49 +466,48 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
 \subsubsection{迭代阶段}
 
 1. 利用离散状态转移函数 $\boldsymbol{f}_d(\cdot)$ 计算先验状态估计
-
-    \begin{equation}
-        \hat{\boldsymbol{x}}_{k}^{-} = \boldsymbol{f}_d(\hat{\boldsymbol{x}}_{k-1}^{+}, \boldsymbol{u}_{k-1}),
-    \end{equation}
-    其中 $\boldsymbol{f}_d$ 的具体形式由式\eqref{eq:f_d}给出，其计算中涉及的合外力 $\boldsymbol{F}^b$ 与合外力矩 $\boldsymbol{M}^b$ 需根据简化后的动力学方程式\eqref{eq:v_dynamic_sim}和式\eqref{eq:omega_dynamic_sim}，并结合当前状态估计值与控制输入实时求取。
+\begin{equation}
+    \hat{\boldsymbol{x}}_{k}^{-} = \boldsymbol{f}_d(\hat{\boldsymbol{x}}_{k-1}^{+}, \boldsymbol{u}_{k-1}),
+\end{equation}
+其中 $\boldsymbol{f}_d$ 的具体形式由式\eqref{eq:f_d}给出，其计算中涉及的合外力 $\boldsymbol{F}^b$ 与合外力矩 $\boldsymbol{M}^b$ 需根据简化后的动力学方程式\eqref{eq:v_dynamic_sim}和式\eqref{eq:omega_dynamic_sim}，并结合当前状态估计值与控制输入实时求取。
 
 2. 计算先验误差协方差矩阵
-    \begin{equation}
-        \boldsymbol{P}_{k}^{-} = \boldsymbol{F}_{k-1} \boldsymbol{P}_{k-1}^{+} \boldsymbol{F}_{k-1}^{T} + \boldsymbol{Q}_{k-1},
-    \end{equation}
-    其中 $\boldsymbol{F}_{k-1}$ 为状态转移函数的雅可比矩阵，按式\eqref{eq:F_km1}在点 $(\hat{\boldsymbol{x}}_{k-1}^{+}, \boldsymbol{u}_{k-1})$ 处实时更新该矩阵；$\boldsymbol{Q}_{k-1}$ 为过程噪声协方差矩阵，其取值需综合考虑模型简化引入的不确定性、未建模动态以及外界扰动等因素，通常通过经验试凑或自适应方法进行整定。
+\begin{equation}
+    \boldsymbol{P}_{k}^{-} = \boldsymbol{F}_{k-1} \boldsymbol{P}_{k-1}^{+} \boldsymbol{F}_{k-1}^{T} + \boldsymbol{Q}_{k-1},
+\end{equation}
+其中 $\boldsymbol{F}_{k-1}$ 为状态转移函数的雅可比矩阵，按式\eqref{eq:F_km1}在点 $(\hat{\boldsymbol{x}}_{k-1}^{+}, \boldsymbol{u}_{k-1})$ 处实时更新该矩阵；$\boldsymbol{Q}_{k-1}$ 为过程噪声协方差矩阵，其取值需综合考虑模型简化引入的不确定性、未建模动态以及外界扰动等因素，通常通过经验试凑或自适应方法进行整定。
 
-    过程噪声协方差矩阵 $\boldsymbol{Q}$ 用于描述系统模型误差与未建模动态引起的不确定性。在实际工程应用中，为简化处理并保证滤波器稳定性，通常将其设定为常值对角阵，即 $\boldsymbol{Q}_k \equiv \boldsymbol{Q}$，其中:
-    \begin{equation}
-        \boldsymbol{Q} = \operatorname{diag}(q_1, q_2, \dots, q_{18}).
-    \end{equation}
+过程噪声协方差矩阵 $\boldsymbol{Q}$ 用于描述系统模型误差与未建模动态引起的不确定性。在实际工程应用中，为简化处理并保证滤波器稳定性，通常将其设定为常值对角阵，即 $\boldsymbol{Q}_k \equiv \boldsymbol{Q}$，其中:
+\begin{equation}
+    \boldsymbol{Q} = \operatorname{diag}(q_1, q_2, \dots, q_{18}).
+\end{equation}
 
-    对角线元素 $q_i$ 的选取需平衡滤波器的收敛速度与估计精度：取值过大会导致估计结果易受噪声影响，波动增大；取值过小则可能使滤波器对模型偏差响应迟缓，甚至发散。通常通过仿真调试与实际飞行试验相结合的方式，依据残差序列的统计特性对 $\boldsymbol{Q}$ 进行整定，确保滤波一致性。
+对角线元素 $q_i$ 的选取需平衡滤波器的收敛速度与估计精度：取值过大会导致估计结果易受噪声影响，波动增大；取值过小则可能使滤波器对模型偏差响应迟缓，甚至发散。通常通过仿真调试与实际飞行试验相结合的方式，依据残差序列的统计特性对 $\boldsymbol{Q}$ 进行整定，确保滤波一致性。
 
 3. 计算卡尔曼增益矩阵
-    \begin{equation}
-        \boldsymbol{K}_k = \boldsymbol{P}_{k}^{-} \boldsymbol{H}_k^{T} \left( \boldsymbol{H}_k \boldsymbol{P}_{k}^{-} \boldsymbol{H}_k^{T} + \boldsymbol{R}_k \right)^{-1},
-    \end{equation}
-    其中 $\boldsymbol{H}_k$ 为观测函数的雅可比矩阵，由于观测向量直接选取部分状态分量，由式\eqref{eq:H_k}可知 $\boldsymbol{H}_k = [\boldsymbol{I}_{12\times 12} \; \boldsymbol{0}_{12\times 6}]$ 为常矩阵；$\boldsymbol{R}_k$ 为观测噪声协方差矩阵，依据动作捕捉系统与机载IMU的实测噪声特性离线标定，并在滤波过程中保持为常值或根据信噪比进行适当调整。
-    
-    在实际的工程应用中，通常认为各个观测量噪声之间不存在相关性。此外，在飞行期间，观测噪声的噪声模型基本保持一致，因此，为降低计算复杂度，可将$\boldsymbol{R}_k$设为常对角阵：
-    \begin{equation}
-        \boldsymbol{R} = \operatorname{diag}(\sigma^2_{p_x},\sigma^2_{p_y}, \sigma^2_{p_z}, \sigma^2_{v_x},\sigma^2_{v_y}, \sigma^2_{v_z}, \sigma^2_{\varphi},\sigma^2_{\theta}, \sigma^2_{\psi}, \sigma^2_{p},\sigma^2_{q}, \sigma^2_{r}),
-    \end{equation}
-    其中，对角线元素可直接取自传感器的标称噪声方差，如动作捕捉系统的位置测量方差、IMU的角速度测量方差等。
+\begin{equation}
+    \boldsymbol{K}_k = \boldsymbol{P}_{k}^{-} \boldsymbol{H}_k^{T} \left( \boldsymbol{H}_k \boldsymbol{P}_{k}^{-} \boldsymbol{H}_k^{T} + \boldsymbol{R}_k \right)^{-1},
+\end{equation}
+其中 $\boldsymbol{H}_k$ 为观测函数的雅可比矩阵，由于观测向量直接选取部分状态分量，由式\eqref{eq:H_k}可知 $\boldsymbol{H}_k = [\boldsymbol{I}_{12\times 12} \; \boldsymbol{0}_{12\times 6}]$ 为常矩阵；$\boldsymbol{R}_k$ 为观测噪声协方差矩阵，依据动作捕捉系统与机载IMU的实测噪声特性离线标定，并在滤波过程中保持为常值或根据信噪比进行适当调整。
+
+在实际的工程应用中，通常认为各个观测量噪声之间不存在相关性。此外，在飞行期间，观测噪声的噪声模型基本保持一致，因此，为降低计算复杂度，可将$\boldsymbol{R}_k$设为常对角阵：
+\begin{equation}
+    \boldsymbol{R} = \operatorname{diag}(\sigma^2_{p_x},\sigma^2_{p_y}, \sigma^2_{p_z}, \sigma^2_{v_x},\sigma^2_{v_y}, \sigma^2_{v_z}, \sigma^2_{\varphi},\sigma^2_{\theta}, \sigma^2_{\psi}, \sigma^2_{p},\sigma^2_{q}, \sigma^2_{r}),
+\end{equation}
+其中，对角线元素可直接取自传感器的标称噪声方差，如动作捕捉系统的位置测量方差、IMU的角速度测量方差等。
 
 4. 融合观测信息获得后验状态估计
-    \begin{equation}
-        \hat{\boldsymbol{x}}_{k}^{+} = \hat{\boldsymbol{x}}_{k}^{-} + \boldsymbol{K}_k \left( \boldsymbol{z}_k - \boldsymbol{h}(\hat{\boldsymbol{x}}_{k}^{-}) \right),
-    \end{equation}
-    式中新息项 $\boldsymbol{z}_k - \boldsymbol{h}(\hat{\boldsymbol{x}}_{k}^{-})$ 反映了模型预测与实际量测之间的偏差；观测函数 $\boldsymbol{h}(\cdot)$ 的形式见式\eqref{eq:obs}。
+\begin{equation}
+    \hat{\boldsymbol{x}}_{k}^{+} = \hat{\boldsymbol{x}}_{k}^{-} + \boldsymbol{K}_k \left( \boldsymbol{z}_k - \boldsymbol{h}(\hat{\boldsymbol{x}}_{k}^{-}) \right),
+\end{equation}
+式中新息项 $\boldsymbol{z}_k - \boldsymbol{h}(\hat{\boldsymbol{x}}_{k}^{-})$ 反映了模型预测与实际量测之间的偏差；观测函数 $\boldsymbol{h}(\cdot)$ 的形式见式\eqref{eq:obs}。
 
 5. 更新后验误差协方差矩阵
-    \begin{equation}
-        \boldsymbol{P}_{k}^{+} = \left( \boldsymbol{I}_{18\times 18} - \boldsymbol{K}_k \boldsymbol{H}_k \right) \boldsymbol{P}_{k}^{-}.
-    \end{equation}
+\begin{equation}
+    \boldsymbol{P}_{k}^{+} = \left( \boldsymbol{I}_{18\times 18} - \boldsymbol{K}_k \boldsymbol{H}_k \right) \boldsymbol{P}_{k}^{-}.
+\end{equation}
 
-    此步骤保证了估计误差协方差矩阵的递推更新，为下一时刻的滤波提供先验信息。
+此步骤保证了估计误差协方差矩阵的递推更新，为下一时刻的滤波提供先验信息。
 
 通过上述初始化与参数配置，扩展卡尔曼滤波器能够在涵道式无人机飞行过程中实时、稳定地估计核心气动参数，为后续抗扰控制器的设计提供准确的模型依据。
 
@@ -572,7 +571,7 @@ $\boldsymbol{H}_k$ 描述了当前时刻状态误差向观测残差的映射。�
     \centering
     \caption{仿真环境预设的过程噪声}
     \label{tab:Q_set}
-    \begin{tabular}{cll}
+    \begin{tabular}{ccc}
     \toprule
     符号 & 设定值 & 单位 \\
     \midrule
