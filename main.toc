@@ -94,7 +94,8 @@
 \contentsline {section}{\numberline {5.7}本章小结}{112}{section.5.7}%
 \contentsline {chapter}{总结与展望}{113}{chapter*.73}%
 \contentsline {chapter}{参考文献}{114}{section*.74}%
-\contentsline {chapter}{附\hskip 1em\relax 录}{122}{chapter*.76}%
-\contentsline {section}{\numberline {1.1}一阶李导数对状态量偏导}{122}{section.1.1}%
-\contentsline {chapter}{攻读硕士学位期间取得的研究成果}{126}{chapter*.77}%
+\contentsline {chapter}{附\hskip 1em\relax 录}{121}{chapter*.76}%
+\contentsline {section}{\numberline {1.1}一阶李导数对状态量偏导}{121}{section.1.1}%
+\contentsline {chapter}{攻读硕士学位期间取得的研究成果}{125}{chapter*.77}%
+\contentsline {chapter}{致\hskip 1em\relax 谢}{126}{chapter*.79}%
 \contentsfinish 

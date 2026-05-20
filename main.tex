@@ -1,7 +1,7 @@
 % 注：1. pdfcover的内容根据学校要求自定义（参考cover_file文件夹）。2. 这里代码写得不是很完备，第二个参数只影响封面，其他内容如页眉不受影响。还需在下面代码进一步调整。这里还需完善。为简单期间，下面三个选项供选择：
-% \documentclass[unicode,master]{scut_thesis/scutthesis} % 硕士草稿封面，使用正式封面时注释该行
+\documentclass[unicode,master]{scut_thesis/scutthesis} % 硕士草稿封面，使用正式封面时注释该行
 % \documentclass[unicode]{scutthesis} %  博士草稿封面，使用正式封面时注释该行
-\documentclass[unicode,pdfcover]{scut_thesis/scutthesis} %   论文正式封面（不使用选项来区分硕博士，而是大家制作自己的封面文件thesis_cover.pdf，盲审时删除必要的封面内容即可），使用草稿封面时注释该行
+% \documentclass[unicode,pdfcover]{scut_thesis/scutthesis} %   论文正式封面（不使用选项来区分硕博士，而是大家制作自己的封面文件thesis_cover.pdf，盲审时删除必要的封面内容即可），使用草稿封面时注释该行
 
 \usepackage{array,longtable,graphicx} 
 \usepackage{anyfontsize} %消除字体警告
@@ -120,6 +120,6 @@
     \input{chapter/appendix.tex}
     %%%%%%%%%%%%%%%%%%%
     \input{chapter/pub} %成果
-    % \input{chapter/ack} %致谢
+    \input{chapter/ack} %致谢
     
 \end{document}

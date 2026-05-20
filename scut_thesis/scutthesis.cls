@@ -23,7 +23,7 @@
 %% import global options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifmasterdegree\masterdegreefalse %默认为doctor
-\newif\ifpdfcover\pdfcoverfalse
+\newif\ifpdfcover\pdfcovertrue
 \newif\ifchapterx\chapterxfalse
 
 \DeclareOption{master}{\masterdegreetrue}
@@ -433,8 +433,8 @@
 \renewcommand{\maketitle}{% called outside
   \ifpdfcover
     %%coverpage from pdf file
-    % \includepdf[pages={1-5,{},7-8}]{cover_file/thesis_cover.pdf} % 正式封面
-    \includepdf[pages=1]{cover_file/blind_review_pdfcover.pdf} % 盲审封面
+    \includepdf[pages={1-4}]{cover_file/thesis_cover.pdf} % 正式封面
+    % \includepdf[pages=1]{cover_file/blind_review_pdfcover.pdf} % 盲审封面
   \else
     %%buildin coverpage
     \begin{titlepage}

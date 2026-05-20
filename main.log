@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.12.20)  15 APR 2026 12:09
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2026.5.20)  21 MAY 2026 12:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1238,20 +1238,47 @@ Package hyperref Info: Link coloring ON on input line 50.
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
-File: cover_file/blind_review_pdfcover.pdf Graphic file (type pdf)
-<use cover_file/blind_review_pdfcover.pdf>
-File: cover_file/blind_review_pdfcover.pdf Graphic file (type pdf)
-<use cover_file/blind_review_pdfcover.pdf, page 1>
-File: cover_file/blind_review_pdfcover.pdf Graphic file (type pdf)
-<use cover_file/blind_review_pdfcover.pdf, page 1>
-File: cover_file/blind_review_pdfcover.pdf Graphic file (type pdf)
-<use cover_file/blind_review_pdfcover.pdf, page 1>
-File: cover_file/blind_review_pdfcover.pdf Graphic file (type pdf)
-<use cover_file/blind_review_pdfcover.pdf, page 1>
-File: cover_file/blind_review_pdfcover.pdf Graphic file (type pdf)
-<use cover_file/blind_review_pdfcover.pdf, page 1>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 1>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 1>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 1>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 1>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 1>
  [1
 
+
+]
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 2>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 2>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 2>
+ [2
+
+]
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 3>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 3>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 3>
+ [3
+
+]
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 4>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 4>
+File: cover_file/thesis_cover.pdf Graphic file (type pdf)
+<use cover_file/thesis_cover.pdf, page 4>
+ [4
 
 ] (chapter/abstract.tex
 
@@ -1281,11 +1308,11 @@ Package fontspec Info: Font family 'SimHei(0)' created for font 'SimHei' with
 
 ] [2
 
-]) [3] (main.toc
+]) [3]
+(main.toc
 LaTeX Font Info:    Trying to load font information for U+rsfs on input line 1.
 
-
-(D:\Program Files\MiKTeX\tex/latex/jknappen\ursfs.fd
+ (D:\Program Files\MiKTeX\tex/latex/jknappen\ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    Trying to load font information for U+msa on input line 1.
@@ -1820,10 +1847,12 @@ raphic file (type pdf)
 ]) [114]
 [115
 
-] [116] [117] [118] [119] [120] (chapter/appendix.tex [121] [122
+] [116] [117] [118] [119] (chapter/appendix.tex [120] [121
 
-] [123]
-[124]) (chapter/pub.tex [125]) [126
+] [122] [123])
+(chapter/pub.tex [124]) (chapter/ack.tex [125
+
+]) [126
 
 ] (main.aux)
  ***********
@@ -1831,18 +1860,18 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B2AC64ED87A331C1E16A64E1271A082F;13548.
+(rerunfilecheck)             Checksum: 0B3625323395A95CA41F1801AF6F2E9D;13610.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36333 strings out of 409616
- 740790 string characters out of 5778254
+ 36334 strings out of 409616
+ 740636 string characters out of 5778255
  1956191 words of memory out of 5000000
- 57874 multiletter control sequences out of 15000+600000
+ 57872 multiletter control sequences out of 15000+600000
  572322 words of font info for 126 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 94i,17n,107p,1408b,5009s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,17n,107p,1408b,4976s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (139 pages).
+Output written on main.pdf (142 pages).
